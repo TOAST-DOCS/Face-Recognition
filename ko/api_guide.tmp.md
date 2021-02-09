@@ -1,9 +1,9 @@
 # [NFR][Service API] API 문서
 
-* 얼굴인식 
+* 얼굴인식 API를 사용하는 데 필요한 API르 설명합니다.
 
 ## 목차
-
+[API 리스트](##API)
 1. <a href="#API">API 리스트</a>
     1. <a href="#Create-Group">Create Group</a>
     2. <a href="#List-Groups">List Groups</a>
