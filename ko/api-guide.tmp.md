@@ -1,100 +1,112 @@
-# [NFR][Service API] API 문서
+# AI Service > Face Recognition > 얼굴인식 API 가이드
 
-* 얼굴인식 API를 사용하는 데 필요한 API르 설명합니다.
+* 얼굴인식 API를 사용하는 데 필요한 API를 설명합니다.
 
-## 목차
+## API 공통 정보
+### 사전 준비
+- API 사용을 위해서는 앱 키와 보안 키가 필요합니다.
+- 앱 키와 보안 키는 콘솔 상단 "URL & Appkey" 메뉴에서 확인이 가능합니다.
+### 요청 공통 정보
 
-1. [API 리스트](#API)
-    1. [Create Group](#Create-Group)
-    2. [List Groups](#List-Groups)
-    3. [Get Group Detail](#Get-Group-Detail)
-    4. [Delete Group](#Delete-Group)
-    5. [Detect Faces](#Detect-Faces)
-    6. [Add Faces](#Add-Faces)
-    7. [Delete Face](#Delete-Face)
-    8. [List Faces in a Group](#List-Faces-in-a-Group)
-    9. [Search Faces by Face ID](#Search-Faces-by-Face-ID)
-    10. [Search Faces by Image](#Search-Faces-by-Image)
-    11. [Compare Faces](#Compare-Faces)
-2. <a href="#Service-API-Data-Type">Service API Data Type</a>
-    1. <a href="#Image">Image</a>
-    2. <a href="#Face">Face</a>
-    3. <a href="#FaceDetail">FaceDetail</a>
-    4. <a href="#MatchedFaces">MatchedFaces</a>
-    5. <a href="#UnmatchedFaces">UnmatchedFaces</a>
-    6. <a href="#Group">Group</a>
-    7. <a href="#GroupDetail">GroupDetail</a>
+- API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
+- 모든 API 요청 헤더에 'Authorization'에 보안 키를 넣어서 요청해야 합니다.
 
-## API
+[요청 헤더]
 
-* 기본적으로 회사 가이드를 따르고, QPIT API 포멧 공통화 가이드를 참고합니다.
-    * [(선별)ToastCloud/467 RestAPI Guide](dooray://1387695619080878080/tasks/1804779257775080328 "closed")
-    * [(검색)QPIT대외사업/15 API 포멧 공통화](dooray://1387695619080878080/tasks/2519396097881722280 "working")
-* path pattern: {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/
-    * `domain`: [frn.search.nhn.com](http://frn.search.nhn.com)과 같이 외부에 노출된 domain
-    * `api-version`: api version
-    * `appkey`: 고객사에 발급된 key
+| 이름 | 값 | 설명 |
+|---|---|---|
+| Authorization | {secretKey} | 콘솔에서 발급받은 보안 키 |
 
-### 공통 header
+### 응답 공통 정보
 
-* `Content-Type: application/json`
-* api 가 요청을 받으면, Http Response Code 는 항상 `200 OK`
+- 모든 API 요청에 "200 OK"로 응답합니다. 자세한 응답 결과는 응답 본문의 헤더를 참고합니다.
 
-### 기본 response body
+[기본 응답 필드]
 
-| name | type | desc |
+| 이름 | 타입 | 설명 |
 | --- | --- | --- |
-| header.resultCode | int | 0: 정상<br>양수: 일부 오류가 있으나 동작 함<br>-40000: InvalidParam<br>-41000: Unauthorized appkey.<br>-45000: InvalidImage<br>-50000: Internal Server Error |
-| header.resultMessage | string | "SUCCESS": 정상.<br>그 외: 오류 메시지 리턴 |
-| header.isSuccessful | boolean | true: 정상, 동작 함.<br>false: 오류 |
-| data.itemCount | int | item의 갯수 |
-| data.items[] | array | 결과 값. 단일 결과도 배열 형태로 리턴 |
+| header.isSuccessful | boolean | true: 정상<br>false: 오류 |
+| header.resultCode | int | 0: 정상<br>음수: 오류 |
+| header.resultMessage | string | "SUCCESS": 정상<br>그 외: 오류 메시지 리턴 |
 
-* example
 
-``` json
+[성공 응답 본문 예시]
+
+```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "SUCCESS",
-        "isSuccessful": true
-    },
-    "data": {
-        "itemCount": 1,
-        "items": [{
-            "groupId": "group-id",
-            "faceSize": 5000,
-            "createTime": "2020-10-29T14:34:12"
-        }]
-    }
-
+	"header": {
+		"isSuccessful": true,
+		"resultCode": 0,
+		"resultMessage": "Success"
+	}
 }
 ```
 
-### Create Group
+[실패 응답 본문시 예시]
 
-* 그룹 생성
-
-#### request
-
-```
-POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups
+```json
 {
-    "groupId": "my-group"
+	"header": {
+		"isSuccessful": false,
+		"resultCode": -40000,
+		"resultMessage": "InvalidParam"
+	}
 }
 ```
+## API 목차
 
-* params
+1. [그룹 생성](#그룹-생성)
+2. [그룹 목록](#그룹-목록)
+3. [그룹 디테일](#그룹-디테일)
+4. [그룹 삭제](#그룹-삭제)
+5. [얼굴 감지](#얼굴-감지)
+6. [얼굴 추가](#얼굴-추가)
+7. [얼굴 삭제](#얼굴-삭제)
+8. [그룹 내 얼굴 목록](#그룹-내-얼굴-목록)
+9. [얼굴 아이디로 검색](#얼굴-아이디로-검색)
+10. [이미지로 검색](#이미지로-검색)
+11. [얼굴 비교](#얼굴-비교)
 
-| name | type | mandatory | example | desc |
+
+### 그룹 생성
+
+* 그룹 생성을 하는 API입니다. 생성된 그룹에 "[얼굴 추가](#얼굴-추가)"를 이용하여 얼굴들을 등록할 수 있습니다.
+#### 요청
+[URI]
+
+| 메서드 | URI |
+| --- | --- |
+| POST | https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/appkeys/{appKey}/groups |
+
+[Path Variable]
+
+| 이름 | 타입 | 설명 |
+| --- | --- | --- |
+| appKey | String | 고유의 appKey | 
+
+[Request Body]
+
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | groupId | string | true | "my-group" | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
 
-#### response
 
-json example
 
-``` json
+[요청 본문]
+```sh
+curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/appkeys/{appKey}/groups' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' \
+ -d '{
+    "groupId": "my-group"
+}'
+```
+
+#### 응답
+
+[응답 본문]
+
+```json
 {
     "header": {
         "resultCode": 0,
@@ -108,25 +120,25 @@ json example
 
 #### error codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| InvalidGroupID | -40000 | invalid group ID pattern |
-| DuplicatedGroupIDError | -40000 | duplicated group ID |
+| -40000 | InvalidParam | invalid param |
+| -40000 | InvalidGroupID | invalid group ID pattern |
+| -40000 | DuplicatedGroupIDError | duplicated group ID |
+| -41000 | UnauthorizedAppKey | unauthorized appKey |
+| -50000 | InternalServerError | internal server error |
 
-### List Groups
+### 그룹 목록
 
 * 그룹 리스트 조회
 
-#### request
+#### 요청
 
 ```
 GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups?limit={limit}&next-token={next-token}
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int | true | 100 | 최대 크기<br>0 < limit <= 200 |
 | next-token | string | false | "skljsdioew..." | Get Group List response에 존재하는 값. next-token 이후로 limit를 세어서 리턴 |
@@ -151,9 +163,9 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups?next-token={nex
 
 * next-token이 존재하면 limit는 변경 될 수 없으며 token이 발행 될 때의 값으로 자동 세팅된다.
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -178,7 +190,7 @@ json example
 
 * 공통 헤더 설명 생략
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | true | 2 | group count |
 | data.groups[].groupId | string | true | "group-id" | 사용자가 등록한 group id |
@@ -195,23 +207,23 @@ json example
 | InvalidTokenError | -40000 | using wrong token |
 
 
-### Get Group Detail
+### 그룹 디테일
 
 * 그룹 상세 정보 조회
 
-#### request
+#### 요청
 
 ```
 GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | group-id | string | true | "group-id" | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -234,7 +246,7 @@ json example
 
 * 공통 헤더 설명 생략
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | true | 2 | group count |
 | data.groups[].groupId | string | true | "group-id" | 사용자가 등록한 group id |
@@ -251,23 +263,23 @@ json example
 | UnauthorizedAppKey | -41000 | unauthorized appkey |
 | NotFoundGroupError | -40000 | not found group ID |
 
-### Delete Group
+### 그룹 삭제
 
 * 그룹 삭제
 
-#### request
+#### 요청
 
 ```
 DELETE {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | group-id | string | true | "group-id" | 등록된 group id<br>[a-z0-9-]{1,255} |
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -290,12 +302,12 @@ json example
 | UnauthorizedAppKey | -41000 | unauthorized appkey |
 | NotFoundGroupError | -40000 | not found group ID |
 
-### Detect Faces
+### 얼굴 감지
 
 * 이미지로부터 얼굴 정보를 가지고 온다.
 * detect 된 face가 큰 순서대로 최대 `100`개의 얼굴 정보를 리턴한다.
 
-#### request
+#### 요청
 
 ```
 POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/detect
@@ -306,16 +318,16 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/detect
 }
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | image.url | string | false | "https://..." | 이미지의 url |
 | image.bytes | blob | false | "/0j3Ohdk==..." | 이미지의 bytes |
 
 * image.url, image.bytes 중 반드시 1개가 있어야 한다.
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -367,7 +379,7 @@ json example
 
 * 공통 헤더 설명 생략
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.faceDetailCount | int | true | 1 | detected face 개수 |
 | data.faceDetails[].bbox | object | true | - | 얼굴 detect된 bbox |
@@ -393,11 +405,11 @@ json example
 | InvalidImageURLException | -45000 | invalid image url |
 | ImageTimeoutError | -45000 | image download timeout |
 
-### Add Faces
+### 얼굴 추가
 
 * 이미지를 통해 detect된 faces를 특정 그룹에 등록한다.
 
-#### request
+#### 요청
 
 ```
 POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
@@ -410,7 +422,7 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 }
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | group id | url path | true | "my-group" | Create Group을 통해 등록된 group id<br>[a-z0-9-]{1,255} |
 | image.url | string | false | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
@@ -418,9 +430,9 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 | externalImageId | string | false | "image01.jsp" | 사용자가 이미지 또는 Face ID들에 labeling을 위해 전달하는 값<br>[a-zA-Z0-9\_.-:]+<br>1 <limit <= 255 |
 | limit | int | true | 3 | 전달된 이미지에서 detected faces 중 크기가 큰 순으로 정렬하여 최대 그룹에 등록할 face 개수<br>0< limit <= 100 |
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -527,7 +539,7 @@ json example
 
 * 공통 헤더 설명 생략
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | true | "v1.0" | Face Model version |
 | data.addedFaceCount | int | true | 1 | detected face 개수 |
@@ -575,24 +587,24 @@ json example
 | InvalidImageURLException | -45000 | invalid image url |
 | ImageTimeoutError | -45000 | image download timeout |
 
-### Delete Face
+### 얼굴 삭제
 
 * 등록된 face 삭제
 
-#### request
+#### 요청
 
 ```
 DELETE {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/faces/{face-id}
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | group-id | url path | true | "group-id" | 등록된 group id<br>[a-z0-9-]{1,255} |
 | face-id | url path | true | "group-id" | 등록된 face id |
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -616,17 +628,17 @@ json example
 | NotFoundGroupError | -40000 | not found group ID |
 | NotFoundFaceIDError | -40000 | not found face ID |
 
-### List Faces in a Group
+### 그룹 내 얼굴 목록
 
 * 특정 그룹에 등록된 face list 조회
 
-#### request
+#### 요청
 
 ```
 GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | group id | url path | true | "my-group" | 찾으려는 그룹 group id<br>[a-z0-9-]{1,255} |
 | limit | int | true | 100 | 최대 크기<br>0< limit <= 200 |
@@ -652,9 +664,9 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 
 * next-token이 존재하면 limit는 변경 될 수 없으며 token이 발행 될 때의 값으로 자동 세팅된다.
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -697,7 +709,7 @@ json example
 
 * 공통 헤더 설명 생략
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | true | "v1.0" | Face Model version |
 | data.faceCount | int | true | 2 | detected face 개수 |
@@ -722,26 +734,26 @@ json example
 | NotFoundGroupError | -40000 | not found group ID |
 | InvalidTokenError | -40000 | using wrong token |
 
-### Search Faces by Face ID
+### 얼굴 아이디로 검색
 
 * face id로 특정 그룹에서 검색
 
-#### request
+#### 요청
 
 ```
 GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold ={threshold }
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | group-id | url path | true | "group-id" | 등록된 group id<br>[a-z0-9-]{1,255} |
 | face-id | url path | true | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 비교하려는 face id |
 | limit | int | true | 10 | 찾으려는 최대 값.<br>0 < limit <= 4096 |
 | threshold | int | true | 90 | 유사도<br>0 < threshold <= 100 |
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -789,7 +801,7 @@ json example
 
 * 공통 헤더 설명 생략
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.matchFaceCount | int | true | 2 | detected face 개수 |
 | data.matchFaces[].face.bbox | object | true | - | 얼굴 detect된 bbox |
@@ -813,12 +825,12 @@ json example
 | NotFoundGroupError | -40000 | not found group ID |
 | NotFoundFaceIDError | -40000 | not found face ID |
 
-### Search Faces by Image
+### 이미지로 검색
 
 * image로 특정 그룹에서 검색
 * 전달된 이미지에서 detected faces 중 가장 큰 이미지를 비교대상으로 사용한다.
 
-#### request
+#### 요청
 
 ```
 POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/search?limit={limit}&threshold ={threshold }
@@ -829,7 +841,7 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/sea
 }
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | group id | url path | true | "my-group" | Create Group을 통해 등록된 group id<br>[a-z0-9-]{1,255} |
 | image.url | string | false | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
@@ -837,9 +849,9 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/sea
 | limit | int | true | 10 | 찾으려는 최대 값.<br>0 < limit <= 4096 |
 | threshold | int | true | 90 | 유사도<br>0 < threshold <= 100 |
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -897,7 +909,7 @@ json example
 
 * 공통 헤더 설명 생략
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.matchFaceCount | int | true | 2 | detected face 개수 |
 | data.matchFaces[].face.bbox | object | true | - | 얼굴 detect된 bbox |
@@ -930,12 +942,12 @@ json example
 | InvalidImageURLException | -45000 | invalid image url |
 | ImageTimeoutError | -45000 | image download timeout |
 
-### Compare Faces
+### 얼굴 비교
 
 * 두 이미지를 비교한다.
 * Source Image에 2개 이상의 face가 detect된다면 가장 큰 face를 사용한다.
 
-#### request
+#### 요청
 
 ```
 POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/compare
@@ -950,7 +962,7 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/compare
 }
 ```
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | sourceImage | object | true | - | 주어진 이미지에서 detected faces 중 가장 큰 face를 source로 사용하여 targets과 비교한다. |
 | sourceImage.url | string | false | "https://..." | <br>이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
@@ -960,9 +972,9 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/compare
 | targetImage.bytes | blob | false | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
 | threshold | int | true | 90 | 유사도<br>0 < threshold <= 100 |
 
-#### response
+#### 응답
 
-json example
+[응답 본문]
 
 ``` json
 {
@@ -1102,7 +1114,7 @@ json example
 
 * 공통 헤더 설명 생략
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | true | "v1.0" | Face Model version |
 | data.matchedFaceDetailCount | int | true | 1 | matched face 개수 |
@@ -1160,7 +1172,7 @@ json example
 
 * 사용자가 파라미터로 넘기는 이미지의 정보
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | url | string | false | "https://..." | 이미지 url |
 | bytes | string | false | "/9j/4O1Q==..." | 이미지 bytes 코드. url 또는 bytes가 둘 중 하나만 있어야 한다. |
@@ -1169,7 +1181,7 @@ json example
 
 * 응답으로 나가는 얼굴의 정보
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | faceId | string | false | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | face Id. 등록된 경우에만 있다. |
 | imageId | string | false | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | image Id. 등록된 경우에만 있다. |
@@ -1185,7 +1197,7 @@ json example
 
 * 응답으로 나가는 얼굴의 정보
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | bbox | object | true | - | 얼굴 detect된 bbox |
 | bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
@@ -1202,7 +1214,7 @@ json example
 
 * target image중 source image에서 매칭된 얼굴
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | FaceDetail | data type | true | - | Face 정보 |
 | similarity | float | true | 0.32165 | 유사도 |
@@ -1211,7 +1223,7 @@ json example
 
 * target image중 source image에서 매칭 안된 얼굴
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | FaceDetail | data type | true | - | Face 정보 |
 | similarity | float | true | 0.32165 | 유사도 |
@@ -1220,7 +1232,7 @@ json example
 
 * 사용자가 등록한 Group 정보
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | groupId | string | true | "nhn" | [a-z0-9-]{1,255} 사용자가 등록한 group id |
 | modelVersion | string | true | "v1.0" | NHN Face Recognition version 정보 |
@@ -1229,7 +1241,7 @@ json example
 
 * 사용자가 등록한 Group 정보
 
-| name | type | mandatory | example | desc |
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | groupId | string | true | "nhn" | [a-z0-9-]{1,255} 사용자가 등록한 group id |
 | modelVersion | string | true | "v1.0" | NHN Face Recognition version 정보 |
