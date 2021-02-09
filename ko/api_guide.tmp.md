@@ -3,19 +3,19 @@
 * 얼굴인식 API를 사용하는 데 필요한 API르 설명합니다.
 
 ## 목차
-[API 리스트](#API)
-1. <a href="#API">API 리스트</a>
-    1. <a href="#Create-Group">Create Group</a>
-    2. <a href="#List-Groups">List Groups</a>
-    3. <a href="#Get-Group-Detail">Get Group Detail</a>
-    4. <a href="#Delete-Group">Delete Group</a>
-    5. <a href="#Detect-Faces">Detect Faces</a>
-    6. <a href="#Add-Faces">Add Faces</a>
-    7. <a href="#Delete-Face">Delete Face</a>
-    8. <a href="#List-Faces-in-a-Group">List Faces in a Group</a>
-    9. <a href="#Search-Faces-by-Face-ID">Search Faces by Face ID</a>
-    10. <a href="#Search-Faces-by-Image">Search Faces by Image</a>
-    11. <a href="#Compare-Faces">Compare Faces</a>
+
+1. [API 리스트](#API)
+    1. [Create Group](#Create-Group)
+    2. [List Groups](#List-Groups)
+    3. [Get Group Detail](#Get-Group-Detail)
+    4. [Delete Group](#Delete-Group)
+    5. [Detect Faces](#Detect-Faces)
+    6. [Add Faces](#Add-Faces)
+    7. [Delete Face](#Delete-Face)
+    8. [List Faces in a Group](#List-Faces-in-a-Group)
+    9. [Search Faces by Face ID](#Search-Faces-by-Face-ID)
+    10. [Search Faces by Image](#Search-Faces-by-Image)
+    11. [Compare Faces](#Compare-Faces)
 2. <a href="#Service-API-Data-Type">Service API Data Type</a>
     1. <a href="#Image">Image</a>
     2. <a href="#Face">Face</a>
