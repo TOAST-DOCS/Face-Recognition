@@ -137,18 +137,28 @@ curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/
 
 ### 그룹 목록
 
-* 그룹 리스트 조회
+* 그룹 목록 조회
 
 #### 요청
 
-```
-GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups?limit={limit}&next-token={next-token}
-```
+| 메서드 | URI |
+| --- | --- |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups |
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+
+[Path Variable]
+
+| 이름 | 타입 | 설명 |
+| --- | --- | --- |
+| appKey | String | 고유의 appKey | 
+
+[URL Parameter]
+
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| limit | int | true | 100 | 최대 크기<br>0 < limit <= 200 |
-| next-token | string | false | "skljsdioew..." | Get Group List response에 존재하는 값. next-token 이후로 limit를 세어서 리턴 |
+| limit | int | O | 100 | 최대 크기<br>0 < limit <= 200 |
+| next-token | string |  | "skljsdioew..." | Get Group List response에 존재하는 값. next-token 이후로 limit를 세어서 리턴 |
+
 
 * `주의 사항`
     * 처음에는 next-token이 존재 할 수 없다.
@@ -158,15 +168,22 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups?limit={limit}&n
 
 1. 최초 query
 
-```
-GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups?limit={limit}
+[요청 예]
+```shell script
+curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 2. response 에 포함된 nextToken을 이용하여 query
 
+[요청 예]
+```shell script
+curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8'
 ```
-GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups?next-token={next-token}&limit={limit}
-```
+
 
 * next-token이 존재하면 limit는 변경 될 수 없으며 token이 발행 될 때의 값으로 자동 세팅된다.
 
@@ -195,24 +212,24 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups?next-token={nex
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.groupCount | int | true | 2 | group count |
-| data.groups[].groupId | string | true | "group-id" | 사용자가 등록한 group id |
-| data.groups[].modelVersion | string | true | "v1.0" | NHN Face Recognition version 정보 |
-| data.nextToken | string | true | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. request에 next-token 파라미터를 전달하면 그 이후부터 센다. |
+| data.groupCount | int | O | 2 | group count |
+| data.groups[].groupId | string | O | "group-id" | 사용자가 등록한 group id |
+| data.groups[].modelVersion | string | O | "v1.0" | NHN Face Recognition version 정보 |
+| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. request에 next-token 파라미터를 전달하면 그 이후부터 센다. |
 
 #### error codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| InvalidTokenError | -40000 | using wrong token |
-
+| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | invalid param |
+| -41000 | UnauthorizedAppKey | unauthorized appkey |
+| -40000 | InvalidTokenError | using wrong token |
 
 ### 그룹 디테일
 
@@ -251,7 +268,8 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -298,7 +316,8 @@ DELETE {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
 #### error codes
 
@@ -384,7 +403,8 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/detect
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -544,7 +564,8 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -623,7 +644,8 @@ DELETE {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/f
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
 #### Error Codes
 
@@ -714,7 +736,8 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -806,7 +829,8 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -914,7 +938,8 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/sea
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -1119,7 +1144,8 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/compare
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
