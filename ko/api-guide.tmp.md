@@ -11,6 +11,12 @@
 - API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
 - 모든 API 요청 헤더에 'Authorization'에 보안 키를 넣어서 요청해야 합니다.
 
+[API 도메인]
+
+| 환경 | 도메인 |
+| --- | --- |
+| Alpha | https://alpha-face-recognition.cloud.toast.com |
+
 [요청 헤더]
 
 | 이름 | 값 | 설명 |
@@ -30,7 +36,7 @@
 | header.resultMessage | string | "SUCCESS": 정상<br>그 외: 오류 메시지 리턴 |
 
 
-[성공 응답 본문 예시]
+[성공 응답 본문 예]
 
 ```json
 {
@@ -42,7 +48,7 @@
 }
 ```
 
-[실패 응답 본문시 예시]
+[실패 응답 본문시 예]
 
 ```json
 {
@@ -76,7 +82,7 @@
 
 | 메서드 | URI |
 | --- | --- |
-| POST | https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/appkeys/{appKey}/groups |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups |
 
 [Path Variable]
 
@@ -86,13 +92,13 @@
 
 [Request Body]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| groupId | string | true | "my-group" | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+| groupId | string | O | "my-group" | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
 
 
 
-[요청 본문]
+[요청 예]
 ```sh
 curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/appkeys/{appKey}/groups' \
  -H 'Authorization: {secretKey}' \
@@ -116,7 +122,8 @@ curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/
 }
 ```
 
-* 공통 헤더 설명 생략
+* [응답 본문 header 설명 생략]
+    * [응답 공통 정보](#응답-공통-정보)에서 확인 가 
 
 #### error codes
 
