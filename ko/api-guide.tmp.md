@@ -63,14 +63,14 @@
 
 1. [그룹 생성](#그룹-생성)
 2. [그룹 목록](#그룹-목록)
-3. [그룹 디테일](#그룹-디테일)
+3. [그룹 상세정보](#그룹-상세정보)
 4. [그룹 삭제](#그룹-삭제)
 5. [얼굴 감지](#얼굴-감지)
 6. [얼굴 추가](#얼굴-추가)
 7. [얼굴 삭제](#얼굴-삭제)
 8. [그룹 내 얼굴 목록](#그룹-내-얼굴-목록)
 9. [얼굴 아이디로 검색](#얼굴-아이디로-검색)
-10. [이미지로 검색](#이미지로-검색)
+10. [얼굴 이미지로 검색](#얼굴-이미지로-검색)
 11. [얼굴 비교](#얼굴-비교)
 
 
@@ -125,15 +125,15 @@ curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
-#### error codes
+#### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | invalid param |
-| -40000 | InvalidGroupID | invalid group ID pattern |
-| -40000 | DuplicatedGroupIDError | duplicated group ID |
-| -41000 | UnauthorizedAppKey | unauthorized appKey |
-| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -40000 | InvalidGroupID | 그룹 아이디 오류 |
+| -40000 | DuplicatedGroupID | 중복된 그룹 아이디 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -50000 | InternalServerError | 서버 에러 |
 
 ### 그룹 목록
 
@@ -225,16 +225,16 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-toke
 | data.groups[].modelVersion | string | O | "v1.0" | NHN Face Recognition version 정보 |
 | data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. request에 next-token 파라미터를 전달하면 그 이후부터 센다. |
 
-#### error codes
+#### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -50000 | InternalServerError | internal server error |
-| -40000 | InvalidParam | invalid param |
-| -41000 | UnauthorizedAppKey | unauthorized appkey |
-| -40000 | InvalidTokenError | using wrong token |
+| -50000 | InternalServerError | 서버 에러 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -40000 | InvalidTokenError | 잘못된 토큰 사용 |
 
-### 그룹 디테일
+### 그룹 상세정보
 
 * 그룹 상세 정보 조회
 
@@ -295,14 +295,14 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | data.groups[].createTime | string | true | "2020-11-04T12:36:24" | Group을 생성한 시간. |
 | data.groups[].faceCount | int | false | 365 | 그룹에 등록된 face Id 숫자 |
 
-#### error codes
+#### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -50000 | InternalServerError | internal server error |
-| -40000 | InvalidParam | invalid param |
-| -41000 | UnauthorizedAppKey | unauthorized appkey |
-| -40000 | NotFoundGroupError | not found group ID |
+| -50000 | InternalServerError | 서버 에러 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
 
 ### 그룹 삭제
 
@@ -350,14 +350,14 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
-#### error codes
+#### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -50000 | InternalServerError | internal server error |
-| -40000 | InvalidParam | invalid param |
-| -41000 | UnauthorizedAppKey | unauthorized appkey |
-| -40000 | NotFoundGroupError | not found group ID |
+| -50000 | InternalServerError | 서버 에러 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
 
 ### 얼굴 감지
 
@@ -474,13 +474,13 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 
 | name | type | desc |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| ImageTooLargeException | -45000 | exceed image size |
-| InvalidImageFormatException | -45000 | not supported image format |
-| InvalidImageURLException | -45000 | invalid image url |
-| ImageTimeoutError | -45000 | image download timeout |
+| InternalServerError | -50000 | 서버 에러 |
+| InvalidParam | -40000 | 파라미터에 오류가 있음 |
+| UnauthorizedAppKey | -41000 | 승인되지 않은 appKey |
+| ImageTooLargeException | -45000 | 이미지 크기 초과 |
+| InvalidImageFormatException | -45000 | 지원하지 않는 이미지 포멧 |
+| InvalidImageURLException | -45000 | 잘못된 이미지 URL |
+| ImageTimeoutError | -45000 | 이미지 다운로드 시간 초과 |
 
 ### 얼굴 추가
 
@@ -683,14 +683,14 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -50000 | InternalServerError | internal server error |
-| -40000 | InvalidParam | invalid param |
-| -41000 | UnauthorizedAppKey | unauthorized appkey |
-| -40000 | NotFoundGroupError | not found group ID |
-| -45000 | ImageTooLargeException | exceed image size |
-| -45000 | InvalidImageFormatException | not supported image format |
-| -45000 | InvalidImageURLException | invalid image url |
-| -45000 | ImageTimeoutError | image download timeout |
+| -50000 | InternalServerError | 서버 에러 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
+| -45000 | ImageTooLargeException | 이미지 크기 초과 |
+| -45000 | InvalidImageFormatException | 지원하지 않는 이미지 포멧 |
+| -45000 | InvalidImageURLException | 잘못된 이미지 URL |
+| -45000 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 
 ### 얼굴 삭제
 
@@ -741,11 +741,11 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{fa
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -50000 | InternalServerError | internal server error |
-| -40000 | InvalidParam | invalid param |
-| -41000 | UnauthorizedAppKey | unauthorized appkey |
-| -40000 | NotFoundGroupError | not found group ID |
-| -40000 | NotFoundFaceIDError | not found face ID |
+| -50000 | InternalServerError | 서버 에러 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
+| -40000 | NotFoundFaceIDError | 얼굴 아이디를 찾을 수 없습니다 |
 
 ### 그룹 내 얼굴 목록
 
@@ -872,11 +872,11 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit=
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -50000 | InternalServerError | internal server error |
-| -40000 | InvalidParam | invalid param |
-| -41000 | UnauthorizedAppKey | unauthorized appkey |
-| -40000 | NotFoundGroupError | not found group ID |
-| -40000 | InvalidTokenError | using wrong token |
+| -50000 | InternalServerError | 서버 에러 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
+| -40000 | InvalidTokenError | 잘못된 토큰 사용 |
 
 ### 얼굴 아이디로 검색
 
@@ -983,13 +983,13 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -50000 | InternalServerError | internal server error |
-| -40000 | InvalidParam | invalid param |
-| -41000 | UnauthorizedAppKey | unauthorized appkey |
-| -40000 | NotFoundGroupError | not found group ID |
-| -40000 | NotFoundFaceIDError | not found face ID |
+| -50000 | InternalServerError | 서버 에러 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
+| -40000 | NotFoundFaceIDError | 얼굴 아이디를 찾을 수 없습니다 |
 
-### 이미지로 검색
+### 얼굴 이미지로 검색
 
 * image로 특정 그룹에서 검색
 * 전달된 이미지에서 detected faces 중 가장 큰 이미지를 비교대상으로 사용한다.
@@ -1125,14 +1125,14 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limi
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -50000 | InternalServerError | internal server error |
-| -40000 | InvalidParam | invalid param |
-| -41000 | UnauthorizedAppKey | unauthorized appkey |
-| -40000 | NotFoundGroupError | not found group ID |
-| -45000 | ImageTooLargeException | exceed image size |
-| -45000 | InvalidImageFormatException | not supported image format |
-| -45000 | InvalidImageURLException | invalid image url |
-| -45000 | ImageTimeoutError | image download timeout |
+| -50000 | InternalServerError | 서버 에러 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
+| -45000 | ImageTooLargeException | 이미지 크기 초과 |
+| -45000 | InvalidImageFormatException | 지원하지 않는 이미지 포멧 |
+| -45000 | InvalidImageURLException | 잘못된 이미지 URL |
+| -45000 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 
 ### 얼굴 비교
 
@@ -1364,10 +1364,10 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -50000 | InternalServerError | internal server error |
-| -40000 | InvalidParam | invalid param |
-| -41000 | UnauthorizedAppKey | unauthorized appkey |
-| -45000 | ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: exceed image size |
-| -45000 | ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: not supported image format |
-| -45000 | ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: invalid image url |
-| -45000 | ImageImageTimeoutError:{Source/Target} | {Source/Target} image: image download timeout |
+| -50000 | InternalServerError | 서버 에러 |
+| -40000 | InvalidParam | 파라미터에 오류가 있음 |
+| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
+| -45000 | ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: 이미지 크기 초과 |
+| -45000 | ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: 지원하지 않는 이미지 포멧 |
+| -45000 | ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: 잘못된 이미지 URL |
+| -45000 | ImageImageTimeoutError:{Source/Target} | {Source/Target} image: 이미지 다운로드 시간 초과 |
