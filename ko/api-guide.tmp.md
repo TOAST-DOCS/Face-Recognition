@@ -376,6 +376,15 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | --- | --- |
 | appKey | 고유의 appKey |
 
+[Request Body]
+
+| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| image.url | string | false | "https://..." | 이미지의 url |
+| image.bytes | blob | false | "/0j3Ohdk==..." | 이미지의 bytes |
+
+* image.url, image.bytes 중 반드시 1개가 있어야 한다.
+
 [요청 예]
  
 ```shell script
@@ -388,13 +397,6 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
     }
 }'
 ```
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| image.url | string | false | "https://..." | 이미지의 url |
-| image.bytes | blob | false | "/0j3Ohdk==..." | 이미지의 bytes |
-
-* image.url, image.bytes 중 반드시 1개가 있어야 한다.
 
 #### 응답
 
@@ -485,24 +487,49 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 
 #### 요청
 
-```
-POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
-{
+[URI]
+ 
+| 메서드 | URI |
+| --- | --- |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+ 
+[Path Variable]
+ 
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
+| group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+ 
+
+
+[Request Body]
+
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| group id | url path | O | "my-group" | Create Group을 통해 등록된 group id<br>[a-z0-9-]{1,255} |
+| image.url | string |  | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| image.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| externalImageId | string |  | "image01.jsp" | 사용자가 이미지 또는 Face ID들에 labeling을 위해 전달하는 값<br>[a-zA-Z0-9\_.-:]+<br>1 <limit <= 255 |
+| limit | int | O | 3 | 전달된 이미지에서 detected faces 중 크기가 큰 순으로 정렬하여 최대 그룹에 등록할 face 개수<br>0< limit <= 100 |
+
+* image.url, image.bytes 중 반드시 1개가 있어야 한다.
+
+ 
+[요청 예]
+ 
+```shell script
+curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' \
+ -d '{
     "image": {
         "url": "https://..."
     },
     "externalImageId": "image01.jpg",
     "limit": 3
-}
+}'
 ```
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| group id | url path | true | "my-group" | Create Group을 통해 등록된 group id<br>[a-z0-9-]{1,255} |
-| image.url | string | false | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| image.bytes | blob | false | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| externalImageId | string | false | "image01.jsp" | 사용자가 이미지 또는 Face ID들에 labeling을 위해 전달하는 값<br>[a-zA-Z0-9\_.-:]+<br>1 <limit <= 255 |
-| limit | int | true | 3 | 전달된 이미지에서 detected faces 중 크기가 큰 순으로 정렬하여 최대 그룹에 등록할 face 개수<br>0< limit <= 100 |
 
 #### 응답
 
@@ -616,53 +643,53 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 
 [응답 본문 data]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.modelVersion | string | true | "v1.0" | Face Model version |
-| data.addedFaceCount | int | true | 1 | detected face 개수 |
-| data.addedFaces[].bbox | object | true | - | 얼굴 detect된 bbox |
-| data.addedFaces[].bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.addedFaces[].bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.addedFaces[].bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.addedFaces[].bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.addedFaces[].faceId | string | true | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | face id |
-| data.addedFaces[].imageId | string | true | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 id. 한 이미지 id에 여러 face id가 존재 할 수 있다. |
-| data.addedFaces[].externalImageId | string | false | "image01.jpg" | request parameter로 전달 된 값 |
-| data.addedFaces[].confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
-| data.addedFaceDetails[].bbox | object | true | - | 얼굴 detect된 bbox |
-| data.addedFaceDetails[].bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.addedFaceDetails[].bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.addedFaceDetails[].bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.addedFaceDetails[].bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.addedFaceDetails[].landmarks | array | true | - | 얼굴 특징 |
-| data.addedFaceDetails[].landmarks[].type | string | true | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
-| data.addedFaceDetails[].landmarks[].y | float | true | 0.362 | y 좌표 |
-| data.addedFaceDetails[].landmarks[].x | float | true | 0.362 | x 좌표 |
-| data.addedFaceDetails[].confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
-| data.notAddedFaceCount | int | true | 1 | detected face 개수 |
-| data.notAddedFaces[].bbox | object | true | - | 얼굴 detect된 bbox |
-| data.notAddedFaces[].bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.notAddedFaces[].bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.notAddedFaces[].bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.notAddedFaces[].bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.notAddedFaces[].landmarks | array | true | - | 얼굴 특징 |
-| data.notAddedFaces[].landmarks[].type | string | true | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
-| data.notAddedFaces[].landmarks[].x | float | true | 0.362 | x 좌표 |
-| data.notAddedFaces[].landmarks[].y | float | true | 0.362 | y 좌표 |
-| data.notAddedFaces[].confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
+| data.modelVersion | string | O | "v1.0" | Face Model version |
+| data.addedFaceCount | int | O | 1 | detected face 개수 |
+| data.addedFaces[].bbox | object | O | - | 얼굴 detect된 bbox |
+| data.addedFaces[].bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.addedFaces[].bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.addedFaces[].bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.addedFaces[].bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.addedFaces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | face id |
+| data.addedFaces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 id. 한 이미지 id에 여러 face id가 존재 할 수 있다. |
+| data.addedFaces[].externalImageId | string |  | "image01.jpg" | request parameter로 전달 된 값 |
+| data.addedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.addedFaceDetails[].bbox | object | O | - | 얼굴 detect된 bbox |
+| data.addedFaceDetails[].bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.addedFaceDetails[].bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.addedFaceDetails[].bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.addedFaceDetails[].bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.addedFaceDetails[].landmarks | array | O | - | 얼굴 특징 |
+| data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | y 좌표 |
+| data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | x 좌표 |
+| data.addedFaceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.notAddedFaceCount | int | O | 1 | detected face 개수 |
+| data.notAddedFaces[].bbox | object | O | - | 얼굴 detect된 bbox |
+| data.notAddedFaces[].bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.notAddedFaces[].bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.notAddedFaces[].bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.notAddedFaces[].bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.notAddedFaces[].landmarks | array | O | - | 얼굴 특징 |
+| data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.notAddedFaces[].landmarks[].x | float | O | 0.362 | x 좌표 |
+| data.notAddedFaces[].landmarks[].y | float | O | 0.362 | y 좌표 |
+| data.notAddedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 #### Error Codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| NotFoundGroupError | -40000 | not found group ID |
-| ImageTooLargeException | -45000 | exceed image size |
-| InvalidImageFormatException | -45000 | not supported image format |
-| InvalidImageURLException | -45000 | invalid image url |
-| ImageTimeoutError | -45000 | image download timeout |
+| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | invalid param |
+| -41000 | UnauthorizedAppKey | unauthorized appkey |
+| -40000 | NotFoundGroupError | not found group ID |
+| -45000 | ImageTooLargeException | exceed image size |
+| -45000 | InvalidImageFormatException | not supported image format |
+| -45000 | InvalidImageURLException | invalid image url |
+| -45000 | ImageTimeoutError | image download timeout |
 
 ### 얼굴 삭제
 
