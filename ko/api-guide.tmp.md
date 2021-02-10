@@ -327,7 +327,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 ```shell script
 curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
  -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' \
+ -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
 
@@ -364,14 +364,29 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 * detect 된 face가 큰 순서대로 최대 `100`개의 얼굴 정보를 리턴한다.
 
 #### 요청
+[URI]
+ 
+| 메서드 | URI |
+| --- | --- |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/detect |
 
-```
-POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/detect
-{
+[Path Variable]
+ 
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
+
+[요청 예]
+ 
+```shell script
+curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' \
+ -d '{
     "image": {
         "url":"https://..."
     }
-}
+}'
 ```
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
@@ -438,19 +453,19 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/detect
 
 [응답 본문 data]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.faceDetailCount | int | true | 1 | detected face 개수 |
-| data.faceDetails[].bbox | object | true | - | 얼굴 detect된 bbox |
-| data.faceDetails[].bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.faceDetails[].bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.faceDetails[].bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.faceDetails[].bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.faceDetails[].landmarks | array | true | - | 얼굴 특징 |
-| data.faceDetails[].landmarks[].type | string | true | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
-| data.faceDetails[].landmarks[].y | float | true | 0.362 | y 좌표 |
-| data.faceDetails[].landmarks[].x | float | true | 0.362 | x 좌표 |
-| data.faceDetails[].confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
+| data.faceDetailCount | int | O | 1 | detected face 개수 |
+| data.faceDetails[].bbox | object | O | - | 얼굴 detect된 bbox |
+| data.faceDetails[].bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.faceDetails[].bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.faceDetails[].bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.faceDetails[].bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.faceDetails[].landmarks | array | O | - | 얼굴 특징 |
+| data.faceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.faceDetails[].landmarks[].y | float | O | 0.362 | y 좌표 |
+| data.faceDetails[].landmarks[].x | float | O | 0.362 | x 좌표 |
+| data.faceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 #### Error Codes
 
