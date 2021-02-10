@@ -110,7 +110,7 @@ curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ```json
 {
@@ -171,7 +171,7 @@ curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/
 
 [요청 예]
 ```shell script
-curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' \
+curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' \
  -H 'Authorization: {secretKey}' \
  -H 'Content-Type: application/json;charset=UTF-8'
 ```
@@ -180,7 +180,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' \
 
 [요청 예]
 ```shell script
-curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' \
+curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' \
  -H 'Authorization: {secretKey}' \
  -H 'Content-Type: application/json;charset=UTF-8'
 ```
@@ -190,7 +190,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-tok
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -215,6 +215,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-tok
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+[응답 본문 data]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -252,14 +253,14 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-tok
 
 [요청 예]
 ```
-curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
+curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
  -H 'Authorization: {secretKey}' \
  -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -282,6 +283,8 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+
+[응답 본문 data]
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -306,17 +309,32 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 
 #### 요청
 
-```
-DELETE {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
+[URI]
+
+| 메서드 | URI |
+| --- | --- |
+| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+
+[Path Variable]
+
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
+| group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+
+[요청 예]
+
+```shell script
+curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' \
 ```
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| group-id | string | true | "group-id" | 등록된 group id<br>[a-z0-9-]{1,255} |
+
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -333,12 +351,12 @@ DELETE {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 
 #### error codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| NotFoundGroupError | -40000 | not found group ID |
+| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | invalid param |
+| -41000 | UnauthorizedAppKey | unauthorized appkey |
+| -40000 | NotFoundGroupError | not found group ID |
 
 ### 얼굴 감지
 
@@ -365,7 +383,7 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/detect
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -417,6 +435,8 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/detect
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+
+[응답 본문 data]
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -471,7 +491,7 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -579,6 +599,8 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
+[응답 본문 data]
+
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | true | "v1.0" | Face Model version |
@@ -644,7 +666,7 @@ DELETE {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/f
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -707,7 +729,7 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -750,6 +772,8 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+
+[응답 본문 data]
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -795,7 +819,7 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -843,6 +867,8 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+
+[응답 본문 data]
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -894,7 +920,7 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/sea
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -952,6 +978,8 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/sea
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+
+[응답 본문 data]
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -1018,7 +1046,7 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/compare
 
 #### 응답
 
-[응답 본문]
+[응답 본문 예]
 
 ``` json
 {
@@ -1158,6 +1186,8 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/compare
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+
+[응답 본문 data]
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
