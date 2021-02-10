@@ -176,7 +176,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' \
  -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
-2. response 에 포함된 nextToken을 이용하여 query
+2. "그룹 목록 응답 본문 data"에 포함된 nextToken을 이용하여 query
 
 [요청 예]
 ```shell script
@@ -751,16 +751,26 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{fa
 * 특정 그룹에 등록된 face list 조회
 
 #### 요청
+[URI]
+ 
+| 메서드 | URI |
+| --- | --- |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces |
+ 
+[Path Variable]
+ 
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
+| group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+ 
+[URL Parameter]
 
-```
-GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}
-```
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| group id | url path | true | "my-group" | 찾으려는 그룹 group id<br>[a-z0-9-]{1,255} |
-| limit | int | true | 100 | 최대 크기<br>0< limit <= 200 |
-| next-token | string | false | "skljsdioew..." | Get Face List response에 존재하는 값. next-token 이후로 limit를 세어서 리턴 |
+| limit | int  | O  | 100  | 최대 크기<br>0 < limit <= 200 |
+| next-token | string  |    | "skljsdioew..."  | "그룹 목록 응답 본문 data"에서 반환된 값. next-token 이후로 limit를 세어서 리턴 |
+ 
 
 * `주의 사항`
     * 처음에는 next-token이 존재 할 수 없다.
@@ -770,17 +780,29 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 
 1. 최초 query
 
-```
-GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/faces?limit={limit}
+ 
+[요청 예]
+ 
+```shell script
+curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
-2. response 에 포함된 nextToken을 이용하여 query
 
+2. "그룹 목록 응답 본문 data"에 포함된 nextToken을 이용하여 query
+ 
+[요청 예]
+ 
+```shell script
+curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' 
 ```
-GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/faces?next-token={next-token}&limit={limit}
-```
+
 
 * next-token이 존재하면 limit는 변경 될 수 없으며 token이 발행 될 때의 값으로 자동 세팅된다.
+
 
 #### 응답
 
@@ -830,47 +852,64 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 
 [응답 본문 data]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.modelVersion | string | true | "v1.0" | Face Model version |
-| data.faceCount | int | true | 2 | detected face 개수 |
-| data.faces[].bbox | object | true | - | 얼굴 detect된 bbox |
-| data.faces[].bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.faces[].bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.faces[].bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.faces[].bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.faces[].confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
-| data.faces[].faceId | string | true | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | face id |
-| data.faces[].imageId | string | true | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 id. 한 이미지 id에 여러 face id가 존재 할 수 있다. |
-| data.faces[].externalImageId | string | false | "image01.jpg" | 사용자가 이미지에 등록한 값 |
-| data.nextToken | string | true | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. request에 next-token 파라미터를 전달하면 그 이후부터 센다. |
+| data.modelVersion | string | O | "v1.0" | Face Model version |
+| data.faceCount | int | O | 2 | detected face 개수 |
+| data.faces[].bbox | object | O | - | 얼굴 detect된 bbox |
+| data.faces[].bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.faces[].bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.faces[].bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.faces[].bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.faces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.faces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | face id |
+| data.faces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 id. 한 이미지 id에 여러 face id가 존재 할 수 있다. |
+| data.faces[].externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
+| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. request에 next-token 파라미터를 전달하면 그 이후부터 센다. |
 
 #### Error Codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| NotFoundGroupError | -40000 | not found group ID |
-| InvalidTokenError | -40000 | using wrong token |
+| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | invalid param |
+| -41000 | UnauthorizedAppKey | unauthorized appkey |
+| -40000 | NotFoundGroupError | not found group ID |
+| -40000 | InvalidTokenError | using wrong token |
 
 ### 얼굴 아이디로 검색
 
 * face id로 특정 그룹에서 검색
 
 #### 요청
-
-```
-GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold ={threshold }
-```
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+[URI]
+ 
+| 메서드 | URI |
+| --- | --- |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+ 
+[Path Variable]
+ 
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
+| group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+| face-id | 비교하려는 얼굴 아이디 |
+ 
+[URL Parameter]
+ 
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| group-id | url path | true | "group-id" | 등록된 group id<br>[a-z0-9-]{1,255} |
-| face-id | url path | true | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 비교하려는 face id |
-| limit | int | true | 10 | 찾으려는 최대 값.<br>0 < limit <= 4096 |
-| threshold | int | true | 90 | 유사도<br>0 < threshold <= 100 |
+| limit | int  | O  | 100  | 찾으려는 최대 값.<br>0 < limit <= 4096 |
+| threshold | int  | O  | 90  | 유사도<br>0 < threshold <= 100 |
+ 
+[요청 예]
+ 
+```shell script
+curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' 
+```
 
 #### 응답
 
@@ -925,29 +964,29 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 
 [응답 본문 data]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.matchFaceCount | int | true | 2 | detected face 개수 |
-| data.matchFaces[].face.bbox | object | true | - | 얼굴 detect된 bbox |
-| data.matchFaces[].face.bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.matchFaces[].face.bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.matchFaces[].face.bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.matchFaces[].face.bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.matchFaces[].face.confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
-| data.matchFaces[].face.faceId | string | true | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | face id |
-| data.matchFaces[].face.imageId | string | true | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 id. 한 이미지 id에 여러 face id가 존재 할 수 있다. |
-| data.matchFaces[].face.externalImageId | string | false | "image01.jpg" | 사용자가 이미지에 등록한 값 |
-| data.matchFaces[].similarity | float | true | 98.156 | 0\~100 값을 가지는 유사도 |
+| data.matchFaceCount | int | O | 2 | detected face 개수 |
+| data.matchFaces[].face.bbox | object | O | - | 얼굴 detect된 bbox |
+| data.matchFaces[].face.bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.matchFaces[].face.bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.matchFaces[].face.bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.matchFaces[].face.bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.matchFaces[].face.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | face id |
+| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 id. 한 이미지 id에 여러 face id가 존재 할 수 있다. |
+| data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
+| data.matchFaces[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 
 #### Error Codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| NotFoundGroupError | -40000 | not found group ID |
-| NotFoundFaceIDError | -40000 | not found face ID |
+| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | invalid param |
+| -41000 | UnauthorizedAppKey | unauthorized appkey |
+| -40000 | NotFoundGroupError | not found group ID |
+| -40000 | NotFoundFaceIDError | not found face ID |
 
 ### 이미지로 검색
 
@@ -955,23 +994,48 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/face
 * 전달된 이미지에서 detected faces 중 가장 큰 이미지를 비교대상으로 사용한다.
 
 #### 요청
+[URI]
+ 
+| 메서드 | URI |
+| --- | --- |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search |
+ 
+[Path Variable]
+ 
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
+| group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+ 
+[URL Parameter]
+ 
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| limit | int  | O  | 100  | 찾으려는 최대 값.<br>0 < limit <= 4096 |
+| threshold | int  | O  | 90  | 유사도<br>0 < threshold <= 100 |
 
-```
-POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/search?limit={limit}&threshold ={threshold }
-{
+[Request Body]
+ 
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| image.url | string |  | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| image.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+
+* image.url, image.bytes 중 반드시 1개가 있어야 한다.
+ 
+[요청 예]
+ 
+```shell script
+curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' \
+ -d '{
     "image": {
         "url": "https://..."
     }
-}
+}'
 ```
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| group id | url path | true | "my-group" | Create Group을 통해 등록된 group id<br>[a-z0-9-]{1,255} |
-| image.url | string | false | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| image.bytes | blob | false | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| limit | int | true | 10 | 찾으려는 최대 값.<br>0 < limit <= 4096 |
-| threshold | int | true | 90 | 유사도<br>0 < threshold <= 100 |
 
 #### 응답
 
@@ -1036,38 +1100,38 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/sea
 
 [응답 본문 data]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.matchFaceCount | int | true | 2 | detected face 개수 |
-| data.matchFaces[].face.bbox | object | true | - | 얼굴 detect된 bbox |
-| data.matchFaces[].face.bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.matchFaces[].face.bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.matchFaces[].face.bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.matchFaces[].face.bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.matchFaces[].face.confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
-| data.matchFaces[].face.faceId | string | true | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | face id |
-| data.matchFaces[].face.imageId | string | true | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 id. 한 이미지 id에 여러 face id가 존재 할 수 있다. |
-| data.matchFaces[].face.externalImageId | string | false | "image01.jpg" | 사용자가 이미지에 등록한 값 |
-| data.matchFaces[].similarity | float | true | 98.156 | 0\~100 값을 가지는 유사도 |
-| data.sourceFace.bbox | object | true | - | 얼굴 detect된 bbox |
-| data.sourceFace.bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.sourceFace.bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.sourceFace.bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.sourceFace.bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.sourceFace.confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
+| data.matchFaceCount | int | O | 2 | detected face 개수 |
+| data.matchFaces[].face.bbox | object | O | - | 얼굴 detect된 bbox |
+| data.matchFaces[].face.bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.matchFaces[].face.bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.matchFaces[].face.bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.matchFaces[].face.bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.matchFaces[].face.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | face id |
+| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 id. 한 이미지 id에 여러 face id가 존재 할 수 있다. |
+| data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
+| data.matchFaces[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
+| data.sourceFace.bbox | object | O | - | 얼굴 detect된 bbox |
+| data.sourceFace.bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.sourceFace.bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.sourceFace.bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.sourceFace.bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.sourceFace.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 #### Error Codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| NotFoundGroupError | -40000 | not found group ID |
-| ImageTooLargeException | -45000 | exceed image size |
-| InvalidImageFormatException | -45000 | not supported image format |
-| InvalidImageURLException | -45000 | invalid image url |
-| ImageTimeoutError | -45000 | image download timeout |
+| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | invalid param |
+| -41000 | UnauthorizedAppKey | unauthorized appkey |
+| -40000 | NotFoundGroupError | not found group ID |
+| -45000 | ImageTooLargeException | exceed image size |
+| -45000 | InvalidImageFormatException | not supported image format |
+| -45000 | InvalidImageURLException | invalid image url |
+| -45000 | ImageTimeoutError | image download timeout |
 
 ### 얼굴 비교
 
@@ -1075,10 +1139,37 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/sea
 * Source Image에 2개 이상의 face가 detect된다면 가장 큰 face를 사용한다.
 
 #### 요청
-
-```
-POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/compare
-{
+[URI]
+ 
+| 메서드 | URI |
+| --- | --- |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/compare |
+ 
+[Path Variable]
+ 
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
+ 
+[Request Body]
+ 
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| sourceImage | object | O | - | 주어진 이미지에서 detected faces 중 가장 큰 face를 source로 사용하여 targets과 비교한다. |
+| sourceImage.url | string |  | "https://..." | <br>이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| sourceImage.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| targetImage | object | O | - | source Image와 비교할 대상 |
+| targetImage.url | string |  | "https://..." | <br>이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| targetImage.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| threshold | int | O | 90 | 유사도<br>0 < threshold <= 100 |
+ 
+[요청 예]
+ 
+```shell script
+curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' \
+ -d '{
     "sourceImage": {
         "url": "https://..."
     },
@@ -1086,18 +1177,8 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/compare
         "url": "https://..."
     },
     "threshold ": 80
-}
+}'
 ```
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| sourceImage | object | true | - | 주어진 이미지에서 detected faces 중 가장 큰 face를 source로 사용하여 targets과 비교한다. |
-| sourceImage.url | string | false | "https://..." | <br>이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| sourceImage.bytes | blob | false | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| targetImage | object | true | - | source Image와 비교할 대상 |
-| targetImage.url | string | false | "https://..." | <br>이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| targetImage.bytes | blob | false | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| threshold | int | true | 90 | 유사도<br>0 < threshold <= 100 |
 
 #### 응답
 
@@ -1244,136 +1325,48 @@ POST {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/compare
 
 [응답 본문 data]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.modelVersion | string | true | "v1.0" | Face Model version |
-| data.matchedFaceDetailCount | int | true | 1 | matched face 개수 |
-| data.matchedFaceDetails[].faceDetail.bbox | object | true | - | 얼굴 detect된 bbox |
-| data.matchedFaceDetails[].faceDetail.bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.matchedFaceDetails[].faceDetail.bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.matchedFaceDetails[].faceDetail.bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.matchedFaceDetails[].faceDetail.bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.matchedFaceDetails[].faceDetail.landmarks | array | true | - | 얼굴 특징 |
-| data.matchedFaceDetails[].faceDetail.landmarks[].type | string | true | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
-| data.matchedFaceDetails[].faceDetail.landmarks[].x | float | true | 0.362 | x 좌표 |
-| data.matchedFaceDetails[].faceDetail.landmarks[].y | float | true | 0.362 | y 좌표 |
-| data.matchedFaceDetails[].faceDetail.confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
-| data.matchedFaceDetails[].similarity | float | true | 98.156 | 0\~100 값을 가지는 유사도 |
-| data.unmatchedFaceDetailCount | int | true | 1 | unmatched face 개수 |
-| data.unmatchedFaceDetails[].faceDetail.bbox | object | true | - | 얼굴 detect된 bbox |
-| data.unmatchedFaceDetails[].faceDetail.bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.landmarks | array | true | - | 얼굴 특징 |
-| data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | true | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
-| data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | true | 0.362 | x 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | true | 0.362 | y 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
-| data.unmatchedFaceDetails[].similarity | float | true | 98.156 | 0\~100 값을 가지는 유사도 |
-| data.sourceFace.bbox | object | true | - | 얼굴 detect된 bbox |
-| data.sourceFace.bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| data.sourceFace.bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| data.sourceFace.bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| data.sourceFace.bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| data.sourceFace.confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
+| data.modelVersion | string | O | "v1.0" | Face Model version |
+| data.matchedFaceDetailCount | int | O | 1 | matched face 개수 |
+| data.matchedFaceDetails[].faceDetail.bbox | object | O | - | 얼굴 detect된 bbox |
+| data.matchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.matchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.matchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.matchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.matchedFaceDetails[].faceDetail.landmarks | array | O | - | 얼굴 특징 |
+| data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x 좌표 |
+| data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y 좌표 |
+| data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.matchedFaceDetails[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
+| data.unmatchedFaceDetailCount | int | O | 1 | unmatched face 개수 |
+| data.unmatchedFaceDetails[].faceDetail.bbox | object | O | - | 얼굴 detect된 bbox |
+| data.unmatchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.landmarks | array | O | - | 얼굴 특징 |
+| data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
+| data.sourceFace.bbox | object | O | - | 얼굴 detect된 bbox |
+| data.sourceFace.bbox.x0 | float | O | 0.123 | 얼굴 bbox의 x0 좌표 |
+| data.sourceFace.bbox.y0 | float | O | 0.123 | 얼굴 bbox의 y0 좌표 |
+| data.sourceFace.bbox.x1 | float | O | 0.123 | 얼굴 bbox의 x1 좌표 |
+| data.sourceFace.bbox.y1 | float | O | 0.123 | 얼굴 bbox의 y1 좌표 |
+| data.sourceFace.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 #### Error Codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| SourceImageImageTooLargeException | -45000 | source Image: exceed image size |
-| SourceImageInvalidImageFormatException | -45000 | source image: not supported image format |
-| SourceImageInvalidImageURLException | -45000 | source image: invalid image url |
-| SourceImageImageTimeoutError | -45000 | source image: image download timeout |
-| TargetImageImageTooLargeException | -45000 | target image: exceed image size |
-| TargetImageInvalidImageFormatException | -45000 | target image: not supported image format |
-| TargetImageInvalidImageURLException | -45000 | target image: invalid image url |
-| TargetImageImageTimeoutError | -45000 | target image: image download timeout |
-
-## Service API Data Type
-
-* Service API 에서 사용하는 Data type에 대한 정의
-
-### Image
-
-* 사용자가 파라미터로 넘기는 이미지의 정보
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| url | string | false | "https://..." | 이미지 url |
-| bytes | string | false | "/9j/4O1Q==..." | 이미지 bytes 코드. url 또는 bytes가 둘 중 하나만 있어야 한다. |
-
-### Face
-
-* 응답으로 나가는 얼굴의 정보
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| faceId | string | false | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | face Id. 등록된 경우에만 있다. |
-| imageId | string | false | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | image Id. 등록된 경우에만 있다. |
-| externalImageId | string | false | "a.jpg" | 사용자가 등록한 값. 등록된 경우에만 있다. |
-| bbox | object | true | - | 얼굴 detect된 bbox |
-| bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
-
-### FaceDetail
-
-* 응답으로 나가는 얼굴의 정보
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| bbox | object | true | - | 얼굴 detect된 bbox |
-| bbox.x0 | float | true | 0.123 | 얼굴 bbox의 x0 좌표 |
-| bbox.y0 | float | true | 0.123 | 얼굴 bbox의 y0 좌표 |
-| bbox.x1 | float | true | 0.123 | 얼굴 bbox의 x1 좌표 |
-| bbox.y1 | float | true | 0.123 | 얼굴 bbox의 y1 좌표 |
-| landmarks | array | true | - | 얼굴 특징 |
-| landmarks[].type | float | true | leftEye | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
-| landmarks[].y | float | true | 0.362 | y 좌표 |
-| landmarks[].x | float | true | 0.362 | x 좌표 |
-| confidence | float | true | 99.9123 | 얼굴 인식 신뢰도 |
-
-### MatchedFaces
-
-* target image중 source image에서 매칭된 얼굴
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| FaceDetail | data type | true | - | Face 정보 |
-| similarity | float | true | 0.32165 | 유사도 |
-
-### UnmatchedFaces
-
-* target image중 source image에서 매칭 안된 얼굴
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| FaceDetail | data type | true | - | Face 정보 |
-| similarity | float | true | 0.32165 | 유사도 |
-
-### Group
-
-* 사용자가 등록한 Group 정보
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| groupId | string | true | "nhn" | [a-z0-9-]{1,255} 사용자가 등록한 group id |
-| modelVersion | string | true | "v1.0" | NHN Face Recognition version 정보 |
-
-### GroupDetail
-
-* 사용자가 등록한 Group 정보
-
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| groupId | string | true | "nhn" | [a-z0-9-]{1,255} 사용자가 등록한 group id |
-| modelVersion | string | true | "v1.0" | NHN Face Recognition version 정보 |
-| createTime | string | false | "2020-11-04T12:36:24" | Group을 생성한 시간. |
-| faceCount | int | false | 365 | 그룹에 등록된 face Id 숫자. 그룹 상세에서만 볼 수 있다. |
+| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | invalid param |
+| -41000 | UnauthorizedAppKey | unauthorized appkey |
+| -45000 | ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: exceed image size |
+| -45000 | ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: not supported image format |
+| -45000 | ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: invalid image url |
+| -45000 | ImageImageTimeoutError:{Source/Target} | {Source/Target} image: image download timeout |
