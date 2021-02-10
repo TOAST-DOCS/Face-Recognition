@@ -86,9 +86,9 @@
 
 [Path Variable]
 
-| 이름 | 타입 | 설명 |
-| --- | --- | --- |
-| appKey | String | 고유의 appKey | 
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
 
 [Request Body]
 
@@ -141,6 +141,7 @@ curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/
 
 #### 요청
 
+[URI]
 | 메서드 | URI |
 | --- | --- |
 | GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups |
@@ -148,16 +149,16 @@ curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/
 
 [Path Variable]
 
-| 이름 | 타입 | 설명 |
-| --- | --- | --- |
-| appKey | String | 고유의 appKey | 
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
 
 [URL Parameter]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 최대 크기<br>0 < limit <= 200 |
-| next-token | string |  | "skljsdioew..." | Get Group List response에 존재하는 값. next-token 이후로 limit를 세어서 리턴 |
+| next-token | string |  | "skljsdioew..." | "그룹 목록 응답 본문 data"에서 반환된 값. next-token 이후로 limit를 세어서 리턴 |
 
 
 * `주의 사항`
@@ -236,14 +237,25 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-tok
 * 그룹 상세 정보 조회
 
 #### 요청
+[URI]
 
-```
-GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
-```
+| 메서드 | URI |
+| --- | --- |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| group-id | string | true | "group-id" | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+[Path Variable]
+
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
+| group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+
+[요청 예]
+```
+curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8'
+```
 
 #### 응답
 
@@ -281,12 +293,12 @@ GET {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}
 
 #### error codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| NotFoundGroupError | -40000 | not found group ID |
+| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | invalid param |
+| -41000 | UnauthorizedAppKey | unauthorized appkey |
+| -40000 | NotFoundGroupError | not found group ID |
 
 ### 그룹 삭제
 
