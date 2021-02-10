@@ -696,15 +696,28 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 * 등록된 face 삭제
 
 #### 요청
-
+[URI]
+ 
+| 메서드 | URI |
+| --- | --- |
+| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+ 
+[Path Variable]
+ 
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 고유의 appKey |
+| group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+| face-id | 등록된 얼굴 아이디 |
+ 
+[요청 예]
+ 
+```shell script
+curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' \
+ -H 'Authorization: {secretKey}' \
+ -H 'Content-Type: application/json;charset=UTF-8' 
 ```
-DELETE {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/faces/{face-id}
-```
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| group-id | url path | true | "group-id" | 등록된 group id<br>[a-z0-9-]{1,255} |
-| face-id | url path | true | "group-id" | 등록된 face id |
 
 #### 응답
 
@@ -725,13 +738,13 @@ DELETE {domain}/nhn-face-reco/{api-version}/appkeys/{appkey}/groups/{group-id}/f
 
 #### Error Codes
 
-| name | type | desc |
+| resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| InternalServerError | -50000 | internal server error |
-| InvalidParam | -40000 | invalid param |
-| UnauthorizedAppKey | -41000 | unauthorized appkey |
-| NotFoundGroupError | -40000 | not found group ID |
-| NotFoundFaceIDError | -40000 | not found face ID |
+| -50000 | InternalServerError | internal server error |
+| -40000 | InvalidParam | invalid param |
+| -41000 | UnauthorizedAppKey | unauthorized appkey |
+| -40000 | NotFoundGroupError | not found group ID |
+| -40000 | NotFoundFaceIDError | not found face ID |
 
 ### 그룹 내 얼굴 목록
 
