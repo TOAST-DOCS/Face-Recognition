@@ -215,6 +215,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-toke
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+
 [응답 본문 data]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
