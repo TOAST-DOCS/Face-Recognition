@@ -41,9 +41,9 @@
     - 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식 가능합니다.
     - 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식 가능합니다.
 - 이미지의 너비 혹은 높이가 2048px 초과한 경우
-    - 원본 이미지 비율에 맞춰서 너비나 높이를 최대 2048px로 리사이징한 후 인풋 이미지로 사용
+    - 원본 이미지 비율에 맞춰서 너비나 높이를 최대 2048px로 변환 후 입력 이미지로 사용합니다.
 - 이미지 최대 크기: 최대 5MB
-- 이미지 포맷: `PNG`, `JPEG`
+- 지원 이미지 포맷: `PNG`, `JPEG`
 
 [성공 응답 본문 예]
 
@@ -75,7 +75,7 @@
 3. [그룹 상세정보](#그룹-상세정보)
 4. [그룹 삭제](#그룹-삭제)
 5. [얼굴 감지](#얼굴-감지)
-6. [얼굴 추가](#얼굴-추가)
+6. [얼굴 등록](#얼굴-등록)
 7. [얼굴 삭제](#얼굴-삭제)
 8. [그룹 내 얼굴 목록](#그룹-내-얼굴-목록)
 9. [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색)
@@ -85,7 +85,7 @@
 
 ### 그룹 생성
 
-- 그룹 생성을 하는 API입니다. 생성된 그룹에 "[얼굴 추가](#얼굴-추가)"를 이용하여 얼굴들을 등록할 수 있습니다.
+- 그룹 생성을 하는 API입니다. 생성된 그룹에 "[얼굴 등록](#얼굴-등록)"를 이용하여 얼굴들을 등록할 수 있습니다.
 
 #### 요청
 [URI]
@@ -456,7 +456,11 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
                     "y": 0.513
                 }
             ],
-
+            "orientation: {
+                "x": 15.303436,
+                "y": -9.222179,
+                "z": -7.97249
+            },
             "confidence": 99.8945155187
         }]
     }
@@ -480,6 +484,10 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 | data.faceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.faceDetails[].landmarks[].y | float | O | 0.362 | y 좌표 |
 | data.faceDetails[].landmarks[].x | float | O | 0.362 | x 좌표 |
+| data.faceDetails[].orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
+| data.faceDetails[].orientation.x | float | O | 15.303436 | x 좌표 |
+| data.faceDetails[].orientation.y | float | O | -9.222179 | y 좌표 |
+| data.faceDetails[].orientation.z | float | O | -7.97249 | z 좌표 |
 | data.faceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 #### Error Codes
@@ -494,7 +502,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 | InvalidImageURLException | -45000 | 잘못된 이미지 URL |
 | ImageTimeoutError | -45000 | 이미지 다운로드 시간 초과 |
 
-### 얼굴 추가
+### 얼굴 등록
 
 * 요청으로 전달된 이미지에서 감지된 얼굴들을 특정한 그룹에 등록한다.
 * NHN 얼굴 인식은 요청으로 전달된 이미지도 인식된 얼굴도 저장하지 않습니다. 대신 요청으로 전달된 이미지에서 얼굴의 box를 감지하고 감지된 얼굴 box에서 얼굴 특징을 벡터로 추출합니다. 추출된 벡터 데이터는 암호화되어 데이터베이스에 저장됩니다.
@@ -609,6 +617,11 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
                     "y": 0.513
                 }
             ],
+            "orientation: {
+                "x": 15.303436,
+                "y": -9.222179,
+                "z": -7.97249
+            },
             "confidence": 99.8945155187
 
         }],
@@ -647,6 +660,11 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
                     "y": 0.513
                 }
             ],
+            "orientation: {
+                "x": 15.303436,
+                "y": -9.222179,
+                "z": -7.97249
+            },
             "confidence": 99.8945155187
 
         }]
@@ -682,6 +700,10 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | y 좌표 |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | x 좌표 |
+| data.addedFaceDetails[].orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
+| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | x 좌표 |
+| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | y 좌표 |
+| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | z 좌표 |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.notAddedFaceCount | int | O | 1 | 추가안된 얼굴 수 |
 | data.notAddedFaces[].bbox | object | O | - | 이미지 내에서 감지된 얼굴의 box 정보 |
@@ -693,6 +715,10 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | x 좌표 |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | y 좌표 |
+| data.notAddedFaces[].orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
+| data.notAddedFaces[].orientation.x | float | O | 15.303436 | x 좌표 |
+| data.notAddedFaces[].orientation.y | float | O | -9.222179 | y 좌표 |
+| data.notAddedFaces[].orientation.z | float | O | -7.97249 | z 좌표 |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 #### Error Codes
@@ -710,7 +736,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 
 ### 얼굴 삭제
 
-* 특정 그룹에서 등록된 얼굴을 삭제합니다.
+* 특정 그룹에서 등록된 얼굴 정보를 삭제합니다.
 
 #### 요청
 [URI]
@@ -765,7 +791,8 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{fa
 
 ### 그룹 내 얼굴 목록
 
-* 특정 그룹에 등록된 얼굴 목록 조회
+* 특정 그룹에 등록된 얼굴 정보 목록 조회
+* 응답은 최근에 등록된 순으로 얼굴 정보 배열이 반환됩니다.
 
 #### 요청
 [URI]
@@ -897,6 +924,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit=
 ### 페이스 아이디로 얼굴 검색
 
 * 페이스 아이디로 특정 그룹에서 검색
+* 응답은 일치하는 얼굴 정보의 배열을 반환하며, 유사도 점수가 가장 높은 순서로 정렬됩니다. 
 
 #### 요청
 [URI]
@@ -1010,7 +1038,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-
 * 전달된 이미지에서 얼굴을 인식 후 가장 큰 얼굴을 사용합니다. 인식된 얼굴을 특정 그룹에 속한 얼굴들과 비교합니다.
 * 입력 이미지는 base64로 인코딩 된 이미지 바이트로 전달하거나 이미지 URL로 전달 할 수 있습니다.
 * [입력 이미지 가이드](#입력-이미지-가이드) 참고.
-* 응답은 일치하는 얼굴의 배열을 반환하며, 유사도 점수가 가장 높은 순서로 정렬됩니다. 
+* 응답은 일치하는 얼굴 정보의 배열을 반환하며, 유사도 점수가 가장 높은 순서로 정렬됩니다.
 
 #### 요청
 [URI]
@@ -1158,6 +1186,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limi
 * 기준 이미지에서는 감지한 얼굴들 중 가장 큰 얼굴(기준 얼굴)만 사용한다.
 * 입력 이미지는 base64로 인코딩 된 이미지 바이트로 전달하거나 이미지 URL로 전달 할 수 있습니다.
 * [입력 이미지 가이드](#입력-이미지-가이드) 참고.
+* 응답은 유사도 점수가 가장 높은 순서로 정렬된 배열입니다. 
 
 #### 요청
 [URI]
@@ -1248,6 +1277,11 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
                         "y": 0.513
                     }
                 ],
+                "orientation: {
+                    "x": 15.303436,
+                    "y": -9.222179,
+                    "z": -7.97249
+                },
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1284,6 +1318,11 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
                         "y": 0.513
                     }
                 ],
+                "orientation: {
+                    "x": 15.303436,
+                    "y": -9.222179,
+                    "z": -7.97249
+                },
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1322,6 +1361,11 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
                             "y": 0.513
                         }
                     ],
+                    "orientation: {
+                        "x": 15.303436,
+                        "y": -9.222179,
+                        "z": -7.97249
+                    },
                     "confidence": 99.8945155187
                 },
                 "similarity": 60.654
@@ -1359,6 +1403,10 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
 | data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x 좌표 |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y 좌표 |
+| data.matchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
+| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | x 좌표 |
+| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | y 좌표 |
+| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | z 좌표 |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 | data.unmatchedFaceDetailCount | int | O | 1 | 매칭되지 않은 얼굴 수 |
@@ -1371,6 +1419,10 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | x 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | y 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | z 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 | data.sourceFace.bbox | object | O | - | 이미지 내에서 감지된 얼굴의 box 정보 |
