@@ -69,7 +69,7 @@
 6. [얼굴 추가](#얼굴-추가)
 7. [얼굴 삭제](#얼굴-삭제)
 8. [그룹 내 얼굴 목록](#그룹-내-얼굴-목록)
-9. [얼굴 아이디로 검색](#얼굴-아이디로-검색)
+9. [페이스 아이디로 검색](#페이스-아이디로-검색)
 10. [얼굴 이미지로 검색](#얼굴-이미지로-검색)
 11. [얼굴 이미지 비교](#얼굴-이미지-비교)
 
@@ -236,8 +236,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-toke
 
 ### 그룹 상세정보
 
-* 그룹 상세 정보 조회
-* 그룹에 있는 얼굴 수와 그룹에서 얼굴 감지를 위해 사용하는 모델 버젼 같은 정보를 가지고 옵니다. 
+* 특정 그룹에 있는 얼굴 수와 그룹에서 얼굴 감지를 위해 사용하는 모델 버전 같은 정보를 가지고 옵니다. 
 
 #### 요청
 [URI]
@@ -488,7 +487,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 
 * 요청으로 전달된 이미지에서 감지된 얼굴들을 특정한 그룹에 등록한다.
 * NHN 얼굴인식은 요청으로 전달된 이미지도 인식된 얼굴도 저장하지 않습니다. 대신 요청으로 전달된 이미지에서 얼굴의 box를 감지하고 감지된 얼굴 box에서 얼굴 특징을 벡터로 추출합니다. 추출된 벡터 데이터는 암호화되어 데이터베이스에 저장됩니다.
-* 추가된 얼굴 벡터는 [얼굴 아이디로 검색](#얼굴-아이디로-검색), [얼굴 이미지로 검색](#얼굴-이미지로-검색) API를 통해 얼굴 검색할 때 특징 벡터로 사용됩니다.
+* 추가된 얼굴 벡터는 [페이스 아이디로 검색](#페이스-아이디로-검색), [얼굴 이미지로 검색](#얼굴-이미지로-검색) API를 통해 얼굴 검색할 때 특징 벡터로 사용됩니다.
 
 #### 요청
 
@@ -513,7 +512,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 | --- | --- | --- | --- | --- |
 | image.url | string |  | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
 | image.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| externalImageId | string |  | "image01.jsp" | 사용자가 이미지 또는 얼굴 아이디들에 라벨링을 위해 전달하는 값<br>[a-zA-Z0-9\_.-:]+<br>1 <limit <= 255 |
+| externalImageId | string |  | "image01.jsp" | 사용자가 이미지 또는 페이스 아이디들에 라벨링을 위해 전달하는 값<br>[a-zA-Z0-9\_.-:]+<br>1 <limit <= 255 |
 | limit | int | O | 3 | 전달된 이미지에서 인식된 얼굴들 중 크기가 큰 순으로 정렬하여 최대 그룹에 등록할 얼굴 수<br>0< limit <= 100 |
 
 * image.url, image.bytes 중 반드시 1개가 있어야 한다.
@@ -656,8 +655,8 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | data.addedFaces[].bbox.y0 | float | O | 0.123 | 이미지 내에서 감지된 얼굴의 box의 y0 좌표 |
 | data.addedFaces[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지된 얼굴의 box의 x1 좌표 |
 | data.addedFaces[].bbox.y1 | float | O | 0.123 | 이미지 내에서 감지된 얼굴의 box의 y1 좌표 |
-| data.addedFaces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 얼굴 아이디 |
-| data.addedFaces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디. 한 이미지 아이디에 여러 얼굴 아이디가 존재 할 수 있다. |
+| data.addedFaces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
+| data.addedFaces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디. 한 이미지 아이디에 여러 페이스 아이디가 존재 할 수 있다. |
 | data.addedFaces[].externalImageId | string |  | "image01.jpg" | 요청에서 전달된 값 |
 | data.addedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.addedFaceDetails[].bbox | object | O | - | 이미지 내에서 감지된 얼굴의 box 정보 |
@@ -712,7 +711,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | --- | --- |
 | appKey | 고유의 appKey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
-| face-id | 등록된 얼굴 아이디 |
+| face-id | 등록된 페이스 아이디 |
  
 [요청 예]
  
@@ -748,7 +747,7 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{fa
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
 | -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
-| -40000 | NotFoundFaceIDError | 얼굴 아이디를 찾을 수 없습니다 |
+| -40000 | NotFoundFaceIDError | 페이스 아이디를 찾을 수 없습니다 |
 
 ### 그룹 내 얼굴 목록
 
@@ -866,8 +865,8 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit=
 | data.faces[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지된 얼굴의 box의 x1 좌표 |
 | data.faces[].bbox.y1 | float | O | 0.123 | 이미지 내에서 감지된 얼굴의 box의 y1 좌표 |
 | data.faces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
-| data.faces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 얼굴 아이디 |
-| data.faces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디. 한 이미지 아이디에 여러 얼굴 아이디가 존재 할 수 있다. |
+| data.faces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
+| data.faces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디. 한 이미지 아이디에 여러 페이스 아이디가 존재 할 수 있다. |
 | data.faces[].externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
 | data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. request에 next-token 파라미터를 전달하면 그 이후부터 센다. |
 
@@ -881,9 +880,9 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit=
 | -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
 | -40000 | InvalidTokenError | 잘못된 토큰 사용 |
 
-### 얼굴 아이디로 검색
+### 페이스 아이디로 검색
 
-* 얼굴 아이디로 특정 그룹에서 검색
+* 페이스 아이디로 특정 그룹에서 검색
 
 #### 요청
 [URI]
@@ -898,7 +897,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit=
 | --- | --- |
 | appKey | 고유의 appKey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
-| face-id | 비교하려는 얼굴 아이디 |
+| face-id | 비교하려는 페이스 아이디 |
  
 [URL Parameter]
  
@@ -977,8 +976,8 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-
 | data.matchFaces[].face.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지된 얼굴의 box의 x1 좌표 |
 | data.matchFaces[].face.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지된 얼굴의 box의 y1 좌표 |
 | data.matchFaces[].face.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
-| data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 얼굴 아이디 |
-| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디. 한 이미지 아이디에 여러 얼굴 아이디가 존재 할 수 있다. |
+| data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
+| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디. 한 이미지 아이디에 여러 페이스 아이디가 존재 할 수 있다. |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
 | data.matchFaces[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 
@@ -990,7 +989,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-
 | -40000 | InvalidParam | 파라미터에 오류가 있음 |
 | -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
 | -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
-| -40000 | NotFoundFaceIDError | 얼굴 아이디를 찾을 수 없습니다 |
+| -40000 | NotFoundFaceIDError | 페이스 아이디를 찾을 수 없습니다 |
 
 ### 얼굴 이미지로 검색
 
@@ -1113,8 +1112,8 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limi
 | data.matchFaces[].face.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지된 얼굴의 box의 x1 좌표 |
 | data.matchFaces[].face.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지된 얼굴의 box의 y1 좌표 |
 | data.matchFaces[].face.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
-| data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 얼굴 아이디 |
-| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디. 한 이미지 아이디에 여러 얼굴 아이디가 존재 할 수 있다. |
+| data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
+| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디. 한 이미지 아이디에 여러 페이스 아이디가 존재 할 수 있다. |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
 | data.matchFaces[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 | data.sourceFace.bbox | object | O | - | 이미지 내에서 감지된 얼굴의 box 정보 |
@@ -1139,8 +1138,8 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limi
 
 ### 얼굴 이미지 비교
 
-* 두 이미지를 비교한다.
-* 소스 이미지에 2개 이상의 얼굴이 감지된다면 가장 큰 얼굴을 사용한다.
+* 기준 이미지(sourceImage)와 비교 이미지(targetImage)에서 감지한 얼굴이 얼마나 유사한지 비교한다.
+* 기준 이미지에서는 감지한 얼굴들 중 가장 큰 얼굴(기준 얼굴)만 사용한다.
 
 #### 요청
 [URI]
@@ -1159,13 +1158,13 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limi
  
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| sourceImage | object | O | - | 주어진 이미지에서 감지된 얼굴들 중 가장 큰 얼굴을 소스로 사용하여 타깃들과 비교한다. |
-| sourceImage.url | string |  | "https://..." | <br>이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| sourceImage | object | O | - | 기준 얼굴로 사용될 얼굴이 있는 이미지. |
+| sourceImage.url | string |  | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
 | sourceImage.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| targetImage | object | O | - | 소스 이미지와 비교할 대상 |
-| targetImage.url | string |  | "https://..." | <br>이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| targetImage | object | O | - | 비교할 얼굴들이 있는 이미지. |
+| targetImage.url | string |  | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
 | targetImage.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| threshold | int | O | 90 | 유사도<br>0 < threshold <= 100 |
+| threshold | int | O | 90 | 매칭 여부를 판단하는 유사도 기준값이다.<br>0 < threshold <= 100 |
  
 [요청 예]
  
