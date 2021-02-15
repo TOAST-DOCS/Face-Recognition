@@ -77,6 +77,7 @@
 ### 그룹 생성
 
 - 그룹 생성을 하는 API입니다. 생성된 그룹에 "[얼굴 추가](#얼굴-추가)"를 이용하여 얼굴들을 등록할 수 있습니다.
+
 #### 요청
 [URI]
 
@@ -158,7 +159,7 @@ curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 최대 크기<br>0 < limit <= 200 |
-| next-token | string |  | "skljsdioew..." | "그룹 목록 응답 본문 data"에서 반환된 값. next-token 이후로 limit를 세어서 리턴 |
+| next-token | string |  | "skljsdioew..." | "그룹 목록 응답 본문 data"에서 반환된 값. 결과가 잘린 경우 next-token을 이용해 이후 결과를 가지고 올 수 있다. |
 
 
 * `주의 사항`
@@ -223,7 +224,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-toke
 | data.groupCount | int | O | 2 | 그룹 수 |
 | data.groups[].groupId | string | O | "group-id" | 사용자가 등록한 그룹 아이디 |
 | data.groups[].modelVersion | string | O | "v1.0" | 얼굴 감지 모델 버전 정보 |
-| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. request에 next-token 파라미터를 전달하면 그 이후부터 센다. |
+| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. 결과가 잘린 경우 next-token을 이용해 이후 결과를 가지고 올 수 있다. |
 
 #### Error Codes
 
@@ -289,10 +290,10 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.groupCount | int | true | 2 | 그룹 수 |
+| data.groupCount | int | true | 1 | 그룹 수 |
 | data.groups[].groupId | string | true | "group-id" | 사용자가 등록한 그룹 아이디 |
 | data.groups[].modelVersion | string | true | "v1.0" | 얼굴 감지 모델 버전 정보 |
-| data.groups[].createTime | string | true | "2020-11-04T12:36:24" | 그룹을 생성한 시간. |
+| data.groups[].createTime | string | true | "2020-11-04T12:36:24" | 그룹을 생성한 시간 |
 | data.groups[].faceCount | int | false | 365 | 그룹에 등록된 얼굴 수 |
 
 #### Error Codes
@@ -361,9 +362,10 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 
 ### 얼굴 감지
 
-* 요청으로 받은 이미지로내의 얼굴을 감지합니다. 감지한 얼굴에 대한 얼굴, 눈, 코, 입의 위치 정보와 신뢰도 값을 반환합니다.
-* `얼굴 감지`는 이미지에서 얼굴이 큰 순서대로 최대 `100`개의 얼굴 정보를 감지합니다.
-* 지원하는 이미지 포맷은 `PNG`, `JPEG`입니다. 
+* 요청으로 받은 이미지에서 얼굴을 감지합니다. 감지한 얼굴에 대한 얼굴, 눈, 코, 입, 등의 위치 정보와 신뢰도 값을 반환합니다.
+* 이미지에서 얼굴이 큰 순서대로 최대 `100`개의 얼굴 정보를 감지합니다.
+* 입력 이미지는 base64로 인코딩 된 이미지 바이트로 전달하거나 이미지 URL로 전달 할 수 있습니다.
+* 지원하는 이미지 포맷은 `PNG`, `JPEG`입니다. 최대 이미지 크기는 5MB입니다.
 
 #### 요청
 [URI]
@@ -383,7 +385,7 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | image.url | string | false | "https://..." | 이미지의 url |
-| image.bytes | blob | false | "/0j3Ohdk==..." | 이미지의 bytes |
+| image.bytes | blob | false | "/0j3Ohdk==..." | base64로 인코딩 된 이미지 바이트 |
 
 * image.url, image.bytes 중 반드시 1개가 있어야 한다.
 
@@ -488,7 +490,11 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 * 요청으로 전달된 이미지에서 감지된 얼굴들을 특정한 그룹에 등록한다.
 * NHN 얼굴 인식은 요청으로 전달된 이미지도 인식된 얼굴도 저장하지 않습니다. 대신 요청으로 전달된 이미지에서 얼굴의 box를 감지하고 감지된 얼굴 box에서 얼굴 특징을 벡터로 추출합니다. 추출된 벡터 데이터는 암호화되어 데이터베이스에 저장됩니다.
 * 추가된 얼굴 벡터는 [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](#이미지로-얼굴-검색) API를 통해 얼굴 검색할 때 특징 벡터로 사용됩니다.
-
+* 입력 이미지는 base64로 인코딩 된 이미지 바이트로 전달하거나 이미지 URL로 전달 할 수 있습니다.
+* 지원하는 이미지 포맷은 `PNG`, `JPEG`입니다. 최대 이미지 크기는 5MB입니다.
+* `externalImageId` 선택 파라미터(Optional)로 사용자 레벨 라벨링 정보를 전달할 수 있습니다. [그룹 내 얼굴 목록](#그룹-내-얼굴-목록)과 [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](#이미지로-얼굴-검색) API의 응답에서 반환됩니다. 
+* `imageId`가 응답에 포함되어 있습니다. `imageId`는 매번 새로 생성되며 `externalImageId`와 함께 사용자 레벨 라벨링 정보로 사용될 수 있습니다.
+ 
 #### 요청
 
 [URI]
@@ -510,7 +516,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | image.url | string |  | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| image.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| image.bytes | blob |  | "/0j3Ohdk==..." | base64로 인코딩 된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
 | externalImageId | string |  | "image01.jsp" | 사용자가 이미지 또는 페이스 아이디들에 라벨링을 위해 전달하는 값<br>[a-zA-Z0-9\_.-:]+<br>1 <limit <= 255 |
 | limit | int | O | 3 | 전달된 이미지에서 인식된 얼굴들 중 크기가 큰 순으로 정렬하여 최대 그룹에 등록할 얼굴 수<br>0< limit <= 100 |
 
@@ -771,7 +777,7 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{fa
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int  | O  | 100  | 최대 크기<br>0 < limit <= 200 |
-| next-token | string  |    | "skljsdioew..."  | "그룹 목록 응답 본문 data"에서 반환된 값. next-token 이후로 limit를 세어서 리턴 |
+| next-token | string  |    | "skljsdioew..."  | "그룹 목록 응답 본문 data"에서 반환된 값. 결과가 잘린 경우 next-token을 이용해 이후 결과를 가지고 올 수 있다. |
  
 
 * `주의 사항`
@@ -867,7 +873,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit=
 | data.faces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
 | data.faces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디. 한 이미지 아이디에 여러 페이스 아이디가 존재 할 수 있다. |
 | data.faces[].externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
-| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. request에 next-token 파라미터를 전달하면 그 이후부터 센다. |
+| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. 결과가 잘린 경우 next-token을 이용해 이후 결과를 가지고 올 수 있다. |
 
 #### Error Codes
 
@@ -992,8 +998,10 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-
 
 ### 이미지로 얼굴 검색
 
-* image로 특정 그룹에서 검색
-* 전달된 이미지에서 detected faces 중 가장 큰 이미지를 비교대상으로 사용한다.
+* 전달된 이미지에서 가장 큰 얼굴을 인식한다. 인식된 얼굴을 특정 그룹에 속한 얼굴들과 비교한다.
+* 입력 이미지는 base64로 인코딩 된 이미지 바이트로 전달하거나 이미지 URL로 전달 할 수 있습니다.
+* 지원하는 이미지 포맷은 `PNG`, `JPEG`입니다. 최대 이미지 크기는 5MB입니다.
+* 응답은 일치하는 얼굴의 배열을 반환하며, 유사도 점수가 가장 높은 순서로 정렬됩니다. 
 
 #### 요청
 [URI]
@@ -1021,7 +1029,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | image.url | string |  | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| image.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| image.bytes | blob |  | "/0j3Ohdk==..." | base64로 인코딩 된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
 
 * image.url, image.bytes 중 반드시 1개가 있어야 한다.
  
@@ -1139,6 +1147,8 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limi
 
 * 기준 이미지(sourceImage)와 비교 이미지(targetImage)에서 감지한 얼굴이 얼마나 유사한지 비교한다.
 * 기준 이미지에서는 감지한 얼굴들 중 가장 큰 얼굴(기준 얼굴)만 사용한다.
+* 입력 이미지는 base64로 인코딩 된 이미지 바이트로 전달하거나 이미지 URL로 전달 할 수 있습니다.
+* 지원하는 이미지 포맷은 `PNG`, `JPEG`입니다. 최대 이미지 크기는 5MB입니다.
 
 #### 요청
 [URI]
@@ -1159,10 +1169,10 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limi
 | --- | --- | --- | --- | --- |
 | sourceImage | object | O | - | 기준 얼굴로 사용될 얼굴이 있는 이미지. |
 | sourceImage.url | string |  | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| sourceImage.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| sourceImage.bytes | blob |  | "/0j3Ohdk==..." | base64로 인코딩 된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
 | targetImage | object | O | - | 비교할 얼굴들이 있는 이미지. |
 | targetImage.url | string |  | "https://..." | 이미지의 url<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
-| targetImage.bytes | blob |  | "/0j3Ohdk==..." | 이미지의 bytes<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
+| targetImage.bytes | blob |  | "/0j3Ohdk==..." | base64로 인코딩 된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개가 있어야 한다. |
 | threshold | int | O | 90 | 매칭 여부를 판단하는 유사도 기준값이다.<br>0 < threshold <= 100 |
  
 [요청 예]
