@@ -6,8 +6,8 @@
 ### 사전 준비
 - API 사용을 위해서는 앱 키와 보안 키가 필요합니다.
 - 앱 키와 보안 키는 콘솔 상단 "URL & Appkey" 메뉴에서 확인이 가능합니다.
-### 요청 공통 정보
 
+### 요청 공통 정보
 - API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
 - 모든 API 요청 헤더에 'Authorization'에 보안 키를 넣어서 요청해야 합니다.
 
@@ -69,14 +69,14 @@
 6. [얼굴 추가](#얼굴-추가)
 7. [얼굴 삭제](#얼굴-삭제)
 8. [그룹 내 얼굴 목록](#그룹-내-얼굴-목록)
-9. [페이스 아이디로 검색](#페이스-아이디로-검색)
-10. [얼굴 이미지로 검색](#얼굴-이미지로-검색)
-11. [얼굴 이미지 비교](#얼굴-이미지-비교)
+9. [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색)
+10. [이미지로 얼굴 검색](#이미지로-얼굴-검색)
+11. [얼굴 비교](#얼굴-비교)
 
 
 ### 그룹 생성
 
-* 그룹 생성을 하는 API입니다. 생성된 그룹에 "[얼굴 추가](#얼굴-추가)"를 이용하여 얼굴들을 등록할 수 있습니다.
+- 그룹 생성을 하는 API입니다. 생성된 그룹에 "[얼굴 추가](#얼굴-추가)"를 이용하여 얼굴들을 등록할 수 있습니다.
 #### 요청
 [URI]
 
@@ -88,7 +88,7 @@
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 
 [Request Body]
 
@@ -151,7 +151,7 @@ curl -X POST 'https://alpha-face-recognition.cloud.toast.com/nhn-face-reco/v1.0/
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 
 [URL Parameter]
 
@@ -222,7 +222,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-toke
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 2 | 그룹 수 |
 | data.groups[].groupId | string | O | "group-id" | 사용자가 등록한 그룹 아이디 |
-| data.groups[].modelVersion | string | O | "v1.0" | 얼굴 감지 모델 버젼 정보 |
+| data.groups[].modelVersion | string | O | "v1.0" | 얼굴 감지 모델 버전 정보 |
 | data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token. request에 next-token 파라미터를 전달하면 그 이후부터 센다. |
 
 #### Error Codes
@@ -249,7 +249,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-toke
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 
 [요청 예]
@@ -291,7 +291,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | true | 2 | 그룹 수 |
 | data.groups[].groupId | string | true | "group-id" | 사용자가 등록한 그룹 아이디 |
-| data.groups[].modelVersion | string | true | "v1.0" | 얼굴 감지 모델 버젼 정보 |
+| data.groups[].modelVersion | string | true | "v1.0" | 얼굴 감지 모델 버전 정보 |
 | data.groups[].createTime | string | true | "2020-11-04T12:36:24" | 그룹을 생성한 시간. |
 | data.groups[].faceCount | int | false | 365 | 그룹에 등록된 얼굴 수 |
 
@@ -320,7 +320,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 
 [요청 예]
@@ -361,7 +361,7 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 
 ### 얼굴 감지
 
-* 요청으로 받은 이미지로내의 얼굴을 감지합니다.
+* 요청으로 받은 이미지로내의 얼굴을 감지합니다. 감지한 얼굴에 대한 얼굴, 눈, 코, 입의 위치 정보와 신뢰도 값을 반환합니다.
 * `얼굴 감지`는 이미지에서 얼굴이 큰 순서대로 최대 `100`개의 얼굴 정보를 감지합니다.
 * 지원하는 이미지 포맷은 `PNG`, `JPEG`입니다. 
 
@@ -376,7 +376,7 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 
 [Request Body]
 
@@ -486,8 +486,8 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 ### 얼굴 추가
 
 * 요청으로 전달된 이미지에서 감지된 얼굴들을 특정한 그룹에 등록한다.
-* NHN 얼굴인식은 요청으로 전달된 이미지도 인식된 얼굴도 저장하지 않습니다. 대신 요청으로 전달된 이미지에서 얼굴의 box를 감지하고 감지된 얼굴 box에서 얼굴 특징을 벡터로 추출합니다. 추출된 벡터 데이터는 암호화되어 데이터베이스에 저장됩니다.
-* 추가된 얼굴 벡터는 [페이스 아이디로 검색](#페이스-아이디로-검색), [얼굴 이미지로 검색](#얼굴-이미지로-검색) API를 통해 얼굴 검색할 때 특징 벡터로 사용됩니다.
+* NHN 얼굴 인식은 요청으로 전달된 이미지도 인식된 얼굴도 저장하지 않습니다. 대신 요청으로 전달된 이미지에서 얼굴의 box를 감지하고 감지된 얼굴 box에서 얼굴 특징을 벡터로 추출합니다. 추출된 벡터 데이터는 암호화되어 데이터베이스에 저장됩니다.
+* 추가된 얼굴 벡터는 [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](#이미지로-얼굴-검색) API를 통해 얼굴 검색할 때 특징 벡터로 사용됩니다.
 
 #### 요청
 
@@ -501,10 +501,9 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
  
-
 
 [Request Body]
 
@@ -709,7 +708,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 | face-id | 등록된 페이스 아이디 |
  
@@ -764,7 +763,7 @@ curl -X DELETE '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{fa
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
@@ -880,7 +879,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit=
 | -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
 | -40000 | InvalidTokenError | 잘못된 토큰 사용 |
 
-### 페이스 아이디로 검색
+### 페이스 아이디로 얼굴 검색
 
 * 페이스 아이디로 특정 그룹에서 검색
 
@@ -895,7 +894,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit=
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 | face-id | 비교하려는 페이스 아이디 |
  
@@ -904,7 +903,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit=
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int  | O  | 100  | 찾으려는 최대 값.<br>0 < limit <= 4096 |
-| threshold | int  | O  | 90  | 유사도<br>0 < threshold <= 100 |
+| threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값이다.<br>0 < threshold <= 100 |
  
 [요청 예]
  
@@ -991,7 +990,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-
 | -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없습니다 |
 | -40000 | NotFoundFaceIDError | 페이스 아이디를 찾을 수 없습니다 |
 
-### 얼굴 이미지로 검색
+### 이미지로 얼굴 검색
 
 * image로 특정 그룹에서 검색
 * 전달된 이미지에서 detected faces 중 가장 큰 이미지를 비교대상으로 사용한다.
@@ -1007,7 +1006,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
 | group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
@@ -1015,7 +1014,7 @@ curl -X GET '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int  | O  | 100  | 찾으려는 최대 값.<br>0 < limit <= 4096 |
-| threshold | int  | O  | 90  | 유사도<br>0 < threshold <= 100 |
+| threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값이다.<br>0 < threshold <= 100 |
 
 [Request Body]
  
@@ -1136,7 +1135,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limi
 | -45000 | InvalidImageURLException | 잘못된 이미지 URL |
 | -45000 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
 
-### 얼굴 이미지 비교
+### 얼굴 비교
 
 * 기준 이미지(sourceImage)와 비교 이미지(targetImage)에서 감지한 얼굴이 얼마나 유사한지 비교한다.
 * 기준 이미지에서는 감지한 얼굴들 중 가장 큰 얼굴(기준 얼굴)만 사용한다.
@@ -1152,7 +1151,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limi
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 고유의 appKey |
+| appKey | 사용자마다 발급된 서비스용 키 |
  
 [Request Body]
  
