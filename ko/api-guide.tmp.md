@@ -456,7 +456,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
                     "y": 0.513
                 }
             ],
-            "orientation: {
+            "orientation": {
                 "x": 15.303436,
                 "y": -9.222179,
                 "z": -7.97249
@@ -617,7 +617,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
                     "y": 0.513
                 }
             ],
-            "orientation: {
+            "orientation": {
                 "x": 15.303436,
                 "y": -9.222179,
                 "z": -7.97249
@@ -660,7 +660,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
                     "y": 0.513
                 }
             ],
-            "orientation: {
+            "orientation": {
                 "x": 15.303436,
                 "y": -9.222179,
                 "z": -7.97249
@@ -1277,7 +1277,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
                         "y": 0.513
                     }
                 ],
-                "orientation: {
+                "orientation": {
                     "x": 15.303436,
                     "y": -9.222179,
                     "z": -7.97249
@@ -1318,7 +1318,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
                         "y": 0.513
                     }
                 ],
-                "orientation: {
+                "orientation": {
                     "x": 15.303436,
                     "y": -9.222179,
                     "z": -7.97249
@@ -1361,7 +1361,7 @@ curl -X POST '/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
                             "y": 0.513
                         }
                     ],
-                    "orientation: {
+                    "orientation": {
                         "x": 15.303436,
                         "y": -9.222179,
                         "z": -7.97249
