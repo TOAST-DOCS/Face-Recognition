@@ -107,23 +107,25 @@
 | groupId | string | O | "my-group" | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 
 
+<details>
+<summary>요청 예</summary>
 
-[요청 예]
 ```sh
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' \
- -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "groupId": "my-group"
 }'
 ```
+
+</details>
 
 #### 응답
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
-[응답 본문 예]
+
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -135,15 +137,17 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' \
 }
 ```
 
+</details>
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40000 | InvalidGroupID | 그룹 아이디 오류 |
-| -40000 | DuplicatedGroupID | 중복된 그룹 아이디 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40010| InvalidGroupID | 그룹 아이디 오류 |
+|-40020| DuplicatedGroupID | 중복된 그룹 아이디 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 그룹 목록
 
@@ -179,21 +183,27 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' \
 
 1. 최초 query
 
-[요청 예]
+
+<details>
+<summary>요청 예</summary>
+
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8'
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'
 ```
+
+</details>
 
 2. "그룹 목록 응답 본문 data"에 포함된 next-token을 이용하여 요청
 
-[요청 예]
+
+<details>
+<summary>요청 예</summary>
+
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8'
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'
 ```
+
+</details>
 
 * next-token이 존재하면 limit은 변경 될 수 없으며 token이 발행 될 때의 값으로 자동 세팅됨
 
@@ -211,7 +221,8 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&n
 | data.groups[].modelVersion | string | O | "v1.0" | 얼굴 감지 모델 버전 정보 |
 | data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token<br>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
-[응답 본문 예]
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -234,14 +245,16 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&n
 }
 ```
 
+</details>
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40000 | InvalidTokenError | 잘못된 토큰 사용 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40040| InvalidTokenError | 잘못된 토큰 사용 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 그룹 상세정보
 
@@ -261,12 +274,14 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&n
 | appKey | 사용자마다 발급된 서비스용 키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 
-[요청 예]
+<details>
+<summary>요청 예</summary>
+
 ```
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8'
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'
 ```
+
+</details>
 
 #### 응답
 
@@ -283,7 +298,8 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | data.groups[].createTime | string | O | "2020-11-04T12:36:24" | 그룹을 생성한 시간 |
 | data.groups[].faceCount | int |   | 365 | 그룹에 등록한 얼굴 수 |
 
-[응답 본문 예]
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -304,14 +320,16 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 }
 ```
 
+</details>
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 그룹 삭제
 
@@ -332,13 +350,15 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | appKey | 사용자마다 발급된 서비스용 키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 
-[요청 예]
+
+<details>
+<summary>요청 예</summary>
 
 ```shell script
-curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
+
+</details>
 
 
 
@@ -347,7 +367,8 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
-[응답 본문 예]
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -359,14 +380,17 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 }
 ```
 
+</details>
+
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 얼굴 감지
 
@@ -398,18 +422,19 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
 
-[요청 예]
+
+<details>
+<summary>요청 예</summary>
  
 ```shell script
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' \
- -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "image": {
         "url":"https://..."
     }
 }'
 ```
+
+</details>
 
 #### 응답
 
@@ -436,7 +461,9 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 | data.faceDetails[].orientation.z | float | O | -7.97249 | 얼굴 방향의 z 좌표 |
 | data.faceDetails[].confidence | float | O | 99.9123 | 얼굴인식 신뢰도 |
 
-[응답 본문 예]
+
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -490,24 +517,27 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 }
 ```
 
+</details>
+
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -45000 | ImageTooLargeException | 이미지 크기 초과 |
-| -45000 | InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
-| -45000 | InvalidImageURLException | 잘못된 이미지 URL |
-| -45000 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-45020| ImageTooLargeException | 이미지 크기 초과 |
+|-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
+|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 얼굴 등록
 
 * 입력 이미지에서 감지한 얼굴을 특정 그룹에 등록하는 API입니다.
 * 입력 이미지에서 얼굴의 box를 감지하고 감지한 얼굴 box에서 얼굴 특징을 벡터로 추출합니다. 이때, 입력 이미지와 입력 이미지에서 감지한 얼굴 이미지 그 어느 것도 저장하지 않습니다.
 * 추출한 벡터 데이터는 암호화하여 데이터베이스에 저장합니다.
-* [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](#이미지로-얼굴-검색) API로 얼굴 검색 시 저장한 벡터 데이터를 특징 벡터로 사용합니다.
+* 저장한 벡터 데이터는 [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](#이미지로-얼굴-검색) API에 특징 벡터로 사용합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
 * 입력 이미지에 대한 세부사항은[입력 이미지 가이드](#입력-이미지-가이드)를 참고하시기 바랍니다.
 * `imageId`는 입력 이미지에 부여되는 값이며 `externalImageId`는 사용자가 직접 부여할 수 있는 값입니다. 사용자는 `imageId`와 `externalImageId`를 통해 사용자 단에서 이미지 또는 페이스 아이디에 라벨링하고 인덱스처럼 자체적으로 활용할 수 있습니다.
@@ -542,13 +572,12 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' \
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
 
  
-[요청 예]
+
+<details>
+<summary>요청 예</summary>
  
 ```shell script
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' \
- -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "image": {
         "url": "https://..."
     },
@@ -556,6 +585,8 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
     "limit": 3
 }'
 ```
+
+</details>
 
 
 #### 응답
@@ -608,7 +639,9 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | data.notAddedFaces[].orientation.z | float | O | -7.97249 | 얼굴 방향의 z 좌표 |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
-[응답 본문 예]
+
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -723,19 +756,21 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 }
 ```
 
+</details>
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-| -40000 | ServiceQuotaExceededException | 단일 그룹에 등록 가능한 최대 얼굴 개수 초과 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -45000 | ImageTooLargeException | 이미지 크기 초과 |
-| -45000 | InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
-| -45000 | InvalidImageURLException | 잘못된 이미지 URL |
-| -45000 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-40070| ServiceQuotaExceededException | 단일 그룹에 등록 가능한 최대 얼굴 개수 초과 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-45020| ImageTooLargeException | 이미지 크기 초과 |
+|-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
+|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 얼굴 삭제
 
@@ -756,21 +791,24 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' \
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 | face-id | 등록된 페이스 아이디 |
  
-[요청 예]
- 
+
+<details>
+<summary>요청 예</summary>
+
 ```shell script
-curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
+</details>
 
 #### 응답
 
 * [응답 본문 header 설명 생략]
     * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
 
-[응답 본문 예]
+
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -782,15 +820,17 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/f
 }
 ```
 
+</details>
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-| -40000 | NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 그룹 내 얼굴 목록
 
@@ -828,24 +868,27 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/f
 1. 최초 query
 
  
-[요청 예]
+<details>
+<summary>요청 예</summary>
  
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
+
+</details>
 
 
 2. "그룹 목록 응답 본문 data"에 포함된 next-token을 이용하여 요청
  
-[요청 예]
+
+<details>
+<summary>요청 예</summary>
  
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
+
+</details>
 
 
 * next-token이 존재하면 limit은 변경 될 수 없으며 token이 발행 될 때의 값으로 자동 세팅됨
@@ -873,7 +916,10 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 | data.faces[].externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
 | data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token<br>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
-[응답 본문 예]
+
+<details>
+<summary>응답 본문 예</summary>
+
 
 ```json
 {
@@ -914,15 +960,17 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 }
 ```
 
+</details>
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-| -40000 | InvalidTokenError | 잘못된 토큰 사용 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-40040| InvalidTokenError | 잘못된 토큰 사용 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 페이스 아이디로 얼굴 검색
 
@@ -951,13 +999,15 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 | limit | int  | O  | 100  | 찾으려는 최대 값.<br>0 < limit <= 4096 |
 | threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
  
-[요청 예]
+
+<details>
+<summary>요청 예</summary>
  
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
+
+</details>
 
 #### 응답
 
@@ -980,7 +1030,9 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
 | data.matchFaces[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 
-[응답 본문 예]
+
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -1026,15 +1078,18 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 }
 ```
 
+</details>
+
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-| -40000 | NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 이미지로 얼굴 검색
 
@@ -1073,18 +1128,19 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
 
-[요청 예]
+
+<details>
+<summary>요청 예</summary>
  
 ```shell script
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' \
- -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "image": {
         "url": "https://..."
     }
 }'
 ```
+
+</details>
 
 
 #### 응답
@@ -1114,7 +1170,9 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/sea
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.sourceFace.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
-[응답 본문 예]
+
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -1170,18 +1228,21 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/sea
 }
 ```
 
+</details>
+
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -40000 | NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -45000 | ImageTooLargeException | 이미지 크기 초과 |
-| -45000 | InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
-| -45000 | InvalidImageURLException | 잘못된 이미지 URL |
-| -45000 | ImageTimeoutError | 이미지 다운로드 시간 초과 |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-45020| ImageTooLargeException | 이미지 크기 초과 |
+|-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
+|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-50000| InternalServerError | 서버 에러 |
 
 ### 얼굴 비교
 
@@ -1216,13 +1277,12 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/sea
 | targetImage.bytes | blob |  | "/0j3Ohdk==..." | base64로 인코딩된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
 | threshold | int | O | 90 | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
 
-[요청 예]
+
+<details>
+<summary>요청 예</summary>
  
 ```shell script
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
- -H 'Authorization: {secretKey}' \
- -H 'Content-Type: application/json;charset=UTF-8' \
- -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "sourceImage": {
         "url": "https://..."
     },
@@ -1232,6 +1292,9 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
     "threshold ": 80
 }'
 ```
+
+</details>
+
 
 #### 응답
 
@@ -1282,7 +1345,9 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.sourceFace.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
-[응답 본문 예]
+
+<details>
+<summary>응답 본문 예</summary>
 
 ```json
 {
@@ -1435,14 +1500,18 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare' \
 }
 ```
 
+</details>
+
+
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
-| -40000 | InvalidParam | 파라미터에 오류가 있음 |
-| -41000 | UnauthorizedAppKey | 승인되지 않은 appKey |
-| -45000 | ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: 이미지 크기 초과 |
-| -45000 | ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: 지원하지 않는 이미지 포맷 |
-| -45000 | ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: 잘못된 이미지 URL |
-| -45000 | ImageImageTimeoutError:{Source/Target} | {Source/Target} image: 이미지 다운로드 시간 초과 |
-| -50000 | InternalServerError | 서버 에러 |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: 이미지 크기 초과 |
+|-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: 지원하지 않는 이미지 포맷 |
+|-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: 잘못된 이미지 URL |
+|-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image: 이미지 다운로드 시간 초과 |
+|-50000| InternalServerError | 서버 에러 |
+
