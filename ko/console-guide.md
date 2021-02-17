@@ -19,20 +19,20 @@
 ![detect](http://static.toastoven.net/prod_facerecognition/detect.png)
 
 * [Result] 얼굴이 감지된 영역과 신뢰도를 표시합니다.
-* [Request] API 호출 시 요청되는 request json 예시를 표시합니다.
-* [Response] API 호출 시 응답 response json 예시를 표시합니다.
+* [Request] API 호출 시 요청하는 json 예시를 표시합니다.
+* [Response] API 호출 시 응답되는 json 예시를 표시합니다.
 
 
 ## 얼굴 비교
 
 ### 얼굴 비교를 위한 사진 업로드
-사진은 아래 세 가지 방법으로 업로드 가능하며 Reference Image와 Comparison Image 모두 선택하여야 합니다.
+사진은 아래 세 가지 방법으로 업로드 가능하며 기준 이미지(Reference Image)와 비교 이미지(Comparison Image) 모두 선택하여야 합니다.
 1. 이미지 업로드 버튼을 클릭하여 업로드
 2. 이미지 URL을 입력하여 업로드
 3. 이미지를 Drag&Drop 하여 업로드
 
-### Threshold(임곗값) 설정
-Threshold란 Reference Image에서 감지된 얼굴과 Comparison Image에서 감지된 얼굴이 
+### Threshold(임계값) 설정
+Threshold란 기준 이미지(Reference Image)에서 감지된 얼굴과 비교 이미지(Comparison Image)에서 감지된 얼굴이 
 일치하는지 판단하는 최소 신뢰 수준입니다.
 
 ### 비교
@@ -41,6 +41,6 @@ Threshold란 Reference Image에서 감지된 얼굴과 Comparison Image에서 �
 
 ![compare](http://static.toastoven.net/prod_facerecognition/compare.png)
 
-* [Result] Reference Image에서 검출된 얼굴과 Comparison Image에서 검출된 얼굴들의 비교 결과와 유사도를 표시합니다. 
-* [Request] API 호출 시 요청되는 request json 예시를 표시합니다.
-* [Response] API 호출 시 응답 response json 예시를 표시합니다.
+* [Result] 기준 이미지(Reference Image)에서 검출된 얼굴과 비교 이미지(Comparison Image)에서 검출된 얼굴들의 비교 결과와 유사도를 표시합니다. 
+* [Request] API 호출 시 요청하는 json 예시를 표시합니다.
+* [Response] API 호출 시 응답되는 json 예시를 표시합니다.
