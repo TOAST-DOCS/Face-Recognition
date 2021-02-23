@@ -4,12 +4,11 @@
 
 ## API 공통 정보
 ### 사전 준비
-- API 사용을 위해서는 앱 키와 보안 키가 필요합니다.
-- 앱 키와 보안 키는 콘솔 상단 "URL & Appkey" 메뉴에서 확인이 가능합니다.
+- API 사용을 위해서는 앱 키가 필요합니다.
+- 앱 키는 콘솔 상단 "URL & Appkey" 메뉴에서 확인이 가능합니다.
 
 ### 요청 공통 정보
 - API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
-- 모든 API 요청 헤더에 'Authorization' 보안 키를 넣어서 요청해야 합니다.
 
 [API 도메인]
 
@@ -17,11 +16,6 @@
 | --- | --- |
 | Alpha | https://alpha-face-recognition.cloud.toast.com |
 
-[요청 헤더]
-
-| 이름 | 값 | 설명 |
-|---|---|---|
-| Authorization | {secretKey} | 콘솔에서 발급받은 보안 키 |
 
 ### 입력 이미지 가이드
 
@@ -42,7 +36,7 @@
 | 이름 | 타입 | 설명 |
 | --- | --- | --- |
 | header.isSuccessful | boolean | true: 정상<br>false: 오류 |
-| header.resultCode | int | 0: 정상<br>음수: 오류 |
+| header.resultCode | int | 0: 정상<br>0보다 큼: 부분 성공<br>음수: 오류 |
 | header.resultMessage | string | "SUCCESS": 정상<br>그 외: 오류 메시지 리턴 |
 
 [성공 응답 본문 예]
@@ -111,7 +105,7 @@
 <summary>요청 예</summary>
 
 ```sh
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "groupId": "my-group"
 }'
 ```
@@ -188,7 +182,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Authoriz
 <summary>요청 예</summary>
 
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}'  -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -200,7 +194,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' 
 <summary>요청 예</summary>
 
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}'  -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -278,7 +272,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&n
 <summary>요청 예</summary>
 
 ```
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -355,7 +349,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H
 <summary>요청 예</summary>
 
 ```shell script
-curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
 </details>
@@ -427,7 +421,7 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 <summary>요청 예</summary>
  
 ```shell script
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "image": {
         "url":"https://..."
     }
@@ -577,7 +571,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Authoriz
 <summary>요청 예</summary>
  
 ```shell script
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "image": {
         "url": "https://..."
     },
@@ -762,6 +756,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -
 
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
+|40070| ServiceQuotaExceededPartialSuccessException | 단일 그룹에 등록 가능한 최대 얼굴 개수 초과하여 일부만 등록 성공 |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40070| ServiceQuotaExceededException | 단일 그룹에 등록 가능한 최대 얼굴 개수 초과 |
@@ -796,7 +791,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -
 <summary>요청 예</summary>
 
 ```shell script
-curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
 </details>
@@ -872,7 +867,7 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/f
 <summary>요청 예</summary>
  
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
 </details>
@@ -885,7 +880,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 <summary>요청 예</summary>
  
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
 </details>
@@ -1004,7 +999,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 <summary>요청 예</summary>
  
 ```shell script
-curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8' 
+curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
 </details>
@@ -1133,7 +1128,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 <summary>요청 예</summary>
  
 ```shell script
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "image": {
         "url": "https://..."
     }
@@ -1282,7 +1277,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/sea
 <summary>요청 예</summary>
  
 ```shell script
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Authorization: {secretKey}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "sourceImage": {
         "url": "https://..."
     },
