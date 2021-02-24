@@ -449,10 +449,10 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Content-
 | data.faceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.faceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.faceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
-| data.faceDetails[].orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
-| data.faceDetails[].orientation.x | float | O | 15.303436 | 얼굴 방향의 x 좌표 |
-| data.faceDetails[].orientation.y | float | O | -9.222179 | 얼굴 방향의 y 좌표 |
-| data.faceDetails[].orientation.z | float | O | -7.97249 | 얼굴 방향의 z 좌표 |
+| data.faceDetails[].orientation | object | O | 0.362 | 얼굴 각도 |
+| data.faceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
+| data.faceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
+| data.faceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
 | data.faceDetails[].confidence | float | O | 99.9123 | 얼굴인식 신뢰도 |
 
 
@@ -612,10 +612,10 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -
 | data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
-| data.addedFaceDetails[].orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
-| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | 얼굴 방향의 x 좌표 |
-| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 얼굴 방향의 y 좌표 |
-| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 얼굴 방향의 z 좌표 |
+| data.addedFaceDetails[].orientation | object | O | 0.362 | 얼굴 각도 |
+| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
+| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
+| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.notAddedFaceCount | int | O | 1 | 등록하지 않은 얼굴 수 |
 | data.notAddedFaces[].bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
@@ -627,10 +627,10 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -
 | data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.notAddedFaces[].orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
-| data.notAddedFaces[].orientation.x | float | O | 15.303436 | 얼굴 방향의 x 좌표 |
-| data.notAddedFaces[].orientation.y | float | O | -9.222179 | 얼굴 방향의 y 좌표 |
-| data.notAddedFaces[].orientation.z | float | O | -7.97249 | 얼굴 방향의 z 좌표 |
+| data.notAddedFaces[].orientation | object | O | 0.362 | 얼굴 각도 |
+| data.notAddedFaces[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
+| data.notAddedFaces[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
+| data.notAddedFaces[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 
@@ -1311,10 +1311,10 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content
 | data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.matchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
-| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 방향의 x 좌표 |
-| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 방향의 y 좌표 |
-| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 얼굴 방향의 z 좌표 |
+| data.matchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 각도 |
+| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
+| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
+| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 | data.unmatchedFaceDetailCount | int | O | 1 | 매칭되지 않은 얼굴 수 |
@@ -1327,10 +1327,10 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 방향의 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 방향의 x 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 방향의 y 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 얼굴 방향의 z 좌표 |
+| data.unmatchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 각도 |
+| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 | data.sourceFace.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
