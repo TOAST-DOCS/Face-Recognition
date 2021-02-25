@@ -4,8 +4,13 @@
 
 ## API 공통 정보
 ### 사전 준비
-- API 사용을 위해서는 앱 키가 필요합니다.
-- 앱 키는 콘솔 상단 "URL & Appkey" 메뉴에서 확인이 가능합니다.
+- API 사용을 위해서는 프로젝트 통합 Appkey 또는 상품 Appkey 필요합니다. 
+    - 프로젝트 통합 Appkey 사용을 권장합니다.
+    - 프로젝트 통합 Appkey는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
+    - 상품 Appkey는 콘솔 상단 "URL & Appkey" 메뉴에서 확인이 가능합니다.
+
+
+
 
 ### 요청 공통 정보
 - API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
@@ -92,7 +97,7 @@
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 
 [Request Body]
 
@@ -159,7 +164,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Content-
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 
 [URL Parameter]
 
@@ -265,7 +270,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&n
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 
 <details>
@@ -341,7 +346,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 
 
@@ -405,7 +410,7 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 
 [Request Body]
 
@@ -550,7 +555,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Content-
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
  
 
@@ -782,7 +787,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 | face-id | 등록된 페이스 아이디 |
  
@@ -843,7 +848,7 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/f
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
@@ -983,7 +988,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 | face-id | 비교하려는 페이스 아이디 |
  
@@ -1104,7 +1109,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
 | group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
@@ -1258,7 +1263,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/sea
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 사용자마다 발급된 서비스용 키 |
+| appKey | 통합 Appkey 또는 상품 Appkey |
  
 [Request Body]
  
