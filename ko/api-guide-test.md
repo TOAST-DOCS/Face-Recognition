@@ -1,4 +1,4 @@
-# AI Service > Face Recognition > 얼굴인식 API 가이드
+## AI Service > Face Recognition > 얼굴인식 API 가이드
 
 * 얼굴인식 API를 사용하는 데 필요한 API를 설명합니다.
 
@@ -31,7 +31,7 @@
 * 입력 이미지에서 얼굴의 좌우 각도(Yaw)와 얼굴의 상하 각도(Pitch)는 모두 45도 이하여야 합니다.
 * 입력 이미지의 너비 혹은 높이가 2048px을 초과하는 경우 원본 이미지 비율에 맞춰서 너비나 높이를 최대 2048px로 변환 후 사용합니다.
 * 이미지 최대 크기: 최대 5MB
-* 지원 이미지 포맷: `PNG`, `JPEG`
+* 지원 이미지 포맷: PNG, JPEG
 
 ### 응답 공통 정보
 
@@ -70,22 +70,9 @@
 ```
 ## API 목차
 
-1. [그룹 생성](#그룹-생성)
-2. [그룹 목록](#그룹-목록)
-3. [그룹 상세정보](#그룹-상세정보)
-4. [그룹 삭제](#그룹-삭제)
-5. [얼굴 감지](#얼굴-감지)
-6. [얼굴 등록](#얼굴-등록)
-7. [얼굴 삭제](#얼굴-삭제)
-8. [그룹 내 얼굴 목록](#그룹-내-얼굴-목록)
-9. [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색)
-10. [이미지로 얼굴 검색](#이미지로-얼굴-검색)
-11. [얼굴 비교](#얼굴-비교)
-
-
 ### 그룹 생성
 
-- 그룹을 생성하는 API입니다. 생성된 그룹에 "[얼굴 등록](#얼굴-등록)"을 이용하여 얼굴을 등록할 수 있습니다.
+- 그룹을 생성하는 API입니다. 생성된 그룹에 "[얼굴 등록](./api-guide.md/#얼굴-등록)"을 이용하여 얼굴을 등록할 수 있습니다.
 
 #### 요청
 [URI]
@@ -109,19 +96,18 @@
 
 <details>
 <summary>요청 예</summary>
-
-```sh
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+	
+```
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "groupId": "my-group"
 }'
 ```
-
 </details>
 
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 
 <details>
@@ -156,6 +142,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Content-
 #### 요청
 
 [URI]
+
 | 메서드 | URI |
 | --- | --- |
 | GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups |
@@ -175,34 +162,38 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Content-
 | next-token | string  |    | "skljsdioew..."  | "그룹 목록 응답 본문 data"에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 
-* `주의 사항`
+* 주의 사항
     * 처음에는 next-token이 존재 할 수 없습니다.
     * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
     * token 발행 시 limit은 고정됩니다.
 * 시나리오 example)
 
-1. 최초 query
+* 최초 query
 
 
 <details>
 <summary>요청 예</summary>
+<p>
 
 ```shell script
 curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}'  -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
+</p>
 </details>
 
-2. "그룹 목록 응답 본문 data"에 포함된 next-token을 이용하여 요청
+* "그룹 목록 응답 본문 data"에 포함된 next-token을 이용하여 요청
 
 
 <details>
 <summary>요청 예</summary>
+<p>
 
 ```shell script
 curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}'  -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
+</p>
 </details>
 
 * next-token이 존재하면 limit은 변경 될 수 없으며 token이 발행 될 때의 값으로 자동 세팅됨
@@ -210,7 +201,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&n
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 [응답 본문 data]
 
@@ -286,7 +277,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 [응답 본문 data]
 
@@ -365,7 +356,7 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 <details>
 <summary>응답 본문 예</summary>
@@ -396,9 +387,9 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 * 입력 이미지에서 얼굴을 감지하는 API입니다.
 * 감지한 얼굴에서 얼굴, 눈, 코, 입 등의 위치 정보와 신뢰도 값을 반환합니다.
-* 입력 이미지에서 얼굴이 큰 순서대로 최대 `20`개의 얼굴을 감지합니다.
+* 입력 이미지에서 얼굴이 큰 순서대로 최대 20개의 얼굴을 감지합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](#입력-이미지-가이드)"를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide.md/#입력-이미지-가이드)"를 참고하시기 바랍니다.
 
 #### 요청
 [URI]
@@ -439,7 +430,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Content-
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 [응답 본문 data]
 
@@ -452,7 +443,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Content-
 | data.faceDetails[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
 | data.faceDetails[].bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.faceDetails[].landmarks | array | O | - | 얼굴 특징 |
-| data.faceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.faceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.faceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.faceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.faceDetails[].orientation | object | O | 0.362 | 얼굴 각도 |
@@ -537,11 +528,11 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Content-
 * 입력 이미지에서 감지한 얼굴을 특정 그룹에 등록하는 API입니다.
 * 입력 이미지에서 얼굴의 box를 감지하고 감지한 얼굴 box에서 얼굴 특징을 벡터로 추출합니다. 이때, 입력 이미지와 입력 이미지에서 감지한 얼굴 이미지 그 어느 것도 저장하지 않습니다.
 * 추출한 벡터 데이터는 암호화하여 데이터베이스에 저장합니다.
-* 저장한 벡터 데이터는 [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](#이미지로-얼굴-검색) API에 특징 벡터로 사용합니다.
+* 저장한 벡터 데이터는 [페이스 아이디로 얼굴 검색](./api-guide.md/#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](./api-guide.md/#이미지로-얼굴-검색) API에 특징 벡터로 사용합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](#입력-이미지-가이드)"를 참고하시기 바랍니다.
-* `imageId`는 입력 이미지에 부여되는 값이며 `externalImageId`는 사용자가 직접 부여할 수 있는 값입니다. 사용자는 `imageId`와 `externalImageId`를 통해 사용자 단에서 이미지 또는 페이스 아이디에 라벨링하고 인덱스처럼 자체적으로 활용할 수 있습니다.
-* `imageId`와 `externalImageId`는 [그룹 내 얼굴 목록](#그룹-내-얼굴-목록)과 [페이스 아이디로 얼굴 검색](#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](#이미지로-얼굴-검색) API의 응답에서 반환됩니다. 
+* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide.md/#입력-이미지-가이드)"를 참고하시기 바랍니다.
+* "imageId"는 입력 이미지에 부여되는 값이며 "externalImageId"는 사용자가 직접 부여할 수 있는 값입니다. 사용자는 "imageId"와 "externalImageId"를 통해 사용자 단에서 이미지 또는 페이스 아이디에 라벨링하고 인덱스처럼 자체적으로 활용할 수 있습니다.
+* "imageId"와 "externalImageId"는 [그룹 내 얼굴 목록](./api-guide.md/#그룹-내-얼굴-목록)과 [페이스 아이디로 얼굴 검색](./api-guide.md/#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](./api-guide.md/#이미지로-얼굴-검색) API의 응답에서 반환됩니다. 
 * 단일 그룹에 등록할 수 있는 최대 얼굴 개수는 10만 개입니다.
  
 #### 요청
@@ -592,7 +583,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 [응답 본문 data]
 
@@ -615,7 +606,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -
 | data.addedFaceDetails[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
 | data.addedFaceDetails[].bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.addedFaceDetails[].landmarks | array | O | - | 얼굴 특징 |
-| data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.addedFaceDetails[].orientation | object | O | 0.362 | 얼굴 각도 |
@@ -630,7 +621,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -
 | data.notAddedFaces[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
 | data.notAddedFaces[].bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.notAddedFaces[].landmarks | array | O | - | 얼굴 특징 |
-| data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.notAddedFaces[].orientation | object | O | 0.362 | 얼굴 각도 |
@@ -805,7 +796,7 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/f
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 
 <details>
@@ -860,35 +851,39 @@ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/f
 | next-token | string  |    | "skljsdioew..."  | "그룹 목록 응답 본문 data"에서 반환한 값<br/>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
  
 
-* `주의 사항`
+* 주의 사항
     * 처음에는 next-token이 존재 할 수 없습니다.
     * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
     * token 발행 시 limit은 고정됩니다.
 * 시나리오 example)
 
-1. 최초 query
+* 최초 query
 
  
 <details>
 <summary>요청 예</summary>
- 
+<p> 
+
 ```shell script
 curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
+</p>
 </details>
 
 
-2. "그룹 목록 응답 본문 data"에 포함된 next-token을 이용하여 요청
+* "그룹 목록 응답 본문 data"에 포함된 next-token을 이용하여 요청
  
 
 <details>
 <summary>요청 예</summary>
- 
+<p>
+
 ```shell script
 curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
+</p>
 </details>
 
 
@@ -898,7 +893,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 [응답 본문 data]
 
@@ -1013,7 +1008,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 [응답 본문 data]
 
@@ -1096,7 +1091,7 @@ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/face
 
 * 입력 이미지에서 감지한 가장 큰 얼굴을 사용하여 특정 그룹에 속한 얼굴과 일치 여부를 비교합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달 할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](#입력-이미지-가이드)"를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide.md/#입력-이미지-가이드)"를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 #### 요청
@@ -1147,7 +1142,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/sea
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 [응답 본문 data]
 
@@ -1250,7 +1245,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/sea
 * 기준 이미지(sourceImage)와 비교 이미지(targetImage)에서 감지한 얼굴이 얼마나 유사한지 비교합니다.
 * 기준 이미지에서 감지한 얼굴 중 가장 큰 얼굴(기준 얼굴)만 사용합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](#입력-이미지-가이드)"를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide.md/#입력-이미지-가이드)"를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 #### 요청
@@ -1300,7 +1295,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
 
 [응답 본문 data]
 
@@ -1314,7 +1309,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content
 | data.matchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
 | data.matchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.matchedFaceDetails[].faceDetail.landmarks | array | O | - | 얼굴 특징 |
-| data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.matchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 각도 |
@@ -1330,7 +1325,7 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content
 | data.unmatchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.landmarks | array | O | - | 얼굴 특징 |
-| data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>`leftEye`, `rightEye`, `nose`, `leftLip`, `rightLib` |
+| data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 각도 |
@@ -1515,4 +1510,3 @@ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: 잘못된 이미지 URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image: 이미지 다운로드 시간 초과 |
 |-50000| InternalServerError | 서버 에러 |
-
