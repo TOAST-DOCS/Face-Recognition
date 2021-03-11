@@ -96,13 +96,12 @@
 
 <details>
 <summary>요청 예</summary>
-
-```sh
-curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+	
+```
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "groupId": "my-group"
 }'
 ```
-
 </details>
 
 #### 응답
