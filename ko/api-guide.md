@@ -860,7 +860,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 <details>
 <summary>요청 예</summary>
 
-```shell script
+```
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
@@ -873,7 +873,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <details>
 <summary>요청 예</summary>
 
-```shell script
+```
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
