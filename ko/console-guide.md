@@ -13,8 +13,7 @@
 3. 이미지를 Drag&Drop 하여 업로드
 
 ### 분석
-사진 업로드 후 분석 버튼을 클릭하면 
-분석 결과가 화면 우측에 출력 됩니다.
+사진 업로드 후 분석 버튼을 클릭하면 분석 결과가 화면 우측에 출력 됩니다.
 
 ![detect](http://static.toastoven.net/prod_facerecognition/detect.png)
 
@@ -32,12 +31,10 @@
 3. 이미지를 Drag&Drop 하여 업로드
 
 ### Threshold 설정
-Threshold란 기준 이미지(Reference Image)에서 감지한 얼굴과 비교 이미지(Comparison Image)에서 감지한 얼굴이 
-일치하는지 판단하는 최소 신뢰 수준입니다.
+Threshold(임곗값)란 기준 이미지에서 감지된 얼굴과 비교 이미지에서 감지된 얼굴이 일치하는지 판단하는 유사도 기준값입니다.
 
 ### 비교
-사진 업로드 후 비교 버튼을 클릭하면 
-분석 결과가 화면 우측에 출력 됩니다.
+사진 업로드 후 비교 버튼을 클릭하면 분석 결과가 화면 우측에 출력 됩니다.
 
 ![compare](http://static.toastoven.net/prod_facerecognition/compare.png)
 
