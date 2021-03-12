@@ -21,7 +21,7 @@
 | --- | --- |
 | Alpha | https://face-recognition.cloud.toast.com |
 
-
+<span id="input-image-guide"></span>
 ### 입력 이미지 가이드
 
 * 입력 이미지는 너비와 높이 모두 최소 80px 이상이어야 합니다.
@@ -33,6 +33,7 @@
 * 이미지 최대 크기: 최대 5MB
 * 지원 이미지 포맷: PNG, JPEG
 
+<span id="common-response"></span>
 ### 응답 공통 정보
 
 - 모든 API 요청에 "200 OK"로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
@@ -72,7 +73,7 @@
 
 ### 그룹 생성
 
-- 그룹을 생성하는 API입니다. 생성된 그룹에 "[얼굴 등록](./api-guide.md/#얼굴-등록)"을 이용하여 얼굴을 등록할 수 있습니다.
+- 그룹을 생성하는 API입니다. 생성된 그룹에 "[얼굴 등록](./api-guide/#add-face)"을 이용하여 얼굴을 등록할 수 있습니다.
 
 #### 요청
 [URI]
@@ -108,7 +109,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 
 <details>
@@ -198,7 +199,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 data]
 
@@ -274,7 +275,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 data]
 
@@ -353,7 +354,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 <details>
 <summary>응답 본문 예</summary>
@@ -386,7 +387,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * 감지한 얼굴에서 얼굴, 눈, 코, 입 등의 위치 정보와 신뢰도 값을 반환합니다.
 * 입력 이미지에서 얼굴이 큰 순서대로 최대 20개의 얼굴을 감지합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide.md/#입력-이미지-가이드)"를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide/#input-image-guide)"를 참고하시기 바랍니다.
 
 #### 요청
 [URI]
@@ -427,7 +428,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 data]
 
@@ -520,16 +521,17 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
 |-50000| InternalServerError | 서버 에러 |
 
+<span id="add-face"></span>
 ### 얼굴 등록
 
 * 입력 이미지에서 감지한 얼굴을 특정 그룹에 등록하는 API입니다.
 * 입력 이미지에서 얼굴의 box를 감지하고 감지한 얼굴 box에서 얼굴 특징을 벡터로 추출합니다. 이때, 입력 이미지와 입력 이미지에서 감지한 얼굴 이미지 그 어느 것도 저장하지 않습니다.
 * 추출한 벡터 데이터는 암호화하여 데이터베이스에 저장합니다.
-* 저장한 벡터 데이터는 [페이스 아이디로 얼굴 검색](./api-guide.md/#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](./api-guide.md/#이미지로-얼굴-검색) API에 특징 벡터로 사용합니다.
+* 저장한 벡터 데이터는 [페이스 아이디로 얼굴 검색](./api-guide/#search-by-face-id), [이미지로 얼굴 검색](./api-guide/#search-by-image) API에 특징 벡터로 사용합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide.md/#입력-이미지-가이드)"를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide/#input-image-guide)"를 참고하시기 바랍니다.
 * "imageId"는 입력 이미지에 부여되는 값이며 "externalImageId"는 사용자가 직접 부여할 수 있는 값입니다. 사용자는 "imageId"와 "externalImageId"를 통해 사용자 단에서 이미지 또는 페이스 아이디에 라벨링하고 인덱스처럼 자체적으로 활용할 수 있습니다.
-* "imageId"와 "externalImageId"는 [그룹 내 얼굴 목록](./api-guide.md/#그룹-내-얼굴-목록)과 [페이스 아이디로 얼굴 검색](./api-guide.md/#페이스-아이디로-얼굴-검색), [이미지로 얼굴 검색](./api-guide.md/#이미지로-얼굴-검색) API의 응답에서 반환됩니다. 
+* "imageId"와 "externalImageId"는 [그룹 내 얼굴 목록](./api-guide/#face-list-in-a-group)과 [페이스 아이디로 얼굴 검색](./api-guide/#search-by-face-id), [이미지로 얼굴 검색](./api-guide/#search-by-image) API의 응답에서 반환됩니다. 
 * 단일 그룹에 등록할 수 있는 최대 얼굴 개수는 10만 개입니다.
  
 #### 요청
@@ -580,7 +582,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 data]
 
@@ -793,7 +795,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 
 <details>
@@ -821,6 +823,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
 |-50000| InternalServerError | 서버 에러 |
 
+<span id="face-list-in-a-group"></span>
 ### 그룹 내 얼굴 목록
 
 * 특정 그룹에 등록한 얼굴 정보 목록을 조회하는 API입니다.
@@ -886,7 +889,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 data]
 
@@ -961,6 +964,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
 |-50000| InternalServerError | 서버 에러 |
 
+<span id="search-by-face-id"></span>
 ### 페이스 아이디로 얼굴 검색
 
 * 페이스 아이디로 특정 그룹에서 얼굴을 검색하는 API입니다.
@@ -1001,7 +1005,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 data]
 
@@ -1080,11 +1084,12 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
 |-50000| InternalServerError | 서버 에러 |
 
+<span id="search-by-image"></span>
 ### 이미지로 얼굴 검색
 
 * 입력 이미지에서 감지한 가장 큰 얼굴을 사용하여 특정 그룹에 속한 얼굴과 일치 여부를 비교합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달 할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide.md/#입력-이미지-가이드)"를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide/#input-image-guide)"를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 #### 요청
@@ -1135,7 +1140,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 data]
 
@@ -1238,7 +1243,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 * 기준 이미지(sourceImage)와 비교 이미지(targetImage)에서 감지한 얼굴이 얼마나 유사한지 비교합니다.
 * 기준 이미지에서 감지한 얼굴 중 가장 큰 얼굴(기준 얼굴)만 사용합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide.md/#입력-이미지-가이드)"를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide/#input-image-guide)"를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 #### 요청
@@ -1288,7 +1293,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Conte
 #### 응답
 
 * [응답 본문 header 설명 생략]
-    * [응답 공통 정보](./api-guide.md/#응답-공통-정보)에서 확인 가능
+    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 data]
 
