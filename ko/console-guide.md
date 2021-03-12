@@ -18,8 +18,8 @@
 ![detect](http://static.toastoven.net/prod_facerecognition/detect.png)
 
 * [Result] 감지한 얼굴 영역과 신뢰도를 표시합니다.
-* [Request] API 호출 시 요청하는 json 예시를 표시합니다.
-* [Response] API 호출 시 응답되는 json 예시를 표시합니다.
+* [Request] API 호출 시 요청하는 JSON 예시를 표시합니다.
+* [Response] API 호출 시 응답되는 JSON 예시를 표시합니다.
 
 
 ## 얼굴 비교
@@ -39,5 +39,5 @@
 ![compare](http://static.toastoven.net/prod_facerecognition/compare.png)
 
 * [Result] 기준 이미지(Reference Image)에서 감지한 얼굴과 비교 이미지(Comparison Image)에서 감지한 얼굴의 비교 결과와 유사도를 표시합니다. 
-* [Request] API 호출 시 요청하는 json 예시를 표시합니다.
-* [Response] API 호출 시 응답되는 json 예시를 표시합니다.
+* [Request] API 호출 시 요청하는 JSON 예시를 표시합니다.
+* [Response] API 호출 시 응답되는 JSON 예시를 표시합니다.
