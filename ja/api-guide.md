@@ -4,10 +4,10 @@
 
 ## API共通情報
 ### 事前準備
-- APIを使用するにはプロジェクト統合Appkeyまたは商品Appkeyが必要です。
+- APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
     - プロジェクト統合Appkeyを使用することを推奨します。
     - プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
-    - 商品Appkeyは、コンソールの上部「URL & Appkey」メニューで確認できます。
+    - サービスAppkeyは、コンソールの上部「URL & Appkey」メニューで確認できます。
 
 
 
@@ -86,7 +86,7 @@
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 
 [Request Body]
 
@@ -108,7 +108,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
 
@@ -154,21 +154,21 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 
 [URL Parameter]
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 最大サイズ<br>0 < limit <= 200 |
-| next-token | string  |    | "skljsdioew..."  | グループリストレスポンス本文dataから返った値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
+| next-token | string  |    | "skljsdioew..."  | グループリストレスポンス本文データから返った値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
 
 
 * 注意事項
-    * 最初はnext-tokenが存在できません。
+    * 最初はnext-tokenが存在しません。
     * tokenは特定時間または特定条件で消える場合があります。
     * token発行時、limitは固定されます。
-* シナリオexample)
+* シナリオ例
 
 * 最初のquery
 
@@ -182,7 +182,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 </details>
 
-* グループリストレスポンス本文dataに含まれたnext-tokenを利用してリクエスト
+* グループリストレスポンス本文データに含まれたnext-tokenを利用してリクエスト
 
 
 <details>
@@ -194,21 +194,21 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 </details>
 
-* next-tokenが存在する場合、limitは変更できず、tokenが発行される時の値に自動セッティングされる
+* next-tokenが存在する場合、limitは変更できず、tokenが発行される時の値に自動設定される
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-[レスポンス本文data]
+[レスポンス本文データ]
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 2 | グループ数 |
 | data.groups[].groupId | string | O | "group-id" | ユーザーが登録したグループID |
 | data.groups[].modelVersion | string | O | "v1.0" | 顔検出モデルバージョン情報 |
-| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | pagingで使用するtoken<br>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
+| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | ページングで使用するトークン<br>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -260,7 +260,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]{1,255} |
 
 <details>
@@ -274,10 +274,10 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-[レスポンス本文data]
+[レスポンス本文データ]
 
 | 名前 | タイプ | 必須かどうか | 例 | 説明 |
 | --- | --- | --- | --- | --- |
@@ -336,7 +336,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]{1,255} |
 
 
@@ -353,7 +353,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
 <details>
@@ -400,7 +400,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
  
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 
 [Request Body]
 
@@ -427,10 +427,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-[レスポンス本文data]
+[レスポンス本文データ]
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
@@ -546,7 +546,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
  
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]{1,255} |
  
 
@@ -581,10 +581,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-[レスポンス本文data]
+[レスポンス本文データ]
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
@@ -778,7 +778,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
  
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]{1,255} |
 | face-id | 登録されたフェイスID |
  
@@ -794,7 +794,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
 
@@ -840,7 +840,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
  
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
@@ -848,14 +848,14 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | limit | int  | O  | 100  | 最大サイズ<br>0 < limit <= 200 |
-| next-token | string  |    | "skljsdioew..."  | "グループリストレスポンス本文data"で返した値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
+| next-token | string  |    | "skljsdioew..."  | "グループリストレスポンス本文データ"で返した値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
  
 
 * 注意事項
-    * 最初はnext-tokenが存在できません。
+    * 最初はnext-tokenが存在しません。
     * tokenは特定時間または特定条件で消える場合があります。
     * token発行時、limitは固定されます。
-* シナリオexample)
+* シナリオ例
 
 * 最初のquery
 
@@ -870,7 +870,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 </details>
 
 
-* グループリストレスポンス本文dataに含まれたnext-tokenを利用してリクエスト
+* グループリストレスポンス本文データに含まれたnext-tokenを利用してリクエスト
  
 
 <details>
@@ -883,15 +883,15 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 </details>
 
 
-* next-tokenが存在する場合、limitは変更できず、tokenが発行される時の値に自動セッティングされる
+* next-tokenが存在する場合、limitは変更できず、tokenが発行される時の値に自動設定される
 
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-[レスポンス本文data]
+[レスポンス本文データ]
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
@@ -906,7 +906,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | data.faces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | フェイスID |
 | data.faces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 画像ID<br>1つの画像IDに複数のフェイスIDが存在することがある |
 | data.faces[].externalImageId | string |  | "image01.jpg" | ユーザーが画像に登録した値 |
-| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | pagingで使用するtoken<br>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
+| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | ページングで使用するトークン<br>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
 
 
 <details>
@@ -981,7 +981,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
  
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]{1,255} |
 | face-id | 比較するフェイスID |
  
@@ -1004,10 +1004,10 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-[レスポンス本文data]
+[レスポンス本文データ]
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
@@ -1103,7 +1103,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
  
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したgroup id<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
@@ -1139,10 +1139,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-[レスポンス本文data]
+[レスポンス本文データ]
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
@@ -1257,7 +1257,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
  
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合Appkeyまたは商品Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
  
 [Request Body]
  
@@ -1292,10 +1292,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Conte
 
 #### レスポンス
 
-* [レスポンス本文header説明省略]
+* [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-[レスポンス本文data]
+[レスポンス本文データ]
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
