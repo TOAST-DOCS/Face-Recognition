@@ -1,13 +1,13 @@
-## AI Service > Face Recognition > 얼굴인식 API 가이드
+## AI Service > Face Recognition > 얼굴 인식 API 가이드
 
-* 얼굴인식 API를 사용하는 데 필요한 API를 설명합니다.
+* 얼굴 인식 API를 사용하는 데 필요한 API를 설명합니다.
 
 ## API 공통 정보
 ### 사전 준비
-- API 사용을 위해서는 프로젝트 통합 Appkey 또는 상품 Appkey가 필요합니다. 
+- API 사용을 위해서는 프로젝트 통합 Appkey 또는 서비스 Appkey가 필요합니다. 
     - 프로젝트 통합 Appkey 사용을 권장합니다.
     - 프로젝트 통합 Appkey는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
-    - 상품 Appkey는 콘솔 상단 "URL & Appkey" 메뉴에서 확인이 가능합니다.
+    - 서비스 Appkey는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
 
 
 
@@ -29,14 +29,13 @@
     * 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식이 가능합니다.
     * 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
 * 입력 이미지에서 얼굴의 좌우 각도(Yaw)와 얼굴의 상하 각도(Pitch)는 모두 45도 이하여야 합니다.
-* 입력 이미지의 너비 혹은 높이가 2048px을 초과하는 경우 원본 이미지 비율에 맞춰서 너비나 높이를 최대 2048px로 변환 후 사용합니다.
 * 이미지 최대 크기: 최대 5MB
 * 지원 이미지 포맷: PNG, JPEG
 
 <span id="common-response"></span>
 ### 응답 공통 정보
 
-- 모든 API 요청에 "200 OK"로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
+- 모든 API 요청에 '200 OK'로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
 
 [응답 본문 헤더]
 
@@ -73,7 +72,7 @@
 
 ### 그룹 생성
 
-- 그룹을 생성하는 API입니다. 생성된 그룹에 "[얼굴 등록](./api-guide/#add-face)"을 이용하여 얼굴을 등록할 수 있습니다.
+- 그룹을 생성하는 API입니다. 생성된 그룹에 [얼굴 등록](./api-guide/#add-face)을 이용하여 얼굴을 등록할 수 있습니다.
 
 #### 요청
 [URI]
@@ -86,7 +85,7 @@
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 
 [Request Body]
 
@@ -108,7 +107,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 
@@ -134,8 +133,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40010| InvalidGroupID | 그룹 아이디 오류 |
 |-40020| DuplicatedGroupID | 중복된 그룹 아이디 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
-|-50000| InternalServerError | 서버 에러 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-50000| InternalServerError | 서버 오류 |
 
 ### 그룹 목록
 
@@ -154,21 +153,21 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 
 [URL Parameter]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | 최대 크기<br>0 < limit <= 200 |
-| next-token | string  |    | "skljsdioew..."  | "그룹 목록 응답 본문 data"에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
+| next-token | string  |    | "skljsdioew..."  | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 
 * 주의 사항
-    * 처음에는 next-token이 존재 할 수 없습니다.
+    * 처음에는 next-token이 없습니다.
     * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
     * token 발행 시 limit은 고정됩니다.
-* 시나리오 example)
+* 시나리오 예
 
 * 최초 query
 
@@ -182,7 +181,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 </details>
 
-* "그룹 목록 응답 본문 data"에 포함된 next-token을 이용하여 요청
+* '그룹 목록 응답 본문 데이터'에 포함된 next-token을 이용하여 요청
 
 
 <details>
@@ -194,21 +193,21 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 </details>
 
-* next-token이 존재하면 limit은 변경 될 수 없으며 token이 발행 될 때의 값으로 자동 세팅됨
+* next-token이 존재하면 limit은 변경될 수 없으며 token이 발행될 때의 값으로 자동 설정됨
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
-[응답 본문 data]
+[응답 본문 데이터]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 2 | 그룹 수 |
 | data.groups[].groupId | string | O | "group-id" | 사용자가 등록한 그룹 아이디 |
 | data.groups[].modelVersion | string | O | "v1.0" | 얼굴 감지 모델 버전 정보 |
-| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token<br>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
+| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | 페이징에서 사용할 token<br>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 <details>
 <summary>응답 본문 예</summary>
@@ -241,13 +240,13 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
-|-40040| InvalidTokenError | 잘못된 토큰 사용 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
-|-50000| InternalServerError | 서버 에러 |
+|-40040| InvalidTokenError | 잘못된 token 사용 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-50000| InternalServerError | 서버 오류 |
 
-### 그룹 상세정보
+### 그룹 상세 정보
 
-* 그룹 아이디, 모델 버전, 그룹에 등록한 얼굴 수 등 특정 그룹의 상세정보를 조회하는 API입니다.
+* 그룹 아이디, 모델 버전, 그룹에 등록한 얼굴 수 등 특정 그룹의 상세 정보를 조회하는 API입니다.
 
 #### 요청
 [URI]
@@ -260,7 +259,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 
 <details>
@@ -274,10 +273,10 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
-[응답 본문 data]
+[응답 본문 데이터]
 
 | 이름 | 타입 | 필수 여부 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -317,8 +316,8 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
-|-50000| InternalServerError | 서버 에러 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-50000| InternalServerError | 서버 오류 |
 
 ### 그룹 삭제
 
@@ -336,7 +335,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 
 
@@ -353,7 +352,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 <details>
@@ -378,8 +377,8 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
-|-50000| InternalServerError | 서버 에러 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-50000| InternalServerError | 서버 오류 |
 
 ### 얼굴 감지
 
@@ -387,7 +386,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * 감지한 얼굴에서 얼굴, 눈, 코, 입 등의 위치 정보와 신뢰도 값을 반환합니다.
 * 입력 이미지에서 얼굴이 큰 순서대로 최대 20개의 얼굴을 감지합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide/#input-image-guide)"를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
 
 #### 요청
 [URI]
@@ -400,7 +399,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 
 [Request Body]
 
@@ -427,10 +426,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
-[응답 본문 data]
+[응답 본문 데이터]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -445,10 +444,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | data.faceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.faceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.faceDetails[].orientation | object | O | 0.362 | 얼굴 각도 |
-| data.faceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
-| data.faceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
-| data.faceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
-| data.faceDetails[].confidence | float | O | 99.9123 | 얼굴인식 신뢰도 |
+| data.faceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.faceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.faceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.faceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 
 <details>
@@ -514,12 +513,12 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
-|-50000| InternalServerError | 서버 에러 |
+|-50000| InternalServerError | 서버 오류 |
 
 <span id="add-face"></span>
 ### 얼굴 등록
@@ -529,9 +528,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 * 추출한 벡터 데이터는 암호화하여 데이터베이스에 저장합니다.
 * 저장한 벡터 데이터는 [페이스 아이디로 얼굴 검색](./api-guide/#search-by-face-id), [이미지로 얼굴 검색](./api-guide/#search-by-image) API에 특징 벡터로 사용합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide/#input-image-guide)"를 참고하시기 바랍니다.
-* "imageId"는 입력 이미지에 부여되는 값이며 "externalImageId"는 사용자가 직접 부여할 수 있는 값입니다. 사용자는 "imageId"와 "externalImageId"를 통해 사용자 단에서 이미지 또는 페이스 아이디에 라벨링하고 인덱스처럼 자체적으로 활용할 수 있습니다.
-* "imageId"와 "externalImageId"는 [그룹 내 얼굴 목록](./api-guide/#face-list-in-a-group)과 [페이스 아이디로 얼굴 검색](./api-guide/#search-by-face-id), [이미지로 얼굴 검색](./api-guide/#search-by-image) API의 응답에서 반환됩니다. 
+* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
+* 'imageId'는 입력 이미지에 부여되는 값이며 'externalImageId'는 사용자가 직접 부여할 수 있는 값입니다. 사용자는 'imageId'와 'externalImageId'를 통해 사용자 단에서 이미지 또는 페이스 아이디에 라벨링하고 인덱스처럼 자체적으로 활용할 수 있습니다.
+* 'imageId'와 'externalImageId'는 [그룹 내 얼굴 목록](./api-guide/#face-list-in-a-group)과 [페이스 아이디로 얼굴 검색](./api-guide/#search-by-face-id), [이미지로 얼굴 검색](./api-guide/#search-by-image) API의 응답에서 반환됩니다. 
 * 단일 그룹에 등록할 수 있는 최대 얼굴 개수는 10만 개입니다.
  
 #### 요청
@@ -546,7 +545,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
  
 
@@ -581,10 +580,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
-[응답 본문 data]
+[응답 본문 데이터]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -596,7 +595,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaces[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
 | data.addedFaces[].bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.addedFaces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
-| data.addedFaces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재 할 수 있음 |
+| data.addedFaces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재할 수 있음 |
 | data.addedFaces[].externalImageId | string |  | "image01.jpg" | 요청에서 전달된 값 |
 | data.addedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.addedFaceDetails[].bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
@@ -609,9 +608,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.addedFaceDetails[].orientation | object | O | 0.362 | 얼굴 각도 |
-| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
-| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
-| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
+| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.notAddedFaceCount | int | O | 1 | 등록하지 않은 얼굴 수 |
 | data.notAddedFaces[].bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
@@ -624,9 +623,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.notAddedFaces[].orientation | object | O | 0.362 | 얼굴 각도 |
-| data.notAddedFaces[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
-| data.notAddedFaces[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
-| data.notAddedFaces[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
+| data.notAddedFaces[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.notAddedFaces[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.notAddedFaces[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 
@@ -756,12 +755,12 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40070| ServiceQuotaExceededException | 단일 그룹에 등록 가능한 최대 얼굴 개수 초과 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
-|-50000| InternalServerError | 서버 에러 |
+|-50000| InternalServerError | 서버 오류 |
 
 ### 얼굴 삭제
 
@@ -778,7 +777,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 | face-id | 등록된 페이스 아이디 |
  
@@ -794,7 +793,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 
@@ -820,8 +819,8 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
-|-50000| InternalServerError | 서버 에러 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-50000| InternalServerError | 서버 오류 |
 
 <span id="face-list-in-a-group"></span>
 ### 그룹 내 얼굴 목록
@@ -840,7 +839,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
@@ -848,14 +847,14 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int  | O  | 100  | 최대 크기<br>0 < limit <= 200 |
-| next-token | string  |    | "skljsdioew..."  | "그룹 목록 응답 본문 data"에서 반환한 값<br/>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
+| next-token | string  |    | "skljsdioew..."  | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
  
 
 * 주의 사항
-    * 처음에는 next-token이 존재 할 수 없습니다.
+    * 처음에는 next-token이 없습니다.
     * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
     * token 발행 시 limit은 고정됩니다.
-* 시나리오 example)
+* 시나리오 예
 
 * 최초 query
 
@@ -870,7 +869,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 </details>
 
 
-* "그룹 목록 응답 본문 data"에 포함된 next-token을 이용하여 요청
+* '그룹 목록 응답 본문 데이터'에 포함된 next-token을 이용하여 요청
  
 
 <details>
@@ -883,15 +882,15 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 </details>
 
 
-* next-token이 존재하면 limit은 변경 될 수 없으며 token이 발행 될 때의 값으로 자동 세팅됨
+* next-token이 존재하면 limit은 변경될 수 없으며 token이 발행될 때의 값으로 자동 설정됨
 
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
-[응답 본문 data]
+[응답 본문 데이터]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -904,9 +903,9 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | data.faces[].bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.faces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.faces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
-| data.faces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재 할 수 있음 |
+| data.faces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재할 수 있음 |
 | data.faces[].externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
-| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | paging에서 사용할 token<br>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
+| data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | 페이징에서 사용할 token<br>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 
 <details>
@@ -960,9 +959,9 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-40040| InvalidTokenError | 잘못된 토큰 사용 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
-|-50000| InternalServerError | 서버 에러 |
+|-40040| InvalidTokenError | 잘못된 token 사용 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-50000| InternalServerError | 서버 오류 |
 
 <span id="search-by-face-id"></span>
 ### 페이스 아이디로 얼굴 검색
@@ -981,7 +980,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 | face-id | 비교하려는 페이스 아이디 |
  
@@ -989,7 +988,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
  
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| limit | int  | O  | 100  | 찾으려는 최대 값.<br>0 < limit <= 4096 |
+| limit | int  | O  | 100  | 찾으려는 최댓값<br>0 < limit <= 4096 |
 | threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
  
 
@@ -1004,10 +1003,10 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
-[응답 본문 data]
+[응답 본문 데이터]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -1019,7 +1018,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | data.matchFaces[].face.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.matchFaces[].face.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
-| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재 할 수 있음 |
+| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재할 수 있음 |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
 | data.matchFaces[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 
@@ -1081,15 +1080,15 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
-|-50000| InternalServerError | 서버 에러 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-50000| InternalServerError | 서버 오류 |
 
 <span id="search-by-image"></span>
 ### 이미지로 얼굴 검색
 
 * 입력 이미지에서 감지한 가장 큰 얼굴을 사용하여 특정 그룹에 속한 얼굴과 일치 여부를 비교합니다.
-* 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달 할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide/#input-image-guide)"를 참고하시기 바랍니다.
+* 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
+* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 #### 요청
@@ -1103,14 +1102,14 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
  
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| limit | int  | O  | 100  | 찾으려는 최대 값<br>0 < limit <= 4096 |
+| limit | int  | O  | 100  | 찾으려는 최댓값<br>0 < limit <= 4096 |
 | threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
 
 [Request Body]
@@ -1139,10 +1138,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
-[응답 본문 data]
+[응답 본문 데이터]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -1154,7 +1153,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | data.matchFaces[].face.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
 | data.matchFaces[].face.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
-| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재 할 수 있음 |
+| data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재할 수 있음 |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
 | data.matchFaces[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 | data.sourceFace.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
@@ -1231,19 +1230,19 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
-|-50000| InternalServerError | 서버 에러 |
+|-50000| InternalServerError | 서버 오류 |
 
 ### 얼굴 비교
 
 * 기준 이미지(sourceImage)와 비교 이미지(targetImage)에서 감지한 얼굴이 얼마나 유사한지 비교합니다.
 * 기준 이미지에서 감지한 얼굴 중 가장 큰 얼굴(기준 얼굴)만 사용합니다.
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 "[입력 이미지 가이드](./api-guide/#input-image-guide)"를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 #### 요청
@@ -1257,7 +1256,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
  
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 상품 Appkey |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
  
 [Request Body]
  
@@ -1292,10 +1291,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Conte
 
 #### 응답
 
-* [응답 본문 header 설명 생략]
+* [응답 본문 헤더 설명 생략]
     * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
-[응답 본문 data]
+[응답 본문 데이터]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
@@ -1311,9 +1310,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Conte
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.matchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 각도 |
-| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
-| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
-| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
+| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 | data.unmatchedFaceDetailCount | int | O | 1 | 매칭되지 않은 얼굴 수 |
@@ -1327,9 +1326,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Conte
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 각도 |
-| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도 (Yaw) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도 (Pitch) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도 (Roll) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
 | data.sourceFace.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
@@ -1502,9 +1501,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Conte
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 appKey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 |-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: 이미지 크기 초과 |
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: 지원하지 않는 이미지 포맷 |
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: 잘못된 이미지 URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image: 이미지 다운로드 시간 초과 |
-|-50000| InternalServerError | 서버 에러 |
+|-50000| InternalServerError | 서버 오류 |
