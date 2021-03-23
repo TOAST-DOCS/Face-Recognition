@@ -264,7 +264,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
 
 <details>
-<summary>요청 예</summary>
+<summary>Request example</summary>
 
 ```
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Content-Type: application/json;charset=UTF-8'
@@ -315,7 +315,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
-|-40000| InvalidParam | 파The parameter contains an error |
+|-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-41000| UnauthorizedAppKey | Unauthorized appKey |
 |-50000| InternalServerError | Server error |
@@ -883,7 +883,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 </details>
 
 
-* next-token이 존재하면 limit은 변경될 수 없으며 token이 발행될 때의 값으로 자동 설정됨
+* If the next-token exists, the limit cannot be changed, and it is auto-set to the value from when the token was issued
 
 
 #### Response
@@ -1090,7 +1090,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 * Uses the largest face recognized from the input image to compare if it matches a face from a specific group.
 * The input image can be delivered via Base64-encoded image bytes or image url.
 * To find out more about input image, see "[Input Image Guide](./api-guide/#input-image-guide)".
-* 유Returns the array of the face info in order of the most to least similar.
+* Returns the array of the face info in order of the most to least similar.
 
 #### Request
 [URI]
@@ -1294,7 +1294,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 * [Response body header description omitted]
     * This information is available in [Common Response Information](./api-guide/#common-response)
 
-[응답 본문 데이터]
+[Response body data]
 
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
