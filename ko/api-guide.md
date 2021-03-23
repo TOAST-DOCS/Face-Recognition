@@ -1257,7 +1257,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
+| threshold | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
  
 [Request Body]
  
