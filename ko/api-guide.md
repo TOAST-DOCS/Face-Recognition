@@ -19,7 +19,7 @@
 
 | 환경 | 도메인 |
 | --- | --- |
-| Real | https://face-recognition.cloud.toast.com |
+| Beta | https://beta-face-recognition.cloud.toast.com |
 
 <span id="input-image-guide"></span>
 ### 입력 이미지 가이드
@@ -996,7 +996,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>요청 예</summary>
  
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold'  -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
 </details>
@@ -1257,6 +1257,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
+| threshold | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
  
 [Request Body]
  
@@ -1268,21 +1269,20 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | targetImage | object | O | - | 비교 대상이 되는 얼굴이 포함된 이미지<br/>(=comparisonImage) |
 | targetImage.url | string |  | "https://..." | 이미지의 URL<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
 | targetImage.bytes | blob |  | "/0j3Ohdk==..." | base64로 인코딩된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
-| threshold | int | O | 90 | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
+
 
 
 <details>
 <summary>요청 예</summary>
  
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "sourceImage": {
         "url": "https://..."
     },
     "targetImage": {
         "url": "https://..."
-    },
-    "threshold ": 80
+    }
 }'
 ```
 
