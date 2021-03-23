@@ -15,7 +15,7 @@
 ### 분석
 사진을 업로드한 후 분석 버튼을 클릭하면 분석 결과가 화면 오른쪽에 나타납니다.
 
-![detect](http://static.toastoven.net/prod_facerecognition/detect.png)
+![detect](http://static.toastoven.net/prod_facerecognition/FR_detect_ch.png)
 
 * [Result] 감지한 얼굴 영역과 신뢰도를 표시합니다.
 * [Request] API 호출 시 요청하는 JSON 예시를 표시합니다.
@@ -36,7 +36,7 @@
 ### 비교
 사진 업로드한 후 비교 버튼을 클릭하면 비교 결과가 화면 오른쪽에 나타납니다.
 
-![compare](http://static.toastoven.net/prod_facerecognition/compare.png)
+![compare](http://static.toastoven.net/prod_facerecognition/FR_compare_ch.png)
 
 * [Result] 기준 이미지(Reference Image)에서 감지한 얼굴과 비교 이미지(Comparison Image)에서 감지한 얼굴의 비교 결과와 유사도를 표시합니다. 
 * [Request] API 호출 시 요청하는 JSON 예시를 표시합니다.
