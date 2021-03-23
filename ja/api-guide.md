@@ -19,7 +19,7 @@
 
 | 環境 | ドメイン |
 | --- | --- |
-| Real | https://face-recognition.cloud.toast.com |
+| Beta | https://beta-face-recognition.cloud.toast.com |
 
 <span id="input-image-guide"></span>
 ### 入力画像ガイド
@@ -997,7 +997,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>リクエスト例</summary>
  
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold'  -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
 </details>
@@ -1258,6 +1258,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
+| threshold | マッチングするかどうかを判断する類似度の基準値<br>0 < threshold <= 100 |
  
 [Request Body]
  
@@ -1269,21 +1270,20 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | targetImage | object | O | - | 比較対象になる顔が含まれる画像<br/>(=comparisonImage) |
 | targetImage.url | string |  | "https://..." | 画像のURL<br>image.url、image.bytesのどちらか1つが必要 |
 | targetImage.bytes | blob |  | "/0j3Ohdk==..." | base64でエンコードされた画像バイト<br>image.url, image.bytesのどちらか1つが必要 |
-| threshold | int | O | 90 | マッチングするかどうかを判断する類似度の基準値<br>0 < threshold <= 100 |
+
 
 
 <details>
 <summary>リクエスト例</summary>
  
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "sourceImage": {
         "url": "https://..."
     },
     "targetImage": {
         "url": "https://..."
-    },
-    "threshold ": 80
+    }
 }'
 ```
 
