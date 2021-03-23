@@ -19,7 +19,7 @@
 
 | 환경 | 도메인 |
 | --- | --- |
-| Alpha | https://alpha-face-recognition.cloud.toast.com |
+| Beta | https://beta-face-recognition.cloud.toast.com |
 
 <span id="input-image-guide"></span>
 ### 입력 이미지 가이드
