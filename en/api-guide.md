@@ -19,7 +19,7 @@
 
 | Environment | Domain |
 | --- | --- |
-| Beta | https://beta-face-recognition.cloud.toast.com |
+| Alpha | https://alpha-face-recognition.cloud.toast.com |
 
 <span id="input-image-guide"></span>
 ### Input Image Guide
@@ -997,7 +997,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>Request example</summary>
  
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold'  -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
 </details>
@@ -1258,6 +1258,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or product Appkey |
+| threshold | A similarity reference value that determines a match<br>0 < threshold <= 100 |
  
 [Request Body]
  
@@ -1269,21 +1270,19 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | targetImage | object | O | - | Image containing the target face for comparison <br/>(=comparisonImage) |
 | targetImage.url | string |  | "https://..." | Image URL<br>Must have only one of either image.url or image.bytes |
 | targetImage.bytes | blob |  | "/0j3Ohdk==..." | Base64-encoded Image bytes<br>Must have only one of either image.url or image.bytes |
-| threshold | int | O | 90 | A similarity reference value that determines a match<br>0 < threshold <= 100 |
 
 
 <details>
 <summary>Request example</summary>
  
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "sourceImage": {
         "url": "https://..."
     },
     "targetImage": {
         "url": "https://..."
-    },
-    "threshold ": 80
+    }
 }'
 ```
 
