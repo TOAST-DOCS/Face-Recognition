@@ -4,10 +4,10 @@
 
 ## Common API Information
 ### Preparations
-- To use APIs, an integrated project Appkey or product Appkey is required.  
+- To use APIs, an integrated project Appkey or service Appkey is required.  
     - We recommend using the integrated project Appkey.
     - You can create and use the integrated project Appkey from the API security settings in the project settings page.
-    - The product Appkey is located in the "URL & Appkey" menu on the top of the console.
+    - The service Appkey is located in the **URL & Appkey** menu on the top of the console.
 
 
 
@@ -28,14 +28,14 @@
     * The face size must be at least 60x60 px to be eligible for facial recognition.
     * As the image gets bigger, the minimum face size must get bigger as well for better facial recognition precision.
     * The bigger the proportion of the face area in the image, the more precise the facial recognition.
-* In the input image, both left/right angle (Yaw) and up/down angle (Pitch) of the face must be 45 degrees or less.
+* In the input image, both left/right angle(Yaw) and up/down angle(Pitch) of the face must be 45 degrees or less.
 * Max image size: up to 5 MB
 * Supported image formats: PNG, JPEG
 
 <span id="common-response"></span>
 ### Common Response Information
 
-- Returns "200 OK" for all API requests. For more information on the response results, see Response Body Header.
+- Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
 
 [Response Body Header]
 
@@ -72,7 +72,7 @@
 
 ### Create Groups
 
-- This API creates groups. You can use "[Register Face](./api-guide/#add-face)" to a created group to register faces.
+- This API creates groups. You can use [Register Face](./api-guide/#add-face) to a created group to register faces.
 
 #### Request
 [URI]
@@ -85,7 +85,7 @@
 
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 
 [Request Body]
 
@@ -133,7 +133,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 |-40000| InvalidParam | The parameter contains an error |
 |-40010| InvalidGroupID | Group ID error |
 |-40020| DuplicatedGroupID | Duplicate group ID |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
 ### Group List
@@ -153,14 +153,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 
 [URL Parameter]
 
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | limit | int | O | 100 | Max size<br>0 < limit <= 200 |
-| next-token | string  |    | "skljsdioew..."  | Value returned from "Group list response body data"<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
+| next-token | string  |    | "skljsdioew..."  | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
 
 * Caution
@@ -181,7 +181,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 </details>
 
-* Requested using the next-token contained in the "Group list response body data"
+* Requested using the next-token contained in the 'Group list response body data'
 
 
 <details>
@@ -242,7 +242,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40040| InvalidTokenError | Invalid token used |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
 ### Group Details
@@ -260,7 +260,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
 
 <details>
@@ -317,7 +317,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
 ### Delete Group
@@ -336,7 +336,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
 
 
@@ -378,7 +378,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
 ### Recognize Face
@@ -387,7 +387,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * Returns the position data of the face, eyes, nose, and moth and the confidence value from the recognized face.
 * Recognizes up to 20 faces from the input image in the order from the largest to smallest face.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see "[Input Image Guide](./api-guide/#input-image-guide)".
+* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
 
 #### Request
 [URI]
@@ -400,7 +400,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
  
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 
 [Request Body]
 
@@ -445,9 +445,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | data.faceDetails[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.faceDetails[].landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.faceDetails[].orientation | object | O | 0.362 | Face angle |
-| data.faceDetails[].orientation.x | float | O | 15.303436 | Face left/right angle (Yaw) |
-| data.faceDetails[].orientation.y | float | O | -9.222179 | Face up/down angle (Pitch) |
-| data.faceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface (Roll) |
+| data.faceDetails[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
+| data.faceDetails[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
+| data.faceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.faceDetails[].confidence | float | O | 99.9123 | Face recognition confidence |
 
 
@@ -514,7 +514,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
@@ -529,9 +529,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 * Extracted vector data gets saved in the database after encryption.
 * The saved vector data gets used as characteristic vectors for the [Search face by face ID](./api-guide/#search-by-face-id)and [Search face by image](./api-guide/#search-by-image) APIs.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see "[Input Image Guide](./api-guide/#input-image-guide)".
-* "imageId" is a value given for the input image, and the "externalImageId" is a value which can be directly given by the user. The user can utilize "imageId" and "externalImageId" to perform labeling for the image or face ID from the user-end, and they can also be used on their own like indexes.
-* "imageId" and "externalImageId" are returned from the response of the [Face list within a group](./api-guide/#face-list-in-a-group) and [Search face by face ID](./api-guide/#search-by-face-id) and [Search face by image](./api-guide/#search-by-image) APIs. 
+* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
+* 'imageId' is a value given for the input image, and the 'externalImageId' is a value which can be directly given by the user. The user can utilize 'imageId' and 'externalImageId' to perform labeling for the image or face ID from the user-end, and they can also be used on their own like indexes.
+* 'imageId' and 'externalImageId' are returned from the response of the [Face list within a group](./api-guide/#face-list-in-a-group) and [Search face by face ID](./api-guide/#search-by-face-id) and [Search face by image](./api-guide/#search-by-image) APIs. 
 * Up to 100,000 faces can be registered per single group.
  
 #### Request
@@ -546,7 +546,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
  
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
  
 
@@ -609,9 +609,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.addedFaceDetails[].orientation | object | O | 0.362 | Face angle |
-| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | Face left/right angle (Yaw) |
-| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | Face up/down angle (Pitch) |
-| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface (Roll) |
+| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
+| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
+| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | Face recognition confidence |
 | data.notAddedFaceCount | int | O | 1 | Number of faces not registered |
 | data.notAddedFaces[].bbox | object | O | - | Face box info recognized from the image |
@@ -624,9 +624,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.notAddedFaces[].orientation | object | O | 0.362 | Face angle |
-| data.notAddedFaces[].orientation.x | float | O | 15.303436 | Face left/right angle (Yaw) |
-| data.notAddedFaces[].orientation.y | float | O | -9.222179 | Face up/down angle (Pitch) |
-| data.notAddedFaces[].orientation.z | float | O | -7.97249 | Face angle compared to level surface (Roll) |
+| data.notAddedFaces[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
+| data.notAddedFaces[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
+| data.notAddedFaces[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | Face recognition confidence |
 
 
@@ -756,7 +756,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40070| ServiceQuotaExceededException | Exceeds the max number of faces which can be registered for a single group |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
@@ -778,7 +778,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
  
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
 | face-id | Registered face ID |
  
@@ -820,7 +820,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40050| NotFoundFaceIDError | Could not find the face ID |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
 <span id="face-list-in-a-group"></span>
@@ -840,7 +840,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
  
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
@@ -848,7 +848,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | limit | int  | O  | 100  | Max size<br>0 < limit <= 200 |
-| next-token | string  |    | "skljsdioew..."  | Value returned from "Group list response body data"<br/>If the result is partially truncated, the next-token can be used to bring the rest of the result |
+| next-token | string  |    | "skljsdioew..."  | Value returned from 'Group list response body data'<br/>If the result is partially truncated, the next-token can be used to bring the rest of the result |
  
 
 * Caution
@@ -870,7 +870,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 </details>
 
 
-* Requested using the next-token contained in the "Group list response body data"
+* Requested using the next-token contained in the 'Group list response body data'
  
 
 <details>
@@ -961,7 +961,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40040| InvalidTokenError | Invalid token used |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
 <span id="search-by-face-id"></span>
@@ -981,7 +981,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
  
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
 | face-id | Face ID to compare |
  
@@ -1081,7 +1081,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40050| NotFoundFaceIDError | Could not find the face ID |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
 <span id="search-by-image"></span>
@@ -1089,7 +1089,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 * Uses the largest face recognized from the input image to compare if it matches a face from a specific group.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see "[Input Image Guide](./api-guide/#input-image-guide)".
+* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
 #### Request
@@ -1103,7 +1103,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
  
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 | group-id | Group id registered by user<br>[a-z0-9-]{1,255} |
  
 [URL Parameter]
@@ -1231,7 +1231,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
@@ -1240,10 +1240,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 ### Compare faces
 
-* Compares the similarity of the faces recognized from the reference image (sourceImage) and comparison image (targetImage).
-* Out of the faces recognized from the reference image, only the largest face (source face) is used.
+* Compares the similarity of the faces recognized from the reference image(sourceImage) and comparison image(targetImage).
+* Out of the faces recognized from the reference image, only the largest face(source face) is used.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see "[Input Image Guide](./api-guide/#input-image-guide)".
+* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
 #### Request
@@ -1257,7 +1257,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
  
 | Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or product Appkey |
+| appKey | Integrated Appkey or service Appkey |
 | threshold | A similarity reference value that determines a match<br>0 < threshold <= 100 |
  
 [Request Body]
@@ -1310,9 +1310,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.matchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | Face angle |
-| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle (Yaw) |
-| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle (Pitch) |
-| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface (Roll) |
+| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
+| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
+| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
 | data.unmatchedFaceDetailCount | int | O | 1 | Number of unmatched faces |
@@ -1326,9 +1326,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.unmatchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | Face angle |
-| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle (Yaw) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle (Pitch) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface (Roll) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
 | data.sourceFace.bbox | object | O | - | Face box info recognized from the image |
@@ -1501,7 +1501,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: Image size exceeded |
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: Unsupported image format |
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: Invalid image URL |
