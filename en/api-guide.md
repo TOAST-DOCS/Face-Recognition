@@ -19,7 +19,7 @@
 
 | Environment | Domain |
 | --- | --- |
-| Alpha | https://alpha-face-recognition.cloud.toast.com |
+| Alpha | https://beta-face-recognition.cloud.toast.com |
 
 <span id="input-image-guide"></span>
 ### Input Image Guide
