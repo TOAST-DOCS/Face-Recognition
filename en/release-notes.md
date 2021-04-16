@@ -1,5 +1,7 @@
 ## AI Service > Face Recognition > Release Notes
+### April 27, 2021
+#### Feature Updates
+* [API] Diversification of uploadable image formats
 
-### 2021.03.23
-
-- Released the Face Recognition Service
+### March 23, 2021
+* Released the Face Recognition Service

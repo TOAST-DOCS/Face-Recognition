@@ -43,7 +43,7 @@
 | --- | --- | --- |
 | header.isSuccessful | boolean | true: 정상<br>false: 오류 |
 | header.resultCode | int | 0: 정상<br>0보다 큼: 부분 성공<br>음수: 오류 |
-| header.resultMessage | string | "SUCCESS": 정상<br>그 외: 오류 메시지 리턴 |
+| header.resultMessage | string | "SUCCESS": 정상<br>그 외: 오류 메시지 반환 |
 
 [성공 응답 본문 예]
 
