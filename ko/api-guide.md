@@ -1507,3 +1507,136 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: 잘못된 이미지 URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image: 이미지 다운로드 시간 초과 |
 |-50000| InternalServerError | 서버 오류 |
+
+
+<span id="verify"></span>
+### 얼굴 검증
+* 사전에 등록된 특정 얼굴의 페이스 ID와 입력 이미지에서 감지한 얼굴을 비교하여 유사도 값을 반환하는 기능입니다.
+* [얼굴 등록](./api-guide/#add-face)을 이용하여 얼굴을 등록할 수 있습니다.
+* 입력 이미지에서 감지한 얼굴 중 가장 큰 얼굴만 사용합니다.  
+* 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
+* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
+
+#### 요청
+[URI]
+
+| 메서드 | URI |
+| --- | --- |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id} |
+
+[Path Variable]
+
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
+| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| face-id | 등록된 페이스 아이디 |
+
+
+[Request Body]
+
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| compareImage.url | string |  | "https://..." | 이미지의 URL<br>compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 함 |
+| compareImage.bytes | blob |  | "/0j3Ohdk==..." | base64로 인코딩된 이미지 바이트<br>compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 함 |
+
+* compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 합니다.
+
+
+<details>
+<summary>요청 예</summary>
+
+```
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+    "compareImage": {
+        "url": "https://..."
+    }
+}'
+```
+
+</details>
+
+
+#### 응답
+
+* [응답 본문 헤더 설명 생략]
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+
+[응답 본문 데이터]
+
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| data.similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
+| data.face | object | O | - | 얼굴 등록 API를 이용하여 등록한 얼굴 |
+| data.face.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.face.bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
+| data.face.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
+| data.face.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
+| data.face.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
+| data.face.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
+| data.face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재할 수 있음 |
+| data.face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
+| data.sourceFace | object | O | - | Request Body로 전달한 이미지 |
+| data.sourceFace.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.sourceFace.bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
+| data.sourceFace.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
+| data.sourceFace.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
+| data.sourceFace.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
+| data.sourceFace.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+
+
+
+<details>
+<summary>응답 본문 예</summary>
+
+```json
+{
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 0,
+    "resultMessage": "SUCCESS"
+  },
+  "data": {
+    "similarity": 87.074165,
+    "face": {
+      "bbox": {
+        "x0": 0.828,
+        "y0": 0.07829181494661921,
+        "x1": 0.886,
+        "y1": 0.2117437722419929
+      },
+      "confidence": 0.998737,
+      "faceId": "bd21a5d1-64bc-4723-a041-71d720fe56d8",
+      "imageId": "165b63c9-9564-4a65-b3f6-7bb64d4fe9f9",
+      "externalImageId": "user-defined-external-image-id"
+    },
+    "sourceFace": {
+      "bbox": {
+        "x0": 0.7567164179104477,
+        "y0": 0.13097713097713098,
+        "x1": 0.8671641791044776,
+        "y1": 0.33264033264033266
+      },
+      "confidence": 0.999286
+    }
+  }
+}
+```
+
+</details>
+
+
+#### Error Codes
+
+| resultCode | resultMessage | 설명 |
+| --- | --- | --- |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-45020| ImageTooLargeException | 이미지 크기 초과 |
+|-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
+|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-50000| InternalServerError | 서버 오류 |
