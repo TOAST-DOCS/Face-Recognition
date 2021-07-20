@@ -4,10 +4,10 @@
 
 ## API 공통 정보
 ### 사전 준비
-- API 사용을 위해서는 프로젝트 통합 Appkey 또는 서비스 Appkey가 필요합니다. 
-    - 프로젝트 통합 Appkey 사용을 권장합니다.
-    - 프로젝트 통합 Appkey는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
-    - 서비스 Appkey는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
+- API 사용을 위해서는 프로젝트 통합 Appkey 또는 서비스 Appkey가 필요합니다.
+  - 프로젝트 통합 Appkey 사용을 권장합니다.
+  - 프로젝트 통합 Appkey는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
+  - 서비스 Appkey는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
 
 
 
@@ -25,9 +25,9 @@
 ### 입력 이미지 가이드
 
 * 입력 이미지는 너비와 높이 모두 최소 80px 이상이어야 합니다.
-    * 얼굴 크기가 최소 60x60px 이상이어야 얼굴 인식이 가능합니다.
-    * 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식이 가능합니다.
-    * 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
+  * 얼굴 크기가 최소 60x60px 이상이어야 얼굴 인식이 가능합니다.
+  * 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식이 가능합니다.
+  * 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
 * 입력 이미지에서 얼굴의 좌우 각도(Yaw)와 얼굴의 상하 각도(Pitch)는 모두 45도 이하여야 합니다.
 * 이미지 최대 크기: 최대 5MB
 * 지원 이미지 포맷: PNG, JPEG
@@ -108,7 +108,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 
 <details>
@@ -164,9 +164,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 
 
 * 주의 사항
-    * 처음에는 next-token이 없습니다.
-    * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
-    * token 발행 시 limit은 고정됩니다.
+  * 처음에는 next-token이 없습니다.
+  * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
+  * token 발행 시 limit은 고정됩니다.
 * 시나리오 예
 
 * 최초 query
@@ -198,7 +198,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -274,7 +274,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -353,7 +353,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 <details>
 <summary>응답 본문 예</summary>
@@ -390,13 +390,13 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 #### 요청
 [URI]
- 
+
 | 메서드 | URI |
 | --- | --- |
 | POST | /nhn-face-reco/v1.0/appkeys/{appKey}/detect |
 
 [Path Variable]
- 
+
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
@@ -413,7 +413,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 <details>
 <summary>요청 예</summary>
- 
+
 ```
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "image": {
@@ -427,7 +427,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -530,24 +530,24 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 * 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
 * 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
 * 'imageId'는 입력 이미지에 부여되는 값이며 'externalImageId'는 사용자가 직접 부여할 수 있는 값입니다. 사용자는 'imageId'와 'externalImageId'를 통해 사용자 단에서 이미지 또는 페이스 아이디에 라벨링하고 인덱스처럼 자체적으로 활용할 수 있습니다.
-* 'imageId'와 'externalImageId'는 [그룹 내 얼굴 목록](./api-guide/#face-list-in-a-group)과 [페이스 아이디로 얼굴 검색](./api-guide/#search-by-face-id), [이미지로 얼굴 검색](./api-guide/#search-by-image) API의 응답에서 반환됩니다. 
+* 'imageId'와 'externalImageId'는 [그룹 내 얼굴 목록](./api-guide/#face-list-in-a-group)과 [페이스 아이디로 얼굴 검색](./api-guide/#search-by-face-id), [이미지로 얼굴 검색](./api-guide/#search-by-image) API의 응답에서 반환됩니다.
 * 단일 그룹에 등록할 수 있는 최대 얼굴 개수는 10만 개입니다.
- 
+
 #### 요청
 
 [URI]
- 
+
 | 메서드 | URI |
 | --- | --- |
 | POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
- 
+
 [Path Variable]
- 
+
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
- 
+
 
 [Request Body]
 
@@ -560,11 +560,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
 
- 
+
 
 <details>
 <summary>요청 예</summary>
- 
+
 ```
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "image": {
@@ -581,7 +581,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -768,19 +768,19 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 #### 요청
 [URI]
- 
+
 | 메서드 | URI |
 | --- | --- |
 | DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
- 
+
 [Path Variable]
- 
+
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 | face-id | 등록된 페이스 아이디 |
- 
+
 
 <details>
 <summary>요청 예</summary>
@@ -794,7 +794,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 
 <details>
@@ -830,35 +830,35 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 #### 요청
 [URI]
- 
+
 | 메서드 | URI |
 | --- | --- |
 | GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces |
- 
+
 [Path Variable]
- 
+
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
- 
+
 [URL Parameter]
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int  | O  | 100  | 최대 크기<br>0 < limit <= 200 |
 | next-token | string  |    | "skljsdioew..."  | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
- 
+
 
 * 주의 사항
-    * 처음에는 next-token이 없습니다.
-    * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
-    * token 발행 시 limit은 고정됩니다.
+  * 처음에는 next-token이 없습니다.
+  * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
+  * token 발행 시 limit은 고정됩니다.
 * 시나리오 예
 
 * 최초 query
 
- 
+
 <details>
 <summary>요청 예</summary>
 
@@ -870,7 +870,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 
 * '그룹 목록 응답 본문 데이터'에 포함된 next-token을 이용하여 요청
- 
+
 
 <details>
 <summary>요청 예</summary>
@@ -888,7 +888,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -971,30 +971,30 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 #### 요청
 [URI]
- 
+
 | 메서드 | URI |
 | --- | --- |
 | GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
- 
+
 [Path Variable]
- 
+
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
 | face-id | 비교하려는 페이스 아이디 |
- 
+
 [URL Parameter]
- 
+
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int  | O  | 100  | 찾으려는 최댓값<br>0 < limit <= 4096 |
 | threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
- 
+
 
 <details>
 <summary>요청 예</summary>
- 
+
 ```
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8' 
 ```
@@ -1004,7 +1004,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -1093,27 +1093,27 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 #### 요청
 [URI]
- 
+
 | 메서드 | URI |
 | --- | --- |
 | POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search |
- 
+
 [Path Variable]
- 
+
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
- 
+
 [URL Parameter]
- 
+
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | limit | int  | O  | 100  | 찾으려는 최댓값<br>0 < limit <= 4096 |
 | threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
 
 [Request Body]
- 
+
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | image.url | string |  | "https://..." | 이미지의 URL<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
@@ -1124,7 +1124,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 <details>
 <summary>요청 예</summary>
- 
+
 ```
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "image": {
@@ -1139,7 +1139,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -1247,20 +1247,20 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 #### 요청
 [URI]
- 
+
 | 메서드 | URI |
 | --- | --- |
 | POST | /nhn-face-reco/v1.0/appkeys/{appKey}/compare |
- 
+
 [Path Variable]
- 
+
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
 | threshold | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
- 
+
 [Request Body]
- 
+
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | sourceImage | object | O | - | 얼굴 비교 시 기준이 되는 이미지<br/>(=referenceImage) |
@@ -1274,7 +1274,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 <details>
 <summary>요청 예</summary>
- 
+
 ```
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
     "sourceImage": {
@@ -1292,7 +1292,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
-    * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
 
 [응답 본문 데이터]
 
@@ -1506,4 +1506,137 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: 지원하지 않는 이미지 포맷 |
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: 잘못된 이미지 URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image: 이미지 다운로드 시간 초과 |
+|-50000| InternalServerError | 서버 오류 |
+
+
+<span id="verify"></span>
+### 얼굴 검증
+* 사전에 등록된 특정 얼굴의 페이스 아이디와 입력 이미지에서 감지한 얼굴을 비교하여 유사도 값을 반환하는 기능입니다.
+* [얼굴 등록](./api-guide/#add-face)을 이용하여 얼굴을 등록할 수 있습니다.
+* 입력 이미지에서 감지한 얼굴 중 가장 큰 얼굴만 사용합니다.
+* 입력 이미지는 base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
+* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
+
+#### 요청
+[URI]
+
+| 메서드 | URI |
+| --- | --- |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id} |
+
+[Path Variable]
+
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
+| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| face-id | 등록된 페이스 아이디 |
+
+
+[Request Body]
+
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| compareImage.url | string |  | "https://..." | 이미지의 URL<br>compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 함 |
+| compareImage.bytes | blob |  | "/0j3Ohdk==..." | base64로 인코딩된 이미지 바이트<br>compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 함 |
+
+* compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 합니다.
+
+
+<details>
+<summary>요청 예</summary>
+
+```
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+    "compareImage": {
+        "url": "https://..."
+    }
+}'
+```
+
+</details>
+
+
+#### 응답
+
+* [응답 본문 헤더 설명 생략]
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+
+[응답 본문 데이터]
+
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| data.similarity | float | O | 98.156 | 0\~100 값을 가지는 유사도 |
+| data.face | object | O | - | 얼굴 등록 API를 이용하여 등록한 얼굴 |
+| data.face.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.face.bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
+| data.face.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
+| data.face.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
+| data.face.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
+| data.face.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 페이스 아이디 |
+| data.face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재할 수 있음 |
+| data.face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
+| data.sourceFace | object | O | - | Request Body로 전달한 이미지 |
+| data.sourceFace.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.sourceFace.bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
+| data.sourceFace.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
+| data.sourceFace.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
+| data.sourceFace.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
+| data.sourceFace.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+
+
+
+<details>
+<summary>응답 본문 예</summary>
+
+```json
+{
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 0,
+    "resultMessage": "SUCCESS"
+  },
+  "data": {
+    "similarity": 87.074165,
+    "face": {
+      "bbox": {
+        "x0": 0.828,
+        "y0": 0.07829181494661921,
+        "x1": 0.886,
+        "y1": 0.2117437722419929
+      },
+      "confidence": 0.998737,
+      "faceId": "bd21a5d1-64bc-4723-a041-71d720fe56d8",
+      "imageId": "165b63c9-9564-4a65-b3f6-7bb64d4fe9f9",
+      "externalImageId": "user-defined-external-image-id"
+    },
+    "sourceFace": {
+      "bbox": {
+        "x0": 0.7567164179104477,
+        "y0": 0.13097713097713098,
+        "x1": 0.8671641791044776,
+        "y1": 0.33264033264033266
+      },
+      "confidence": 0.999286
+    }
+  }
+}
+```
+
+</details>
+
+
+#### Error Codes
+
+| resultCode | resultMessage | 설명 |
+| --- | --- | --- |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-45020| ImageTooLargeException | 이미지 크기 초과 |
+|-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
+|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
 |-50000| InternalServerError | 서버 오류 |
