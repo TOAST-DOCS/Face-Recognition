@@ -1507,3 +1507,136 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: Invalid image URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} Image: Image download timeout |
 |-50000| InternalServerError | Server error |
+
+
+<span id="verify"></span>
+### Face Verification
+* This function compares the face ID of a specific face registered in advance with the face detected in the input image and returns a similarity value.
+* Use [Register Face](./api-guide/#add-face) to a created group to register faces.
+* Only the largest face detected in the input image is used.  
+* The input image can be delivered via Base64-encoded image bytes or image URL.
+* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
+
+#### Request
+[URI]
+
+| Method | URI |
+| --- | --- |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id} |
+
+[Path Variable]
+
+| More ActionsName | Description |
+| --- | --- |
+| appKey | Integrated Appkey or Service Appkey |
+| group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
+| face-id | Registered face ID |
+
+
+[Request Body]
+
+| Name | Type | Required | Example | Description |
+| --- | --- | --- | --- | --- |
+| compareImage.url | string |  | "https://..." | Image URL<br>Must have only either compareImage.url or compareImage.bytes |
+| compareImage.bytes | blob |  | "/0j3Ohdk==..." | Image URL<br>Must have only either compareImage.url or compareImage.bytes |
+
+* Must have only either compareImage.url or compareImage.bytes
+
+
+<details>
+<summary>Request example</summary>
+
+```
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+    "compareImage": {
+        "url": "https://..."
+    }
+}'
+```
+
+</details>
+
+
+#### Response
+
+* [Response body header description omitted]
+  * This information is available in [Common Response Information](./api-guide/#common-response)
+
+[Response body data]
+
+| Name | Type | Required | Example | Description |
+| --- | --- | --- | --- | --- |
+| data.similarity | float | O | 98.156 | Similarity value between0\~1000 |
+| data.face | object | O | - | A face registered using face registration API |
+| data.face.bbox | object | O | - | Face box info recognized from the image |
+| data.face.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
+| data.face.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
+| data.face.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
+| data.face.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
+| data.face.confidence | float | O | 99.9123 | Face recognition reliability |
+| data.face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Face ID |
+| data.face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이Image ID<br>There can be multiple face IDs per image ID |
+| data.face.externalImageId | string |  | "image01.jpg" | Values registered in the image by user |
+| data.sourceFace | object | O | - | The image delivered to Request Body |
+| data.sourceFace.bbox | object | O | - | Face box info recognized from the image |
+| data.sourceFace.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
+| data.sourceFace.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
+| data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
+| data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
+| data.sourceFace.confidence | float | O | 99.9123 | Face recognition reliability |
+
+
+
+<details>
+<summary>Response body example</summary>
+
+```json
+{
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 0,
+    "resultMessage": "SUCCESS"
+  },
+  "data": {
+    "similarity": 87.074165,
+    "face": {
+      "bbox": {
+        "x0": 0.828,
+        "y0": 0.07829181494661921,
+        "x1": 0.886,
+        "y1": 0.2117437722419929
+      },
+      "confidence": 0.998737,
+      "faceId": "bd21a5d1-64bc-4723-a041-71d720fe56d8",
+      "imageId": "165b63c9-9564-4a65-b3f6-7bb64d4fe9f9",
+      "externalImageId": "user-defined-external-image-id"
+    },
+    "sourceFace": {
+      "bbox": {
+        "x0": 0.7567164179104477,
+        "y0": 0.13097713097713098,
+        "x1": 0.8671641791044776,
+        "y1": 0.33264033264033266
+      },
+      "confidence": 0.999286
+    }
+  }
+}
+```
+
+</details>
+
+
+#### Error Codes
+
+| resultCode | resultMessage | Description |
+| --- | --- | --- |
+|-40000| InvalidParam | The parameter contains an error |
+|-40030| NotFoundGroupError | Could not find the group ID |
+|-40050| NotFoundFaceIDError | Could not find the face ID |
+|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-45020| ImageTooLargeException | Image size exceeded |
+|-45040| InvalidImageFormatException | Unsupported image format |
+|-45050| InvalidImageURLException | Invalid image URL |
+|-45060| ImageTimeoutError | Image download timeout |
+|-50000| InternalServerError | Server error |
