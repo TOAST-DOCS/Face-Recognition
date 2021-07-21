@@ -1508,3 +1508,136 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image：無効な画像URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image:画像ダウンロード時間超過 |
 |-50000| InternalServerError | サーバーエラー |
+
+
+<span id="verify"></span>
+### 顔検証
+* 事前に登録された特定の顔のフェイスIDと、入力画像から検出した顔を比較して類似度値を返す機能です。
+* [顔登録](./api-guide/#add-face)を利用して顔を登録できます。
+* 入力画像から検出した顔のうち、最も大きい顔のみを使用します。  
+* 入力画像はbase64でエンコードされた画像バイトで伝達するか、画像URLで伝達できます。
+* 入力画像についての詳細は、[入力画像ガイド](./api-guide/#input-image-guide)を参照してください。
+
+#### リクエスト
+[URI]
+
+| メソッド | URI |
+| --- | --- |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id} |
+
+[Path Variable]
+
+| 名前 | 説明 |
+| --- | --- |
+| appKey | 統合AppkeyまたはサービスAppkey |
+| group-id | ユーザーが登録したグループID<br>[a-z0-9-]{1,255} |
+| face-id | 登録されたフェイスID |
+
+
+[Request Body]
+
+| 名前 | タイプ | 必須 | 例 | 説明 |
+| --- | --- | --- | --- | --- |
+| compareImage.url | string |  | "https://..." | 画像のURL<br>compareImage.url、compareImage.bytesのいずれかが必要 |
+| compareImage.bytes | blob |  | "/0j3Ohdk==..." | base64でエンコードされた画像バイト<br>compareImage.url、compareImage.bytesのいずれかが必要 |
+
+* compareImage.url, compareImage.bytesのいずれかが必要です。
+
+
+<details>
+<summary>リクエスト例</summary>
+
+```
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+    "compareImage": {
+        "url": "https://..."
+    }
+}'
+```
+
+</details>
+
+
+#### レスポンス
+
+* [レスポンス本文ヘッダ説明省略]
+  * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+
+[レスポンス本文データ]
+
+| 名前 | タイプ | 必須 | 例 | 説明 |
+| --- | --- | --- | --- | --- |
+| data.similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
+| data.face | object | O | - | 顔登録APIを利用して登録した顔 |
+| data.face.bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.face.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
+| data.face.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
+| data.face.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
+| data.face.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
+| data.face.confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | フェイスID |
+| data.face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 画像ID<br>1つの画像IDに複数のフェイスIDが存在することがある |
+| data.face.externalImageId | string |  | "image01.jpg" | ユーザーが画像に登録した値 |
+| data.sourceFace | object | O | - | Request Bodyに伝達した画像 |
+| data.sourceFace.bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.sourceFace.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
+| data.sourceFace.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
+| data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
+| data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
+| data.sourceFace.confidence | float | O | 99.9123 | 顔認識の信頼度 |
+
+
+
+<details>
+<summary>レスポンス本文例</summary>
+
+```json
+{
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 0,
+    "resultMessage": "SUCCESS"
+  },
+  "data": {
+    "similarity": 87.074165,
+    "face": {
+      "bbox": {
+        "x0": 0.828,
+        "y0": 0.07829181494661921,
+        "x1": 0.886,
+        "y1": 0.2117437722419929
+      },
+      "confidence": 0.998737,
+      "faceId": "bd21a5d1-64bc-4723-a041-71d720fe56d8",
+      "imageId": "165b63c9-9564-4a65-b3f6-7bb64d4fe9f9",
+      "externalImageId": "user-defined-external-image-id"
+    },
+    "sourceFace": {
+      "bbox": {
+        "x0": 0.7567164179104477,
+        "y0": 0.13097713097713098,
+        "x1": 0.8671641791044776,
+        "y1": 0.33264033264033266
+      },
+      "confidence": 0.999286
+    }
+  }
+}
+```
+
+</details>
+
+
+#### Error Codes
+
+| resultCode | resultMessage | 説明 |
+| --- | --- | --- |
+|-40000| InvalidParam | パラメータにエラーがある |
+|-40030| NotFoundGroupError | グループIDが見つからない |
+|-40050| NotFoundFaceIDError | フェイスIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないAppkey |
+|-45020| ImageTooLargeException | 画像サイズ超過 |
+|-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
+|-45050| InvalidImageURLException | 無効な画像URL |
+|-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-50000| InternalServerError | サーバーエラー |
