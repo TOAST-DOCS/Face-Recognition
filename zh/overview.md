@@ -21,6 +21,10 @@ Provides the following features:
     * This feature lets you pre-analyze and store facial data, and use a face ID or an image to search and find those faces from the provided images.
     * The analyzed facial data is managed with face IDs.
     * It returns a series of faces that match the input value (face ID or image) and sorts them by similarity (highest to lowest).
+* **Face Verification**
+    * This function compares the face ID of a specific face registered in advance with the face detected in the input image and returns a similarity value.
+    * The user can set the reference value of similarity to determine whether the face is the same.
+    * Raise the reference value of similarity to perform strict verification for a high level of security.
 
 ## Service targets
 
