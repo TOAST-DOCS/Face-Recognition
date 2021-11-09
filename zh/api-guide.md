@@ -1021,7 +1021,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Face ID |
 | data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | Image ID<br>There can be multiple face IDs per image ID |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | Values registered in the image by user |
-| data.matchFaces[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
+| data.matchFaces[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 
 
 <details>
@@ -1156,7 +1156,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Face ID |
 | data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | Image ID<br>There can be multiple face IDs per image ID |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | Values registered in the image by user |
-| data.matchFaces[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
+| data.matchFaces[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.sourceFace.bbox | object | O | - | Face box info recognized from the image |
 | data.sourceFace.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
 | data.sourceFace.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
@@ -1314,7 +1314,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
-| data.matchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
+| data.matchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.unmatchedFaceDetailCount | int | O | 1 | Number of unmatched faces |
 | data.unmatchedFaceDetails[].faceDetail.bbox | object | O | - | Face box info recognized from the image |
 | data.unmatchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
@@ -1330,7 +1330,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
-| data.unmatchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
+| data.unmatchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.sourceFace.bbox | object | O | - | Face box info recognized from the image |
 | data.sourceFace.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
 | data.sourceFace.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
@@ -1566,7 +1566,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
-| data.similarity | float | O | 98.156 | Similarity value between0\~1000 |
+| data.similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.face | object | O | - | A face registered using face registration API |
 | data.face.bbox | object | O | - | Face box info recognized from the image |
 | data.face.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
