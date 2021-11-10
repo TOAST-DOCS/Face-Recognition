@@ -435,7 +435,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.faceDetailCount | int | O | 1 | 検出した顔の数 |
-| data.faceDetails[].bbox | object | O | - | 画像内で検出した顔box情報 |
+| data.faceDetails[].bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.faceDetails[].bbox.x0 | float | O | 0.123 | 画像内で検出した顔boxのx0座標 |
 | data.faceDetails[].bbox.y0 | float | O | 0.123 | 画像内で検出した顔boxのy0座標 |
 | data.faceDetails[].bbox.x1 | float | O | 0.123 | 画像内で検出した顔boxのx1座標 |
@@ -448,7 +448,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | data.faceDetails[].orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
 | data.faceDetails[].orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
 | data.faceDetails[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
-| data.faceDetails[].confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.faceDetails[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
 
 <details>
@@ -590,7 +590,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
 | data.addedFaceCount | int | O | 1 | 登録した顔の数 |
-| data.addedFaces[].bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.addedFaces[].bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.addedFaces[].bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.addedFaces[].bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.addedFaces[].bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
@@ -598,8 +598,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | フェイスID |
 | data.addedFaces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 画像ID<br>1つの画像IDに複数のフェイスIDが存在する場合がある |
 | data.addedFaces[].externalImageId | string |  | "image01.jpg" | リクエストから伝達された値 |
-| data.addedFaces[].confidence | float | O | 99.9123 | 顔認識の信頼度 |
-| data.addedFaceDetails[].bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.addedFaces[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
+| data.addedFaceDetails[].bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.addedFaceDetails[].bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.addedFaceDetails[].bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.addedFaceDetails[].bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
@@ -612,9 +612,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].orientation.x | float | O | 15.303436 | 顔の左右の角度(Yaw) |
 | data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 顔の上下の角度(Pitch) |
 | data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
-| data.addedFaceDetails[].confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.addedFaceDetails[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 | data.notAddedFaceCount | int | O | 1 | 登録していない顔の数 |
-| data.notAddedFaces[].bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.notAddedFaces[].bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.notAddedFaces[].bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.notAddedFaces[].bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.notAddedFaces[].bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
@@ -627,8 +627,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
 | data.notAddedFaces[].orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
 | data.notAddedFaces[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
-| data.notAddedFaces[].confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.notAddedFaces[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
+* data.addedFacesDetailsはdata.addedFacesの詳細情報であり、重複または保存されない情報です。
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -897,12 +898,12 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
 | data.faceCount | int | O | 2 | 検出した顔の数 |
-| data.faces[].bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.faces[].bbox | object | O | - | 顔の登録時に使用した画像で顔の境界ボックス(bounding box)情報 |
 | data.faces[].bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.faces[].bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.faces[].bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.faces[].bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.faces[].confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.faces[].confidence | float | O | 99.9123 | 顔の登録時に使用した画像で顔の認識信頼度 |
 | data.faces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | フェイスID |
 | data.faces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 画像ID<br>1つの画像IDに複数のフェイスIDが存在することがある |
 | data.faces[].externalImageId | string |  | "image01.jpg" | ユーザーが画像に登録した値 |
@@ -1011,17 +1012,17 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.matchFaceCount | int | O | 2 | 検出した顔の数 |
-| data.matchFaces[].face.bbox | object | O | - | 画像内で検出した顔box情報 |
+| data.matchFaceCount | int | O | 2 | 入力画像から検出した最も大きい顔と一致する顔の数 |
+| data.matchFaces[].face.bbox | object | O | - | 顔の登録時に使用した画像で顔の境界ボックス(bounding box)情報 |
 | data.matchFaces[].face.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.matchFaces[].face.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.matchFaces[].face.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.matchFaces[].face.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.matchFaces[].face.confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.matchFaces[].face.confidence | float | O | 99.9123 | 顔の登録時に使用した画像で顔の認識信頼度 |
 | data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | フェイスID |
 | data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 画像ID<br>1つの画像IDに複数のフェイスIDが存在することがある |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | ユーザーが画像に登録した値 |
-| data.matchFaces[].similarity | float | O | 98.156 | 0~100値을 가지는 유사도 |
+| data.matchFaces[].similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
 
 
 <details>
@@ -1146,23 +1147,23 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.matchFaceCount | int | O | 2 | 検出した顔の数 |
-| data.matchFaces[].face.bbox | object | O | - | 画像内で検出した顔box情報 |
+| data.matchFaceCount | int | O | 2 | 入力画像から検出した最も大きい顔と一致する顔の数 |
+| data.matchFaces[].face.bbox | object | O | - | 顔の登録時に使用した画像で顔の境界ボックス(bounding box)情報 |
 | data.matchFaces[].face.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.matchFaces[].face.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.matchFaces[].face.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.matchFaces[].face.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.matchFaces[].face.confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.matchFaces[].face.confidence | float | O | 99.9123 | 顔の登録時に使用した画像で顔の認識信頼度 |
 | data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | フェイスID |
 | data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 画像ID<br>1つの画像IDに複数のフェイスIDが存在することがある |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | ユーザーが画像に登録した値 |
-| data.matchFaces[].similarity | float | O | 98.156 | 0~100値을 가지는 유사도 |
-| data.sourceFace.bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.matchFaces[].similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
+| data.sourceFace.bbox | object | O | - | 入力画像内から検出した最も大きい顔の境界ボックス(bounding box)情報 |
 | data.sourceFace.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.sourceFace.confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.sourceFace.confidence | float | O | 99.9123 | 入力画像内から検出した最も大きい顔の認識信頼度 |
 
 
 <details>
@@ -1301,7 +1302,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
 | data.matchedFaceDetailCount | int | O | 1 | マッチングした顔の数 |
-| data.matchedFaceDetails[].faceDetail.bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.matchedFaceDetails[].faceDetail.bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.matchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.matchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.matchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
@@ -1314,10 +1315,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
 | data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
 | data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
-| data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 顔認識の信頼度 |
-| data.matchedFaceDetails[].similarity | float | O | 98.156 | 0~100値을 가지는 유사도 |
+| data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 顔の認識信頼度 |
+| data.matchedFaceDetails[].similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
 | data.unmatchedFaceDetailCount | int | O | 1 | マッチングしていない顔の数 |
-| data.unmatchedFaceDetails[].faceDetail.bbox | object | O | - | 画像内で検出した顔box情報 |
+| data.unmatchedFaceDetails[].faceDetail.bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.unmatchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.unmatchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.unmatchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
@@ -1330,14 +1331,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
-| data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 顔認識の信頼度 |
-| data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0~100値을 가지는 유사도 |
-| data.sourceFace.bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 顔の認識信頼度 |
+| data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
+| data.sourceFace.bbox | object | O | - | 入力画像内から検出した最も大きい顔の境界ボックス(bounding box)情報 |
 | data.sourceFace.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.sourceFace.confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.sourceFace.confidence | float | O | 99.9123 | 入力画像内から検出した最も大きい顔の認識信頼度 |
 
 
 <details>
@@ -1569,22 +1570,22 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | --- | --- | --- | --- | --- |
 | data.similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
 | data.face | object | O | - | 顔登録APIを利用して登録した顔 |
-| data.face.bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.face.bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.face.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.face.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.face.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.face.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.face.confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.face.confidence | float | O | 99.9123 | 顔の認識信頼度 |
 | data.face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | フェイスID |
 | data.face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 画像ID<br>1つの画像IDに複数のフェイスIDが存在することがある |
 | data.face.externalImageId | string |  | "image01.jpg" | ユーザーが画像に登録した値 |
 | data.sourceFace | object | O | - | Request Bodyに伝達した画像 |
-| data.sourceFace.bbox | object | O | - | 画像内から検出した顔box情報 |
+| data.sourceFace.bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.sourceFace.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.sourceFace.confidence | float | O | 99.9123 | 顔認識の信頼度 |
+| data.sourceFace.confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
 
 

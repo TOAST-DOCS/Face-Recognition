@@ -434,7 +434,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.faceDetailCount | int | O | 1 | 감지한 얼굴 수 |
-| data.faceDetails[].bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.faceDetails[].bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
 | data.faceDetails[].bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.faceDetails[].bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.faceDetails[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
@@ -589,7 +589,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 얼굴 감지 모델 정보 |
 | data.addedFaceCount | int | O | 1 | 등록한 얼굴 수 |
-| data.addedFaces[].bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.addedFaces[].bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
 | data.addedFaces[].bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.addedFaces[].bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.addedFaces[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
@@ -598,7 +598,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재할 수 있음 |
 | data.addedFaces[].externalImageId | string |  | "image01.jpg" | 요청에서 전달된 값 |
 | data.addedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
-| data.addedFaceDetails[].bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.addedFaceDetails[].bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
 | data.addedFaceDetails[].bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.addedFaceDetails[].bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.addedFaceDetails[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
@@ -613,7 +613,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.notAddedFaceCount | int | O | 1 | 등록하지 않은 얼굴 수 |
-| data.notAddedFaces[].bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.notAddedFaces[].bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
 | data.notAddedFaces[].bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.notAddedFaces[].bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.notAddedFaces[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
@@ -1301,7 +1301,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 얼굴 감지 모델 정보 |
 | data.matchedFaceDetailCount | int | O | 1 | 매칭된 얼굴 수 |
-| data.matchedFaceDetails[].faceDetail.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.matchedFaceDetails[].faceDetail.bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
 | data.matchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.matchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.matchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
@@ -1317,7 +1317,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | 0~100 값을 가지는 유사도 |
 | data.unmatchedFaceDetailCount | int | O | 1 | 매칭되지 않은 얼굴 수 |
-| data.unmatchedFaceDetails[].faceDetail.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.unmatchedFaceDetails[].faceDetail.bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
 | data.unmatchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
@@ -1569,7 +1569,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | --- | --- | --- | --- | --- |
 | data.similarity | float | O | 98.156 | 0~100 값을 가지는 유사도 |
 | data.face | object | O | - | 얼굴 등록 API를 이용하여 등록한 얼굴 |
-| data.face.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.face.bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
 | data.face.bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.face.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.face.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
@@ -1579,7 +1579,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | data.face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이미지 아이디<br>하나의 이미지 아이디에 여러 페이스 아이디가 존재할 수 있음 |
 | data.face.externalImageId | string |  | "image01.jpg" | 사용자가 이미지에 등록한 값 |
 | data.sourceFace | object | O | - | Request Body로 전달한 이미지 |
-| data.sourceFace.bbox | object | O | - | 이미지 내에서 감지한 얼굴 box 정보 |
+| data.sourceFace.bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
 | data.sourceFace.bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
