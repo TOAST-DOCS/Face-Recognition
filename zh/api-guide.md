@@ -1,6 +1,6 @@
 ## AI Service > Face Recognition > Face Recognition API Guide
 
-* This document explains about the APIs required for using Face Recognition API.
+* This document describes the APIs required for using Face Recognition API.
 
 ## Common API Information
 ### Preparations
@@ -435,11 +435,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | Name | Type | Required | Example | Example |
 | --- | --- | --- | --- | --- |
 | data.faceDetailCount | int | O | 1 | Number of faces recognized |
-| data.faceDetails[].bbox | object | O | - | Face box info recognized from the image |
-| data.faceDetails[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.faceDetails[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.faceDetails[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.faceDetails[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
+| data.faceDetails[].bbox | object | O | - | Bounding box information of a face detected in the image |
+| data.faceDetails[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.faceDetails[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.faceDetails[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.faceDetails[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.faceDetails[].landmarks | array | O | - | Facial characteristics |
 | data.faceDetails[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.faceDetails[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
@@ -590,20 +590,20 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | Face recognition model info |
 | data.addedFaceCount | int | O | 1 | Number of faces registered |
-| data.addedFaces[].bbox | object | O | - | Face box info recognized from the image |
-| data.addedFaces[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.addedFaces[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.addedFaces[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.addedFaces[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
+| data.addedFaces[].bbox | object | O | - | Bounding box information of a face detected in the image |
+| data.addedFaces[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.addedFaces[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.addedFaces[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.addedFaces[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.addedFaces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Face ID |
 | data.addedFaces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | Image ID<br>There can be multiple face IDs per image ID |
 | data.addedFaces[].externalImageId | string |  | "image01.jpg" | Values delivered by request |
 | data.addedFaces[].confidence | float | O | 99.9123 | Face recognition confidence |
-| data.addedFaceDetails[].bbox | object | O | - | Face box info recognized from the image |
-| data.addedFaceDetails[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.addedFaceDetails[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.addedFaceDetails[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.addedFaceDetails[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
+| data.addedFaceDetails[].bbox | object | O | - | Bounding box information of a face detected in the image |
+| data.addedFaceDetails[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.addedFaceDetails[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.addedFaceDetails[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.addedFaceDetails[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.addedFaceDetails[].landmarks | array | O | - | Facial characteristics |
 | data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
@@ -614,11 +614,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | Face recognition confidence |
 | data.notAddedFaceCount | int | O | 1 | Number of faces not registered |
-| data.notAddedFaces[].bbox | object | O | - | Face box info recognized from the image |
-| data.notAddedFaces[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.notAddedFaces[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.notAddedFaces[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.notAddedFaces[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
+| data.notAddedFaces[].bbox | object | O | - | Bounding box information of a face detected in the image |
+| data.notAddedFaces[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.notAddedFaces[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.notAddedFaces[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.notAddedFaces[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.notAddedFaces[].landmarks | array | O | - | Facial characteristics |
 | data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
@@ -629,6 +629,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | Face recognition confidence |
 
+* data.addedFacesDetails is the detailed information of data.addedFaces, which does not include duplicate elements and is not stored separately.
 
 <details>
 <summary>Response body example</summary>
@@ -897,12 +898,12 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | Face recognition model info |
 | data.faceCount | int | O | 2 | Number of faces recognized |
-| data.faces[].bbox | object | O | - | Face box info recognized from the image |
-| data.faces[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.faces[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.faces[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.faces[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
-| data.faces[].confidence | float | O | 99.9123 | Face recognition confidence |
+| data.faces[].bbox | object | O | - | Bounding box information of a face in the image used for face registration |
+| data.faces[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.faces[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.faces[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.faces[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
+| data.faces[].confidence | float | O | 99.9123 | Recognition confidence of a face in the image used for face registration |
 | data.faces[].faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Face ID |
 | data.faces[].imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | Image ID<br>There can be multiple face IDs per image ID |
 | data.faces[].externalImageId | string |  | "image01.jpg" | Values registered in the image by user |
@@ -1011,17 +1012,17 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | Name | Type | Required | Example | TypeRequiredExampleDescription |
 | --- | --- | --- | --- | --- |
-| data.matchFaceCount | int | O | 2 | Number of faces recognized |
-| data.matchFaces[].face.bbox | object | O | - | Face box info recognized from the image |
-| data.matchFaces[].face.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.matchFaces[].face.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.matchFaces[].face.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.matchFaces[].face.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
-| data.matchFaces[].face.confidence | float | O | 99.9123 | Face recognition confidence |
+| data.matchFaceCount | int | O | 2 | Number of faces matching the largest face detected in the input image |
+| data.matchFaces[].face.bbox | object | O | - | Bounding box information of a face in the image used for face registration |
+| data.matchFaces[].face.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.matchFaces[].face.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.matchFaces[].face.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.matchFaces[].face.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
+| data.matchFaces[].face.confidence | float | O | 99.9123 | Recognition confidence of a face in the image used for face registration |
 | data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Face ID |
 | data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | Image ID<br>There can be multiple face IDs per image ID |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | Values registered in the image by user |
-| data.matchFaces[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
+| data.matchFaces[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 
 
 <details>
@@ -1146,23 +1147,23 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
-| data.matchFaceCount | int | O | 2 | Number of faces recognized |
-| data.matchFaces[].face.bbox | object | O | - | Face box info recognized from the image |
-| data.matchFaces[].face.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.matchFaces[].face.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.matchFaces[].face.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.matchFaces[].face.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
-| data.matchFaces[].face.confidence | float | O | 99.9123 | Face recognition confidence |
+| data.matchFaceCount | int | O | 2 | Number of faces matching the largest face detected in the input image |
+| data.matchFaces[].face.bbox | object | O | - | Bounding box information of a face in the image used for face registration |
+| data.matchFaces[].face.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.matchFaces[].face.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.matchFaces[].face.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.matchFaces[].face.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
+| data.matchFaces[].face.confidence | float | O | 99.9123 | Recognition confidence of a face in the image used for face registration |
 | data.matchFaces[].face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Face ID |
 | data.matchFaces[].face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | Image ID<br>There can be multiple face IDs per image ID |
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | Values registered in the image by user |
-| data.matchFaces[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
-| data.sourceFace.bbox | object | O | - | Face box info recognized from the image |
-| data.sourceFace.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.sourceFace.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
-| data.sourceFace.confidence | float | O | 99.9123 | Face recognition confidence |
+| data.matchFaces[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
+| data.sourceFace.bbox | object | O | - | Bounding box information of the largest face detected in the input image |
+| data.sourceFace.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.sourceFace.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
+| data.sourceFace.confidence | float | O | 99.9123 | Recognition confidence of the largest face detected in the input image |
 
 
 <details>
@@ -1300,11 +1301,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | Face recognition model info |
 | data.matchedFaceDetailCount | int | O | 1 | Number of matched faces |
-| data.matchedFaceDetails[].faceDetail.bbox | object | O | - | Face box info recognized from the image |
-| data.matchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.matchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.matchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.matchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
+| data.matchedFaceDetails[].faceDetail.bbox | object | O | - | Bounding box information of a face detected in the image |
+| data.matchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.matchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.matchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.matchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.matchedFaceDetails[].faceDetail.landmarks | array | O | - | Facial characteristics |
 | data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
@@ -1314,13 +1315,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
-| data.matchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
+| data.matchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.unmatchedFaceDetailCount | int | O | 1 | Number of unmatched faces |
-| data.unmatchedFaceDetails[].faceDetail.bbox | object | O | - | Face box info recognized from the image |
-| data.unmatchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.unmatchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.unmatchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.unmatchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
+| data.unmatchedFaceDetails[].faceDetail.bbox | object | O | - | Bounding box information of a face detected in the image |
+| data.unmatchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.unmatchedFaceDetails[].faceDetail.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.unmatchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.unmatchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.unmatchedFaceDetails[].faceDetail.landmarks | array | O | - | Facial characteristics |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
@@ -1330,13 +1331,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
-| data.unmatchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0\ and 100 |
-| data.sourceFace.bbox | object | O | - | Face box info recognized from the image |
-| data.sourceFace.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.sourceFace.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
-| data.sourceFace.confidence | float | O | 99.9123 | Face recognition confidence |
+| data.unmatchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
+| data.sourceFace.bbox | object | O | - | Bounding box information of the largest face detected in the input image |
+| data.sourceFace.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.sourceFace.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
+| data.sourceFace.confidence | float | O | 99.9123 | Recognition confidence of the largest face detected in the input image |
 
 
 <details>
@@ -1566,24 +1567,24 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
-| data.similarity | float | O | 98.156 | Similarity value between0\~1000 |
+| data.similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.face | object | O | - | A face registered using face registration API |
-| data.face.bbox | object | O | - | Face box info recognized from the image |
-| data.face.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.face.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.face.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.face.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
-| data.face.confidence | float | O | 99.9123 | Face recognition reliability |
+| data.face.bbox | object | O | - | Bounding box information of a face detected in the image |
+| data.face.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.face.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.face.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.face.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
+| data.face.confidence | float | O | 99.9123 | Face recognition confidence |
 | data.face.faceId | string | O | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Face ID |
-| data.face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 이Image ID<br>There can be multiple face IDs per image ID |
+| data.face.imageId | string | O | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | Image ID<br>There can be multiple face IDs per image ID |
 | data.face.externalImageId | string |  | "image01.jpg" | Values registered in the image by user |
 | data.sourceFace | object | O | - | The image delivered to Request Body |
-| data.sourceFace.bbox | object | O | - | Face box info recognized from the image |
-| data.sourceFace.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box recognized from the image |
-| data.sourceFace.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box recognized from the image |
-| data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box recognized from the image |
-| data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box recognized from the image |
-| data.sourceFace.confidence | float | O | 99.9123 | Face recognition reliability |
+| data.sourceFace.bbox | object | O | - | Bounding box information of a face detected in the image |
+| data.sourceFace.bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
+| data.sourceFace.bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
+| data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
+| data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
+| data.sourceFace.confidence | float | O | 99.9123 | Face recognition confidence |
 
 
 
