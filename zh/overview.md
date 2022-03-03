@@ -1,6 +1,6 @@
 ## AI Service > Face Recognition > Overview
 
-* NHN's face recognition service has been developed by learning the quality facial dataset using the machine learning technology.
+* NHN Cloud's face recognition service has been developed by learning the quality facial dataset using the machine learning technology.
 * It offers a variety of features including facial recognition, analysis, and comparison, and supports the identity verification feature in various scenarios.
 * It can provide elaborate and personalized custom services in a variety of online and offline environments (e.g. financial, medical, and commercial industries) where facial recognition is applicable.
 
@@ -38,9 +38,9 @@ Provides the following features:
 ## Privacy Policy
 
 - While using the face recognition service, the customer may collect personal and sensitive information of their users. Therefore, the customer of this service must inform a legal notice to their users as per the Personal Information Protection Act and acquire their consent regarding the matter.
-Also during this process, work consignment relation regarding the processing of personal information may arise between the customer and NHN. The customer who assumes the position of consignor may enter into a consignment contract with the consignee, NHN, separately in writing, and post a privacy policy notice by referencing the following:
+Also during this process, work consignment relation regarding the processing of personal information may arise between the customer and NHN Cloud. The customer who assumes the position of consignor may enter into a consignment contract with the consignee, NHN Cloud, separately in writing, and post a privacy policy notice by referencing the following:
 
-     \- Consignee: NHN
+     \- Consignee: NHN Cloud
      \- Consignment Description: Providing face recognition service
  
  
