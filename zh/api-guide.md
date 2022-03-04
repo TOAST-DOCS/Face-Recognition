@@ -17,9 +17,10 @@
 
 [API domain]
 
-| Environment | Domain |
+| Region | Domain |
 | --- | --- |
-| Real | https://face-recognition.cloud.toast.com |
+| KOREA (Pangyo) | https://kr1-facerecognition.api.nhncloudservice.com |
+| KOREA (Pyeongchon) | https://kr2-facerecognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
 ### Input Image Guide
