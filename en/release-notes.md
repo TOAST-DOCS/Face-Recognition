@@ -1,9 +1,9 @@
 ## AI Service > Face Recognition > Release Notes
 
-### February 22, 2022
+### March 29, 2022
 #### Feature Updates
 * Applied a new model with enhancements including the improved face recognition rate
-    * The new model will be automatically applied to newly created groups from February 22, 2022
+    * The new model will be automatically applied to newly created groups from March 29, 2022
     * Groups that have already been created will use the existing model as it is.
     * To use the new model, you need to create a new group and register faces again.
 

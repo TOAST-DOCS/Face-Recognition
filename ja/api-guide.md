@@ -17,9 +17,10 @@
 
 [APIドメイン]
 
-| 環境 | ドメイン |
+| リージョン | ドメイン |
 | --- | --- |
-| Real | https://face-recognition.cloud.toast.com |
+| 韓国(パンギョ) | https://kr1-facerecognition.api.nhncloudservice.com |
+| 韓国(ピョンチョン) | https://kr2-facerecognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
 ### 入力画像ガイド
