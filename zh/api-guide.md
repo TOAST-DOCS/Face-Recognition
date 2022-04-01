@@ -30,7 +30,7 @@
     * As the image gets bigger, the minimum face size must get bigger as well for better facial recognition precision.
     * The bigger the proportion of the face area in the image, the more precise the facial recognition.
 * In the input image, both left/right angle(Yaw) and up/down angle(Pitch) of the face must be 45 degrees or less.
-* Max image size: up to 5 MB
+* Max image size: up to 3 MB
 * Supported image formats: PNG, JPEG
 
 <span id="common-response"></span>
