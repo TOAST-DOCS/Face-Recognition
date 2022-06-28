@@ -17,10 +17,9 @@
 
 [APIドメイン]
 
-| リージョン | ドメイン |
-| --- | --- |
-| 韓国(パンギョ) | https://kr1-facerecognition.api.nhncloudservice.com |
-| 韓国(ピョンチョン) | https://kr2-facerecognition.api.nhncloudservice.com |
+| ドメイン |
+| --- |
+| https://face-recognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
 ### 入力画像ガイド
