@@ -17,10 +17,9 @@
 
 [API 도메인]
 
-| 리전 | 도메인 |
-| --- | --- |
-| 한국(판교) | https://kr1-facerecognition.api.nhncloudservice.com |
-| 한국(평촌) | https://kr2-facerecognition.api.nhncloudservice.com |
+| 도메인 |
+| --- |
+| https://face-recognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
 ### 입력 이미지 가이드
