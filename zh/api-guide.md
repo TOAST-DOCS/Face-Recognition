@@ -516,6 +516,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 |-40000| InvalidParam | The parameter contains an error |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
+|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
@@ -759,6 +760,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-40070| ServiceQuotaExceededException | Exceeds the max number of faces which can be registered for a single group |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
+|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
@@ -1234,6 +1236,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
+|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
@@ -1504,6 +1507,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-40000| InvalidParam | The parameter contains an error |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: Image size exceeded |
+|-45030| InvalidImageParameterException:{Source/Target} | {Source/Target} 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: Unsupported image format |
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: Invalid image URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} Image: Image download timeout |
@@ -1637,6 +1641,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-40050| NotFoundFaceIDError | Could not find the face ID |
 |-41000| UnauthorizedAppKey | Unauthorized appKey |
 |-45020| ImageTooLargeException | Image size exceeded |
+|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
