@@ -386,7 +386,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * 入力画像から顔を検出するAPIです。
 * 検出した顔から顔、目、鼻、口などの位置情報と信頼度の値を返します。
 * 入力画像から顔が大きい順に最大20個の顔を検出します。
-* 入力画像はbase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
+* 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
 
 #### リクエスト
@@ -407,7 +407,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | 名前 | タイプ | 必須かどうか | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | image.url | string |  | "https://..." | 画像のURL<br>image.url、image.bytesのどちらか1つが必要 |
-| image.bytes | blob |  | "/0j3Ohdk==..." | base64でエンコードされた画像バイト<br>image.url、image.bytesのどちらか1つが必要 |
+| image.bytes | blob |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト<br>image.url、image.bytesのどちらか1つが必要 |
 
 * image.url、image.bytesのどちらか1つが必要です。
 
@@ -516,6 +516,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 |-40000| InvalidParam | パラメータにエラーがある |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
+|-45030| InvalidImageParameterException | 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
@@ -528,7 +529,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 * 入力画像から顔のboxを検出し、検出した顔boxから顔の特徴をベクトルで抽出します。この時、入力画像と入力画像から検出した顔画像は保存しません。
 * 抽出したベクトルデータは暗号化してデータベースに保存します。
 * 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide/#search-by-face-id)、[画像で顔検索](./api-guide/#search-by-image) APIで特徴ベクトルとして使用します。
-* 入力画像はbase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
+* 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
 * "imageId"は入力画像に付与される値で、"externalImageId"はユーザーが直接付与できる値です。ユーザーは"imageId"と"externalImageId"を利用して画像またはフェイスIDにラベリングしてインデックスのように活用できます。
 * "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide/#face-list-in-a-group)と[フェイスIDで顔検索](./api-guide/#search-by-face-id)、[画像で顔検索](./api-guide/#search-by-image) APIのレスポンスで返されます。
@@ -555,7 +556,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | image.url | string |  | "https://..." | 画像のURL<br>image.url、image.bytesのどちらか1つが必要 |
-| image.bytes | blob |  | "/0j3Ohdk==..." | base64でエンコードされた画像バイト<br>image.url、image.bytesのどちらか1つが必要 |
+| image.bytes | blob |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト<br>image.url、image.bytesのどちらか1つが必要 |
 | externalImageId | string |  | "image01.jsp" | ユーザーが画像またはフェイスIDにラベリングするために伝達する値<br>[a-zA-Z0-9\_.-:]+<br>1 <limit <= 255 |
 | limit | int | O | 3 | 入力画像から認識した顔のうち、サイズが大きい順にソートしてグループに登録する最大顔数<br>0< limit <= 20 |
 
@@ -759,6 +760,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-40070| ServiceQuotaExceededException | 1つのグループに登録可能な最大顔数を超過 |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
+|-45030| InvalidImageParameterException | 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
@@ -1089,7 +1091,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 ### 画像で顔検索
 
 * 入力画像から検出した最も大きい顔を使用して特定グループに属す顔と一致するかどうかを比較します。
-* 入力画像はbase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
+* 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
@@ -1119,7 +1121,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | image.url | string |  | "https://..." | 画像のURL<br>image.url、image.bytesのどちらか1つが必要 |
-| image.bytes | blob |  | "/0j3Ohdk==..." | base64でエンコードされた画像バイト<br>image.url、image.bytesのどちらか1つが必要 |
+| image.bytes | blob |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト<br>image.url、image.bytesのどちらか1つが必要 |
 
 * image.url、image.bytesのどちらか1つが必要です。
 
@@ -1234,6 +1236,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
+|-45030| InvalidImageParameterException | 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
@@ -1243,7 +1246,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 * 基準画像(sourceImage)と比較画像(targetImage)から検出した顔がどれくらい類似しているかを比較します。
 * 基準画像から検出した顔のうち、最も大きい顔(基準顔)のみ使用します。
-* 入力画像はbase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
+* 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
@@ -1267,10 +1270,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | --- | --- | --- | --- | --- |
 | sourceImage | object | O | - | 顔を比較する時、基準になる画像<br/>(=referenceImage) |
 | sourceImage.url | string |  | "https://..." | 画像のURL<br>image.url、image.bytesのどちらか1つが必要 |
-| sourceImage.bytes | blob |  | "/0j3Ohdk==..." | base64でエンコードされた画像バイト<br>image.url, image.bytesのどちらか1つが必要 |
+| sourceImage.bytes | blob |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト<br>image.url, image.bytesのどちらか1つが必要 |
 | targetImage | object | O | - | 比較対象になる顔が含まれる画像<br/>(=comparisonImage) |
 | targetImage.url | string |  | "https://..." | 画像のURL<br>image.url、image.bytesのどちらか1つが必要 |
-| targetImage.bytes | blob |  | "/0j3Ohdk==..." | base64でエンコードされた画像バイト<br>image.url, image.bytesのどちらか1つが必要 |
+| targetImage.bytes | blob |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト<br>image.url, image.bytesのどちらか1つが必要 |
 
 
 
@@ -1505,6 +1508,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-40000| InvalidParam | パラメータにエラーがある |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image:画像サイズ超過 |
+|-45030| InvalidImageParameterException:{Source/Target} | {Source/Target} 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image:サポートしない画像フォーマット |
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image：無効な画像URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image:画像ダウンロード時間超過 |
@@ -1516,7 +1520,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 * 事前に登録された特定の顔のフェイスIDと、入力画像から検出した顔を比較して類似度値を返す機能です。
 * [顔登録](./api-guide/#add-face)を利用して顔を登録できます。
 * 入力画像から検出した顔のうち、最も大きい顔のみを使用します。  
-* 入力画像はbase64でエンコードされた画像バイトで伝達するか、画像URLで伝達できます。
+* 入力画像はBase64でエンコードされた画像バイトで伝達するか、画像URLで伝達できます。
 * 入力画像についての詳細は、[入力画像ガイド](./api-guide/#input-image-guide)を参照してください。
 
 #### リクエスト
@@ -1540,7 +1544,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | compareImage.url | string |  | "https://..." | 画像のURL<br>compareImage.url、compareImage.bytesのいずれかが必要 |
-| compareImage.bytes | blob |  | "/0j3Ohdk==..." | base64でエンコードされた画像バイト<br>compareImage.url、compareImage.bytesのいずれかが必要 |
+| compareImage.bytes | blob |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト<br>compareImage.url、compareImage.bytesのいずれかが必要 |
 
 * compareImage.url, compareImage.bytesのいずれかが必要です。
 
@@ -1638,6 +1642,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
 |-41000| UnauthorizedAppKey | 承認されていないAppkey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
+|-45030| InvalidImageParameterException | 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
