@@ -380,6 +380,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 |-50000| InternalServerError | 서버 오류 |
 
+<span id="detect-face"></span>
 ### 얼굴 감지
 
 * 입력 이미지에서 얼굴을 감지하는 API입니다.
@@ -424,6 +425,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 
 </details>
 
+<span id="detect-face-response"></span>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -447,6 +449,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | data.faceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
 | data.faceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
 | data.faceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.faceDetails[].mask | boolean | O | false | 마스크 착용 여부 |
 | data.faceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 
@@ -499,6 +502,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
         }]
     }
@@ -579,6 +583,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 </details>
 
 
+<span id="add-face-response"></span>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -612,6 +617,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
 | data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
 | data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.addedFaceDetails[].mask | boolean | O | false | 마스크 착용 여부 |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.notAddedFaceCount | int | O | 1 | 등록하지 않은 얼굴 수 |
 | data.notAddedFaces[].bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
@@ -627,6 +633,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
 | data.notAddedFaces[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
 | data.notAddedFaces[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.notAddedFaces[].mask | boolean | O | false | 마스크 착용 여부 |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 * data.addedFacesDetails는 data.addedFaces의 세부 정보로, 서로 중복되지 않고 별도로 저장되지 않는 정보입니다.
@@ -696,6 +703,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
 
         }],
@@ -739,6 +747,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
 
         }]
@@ -1292,7 +1301,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 </details>
 
-
+<span id="compare-face-response"></span>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -1317,6 +1326,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
 | data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
 | data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.matchedFaceDetails[].mask | boolean | O | false | 마스크 착용 여부 |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | 0~100 값을 가지는 유사도 |
 | data.unmatchedFaceDetailCount | int | O | 1 | 매칭되지 않은 얼굴 수 |
@@ -1333,6 +1343,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.unmatchedFaceDetails[].mask | boolean | O | false | 마스크 착용 여부 |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0~100 값을 가지는 유사도 |
 | data.sourceFace.bbox | object | O | - | 입력 이미지에서 감지한 가장 큰 얼굴의 경계 상자(bounding box) 정보 |
@@ -1394,6 +1405,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "y": -9.222179,
                     "z": -7.97249
                 },
+                "mask": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1435,6 +1447,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "y": -9.222179,
                     "z": -7.97249
                 },
+                "mask": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1478,6 +1491,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                         "y": -9.222179,
                         "z": -7.97249
                     },
+                    "mask": false,
                     "confidence": 99.8945155187
                 },
                 "similarity": 60.654

@@ -381,6 +381,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-50000| InternalServerError | サーバーエラー |
 
+<span id="detect-face"></span>
 ### 顔検出
 
 * 入力画像から顔を検出するAPIです。
@@ -425,6 +426,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 
 </details>
 
+<span id="detect-face-response"></span>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -448,6 +450,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | data.faceDetails[].orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
 | data.faceDetails[].orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
 | data.faceDetails[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
+| data.faceDetails[].mask | boolean | O | false | マスク着用の有無 |
 | data.faceDetails[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
 
@@ -500,6 +503,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
         }]
     }
@@ -580,6 +584,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 </details>
 
 
+<span id="add-face-response"></span>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -613,6 +618,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].orientation.x | float | O | 15.303436 | 顔の左右の角度(Yaw) |
 | data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 顔の上下の角度(Pitch) |
 | data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
+| data.addedFaceDetails[].mask | boolean | O | false | マスク着用の有無 |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 | data.notAddedFaceCount | int | O | 1 | 登録していない顔の数 |
 | data.notAddedFaces[].bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
@@ -628,6 +634,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
 | data.notAddedFaces[].orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
 | data.notAddedFaces[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
+| data.notAddedFaces[].mask | boolean | O | false | マスク着用の有無 |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
 * data.addedFacesDetailsはdata.addedFacesの詳細情報であり、重複または保存されない情報です。
@@ -697,6 +704,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
 
         }],
@@ -740,6 +748,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
 
         }]
@@ -1293,7 +1302,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 </details>
 
-
+<span id="compare-face-response"></span>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -1318,6 +1327,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
 | data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
 | data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
+| data.matchedFaceDetails[].mask | boolean | O | false | マスク着用の有無 |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 顔の認識信頼度 |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
 | data.unmatchedFaceDetailCount | int | O | 1 | マッチングしていない顔の数 |
@@ -1334,6 +1344,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
+| data.unmatchedFaceDetails[].mask | boolean | O | false | マスク着用の有無 |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 顔の認識信頼度 |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
 | data.sourceFace.bbox | object | O | - | 入力画像内から検出した最も大きい顔の境界ボックス(bounding box)情報 |
@@ -1395,6 +1406,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "y": -9.222179,
                     "z": -7.97249
                 },
+                "mask": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1436,6 +1448,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "y": -9.222179,
                     "z": -7.97249
                 },
+                "mask": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1479,6 +1492,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                         "y": -9.222179,
                         "z": -7.97249
                     },
+                    "mask": false,
                     "confidence": 99.8945155187
                 },
                 "similarity": 60.654
