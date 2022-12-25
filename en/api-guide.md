@@ -448,6 +448,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | data.faceDetails[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.faceDetails[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.faceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.faceDetails[].mask | boolean | O | false | Whether to wear a mask |
 | data.faceDetails[].confidence | float | O | 99.9123 | Face recognition confidence |
 
 
@@ -500,6 +501,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
         }]
     }
@@ -613,6 +615,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.addedFaceDetails[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.addedFaceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.addedFaceDetails[].mask | boolean | O | false | Whether to wear a mask |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | Face recognition confidence |
 | data.notAddedFaceCount | int | O | 1 | Number of faces not registered |
 | data.notAddedFaces[].bbox | object | O | - | Bounding box information of a face detected in the image |
@@ -628,6 +631,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.notAddedFaces[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.notAddedFaces[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.notAddedFaces[].mask | boolean | O | false | Whether to wear a mask |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | Face recognition confidence |
 
 * data.addedFacesDetails is the detailed information of data.addedFaces, which does not include duplicate elements and is not stored separately.
@@ -697,6 +701,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
 
         }],
@@ -740,6 +745,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
 
         }]
@@ -1317,6 +1323,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.matchedFaceDetails[].mask | boolean | O | false | Whether to wear a mask |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.unmatchedFaceDetailCount | int | O | 1 | Number of unmatched faces |
@@ -1333,6 +1340,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.unmatchedFaceDetails[].mask | boolean | O | false | Whether to wear a mask |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.sourceFace.bbox | object | O | - | Bounding box information of the largest face detected in the input image |
@@ -1394,6 +1402,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "y": -9.222179,
                     "z": -7.97249
                 },
+                "mask": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1435,6 +1444,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "y": -9.222179,
                     "z": -7.97249
                 },
+                "mask": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1478,6 +1488,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                         "y": -9.222179,
                         "z": -7.97249
                     },
+                    "mask": false,
                     "confidence": 99.8945155187
                 },
                 "similarity": 60.654

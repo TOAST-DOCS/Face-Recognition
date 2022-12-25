@@ -432,7 +432,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 
 [Response body data]
 
-| Name | Type | Required | Example | Example |
+| Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | data.faceDetailCount | int | O | 1 | Number of faces recognized |
 | data.faceDetails[].bbox | object | O | - | Bounding box information of a face detected in the image |
@@ -448,6 +448,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | data.faceDetails[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.faceDetails[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.faceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.faceDetails[].mask | boolean | O | false | Whether to wear a mask |
 | data.faceDetails[].confidence | float | O | 99.9123 | Face recognition confidence |
 
 
@@ -500,6 +501,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
         }]
     }
@@ -516,7 +518,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 |-40000| InvalidParam | The parameter contains an error |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
-|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45030| InvalidImageParameterException | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
@@ -613,6 +615,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.addedFaceDetails[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.addedFaceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.addedFaceDetails[].mask | boolean | O | false | Whether to wear a mask |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | Face recognition confidence |
 | data.notAddedFaceCount | int | O | 1 | Number of faces not registered |
 | data.notAddedFaces[].bbox | object | O | - | Bounding box information of a face detected in the image |
@@ -628,6 +631,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.notAddedFaces[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.notAddedFaces[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.notAddedFaces[].mask | boolean | O | false | Whether to wear a mask |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | Face recognition confidence |
 
 * data.addedFacesDetails is the detailed information of data.addedFaces, which does not include duplicate elements and is not stored separately.
@@ -697,6 +701,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
 
         }],
@@ -740,6 +745,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "y": -9.222179,
                 "z": -7.97249
             },
+            "mask": false,
             "confidence": 99.8945155187
 
         }]
@@ -760,7 +766,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-40070| ServiceQuotaExceededException | Exceeds the max number of faces which can be registered for a single group |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
-|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45030| InvalidImageParameterException | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
@@ -1012,7 +1018,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 [Response body data]
 
-| Name | Type | Required | Example | TypeRequiredExampleDescription |
+| Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | data.matchFaceCount | int | O | 2 | Number of faces matching the largest face detected in the input image |
 | data.matchFaces[].face.bbox | object | O | - | Bounding box information of a face in the image used for face registration |
@@ -1236,7 +1242,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
-|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45030| InvalidImageParameterException | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
@@ -1317,6 +1323,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.matchedFaceDetails[].mask | boolean | O | false | Whether to wear a mask |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.unmatchedFaceDetailCount | int | O | 1 | Number of unmatched faces |
@@ -1333,6 +1340,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
 | data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
+| data.unmatchedFaceDetails[].mask | boolean | O | false | Whether to wear a mask |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.sourceFace.bbox | object | O | - | Bounding box information of the largest face detected in the input image |
@@ -1394,6 +1402,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "y": -9.222179,
                     "z": -7.97249
                 },
+                "mask": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1435,6 +1444,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "y": -9.222179,
                     "z": -7.97249
                 },
+                "mask": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1478,6 +1488,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                         "y": -9.222179,
                         "z": -7.97249
                     },
+                    "mask": false,
                     "confidence": 99.8945155187
                 },
                 "similarity": 60.654
@@ -1507,7 +1518,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-40000| InvalidParam | The parameter contains an error |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: Image size exceeded |
-|-45030| InvalidImageParameterException:{Source/Target} | {Source/Target} 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45030| InvalidImageParameterException:{Source/Target} | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: Unsupported image format |
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: Invalid image URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} Image: Image download timeout |
@@ -1519,7 +1530,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 * This function compares the face ID of a specific face registered in advance with the face detected in the input image and returns a similarity value.
 * Use [Register Face](./api-guide/#add-face) to a created group to register faces.
 * Only the largest face detected in the input image is used.  
-* The input image can be delivered via Base64-encoded image bytes or image URL.
+* The input image can be delivered via Base64-encoded image bytes or image url.
 * To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
 
 #### Request
@@ -1531,9 +1542,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 [Path Variable]
 
-| More ActionsName | Description |
+| Name | Description |
 | --- | --- |
-| appKey | Integrated Appkey or Service Appkey |
+| appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
 | face-id | Registered face ID |
 
@@ -1543,7 +1554,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | compareImage.url | string |  | "https://..." | Image URL<br>Must have only either compareImage.url or compareImage.bytes |
-| compareImage.bytes | blob |  | "/0j3Ohdk==..." | Image URL<br>Must have only either compareImage.url or compareImage.bytes |
+| compareImage.bytes | blob |  | "/0j3Ohdk==..." | Base64-encoded Image bytes<br>Must have only either compareImage.url or compareImage.bytes |
 
 * Must have only either compareImage.url or compareImage.bytes
 
@@ -1639,9 +1650,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40050| NotFoundFaceIDError | Could not find the face ID |
-|-41000| UnauthorizedAppKey | Unauthorized appKey |
+|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
-|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45030| InvalidImageParameterException | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
