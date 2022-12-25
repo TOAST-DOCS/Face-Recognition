@@ -1,5 +1,12 @@
 ## AI Service > Face Recognition > 릴리스 노트
 
+### 2022. 12. 27.
+#### 기능 추가
+* [API] 응답 본문의 FaceDetails에 마스크 착용 여부 추가.
+    * [얼굴 감지의 응답](./api-guide/#detect-face-response)
+    * [얼굴 등록의 응답](./api-guide/#add-face-response)
+    * [얼굴 비교의 응답](./api-guide/#compare-face-response)
+
 ### 2022. 03. 29.
 #### 기능 개선
 * 얼굴 인식률 등이 개선된 신규 모델 적용

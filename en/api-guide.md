@@ -381,6 +381,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
+<span id="detect-face"></span>
 ### Recognize Face
 
 * This API recognizes faces from input image.
@@ -425,6 +426,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 
 </details>
 
+<span id="detect-face-response"></span>
 #### Response
 
 * [Response body header description omitted]
@@ -581,7 +583,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 </details>
 
-
+<span id="add-face-response"></span>
 #### Response
 
 * [Response body header description omitted]
@@ -1298,7 +1300,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 </details>
 
-
+<span id="compare-face-response"></span>
 #### Response
 
 * [Response body header description omitted]

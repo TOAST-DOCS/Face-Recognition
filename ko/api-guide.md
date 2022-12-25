@@ -380,6 +380,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
 |-50000| InternalServerError | 서버 오류 |
 
+<span id="detect-face"></span>
 ### 얼굴 감지
 
 * 입력 이미지에서 얼굴을 감지하는 API입니다.
@@ -424,6 +425,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 
 </details>
 
+<span id="detect-face-response"></span>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -581,6 +583,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 </details>
 
 
+<span id="add-face-response"></span>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -1298,7 +1301,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 </details>
 
-
+<span id="compare-face-response"></span>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]

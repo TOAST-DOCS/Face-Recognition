@@ -381,6 +381,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-50000| InternalServerError | サーバーエラー |
 
+<span id="detect-face"></span>
 ### 顔検出
 
 * 入力画像から顔を検出するAPIです。
@@ -425,6 +426,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 
 </details>
 
+<span id="detect-face-response"></span>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -582,6 +584,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 </details>
 
 
+<span id="add-face-response"></span>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -1299,7 +1302,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 </details>
 
-
+<span id="compare-face-response"></span>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
