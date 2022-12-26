@@ -1,5 +1,12 @@
 ## AI Service > Face Recognition > リリースノート
 
+### 2022. 12. 27.
+#### 機能追加
+* [API] 応答のFaceDetailsにマスク着用の有無を追加
+    * [顔検出の応答](./api-guide/#detect-face-response)
+    * [顔登録の応答](./api-guide/#add-face-response)
+    * [顔比較の応答](./api-guide/#compare-face-response)
+
 ### 2022. 03. 29.
 #### 機能改善
 * 顔認識率などが改善された新規モデルを適用
