@@ -1,5 +1,12 @@
 ## AI Service > Face Recognition > Release Notes
 
+### December 27, 2022
+#### Added Features
+* [API] Added whether to wear a mask to FaceDetails in response body.
+    * [Response of Face Recognize](./api-guide/#detect-face-response)
+    * [Response of Face Register](./api-guide/#add-face-response)
+    * [Response of Face Compare](./api-guide/#compare-face-response)
+
 ### March 29, 2022
 #### Feature Updates
 * Applied a new model with enhancements including the improved face recognition rate
