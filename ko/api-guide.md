@@ -29,7 +29,7 @@
   * 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식이 가능합니다.
   * 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
 * 입력 이미지에서 얼굴의 좌우 각도(Yaw)와 얼굴의 상하 각도(Pitch)는 모두 45도 이하여야 합니다.
-* 이미지 최대 크기: 최대 3MB
+* 이미지 최대 크기: 최대 3MB (3,000,000 Byte)
 * 지원 이미지 포맷: PNG, JPEG
 
 <span id="common-response"></span>
@@ -43,17 +43,17 @@
 | --- | --- | --- |
 | header.isSuccessful | boolean | true: 정상<br>false: 오류 |
 | header.resultCode | int | 0: 정상<br>0보다 큼: 부분 성공<br>음수: 오류 |
-| header.resultMessage | string | "SUCCESS": 정상<br>그 외: 오류 메시지 반환 |
+| header.resultMessage | string | "Success": 정상<br>그 외: 오류 메시지 반환 |
 
 [성공 응답 본문 예]
 
 ```json
 {
-	"header": {
-		"isSuccessful": true,
-		"resultCode": 0,
-		"resultMessage": "Success"
-	}
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "Success"
+    }
 }
 ```
 
@@ -61,11 +61,11 @@
 
 ```json
 {
-	"header": {
-		"isSuccessful": false,
-		"resultCode": -40000,
-		"resultMessage": "InvalidParam"
-	}
+    "header": {
+        "isSuccessful": false,
+        "resultCode": -40000,
+        "resultMessage": "InvalidParam"
+    }
 }
 ```
 ## API 목차
@@ -89,16 +89,16 @@
 
 [Request Body]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| groupId | string | O | "my-group" | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| groupId | string | O |  | [a-z0-9-]<br>최대 255자 | "my-group" | 사용자가 등록한 그룹 아이디 |
 
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "groupId": "my-group"
 }'
 ```
@@ -118,7 +118,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     }
 }
@@ -157,10 +157,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 
 [URL Parameter]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| limit | int | O | 100 | 최대 크기<br>0 < limit <= 200 |
-| next-token | string  |    | "skljsdioew..."  | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| limit | int | O |  | 1 \~ 200 | 100 | 최대 크기 |
+| next-token | string |  |  |  | "skljsdioew..." | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 
 * 주의 사항
@@ -176,7 +176,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups'  -H 'Conten
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}'  -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -188,7 +188,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}'  -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -216,7 +216,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     },
     "data": {
@@ -260,13 +260,13 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -284,7 +284,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 | data.groups[].groupId | string | O | "group-id" | 사용자가 등록한 그룹 아이디 |
 | data.groups[].modelVersion | string | O | "v1.0" | 얼굴 감지 모델 버전 정보 |
 | data.groups[].createTime | string | O | "2020-11-04T12:36:24" | 그룹을 생성한 시간 |
-| data.groups[].faceCount | int |   | 365 | 그룹에 등록한 얼굴 수 |
+| data.groups[].faceCount | int |  | 365 | 그룹에 등록한 얼굴 수 |
 
 <details>
 <summary>응답 본문 예</summary>
@@ -293,7 +293,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     },
     "data": {
@@ -336,14 +336,14 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -362,7 +362,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     }
 }
@@ -389,6 +389,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
 * 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
 
+<span id="detect-face-request"></span>
 #### 요청
 [URI]
 
@@ -404,10 +405,15 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 [Request Body]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| image.url | string |  | "https://..." | 이미지의 URL<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
-| image.bytes | blob |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| image | object | O |  |  | - | 얼굴 감지에 사용할 이미지 |
+| image.url | string | △ |  |  | "https://..." | 이미지의 URL |
+| image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
 
@@ -416,10 +422,11 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url":"https://..."
-    }
+    },
+    "spoofing": true
 }'
 ```
 
@@ -445,11 +452,12 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | data.faceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.faceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.faceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
-| data.faceDetails[].orientation | object | O | 0.362 | 얼굴 각도 |
-| data.faceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
-| data.faceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
-| data.faceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
-| data.faceDetails[].mask | boolean | O | false | 마스크 착용 여부 |
+| data.faceDetails[].orientation | object |  | 0.362 | 얼굴 각도 |
+| data.faceDetails[].orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.faceDetails[].orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.faceDetails[].orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.faceDetails[].mask | boolean |  | false | 마스크 착용 여부 |
+| data.faceDetails[].spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
 | data.faceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 
@@ -460,7 +468,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     },
     "data": {
@@ -503,6 +511,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
                 "z": -7.97249
             },
             "mask": false,
+            "spoofing": false,
             "confidence": 99.8945155187
         }]
     }
@@ -538,6 +547,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 * 'imageId'와 'externalImageId'는 [그룹 내 얼굴 목록](./api-guide/#face-list-in-a-group)과 [페이스 아이디로 얼굴 검색](./api-guide/#search-by-face-id), [이미지로 얼굴 검색](./api-guide/#search-by-image) API의 응답에서 반환됩니다.
 * 단일 그룹에 등록할 수 있는 최대 얼굴 개수는 10만 개입니다.
 
+<span id="add-face-request"></span>
 #### 요청
 
 [URI]
@@ -551,32 +561,38 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect'  -H 'Conten
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 
 [Request Body]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| image.url | string |  | "https://..." | 이미지의 URL<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
-| image.bytes | blob |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
-| externalImageId | string |  | "image01.jsp" | 사용자가 이미지 또는 페이스 아이디에 라벨링을 하기 위해 전달하는 값<br>[a-zA-Z0-9\_.-:]+<br>1 <limit <= 255 |
-| limit | int | O | 3 | 입력 이미지에서 인식한 얼굴 중 크기가 큰 순으로 정렬하여 그룹에 등록할 최대 얼굴 수<br>0< limit <= 20 |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| image | object | O |  |  | - | 얼굴 등록에 사용할 이미지 |
+| image.url | string | △ |  |  | "https://..." | 이미지의 URL |
+| image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
+| externalImageId | string |  |  | [a-zA-Z0-9\_.-:]+<br>최대 255자 | "image01.jsp" | 사용자가 이미지 또는 페이스 아이디에 라벨링을 하기 위해 전달하는 값 |
+| limit | int | O |  | 1 \~ 20 | 3 | 입력 이미지에서 인식한 얼굴 중 크기가 큰 순으로 정렬하여 그룹에 등록할 최대 얼굴 수 |
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
-
 
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
     "externalImageId": "image01.jpg",
-    "limit": 3
+    "limit": 3,
+    "spoofing": true,
+    "spoofingCondition": "balanced"
 }'
 ```
 
@@ -618,6 +634,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
 | data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
 | data.addedFaceDetails[].mask | boolean | O | false | 마스크 착용 여부 |
+| data.addedFaceDetails[].spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.notAddedFaceCount | int | O | 1 | 등록하지 않은 얼굴 수 |
 | data.notAddedFaces[].bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
@@ -634,6 +651,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
 | data.notAddedFaces[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
 | data.notAddedFaces[].mask | boolean | O | false | 마스크 착용 여부 |
+| data.notAddedFaces[].spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
 * data.addedFacesDetails는 data.addedFaces의 세부 정보로, 서로 중복되지 않고 별도로 저장되지 않는 정보입니다.
@@ -645,7 +663,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     },
     "data": {
@@ -704,6 +722,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "z": -7.97249
             },
             "mask": false,
+            "spoofing": false,
             "confidence": 99.8945155187
 
         }],
@@ -748,6 +767,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
                 "z": -7.97249
             },
             "mask": false,
+            "spoofing": false,
             "confidence": 99.8945155187
 
         }]
@@ -790,7 +810,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 등록된 페이스 아이디 |
 
 
@@ -798,7 +818,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 <summary>요청 예</summary>
 
 ```
-$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}'  -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -816,7 +836,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     }
 }
@@ -852,14 +872,14 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 [URL Parameter]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| limit | int  | O  | 100  | 최대 크기<br>0 < limit <= 200 |
-| next-token | string  |    | "skljsdioew..."  | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/>결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| limit | int | O |  | 1 \~ 200 | 100 | 최대 크기 |
+| next-token | string |  |  |  | "skljsdioew..." | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 
 * 주의 사항
@@ -875,7 +895,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}'  -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -888,7 +908,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}'  -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -928,7 +948,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     },
     "data": {
@@ -945,7 +965,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
                     "y1": 0.715
                 },
                 "confidence": 99.8945155187
-            }, 
+            },
             {
                 "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
                 "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
@@ -993,22 +1013,22 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 비교하려는 페이스 아이디 |
 
 [URL Parameter]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| limit | int  | O  | 100  | 찾으려는 최댓값<br>0 < limit <= 4096 |
-| threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| limit | int | O |  | 1 \~ 4096 | 100 | 최대 크기 |
+| threshold | int | O |  | 1 \~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
 
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1042,7 +1062,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     },
     "data": {
@@ -1103,6 +1123,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 * 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
+<span id="search-by-image-request"></span>
 #### 요청
 [URI]
 
@@ -1115,21 +1136,26 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| group-id | 사용자가 등록한 group id<br>[a-z0-9-]{1,255} |
+| group-id | 사용자가 등록한 group id<br>[a-z0-9-]<br>최대255자 |
 
 [URL Parameter]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| limit | int  | O  | 100  | 찾으려는 최댓값<br>0 < limit <= 4096 |
-| threshold | int  | O  | 90  | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| limit | int | O |  | 1 \~ 4096 | 100 | 최대 크기 |
+| threshold | int | O |  | 1 \~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
 
 [Request Body]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| image.url | string |  | "https://..." | 이미지의 URL<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
-| image.bytes | blob |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| image | object | O |  |  | - | 얼굴 검색에 사용할 이미지 |
+| image.url | string | △ |  |  | "https://..." | 이미지의 URL |
+| image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
 
@@ -1138,10 +1164,11 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
-    }
+    },
+    "spoofing": true
 }'
 ```
 
@@ -1173,6 +1200,16 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
+| data.sourceFace.landmarks | array | O | - | 얼굴 특징 |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
+| data.sourceFace.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
+| data.sourceFace.orientation | object |  | 0.362 | 얼굴 각도 |
+| data.sourceFace.orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.sourceFace.orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.sourceFace.orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.sourceFace.mask | boolean |  | false | 마스크 착용 여부 |
+| data.sourceFace.spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
 | data.sourceFace.confidence | float | O | 99.9123 | 입력 이미지에서 감지한 가장 큰 얼굴의 인식 신뢰도 |
 
 
@@ -1183,7 +1220,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     },
     "data": {
@@ -1221,13 +1258,47 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
             }
         ],
         "sourceFace": {
-            "bbox": {
-                "x0": 0.36,
-                "y0": 0.21,
-                "x1": 0.612,
-                "y1": 0.715
+          "bbox": {
+            "x0": 0.26785714285714285,
+            "y0": 0.22767857142857142,
+            "x1": 0.7366071428571429,
+            "y1": 0.8660714285714286
+          },
+          "landmarks": [
+            {
+              "type": "leftEye",
+              "x": 0.39285714285714285,
+              "y": 0.47767857142857145
             },
-            "confidence": 99.8945155187
+            {
+              "type": "rightEye",
+              "x": 0.6071428571428571,
+              "y": 0.4732142857142857
+            },
+            {
+              "type": "nose",
+              "x": 0.5,
+              "y": 0.6026785714285714
+            },
+            {
+              "type": "leftLip",
+              "x": 0.41964285714285715,
+              "y": 0.7276785714285714
+            },
+            {
+              "type": "rightLip",
+              "x": 0.5758928571428571,
+              "y": 0.7276785714285714
+            }
+          ],
+          "orientation": {
+            "x": 1.400425,
+            "y": 6.624787,
+            "z": -2.08028
+          },
+          "mask": false,
+          "spoofing": true,
+          "confidence": 0.999894
         }
     }
 }
@@ -1250,6 +1321,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
 |-50000| InternalServerError | 서버 오류 |
 
+<span id="compare-face"></span>
 ### 얼굴 비교
 
 * 기준 이미지(sourceImage)와 비교 이미지(targetImage)에서 감지한 얼굴이 얼마나 유사한지 비교합니다.
@@ -1258,6 +1330,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 * 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
+<span id="compare-face-request"></span>
 #### 요청
 [URI]
 
@@ -1270,32 +1343,44 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| threshold | 매칭 여부를 판단하는 유사도 기준값<br>0 < threshold <= 100 |
+
+[URL Parameter]
+
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| threshold | int | O |  | 1 \~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
 
 [Request Body]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| sourceImage | object | O | - | 얼굴 비교 시 기준이 되는 이미지<br/>(=referenceImage) |
-| sourceImage.url | string |  | "https://..." | 이미지의 URL<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
-| sourceImage.bytes | blob |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
-| targetImage | object | O | - | 비교 대상이 되는 얼굴이 포함된 이미지<br/>(=comparisonImage) |
-| targetImage.url | string |  | "https://..." | 이미지의 URL<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
-| targetImage.bytes | blob |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트<br>image.url, image.bytes 중 반드시 1개만 있어야 함 |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| sourceImage | object | O |  |  | - | 얼굴 비교 시 기준이 되는 이미지<br/>(=referenceImage) |
+| sourceImage.url | string | △ |  |  | "https://..." | 이미지의 URL |
+| sourceImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
+| targetImage | object | O |  |  | - | 비교 대상이 되는 얼굴이 포함된 이미지<br/>(=comparisonImage) |
+| targetImage.url | string | △ |  |  | "https://..." | 이미지의 URL |
+| targetImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
 
+* sourceImage.url, sourceImage.bytes 중 반드시 1개만 있어야 합니다.
+* targetImage.url, targetImage.bytes 중 반드시 1개만 있어야 합니다.
 
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={threshold}'  -H 'Content-Type: application/json;charset=UTF-8'  -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "sourceImage": {
         "url": "https://..."
     },
     "targetImage": {
         "url": "https://..."
-    }
+    },
+    "spoofing": true
 }'
 ```
 
@@ -1351,6 +1436,16 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
+| data.sourceFace.landmarks | array | O | - | 얼굴 특징 |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
+| data.sourceFace.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
+| data.sourceFace.orientation | object |  | 0.362 | 얼굴 각도 |
+| data.sourceFace.orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.sourceFace.orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.sourceFace.orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.sourceFace.mask | boolean |  | false | 마스크 착용 여부 |
+| data.sourceFace.spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
 | data.sourceFace.confidence | float | O | 99.9123 | 입력 이미지에서 감지한 가장 큰 얼굴의 인식 신뢰도 |
 
 
@@ -1361,7 +1456,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 {
     "header": {
         "resultCode": 0,
-        "resultMessage": "SUCCESS",
+        "resultMessage": "Success",
         "isSuccessful": true
     },
     "data": {
@@ -1406,6 +1501,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "z": -7.97249
                 },
                 "mask": false,
+                "spoofing": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1448,6 +1544,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                     "z": -7.97249
                 },
                 "mask": false,
+                "spoofing": false,
                 "confidence": 99.8945155187
             },
             "similarity": 90.654
@@ -1492,6 +1589,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
                         "z": -7.97249
                     },
                     "mask": false,
+                    "spoofing": false,
                     "confidence": 99.8945155187
                 },
                 "similarity": 60.654
@@ -1499,13 +1597,47 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
         ],
         "sourceFace": {
-            "bbox": {
-                "x0": 0.36,
-                "y0": 0.21,
-                "x1": 0.612,
-                "y1": 0.715
+          "bbox": {
+            "x0": 0.26785714285714285,
+            "y0": 0.22767857142857142,
+            "x1": 0.7366071428571429,
+            "y1": 0.8660714285714286
+          },
+          "landmarks": [
+            {
+              "type": "leftEye",
+              "x": 0.39285714285714285,
+              "y": 0.47767857142857145
             },
-            "confidence": 99.8945155187
+            {
+              "type": "rightEye",
+              "x": 0.6071428571428571,
+              "y": 0.4732142857142857
+            },
+            {
+              "type": "nose",
+              "x": 0.5,
+              "y": 0.6026785714285714
+            },
+            {
+              "type": "leftLip",
+              "x": 0.41964285714285715,
+              "y": 0.7276785714285714
+            },
+            {
+              "type": "rightLip",
+              "x": 0.5758928571428571,
+              "y": 0.7276785714285714
+            }
+          ],
+          "orientation": {
+            "x": 1.400425,
+            "y": 6.624787,
+            "z": -2.08028
+          },
+          "mask": false,
+          "spoofing": true,
+          "confidence": 0.999894
         }
     }
 }
@@ -1536,6 +1668,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 * 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
 * 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
 
+<span id="verify-request"></span>
 #### 요청
 [URI]
 
@@ -1548,16 +1681,21 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 Appkey 또는 서비스 Appkey |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]{1,255} |
+| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 등록된 페이스 아이디 |
 
 
 [Request Body]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
-| --- | --- | --- | --- | --- |
-| compareImage.url | string |  | "https://..." | 이미지의 URL<br>compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 함 |
-| compareImage.bytes | blob |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트<br>compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 함 |
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| compareImage | object | O |  |  | - | 얼굴 검증에 사용할 이미지 |
+| compareImage.url | string | △ |  |  | "https://..." | 이미지의 URL |
+| compareImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
 
 * compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 합니다.
 
@@ -1569,7 +1707,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
-    }
+    },
+    "spoofing": true,
 }'
 ```
 
@@ -1602,8 +1741,17 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
+| data.sourceFace.landmarks | array | O | - | 얼굴 특징 |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
+| data.sourceFace.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
+| data.sourceFace.orientation | object |  | 0.362 | 얼굴 각도 |
+| data.sourceFace.orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.sourceFace.orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.sourceFace.orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.sourceFace.mask | boolean |  | false | 마스크 착용 여부 |
+| data.sourceFace.spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
 | data.sourceFace.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
-
 
 
 <details>
@@ -1611,35 +1759,69 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 
 ```json
 {
-  "header": {
-    "isSuccessful": true,
-    "resultCode": 0,
-    "resultMessage": "SUCCESS"
-  },
-  "data": {
-    "similarity": 87.074165,
-    "face": {
-      "bbox": {
-        "x0": 0.828,
-        "y0": 0.07829181494661921,
-        "x1": 0.886,
-        "y1": 0.2117437722419929
-      },
-      "confidence": 0.998737,
-      "faceId": "bd21a5d1-64bc-4723-a041-71d720fe56d8",
-      "imageId": "165b63c9-9564-4a65-b3f6-7bb64d4fe9f9",
-      "externalImageId": "user-defined-external-image-id"
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "Success"
     },
-    "sourceFace": {
-      "bbox": {
-        "x0": 0.7567164179104477,
-        "y0": 0.13097713097713098,
-        "x1": 0.8671641791044776,
-        "y1": 0.33264033264033266
-      },
-      "confidence": 0.999286
+    "data": {
+        "similarity": 29.507784,
+        "face": {
+            "bbox": {
+                "x0": 0.15520833333333334,
+                "y0": 0.2222222222222222,
+                "x1": 0.24479166666666666,
+                "y1": 0.45185185185185184
+            },
+            "confidence": 0.997507,
+            "faceId": "b460baac-190d-448e-9f29-c2d5d429f388",
+            "imageId": "f43a7bee-6a33-4450-82dd-16adfc6788ef",
+            "externalImageId": "imsa-control-wb801-test"
+        },
+        "sourceFace": {
+            "bbox": {
+                "x0": 0.26785714285714285,
+                "y0": 0.22767857142857142,
+                "x1": 0.7366071428571429,
+                "y1": 0.8660714285714286
+            },
+            "landmarks": [
+                {
+                    "type": "leftEye",
+                    "x": 0.39285714285714285,
+                    "y": 0.47767857142857145
+                },
+                {
+                    "type": "rightEye",
+                    "x": 0.6071428571428571,
+                    "y": 0.4732142857142857
+                },
+                {
+                    "type": "nose",
+                    "x": 0.5,
+                    "y": 0.6026785714285714
+                },
+                {
+                    "type": "leftLip",
+                    "x": 0.41964285714285715,
+                    "y": 0.7276785714285714
+                },
+                {
+                    "type": "rightLip",
+                    "x": 0.5758928571428571,
+                    "y": 0.7276785714285714
+                }
+            ],
+            "orientation": {
+                "x": 1.400425,
+                "y": 6.624787,
+                "z": -2.08028
+            },
+            "mask": false,
+            "spoofing": true,
+            "confidence": 0.999286
+        }
     }
-  }
 }
 ```
 
@@ -1659,4 +1841,174 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-50000| InternalServerError | 서버 오류 |
+
+<span id="spoofing-face"></span>
+### 얼굴 스푸핑 감지
+
+* 입력 이미지에서 얼굴을 찾아, 스푸핑 여부를 감지하는 API입니다.
+* 감지한 얼굴에서 얼굴, 눈, 코, 입 등의 위치 정보와 신뢰도 값, 스푸핑 여부를 반환합니다.
+* 입력 이미지에서 얼굴이 큰 순서대로 최대 20개의 얼굴을 찾고, 스푸핑 여부를 감지합니다.
+* 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
+* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
+
+<span id="spoofing-face-request"></span>
+#### 요청
+[URI]
+
+| 메서드 | URI |
+| --- | --- |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/spoofing |
+
+[Path Variable]
+
+| 이름 | 설명 |
+| --- | --- |
+| appKey | 통합 Appkey 또는 서비스 Appkey |
+
+[Request Body]
+
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| image | object | O |  |  | - | 얼굴 스푸핑 감지에 사용할 이미지 |
+| image.url | string | △ |  |  | "https://..." | 이미지의 URL |
+| image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
+| aligned | bool |  | false | true, false | false | 전달되는 이미지가 정렬된 이미지 인지 여부<br>이미지 사이즈 : 224 x 224<br>true 인 경우, 얼굴 감지를 하지 않고 스푸핑 여부만 감지 함 |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
+
+* image.url, image.bytes 중 반드시 1개만 있어야 합니다.
+
+
+<details>
+<summary>요청 예</summary>
+
+```
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/spoofing' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+    "image": {
+        "url":"https://..."
+    },
+    "aligned": false,
+    "spoofingCondition": "weak"
+}'
+```
+
+</details>
+
+<span id="spoofing-face-response"></span>
+#### 응답
+
+* [응답 본문 헤더 설명 생략]
+  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+
+[응답 본문 데이터]
+
+| 이름 | 타입 | 필수 | 예제 | 설명 |
+| --- | --- | --- | --- | --- |
+| data.faceDetailCount | int | O | 1 | 감지한 얼굴 수 |
+| data.faceDetails[].bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
+| data.faceDetails[].bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
+| data.faceDetails[].bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
+| data.faceDetails[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
+| data.faceDetails[].bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
+| data.faceDetails[].landmarks | array | O | - | 얼굴 특징 |
+| data.faceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.faceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
+| data.faceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
+| data.faceDetails[].spoofing | boolean | O | false | 얼굴 스푸핑 여부 |
+| data.faceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+
+
+<details>
+<summary>응답 본문 예</summary>
+* aligned : false
+```json
+{
+    "header": {
+        "resultCode": 0,
+        "resultMessage": "Success",
+        "isSuccessful": true
+    },
+    "data": {
+        "faceDetailCount": 1,
+        "faceDetails": [{
+            "bbox": {
+                "x0": 0.36,
+                "y0": 0.21,
+                "x1": 0.612,
+                "y1": 0.715
+            },
+            "landmarks": [{
+                    "type": "leftEye",
+                    "x": 0.415,
+                    "y": 0.513
+                },
+                {
+                    "type": "rightEye",
+                    "x": 0.415,
+                    "y": 0.513
+                },
+                {
+                    "type": "nose",
+                    "x": 0.415,
+                    "y": 0.513
+                },
+                {
+                    "type": "leftLip",
+                    "x": 0.415,
+                    "y": 0.513
+                }, {
+                    "type": "rightLip",
+                    "x": 0.415,
+                    "y": 0.513
+                }
+            ],
+            "spoofing": false,
+            "confidence": 99.8945155187
+        }]
+    }
+}
+```
+
+* aligned : true
+```json
+{
+    "header": {
+        "isSuccessful": true,
+        "resultCode": 0,
+        "resultMessage": "Success"
+    },
+    "data": {
+        "faceDetailCount": 1,
+        "faceDetails": [
+            {
+                "bbox": {
+                    "x0": 0,
+                    "y0": 0,
+                    "x1": 0,
+                    "y1": 0
+                },
+                "landmarks": [],
+                "spoofing": true,
+                "confidence": 0
+            }
+        ]
+    }
+}
+```
+
+</details>
+
+
+#### Error Codes
+
+| resultCode | resultMessage | 설명 |
+| --- | --- | --- |
+|-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-45020| ImageTooLargeException | 이미지 크기 초과 |
+|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
+|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45070| InvalidImageSizeException | 전달된 이미지의 크기가 지정된(224 x 224) 크기와 다름(aligned 옵션이 true인 경우 확인) |
 |-50000| InternalServerError | 서버 오류 |
