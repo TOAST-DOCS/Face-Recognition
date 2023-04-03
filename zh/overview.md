@@ -25,6 +25,10 @@ Provides the following features:
     * This function compares the face ID of a specific face registered in advance with the face detected in the input image and returns a similarity value.
     * The user can set the reference value of similarity to determine whether the face is the same.
     * Raise the reference value of similarity to perform strict verification for a high level of security.
+* **Face Spoofing Detection (face spoofing detection)**
+    * A detection feature to prevent illegal access to face recognition or spoofing (distortion in face recognition, such as face photos and videos).
+    * Analyzes the detected face images and returns whether the face is spoofed or not.
+    * The face spoofing detection feature is available in the Face Recognition API (Face Detection, Face Registration, Face Comparison, Face Search by Image, and Face Verification).
 
 ## Service targets
 
@@ -33,7 +37,7 @@ Provides the following features:
 * For monitoring the position of the workers working in a construction site to ensure workplace safety
 * For building a transaction system utilizing the facial recognition technology
 * For searching photos containing a specific face from photo albums
-
+* For determining whether the face image is spoofed or not
 
 ## Privacy Policy
 
