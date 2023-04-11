@@ -29,7 +29,7 @@
   * 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식이 가능합니다.
   * 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
 * 입력 이미지에서 얼굴의 좌우 각도(Yaw)와 얼굴의 상하 각도(Pitch)는 모두 45도 이하여야 합니다.
-* 이미지 최대 크기: 최대 3MB (3,000,000 Byte)
+* 이미지 최대 크기: 최대 3MB(3,000,000Byte)
 * 지원 이미지 포맷: PNG, JPEG
 
 <span id="common-response"></span>
@@ -1846,7 +1846,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 <span id="spoofing-face"></span>
 ### 얼굴 스푸핑 감지
 
-* 입력 이미지에서 얼굴을 찾아, 스푸핑 여부를 감지하는 API입니다.
+* 입력 이미지에서 얼굴을 찾아 스푸핑 여부를 감지하는 API입니다.
 * 감지한 얼굴에서 얼굴, 눈, 코, 입 등의 위치 정보와 신뢰도 값, 스푸핑 여부를 반환합니다.
 * 입력 이미지에서 얼굴이 큰 순서대로 최대 20개의 얼굴을 찾고, 스푸핑 여부를 감지합니다.
 * 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
@@ -1873,7 +1873,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | image | object | O |  |  | - | 얼굴 스푸핑 감지에 사용할 이미지 |
 | image.url | string | △ |  |  | "https://..." | 이미지의 URL |
 | image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
-| aligned | bool |  | false | true, false | false | 전달되는 이미지가 정렬된 이미지 인지 여부<br>이미지 사이즈 : 224 x 224<br>true 인 경우, 얼굴 감지를 하지 않고 스푸핑 여부만 감지 함 |
+| aligned | bool |  | false | true, false | false | 전달되는 이미지가 정렬된 이미지인지 여부<br>이미지 사이즈:224x224<br>true인 경우 얼굴을 감지하지 않고 스푸핑 여부만 감지함 |
 | spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
@@ -2010,5 +2010,5 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/spoofing' -H 'Conte
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
-|-45070| InvalidImageSizeException | 전달된 이미지의 크기가 지정된(224 x 224) 크기와 다름(aligned 옵션이 true인 경우 확인) |
+|-45070| InvalidImageSizeException | 전달된 이미지의 크기가 지정된 크기(224x224)와 다름(aligned 옵션이 true인 경우 확인) |
 |-50000| InternalServerError | 서버 오류 |

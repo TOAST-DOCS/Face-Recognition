@@ -1,6 +1,6 @@
 ## AI Service > Face Recognition > Release Notes
 
-## March 28, 2023
+### March 28, 2023
 #### Added Features
 * [API] [얼굴 스푸핑 감지](./api-guide/#spoofing) API 추가
 * [API] 이미지를 사용하는 API들에 얼굴 스푸핑 감지 및 마스크 착용 여부, 얼굴 방향 감지 옵션 추가

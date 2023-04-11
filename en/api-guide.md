@@ -1845,7 +1845,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 <span id="spoofing-face"></span>
 ### 얼굴 스푸핑 감지
 
-* 입력 이미지에서 얼굴을 찾아, 스푸핑 여부를 감지하는 API입니다.
+* 입력 이미지에서 얼굴을 찾아 스푸핑 여부를 감지하는 API입니다.
 * 감지한 얼굴에서 얼굴, 눈, 코, 입 등의 위치 정보와 신뢰도 값, 스푸핑 여부를 반환합니다.
 * 입력 이미지에서 얼굴이 큰 순서대로 최대 20개의 얼굴을 찾고, 스푸핑 여부를 감지합니다.
 * The input image can be delivered via Base64-encoded image bytes or image url.
@@ -1872,7 +1872,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | image | object | O | | | - | 얼굴 스푸핑 감지에 사용할 이미지 |
 | image.url | string | △ | | | "https://..." | Image URL |
 | image.bytes | blob | △ | | | "/0j3Ohdk==..." | Base64-encoded Image bytes |
-| aligned | bool | | false | true, false | false | 전달되는 이미지가 정렬된 이미지 인지 여부<br>이미지 사이즈 : 224 x 224<br>true 인 경우, 얼굴 감지를 하지 않고 스푸핑 여부만 감지 함 |
+| aligned | bool |  | false | true, false | false | 전달되는 이미지가 정렬된 이미지인지 여부<br>이미지 사이즈:224x224<br>true인 경우 얼굴을 감지하지 않고 스푸핑 여부만 감지함 |
 | spoofingCondition | string | | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
 
 * Must have only one of either image.url or image.bytes.
@@ -2009,5 +2009,5 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/spoofing' -H 'Conte
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
-|-45070| InvalidImageSizeException | 전달된 이미지의 크기가 지정된(224 x 224) 크기와 다름(aligned 옵션이 true인 경우 확인) |
+|-45070| InvalidImageSizeException | 전달된 이미지의 크기가 지정된 크기(224x224)와 다름(aligned 옵션이 true인 경우 확인) |
 |-50000| InternalServerError | Server error |
