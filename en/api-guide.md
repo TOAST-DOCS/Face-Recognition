@@ -563,7 +563,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 
-
 [Request Body]
 
 | Name | Type | Required | Default value | Valid range | Example | Description |
@@ -1682,7 +1681,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 | face-id | Registered face ID |
-
 
 [Request Body]
 

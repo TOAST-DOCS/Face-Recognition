@@ -279,7 +279,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 [レスポンス本文データ]
 
-| 名前 | タイプ | 必須かどうか | 例 | 説明 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 1 | グループ数 |
 | data.groups[].groupId | string | O | "group-id" | ユーザーが登録したグループID |
@@ -563,7 +563,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
-
 
 [Request Body]
 
@@ -1019,7 +1018,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 [URL Parameter]
 
-
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
 | limit | int | O |  | 1 ～ 4096 | 100 | 最大サイズ |
@@ -1351,7 +1349,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
 | threshold | int | O |  | 1 ～ 100 | 90 | マッチングの有無を判断する類似度基準値 |
-
 
 [Request Body]
 
@@ -1686,7 +1683,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 | face-id | 登録されたフェイスID |
-
 
 [Request Body]
 

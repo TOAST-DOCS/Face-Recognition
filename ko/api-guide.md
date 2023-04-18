@@ -563,7 +563,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
-
 [Request Body]
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
@@ -1683,7 +1682,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | appKey | 통합 Appkey 또는 서비스 Appkey |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 등록된 페이스 아이디 |
-
 
 [Request Body]
 
