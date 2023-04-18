@@ -25,7 +25,7 @@
 ### 입력 이미지 가이드
 
 * 입력 이미지는 너비와 높이 모두 최소 80px 이상이어야 합니다.
-  * 얼굴 크기가 최소 60x60px 이상이어야 얼굴 인식이 가능합니다.
+  * 얼굴 크기가 최소 60*60px 이상이어야 얼굴 인식이 가능합니다.
   * 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식이 가능합니다.
   * 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
 * 입력 이미지에서 얼굴의 좌우 각도(Yaw)와 얼굴의 상하 각도(Pitch)는 모두 45도 이하여야 합니다.
@@ -1873,7 +1873,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | image | object | O |  |  | - | 얼굴 스푸핑 감지에 사용할 이미지 |
 | image.url | string | △ |  |  | "https://..." | 이미지의 URL |
 | image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
-| aligned | bool |  | false | true, false | false | 전달되는 이미지가 정렬된 이미지인지 여부<br>이미지 사이즈:224x224<br>true인 경우 얼굴을 감지하지 않고 스푸핑 여부만 감지함 |
+| aligned | bool |  | false | true, false | false | 전달되는 이미지가 정렬된 이미지인지 여부<br>이미지 사이즈:224*224<br>true인 경우 얼굴을 감지하지 않고 스푸핑 여부만 감지함 |
 | spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
@@ -2010,5 +2010,5 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/spoofing' -H 'Conte
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
-|-45070| InvalidImageSizeException | 전달된 이미지의 크기가 지정된 크기(224x224)와 다름(aligned 옵션이 true인 경우 확인) |
+|-45070| InvalidImageSizeException | 전달된 이미지의 크기가 지정된 크기(224*224)와 다름(aligned 옵션이 true인 경우 확인) |
 |-50000| InternalServerError | 서버 오류 |

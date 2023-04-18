@@ -25,10 +25,11 @@
 ### 入力画像ガイド
 
 * 入力画像は幅と高さがどちらも80px以上必要です。
-    * 顔のサイズが60x60px以上の顔のみ認識できます。
+    * 顔のサイズが60*60px以上の顔のみ認識できます。
     * 正確に認識するには、大きな画像ほど、顔のサイズも大きくするのが望ましいです。
     * 画像で顔が占める割合が大きいほど、正確に認識できます。
 * 入力画像で顔の左右の角度(Yaw)と顔の上下の角度(Pitch)は、どちらも45度以上必要です。
+* 入力画像の幅または高さが2048pxを超える場合、原本画像の比率に合わせて幅または高さを最大2048pxに変換して使用します。
 * 画像最大サイズ：最大3MB(3,000,000Byte)
 * サポート画像フォーマット：PNG、JPEG
 
@@ -91,7 +92,7 @@
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| groupId | string | O | [a-z0-9-]<br>最大255文字 | "my-group" | ユーザーが登録したグループID |
+| groupId | string | O |  | [a-z0-9-]<br>最大255文字 | "my-group" | ユーザーが登録したグループID |
 
 
 <details>
@@ -159,8 +160,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 200 | 100 | 最大サイズ |
-| next-token | string |  |  |  | "skljsdioew..." | グループリストレスポンス本文データから返った値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
+| limit | int | O |  | 1 ～ 200 | 100 | 最大サイズ |
+| next-token | string |  |  |  | "skljsdioew..." | 「グループリストレスポンス本文データ」から返った値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
 
 
 * 注意事項
@@ -202,7 +203,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 [レスポンス本文データ]
 
-| 名前 | タイプ | 必須かどうか | 例 | 説明 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 2 | グループ数 |
 | data.groups[].groupId | string | O | "group-id" | ユーザーが登録したグループID |
@@ -407,13 +408,13 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| image | object | O |  |  | - | 얼굴 감지에 사용할 이미지 |
-| image.url | string | △ |  | "https://..." | 画像のURL |
-| image.bytes | blob | △ |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
-| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
-| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
+| image | object | O |  |  | - | 顔検出に使用する画像 |
+| image.url | string | △ |  |  | "https://..." | 画像のURL |
+| image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
+| spoofing | bool |  | false | true, false | false | 顔スプーフィング検出機能を使用するかどうか |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 顔スプーフィング検出感度 |
 
 * image.url、image.bytesのどちらか1つが必要です。
 
@@ -440,7 +441,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 [レスポンス本文データ]
 
-| 名前 | タイプ | 必須かどうか | 例 | 説明 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.faceDetailCount | int | O | 1 | 検出した顔の数 |
 | data.faceDetails[].bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
@@ -457,7 +458,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | data.faceDetails[].orientation.y | float |  | -9.222179 | 顔の上下角度(Pitch) |
 | data.faceDetails[].orientation.z | float |  | -7.97249 | 水平面に対する顔の角度(Roll) |
 | data.faceDetails[].mask | boolean |  | false | マスク着用の有無 |
-| data.faceDetails[].spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
+| data.faceDetails[].spoofing | boolean |  | false | 顔スプーフィングの有無 |
 | data.faceDetails[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
 
@@ -568,15 +569,15 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| image | object | O |  |  | - | 얼굴 등록에 사용할 이미지 |
-| image.url | string | △ |  | "https://..." | 画像のURL |
-| image.bytes | blob | △ |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
-| externalImageId | string |  | "image01.jsp" | ユーザーが画像またはフェイスIDにラベリングするために伝達する値<br>[a-zA-Z0-9\_.-:]+<br>最大255文字 |
-| limit | int | O |  | 1 \~ 20 | 3 | 入力画像から認識した顔のうち、サイズが大きい順にソートしてグループに登録する最大顔数 |
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
-| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
-| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
+| image | object | O |  |  | - | 顔の登録に使用する画像 |
+| image.url | string | △ |  |  | "https://..." | 画像のURL |
+| image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
+| externalImageId | string |  |  | [a-zA-Z0-9\_.-:]+<br>最大255文字 | "image01.jsp" | ユーザーが画像またはフェイスIDにラベリングを行うために渡す値 |
+| limit | int | O |  | 1 ～ 20 | 3 | 入力画像から認識した顔のうち、サイズが大きい順にソートしてグループに登録する最大顔数 |
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
+| spoofing | bool |  | false | true, false | false | 顔スプーフィング検出機能を使用するかどうか |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 顔スプーフィング検出感度 |
 
 * image.url、image.bytesのどちらか1つが必要です。
 
@@ -607,7 +608,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 [レスポンス本文データ]
 
-| 名前 | タイプ | 必須かどうか | 例 | 説明 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
 | data.addedFaceCount | int | O | 1 | 登録した顔の数 |
@@ -634,7 +635,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 顔の上下の角度(Pitch) |
 | data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
 | data.addedFaceDetails[].mask | boolean | O | false | マスク着用の有無 |
-| data.addedFaceDetails[].spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
+| data.addedFaceDetails[].spoofing | boolean |  | false | 顔スプーフィングの有無 |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 | data.notAddedFaceCount | int | O | 1 | 登録していない顔の数 |
 | data.notAddedFaces[].bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
@@ -651,7 +652,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
 | data.notAddedFaces[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
 | data.notAddedFaces[].mask | boolean | O | false | マスク着用の有無 |
-| data.notAddedFaces[].spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
+| data.notAddedFaces[].spoofing | boolean |  | false | 顔スプーフィングの有無 |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
 * data.addedFacesDetailsはdata.addedFacesの詳細情報であり、重複または保存されない情報です。
@@ -878,8 +879,8 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 200 | 100 | 最大サイズ |
-| next-token | string |  |  |  | "skljsdioew..." | "グループリストレスポンス本文データ"で返した値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
+| limit | int | O |  | 1 ～ 200 | 100 | 最大サイズ |
+| next-token | string |  |  |  | "skljsdioew..." | 「グループリストレスポンス本文データ」から返った値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
 
 
 * 注意事項
@@ -924,7 +925,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 [レスポンス本文データ]
 
-| 名前 | タイプ | 必須かどうか | 例 | 説明 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
 | data.faceCount | int | O | 2 | 検出した顔の数 |
@@ -1018,10 +1019,11 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 [URL Parameter]
 
+
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 4096 | 100 | 探す最大値。 |
-| threshold | int | O |  | 1 \~ 100 | 90 | マッチングするかどうかを判断する類似度の基準値 |
+| limit | int | O |  | 1 ～ 4096 | 100 | 最大サイズ |
+| threshold | int | O |  | 1 ～ 100 | 90 | マッチングの有無を判断する類似度基準値 |
 
 
 <details>
@@ -1040,7 +1042,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 [レスポンス本文データ]
 
-| 名前 | タイプ | 必須かどうか | 例 | 説明 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.matchFaceCount | int | O | 2 | 入力画像から検出した最も大きい顔と一致する顔の数 |
 | data.matchFaces[].face.bbox | object | O | - | 顔の登録時に使用した画像で顔の境界ボックス(bounding box)情報 |
@@ -1142,20 +1144,20 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 4096 | 100 | 探す最大値|
-| threshold | int | O |  | 1 \~ 100 | 90 | マッチングするかどうかを判断する類似度の基準値 |
+| limit | int | O |  | 1 ～ 4096 | 100 | 最大サイズ |
+| threshold | int | O |  | 1 ～ 100 | 90 | マッチングの有無を判断する類似度基準値 |
 
 [Request Body]
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| image | object | O |  |  | - | 얼굴 검색에 사용할 이미지 |
-| image.url | string | △ |  | "https://..." | 画像のURL |
-| image.bytes | blob | △ |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
-| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
-| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
+| image | object | O |  |  | - | 顔の検索に使用する画像 |
+| image.url | string | △ |  |  | "https://..." | 画像のURL |
+| image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
+| spoofing | bool |  | false | true, false | false | 顔スプーフィング検出機能を使用するかどうか |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 顔スプーフィング検出感度 |
 
 * image.url、image.bytesのどちらか1つが必要です。
 
@@ -1182,7 +1184,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 [レスポンス本文データ]
 
-| 名前 | タイプ | 必須かどうか | 例 | 説明 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.matchFaceCount | int | O | 2 | 入力画像から検出した最も大きい顔と一致する顔の数 |
 | data.matchFaces[].face.bbox | object | O | - | 顔の登録時に使用した画像で顔の境界ボックス(bounding box)情報 |
@@ -1200,16 +1202,16 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.sourceFace.landmarks | array | O | - | 얼굴 특징 |
-| data.sourceFace.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
-| data.sourceFace.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.sourceFace.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
-| data.sourceFace.orientation | object |  | 0.362 | 얼굴 각도 |
-| data.sourceFace.orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
-| data.sourceFace.orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
-| data.sourceFace.orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
-| data.sourceFace.mask | boolean |  | false | 마스크 착용 여부 |
-| data.sourceFace.spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
+| data.sourceFace.landmarks | array | O | - | 顔の特徴 |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
+| data.sourceFace.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
+| data.sourceFace.orientation | object |  | 0.362 | 顔の角度 |
+| data.sourceFace.orientation.x | float |  | 15.303436 | 顔の左右角度(Yaw) |
+| data.sourceFace.orientation.y | float |  | -9.222179 | 顔の上下角度(Pitch) |
+| data.sourceFace.orientation.z | float |  | -7.97249 |水平面に対する顔の角度(Roll) |
+| data.sourceFace.mask | boolean |  | false | マスク着用の有無 |
+| data.sourceFace.spoofing | boolean |  | false | 顔スプーフィングの有無 |
 | data.sourceFace.confidence | float | O | 99.9123 | 入力画像内から検出した最も大きい顔の認識信頼度 |
 
 
@@ -1346,27 +1348,28 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 [URL Parameter]
 
-| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| threshold | int | O |  | 1 \~ 100 | 90 | マッチングするかどうかを判断する類似度の基準値 |
+| threshold | int | O |  | 1 ～ 100 | 90 | マッチングの有無を判断する類似度基準値 |
+
 
 [Request Body]
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| sourceImage | object | O | - | 顔を比較する時、基準になる画像<br/>(=referenceImage) |
-| sourceImage.url | string | △ |  | "https://..." | 画像のURL |
-| sourceImage.bytes | blob | △ |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
-| targetImage | object | O | - | 比較対象になる顔が含まれる画像<br/>(=comparisonImage) |
-| targetImage.url | string | △ |  | "https://..." | 画像のURL |
-| targetImage.bytes | blob | △ |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
-| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
-| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
+| sourceImage | object | O |  |  | - | 顔を比較する時、基準になる画像<br/>(=referenceImage) |
+| sourceImage.url | string | △ |  |  | "https://..." | 画像のURL |
+| sourceImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
+| targetImage | object | O |  |  | - | 比較対象になる顔が含まれる画像<br/>(=comparisonImage) |
+| targetImage.url | string | △ |  |  | "https://..." | 画像のURL |
+| targetImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
+| spoofing | bool |  | false | true, false | false | 顔スプーフィング検出機能を使用するかどうか |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 顔スプーフィング検出感度 |
 
-* sourceImage.url、sourceImage.bytesのどちらか1つが必要です。
-* targetImage.url、targetImage.bytesのどちらか1つが必要です。
+* sourceImage.url, sourceImage.bytesのうち、1つだけ必要です。
+* targetImage.url, targetImage.bytesのうち、1つだけ必要です。
 
 
 <details>
@@ -1394,7 +1397,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 [レスポンス本文データ]
 
-| 名前 | タイプ | 必須かどうか | 例 | 説明 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
 | data.matchedFaceDetailCount | int | O | 1 | マッチングした顔の数 |
@@ -1436,16 +1439,16 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.sourceFace.landmarks | array | O | - | 얼굴 특징 |
-| data.sourceFace.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
-| data.sourceFace.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.sourceFace.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
-| data.sourceFace.orientation | object |  | 0.362 | 얼굴 각도 |
-| data.sourceFace.orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
-| data.sourceFace.orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
-| data.sourceFace.orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
-| data.sourceFace.mask | boolean |  | false | 마스크 착용 여부 |
-| data.sourceFace.spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
+| data.sourceFace.landmarks | array | O | - | 顔の特徴 |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
+| data.sourceFace.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
+| data.sourceFace.orientation | object |  | 0.362 | 顔の角度 |
+| data.sourceFace.orientation.x | float |  | 15.303436 | 顔の左右角度(Yaw) |
+| data.sourceFace.orientation.y | float |  | -9.222179 | 顔の上下角度(Pitch) |
+| data.sourceFace.orientation.z | float |  | -7.97249 |水平面に対する顔の角度(Roll) |
+| data.sourceFace.mask | boolean |  | false | マスク着用の有無 |
+| data.sourceFace.spoofing | boolean |  | false | 顔スプーフィングの有無 |
 | data.sourceFace.confidence | float | O | 99.9123 | 入力画像内から検出した最も大きい顔の認識信頼度 |
 
 
@@ -1597,47 +1600,47 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
         ],
         "sourceFace": {
-            "bbox": {
-              "x0": 0.26785714285714285,
-              "y0": 0.22767857142857142,
-              "x1": 0.7366071428571429,
-              "y1": 0.8660714285714286
+          "bbox": {
+            "x0": 0.26785714285714285,
+            "y0": 0.22767857142857142,
+            "x1": 0.7366071428571429,
+            "y1": 0.8660714285714286
+          },
+          "landmarks": [
+            {
+              "type": "leftEye",
+              "x": 0.39285714285714285,
+              "y": 0.47767857142857145
             },
-            "landmarks": [
-              {
-                "type": "leftEye",
-                "x": 0.39285714285714285,
-                "y": 0.47767857142857145
-              },
-              {
-                "type": "rightEye",
-                "x": 0.6071428571428571,
-                "y": 0.4732142857142857
-              },
-              {
-                "type": "nose",
-                "x": 0.5,
-                "y": 0.6026785714285714
-              },
-              {
-                "type": "leftLip",
-                "x": 0.41964285714285715,
-                "y": 0.7276785714285714
-              },
-              {
-                "type": "rightLip",
-                "x": 0.5758928571428571,
-                "y": 0.7276785714285714
-              }
-            ],
-            "orientation": {
-              "x": 1.400425,
-              "y": 6.624787,
-              "z": -2.08028
+            {
+              "type": "rightEye",
+              "x": 0.6071428571428571,
+              "y": 0.4732142857142857
             },
-            "mask": false,
-            "spoofing": true,
-            "confidence": 0.999894
+            {
+              "type": "nose",
+              "x": 0.5,
+              "y": 0.6026785714285714
+            },
+            {
+              "type": "leftLip",
+              "x": 0.41964285714285715,
+              "y": 0.7276785714285714
+            },
+            {
+              "type": "rightLip",
+              "x": 0.5758928571428571,
+              "y": 0.7276785714285714
+            }
+          ],
+          "orientation": {
+            "x": 1.400425,
+            "y": 6.624787,
+            "z": -2.08028
+          },
+          "mask": false,
+          "spoofing": true,
+          "confidence": 0.999894
         }
     }
 }
@@ -1689,13 +1692,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| compareImage | object | O |  |  | - | 얼굴 검증에 사용할 이미지 |
-| compareImage.url | string | △ |  | "https://..." | 画像のURL |
-| compareImage.bytes | blob | △ |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
-| spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
-| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
+| compareImage | object | O |  |  | - | 顔の検証に使用する画像 |
+| compareImage.url | string | △ |  |  | "https://..." | 画像のURL |
+| compareImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
+| spoofing | bool |  | false | true, false | false | 顔スプーフィング検出機能を使用するかどうか |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 顔スプーフィング検出感度 |
 
 * compareImage.url, compareImage.bytesのいずれかが必要です。
 
@@ -1722,7 +1725,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 
 [レスポンス本文データ]
 
-| 名前 | タイプ | 必須かどうか | 例 | 説明 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
 | data.face | object | O | - | 顔登録APIを利用して登録した顔 |
@@ -1741,16 +1744,16 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | data.sourceFace.bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
-| data.sourceFace.landmarks | array | O | - | 얼굴 특징 |
-| data.sourceFace.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
-| data.sourceFace.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.sourceFace.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
-| data.sourceFace.orientation | object |  | 0.362 | 얼굴 각도 |
-| data.sourceFace.orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
-| data.sourceFace.orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
-| data.sourceFace.orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
-| data.sourceFace.mask | boolean |  | false | 마스크 착용 여부 |
-| data.sourceFace.spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
+| data.sourceFace.landmarks | array | O | - | 顔の特徴 |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
+| data.sourceFace.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
+| data.sourceFace.orientation | object |  | 0.362 | 顔の角度 |
+| data.sourceFace.orientation.x | float |  | 15.303436 | 顔の左右角度(Yaw) |
+| data.sourceFace.orientation.y | float |  | -9.222179 | 顔の上下角度(Pitch) |
+| data.sourceFace.orientation.z | float |  | -7.97249 |水平面に対する顔の角度(Roll) |
+| data.sourceFace.mask | boolean |  | false | マスク着用の有無 |
+| data.sourceFace.spoofing | boolean |  | false | 顔スプーフィングの有無 |
 | data.sourceFace.confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
 
@@ -1844,43 +1847,43 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="spoofing-face"></span>
-### 얼굴 스푸핑 감지
+### 顔スプーフィング検出
 
-* 입력 이미지에서 얼굴을 찾아 스푸핑 여부를 감지하는 API입니다.
-* 감지한 얼굴에서 얼굴, 눈, 코, 입 등의 위치 정보와 신뢰도 값, 스푸핑 여부를 반환합니다.
-* 입력 이미지에서 얼굴이 큰 순서대로 최대 20개의 얼굴을 찾고, 스푸핑 여부를 감지합니다.
-* 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide/#input-image-guide)를 참고하시기 바랍니다.
+* 入力画像から顔を探してスプーフィングの有無を検出するAPIです。
+* 検出した顔から顔、鼻、口などの位置情報と信頼度値、スプーフィングの有無を返します。
+* 入力画像から顔が大きい順に最大20個の顔を探して、スプーフィングの有無を検出します。
+* 入力画像はBase64でエンコードされた画像バイトで伝達するか、画像URLで伝達できます。
+* 入力画像の詳細については[入力画像ガイド](./api-guide/#input-image-guide)を参照してください。
 
 <span id="spoofing-face-request"></span>
-#### 요청
+#### リクエスト
 [URI]
 
-| 메서드 | URI |
+| メソッド | URI |
 | --- | --- |
 | POST | /nhn-face-reco/v1.0/appkeys/{appKey}/spoofing |
 
 [Path Variable]
 
-| 이름 | 설명 |
+| 名前 | 説明 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 統合AppkeyまたはサービスAppkey |
 
 [Request Body]
 
-| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| image | object | O |  |  | - | 얼굴 스푸핑 감지에 사용할 이미지 |
-| image.url | string | △ |  |  | "https://..." | 이미지의 URL |
-| image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
-| aligned | bool |  | false | true, false | false | 전달되는 이미지가 정렬된 이미지인지 여부<br>이미지 사이즈:224x224<br>true인 경우 얼굴을 감지하지 않고 스푸핑 여부만 감지함 |
-| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 얼굴 스푸핑 감지 감도 |
+| image | object | O |  |  | - | 顔スプーフィングの検出に使用する画像 |
+| image.url | string | △ |  |  | "https://..." | 画像のURL |
+| image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
+| aligned | bool |  | false | true, false | false | 渡される画像がソートされた画像かどうか<br>画像サイズ：224*224<br>trueの場合は顔を検出せずにスプーフィングの有無のみ検出する |
+| spoofingCondition | string |  | "balanced" | "balanced", "strict", "weak" | "balanced" | 顔スプーフィング検出感度 |
 
-* image.url, image.bytes 중 반드시 1개만 있어야 합니다.
+* image.url、image.bytesのうち必ず1つのみ必要です。
 
 
 <details>
-<summary>요청 예</summary>
+<summary>リクエスト例</summary>
 
 ```
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/spoofing' -H 'Content-Type: application/json;charset=UTF-8' -d '{
@@ -1895,31 +1898,31 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/spoofing' -H 'Conte
 </details>
 
 <span id="spoofing-face-response"></span>
-#### 응답
+#### レスポンス
 
-* [응답 본문 헤더 설명 생략]
-  * [응답 공통 정보](./api-guide/#common-response)에서 확인 가능
+* [レスポンス本文ヘッダ説明省略]
+  * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-[응답 본문 데이터]
+[レスポンス本文データ]
 
-| 이름 | 타입 | 필수 | 예제 | 설명 |
+| 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.faceDetailCount | int | O | 1 | 감지한 얼굴 수 |
-| data.faceDetails[].bbox | object | O | - | 이미지 내에서 감지한 얼굴의 경계 상자(bounding box) 정보 |
-| data.faceDetails[].bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
-| data.faceDetails[].bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
-| data.faceDetails[].bbox.x1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x1 좌표 |
-| data.faceDetails[].bbox.y1 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y1 좌표 |
-| data.faceDetails[].landmarks | array | O | - | 얼굴 특징 |
-| data.faceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
-| data.faceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.faceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
-| data.faceDetails[].spoofing | boolean | O | false | 얼굴 스푸핑 여부 |
-| data.faceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
+| data.faceDetailCount | int | O | 1 | 検出した顔の数 |
+| data.faceDetails[].bbox | object | O | - | 画像内から検出した顔の境界のバウンディングボックス(bounding box)情報 |
+| data.faceDetails[].bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
+| data.faceDetails[].bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |
+| data.faceDetails[].bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
+| data.faceDetails[].bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
+| data.faceDetails[].landmarks | array | O | - | 顔の特徴 |
+| data.faceDetails[].landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.faceDetails[].landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
+| data.faceDetails[].landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
+| data.faceDetails[].spoofing | boolean | O | false | 顔スプーフィングの有無 |
+| data.faceDetails[].confidence | float | O | 99.9123 | 顔認識の信頼度 |
 
 
 <details>
-<summary>응답 본문 예</summary>
+<summary>レスポンス本文例</summary>
 * aligned : false
 ```json
 {
@@ -2001,14 +2004,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/spoofing' -H 'Conte
 
 #### Error Codes
 
-| resultCode | resultMessage | 설명 |
+| resultCode | resultMessage | 説明 |
 | --- | --- | --- |
-|-40000| InvalidParam | 파라미터에 오류가 있음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
-|-45020| ImageTooLargeException | 이미지 크기 초과 |
-|-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
-|-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
-|-45050| InvalidImageURLException | 잘못된 이미지 URL |
-|-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
-|-45070| InvalidImageSizeException | 전달된 이미지의 크기가 지정된 크기(224x224)와 다름(aligned 옵션이 true인 경우 확인) |
-|-50000| InternalServerError | 서버 오류 |
+|-40000| InvalidParam | パラメータにエラーがある |
+|-41000| UnauthorizedAppKey | 承認されていないAppkey |
+|-45020| ImageTooLargeException | 画像サイズ超過 |
+|-45030| InvalidImageParameterException | 無効な画像パラメータ。主にBase64エンコードが無効な場合に発生 |
+|-45040| InvalidImageFormatException | サポートしない画像フォーマット |
+|-45050| InvalidImageURLException | 無効な画像URL |
+|-45060| ImageTimeoutError | 画像ダウンロードタイムアウト |
+|-45070| InvalidImageSizeException | 渡された画像のサイズが指定されたサイズ(224*224)と異なる(alignedオプションがtrueの場合確認) |
+|-50000| InternalServerError | サーバーエラー |

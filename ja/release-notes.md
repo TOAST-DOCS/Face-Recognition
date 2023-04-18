@@ -2,13 +2,13 @@
 
 ### 2023. 03. 28.
 #### 機能追加
-* [API] [얼굴 스푸핑 감지](./api-guide/#spoofing) API 추가
-* [API] 이미지를 사용하는 API들에 얼굴 스푸핑 감지 및 마스크 착용 여부, 얼굴 방향 감지 옵션 추가
-    * [얼굴 감지 요청](./api-guide/#detect-face-request)
-    * [얼굴 등록 요청](./api-guide/#add-face-request)
-    * [얼굴 비교 요청](./api-guide/#compare-face-request)
-    * [얼굴 검증 요청](./api-guide/#verify-request)
-    * [이미지로 얼굴 검색 요청](./api-guide/#search-by-image-request)
+* [API] [顔スプーフィング検出](./api-guide/#spoofing) API追加
+* [API]画像を使用するAPIに顔スプーフィング検出およびマスクの着用有無、顔の方向検出オプションを追加
+    * [顔検出リクエスト](./api-guide/#detect-face-request)
+    * [顔登録リクエスト](./api-guide/#add-face-request)
+    * [顔比較リクエスト](./api-guide/#compare-face-request)
+    * [顔検証リクエスト](./api-guide/#verify-request)
+    * [画像で顔検索リクエスト](./api-guide/#search-by-image-request)
 
 ### 2022. 12. 27.
 #### 機能追加
