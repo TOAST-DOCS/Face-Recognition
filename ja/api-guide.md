@@ -566,7 +566,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | image | object | O |  |  | - | 顔の登録に使用する画像 |
 | image.url | string | △ |  |  | "https://..." | 画像のURL |
 | image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
-| externalImageId | string |  |  | [a-zA-Z0-9\_.-:]+<br>最大255文字 | "image01.jsp" | ユーザーが画像またはフェイスIDにラベリングを行うために渡す値 |
+| externalImageId | string |  |  | [a-zA-Z0-9\_.-:]<br>最大255文字 | "image01.jsp" | ユーザーが画像またはフェイスIDにラベリングを行うために渡す値 |
 | limit | int | O |  | 1 ～ 20 | 3 | 入力画像から認識した顔のうち、サイズが大きい順にソートしてグループに登録する最大顔数 |
 | orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
 | mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
@@ -620,11 +620,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
-| data.addedFaceDetails[].orientation | object | O | 0.362 | 顔の角度 |
-| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | 顔の左右の角度(Yaw) |
-| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 顔の上下の角度(Pitch) |
-| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
-| data.addedFaceDetails[].mask | boolean | O | false | マスク着用の有無 |
+| data.addedFaceDetails[].orientation | object |  | 0.362 | 顔の角度 |
+| data.addedFaceDetails[].orientation.x | float |  | 15.303436 | 顔の左右の角度(Yaw) |
+| data.addedFaceDetails[].orientation.y | float |  | -9.222179 | 顔の上下の角度(Pitch) |
+| data.addedFaceDetails[].orientation.z | float |  | -7.97249 | 水平面に対する顔の角度(Roll) |
+| data.addedFaceDetails[].mask | boolean |  | false | マスク着用の有無 |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 | data.notAddedFaceCount | int | O | 1 | 登録していない顔の数 |
 | data.notAddedFaces[].bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
@@ -636,11 +636,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
-| data.notAddedFaces[].orientation | object | O | 0.362 | 顔の角度 |
-| data.notAddedFaces[].orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
-| data.notAddedFaces[].orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
-| data.notAddedFaces[].orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
-| data.notAddedFaces[].mask | boolean | O | false | マスク着用の有無 |
+| data.notAddedFaces[].orientation | object |  | 0.362 | 顔の角度 |
+| data.notAddedFaces[].orientation.x | float |  | 15.303436 | 顔の左右角度(Yaw) |
+| data.notAddedFaces[].orientation.y | float |  | -9.222179 | 顔の上下角度(Pitch) |
+| data.notAddedFaces[].orientation.z | float |  | -7.97249 | 水平面に対する顔の角度(Roll) |
+| data.notAddedFaces[].mask | boolean |  | false | マスク着用の有無 |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
 * data.addedFacesDetailsはdata.addedFacesの詳細情報であり、重複または保存されない情報です。
@@ -1386,11 +1386,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
-| data.matchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 顔の角度 |
-| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
-| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
-| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
-| data.matchedFaceDetails[].mask | boolean | O | false | マスク着用の有無 |
+| data.matchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | 顔の角度 |
+| data.matchedFaceDetails[].faceDetail.orientation.x | float |  | 15.303436 | 顔の左右角度(Yaw) |
+| data.matchedFaceDetails[].faceDetail.orientation.y | float |  | -9.222179 | 顔の上下角度(Pitch) |
+| data.matchedFaceDetails[].faceDetail.orientation.z | float |  | -7.97249 | 水平面に対する顔の角度(Roll) |
+| data.matchedFaceDetails[].mask | boolean |  | false | マスク着用の有無 |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 顔の認識信頼度 |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
 | data.unmatchedFaceDetailCount | int | O | 1 | マッチングしていない顔の数 |
@@ -1403,11 +1403,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
-| data.unmatchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 顔の角度 |
-| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 顔の左右角度(Yaw) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 顔の上下角度(Pitch) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 水平面に対する顔の角度(Roll) |
-| data.unmatchedFaceDetails[].mask | boolean | O | false | マスク着用の有無 |
+| data.unmatchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | 顔の角度 |
+| data.unmatchedFaceDetails[].faceDetail.orientation.x | float |  | 15.303436 | 顔の左右角度(Yaw) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.y | float |  | -9.222179 | 顔の上下角度(Pitch) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.z | float |  | -7.97249 | 水平面に対する顔の角度(Roll) |
+| data.unmatchedFaceDetails[].mask | boolean |  | false | マスク着用の有無 |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 顔の認識信頼度 |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
 | data.sourceFace.bbox | object | O | - | 入力画像内から検出した最も大きい顔の境界ボックス(bounding box)情報 |
