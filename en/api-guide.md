@@ -279,7 +279,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 [Response body data]
 
-| Name | Type | Required? | Example | Description |
+| Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 1 | Number of groups |
 | data.groups[].groupId | string | O | "group-id" | Group IDs registered by user |
