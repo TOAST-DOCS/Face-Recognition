@@ -159,7 +159,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 200 | 100 | 최대 크기 |
+| limit | int | O |  | 1 ~ 200 | 100 | 최대 크기 |
 | next-token | string |  |  |  | "skljsdioew..." | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 
@@ -278,7 +278,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 [응답 본문 데이터]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 1 | 그룹 수 |
 | data.groups[].groupId | string | O | "group-id" | 사용자가 등록한 그룹 아이디 |
@@ -571,7 +571,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | image.url | string | △ |  |  | "https://..." | 이미지의 URL |
 | image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64로 인코딩된 이미지 바이트 |
 | externalImageId | string |  |  | [a-zA-Z0-9\_.-:]+<br>최대 255자 | "image01.jsp" | 사용자가 이미지 또는 페이스 아이디에 라벨링을 하기 위해 전달하는 값 |
-| limit | int | O |  | 1 \~ 20 | 3 | 입력 이미지에서 인식한 얼굴 중 크기가 큰 순으로 정렬하여 그룹에 등록할 최대 얼굴 수 |
+| limit | int | O |  | 1 ~ 20 | 3 | 입력 이미지에서 인식한 얼굴 중 크기가 큰 순으로 정렬하여 그룹에 등록할 최대 얼굴 수 |
 | orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
 | mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
 | spoofing | bool |  | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
@@ -628,11 +628,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
-| data.addedFaceDetails[].orientation | object | O | 0.362 | 얼굴 각도 |
-| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
-| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
-| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
-| data.addedFaceDetails[].mask | boolean | O | false | 마스크 착용 여부 |
+| data.addedFaceDetails[].orientation | object |  | 0.362 | 얼굴 각도 |
+| data.addedFaceDetails[].orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.addedFaceDetails[].orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.addedFaceDetails[].orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.addedFaceDetails[].mask | boolean |  | false | 마스크 착용 여부 |
 | data.addedFaceDetails[].spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.notAddedFaceCount | int | O | 1 | 등록하지 않은 얼굴 수 |
@@ -645,11 +645,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.notAddedFaces[].orientation | object | O | 0.362 | 얼굴 각도 |
-| data.notAddedFaces[].orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
-| data.notAddedFaces[].orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
-| data.notAddedFaces[].orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
-| data.notAddedFaces[].mask | boolean | O | false | 마스크 착용 여부 |
+| data.notAddedFaces[].orientation | object |  | 0.362 | 얼굴 각도 |
+| data.notAddedFaces[].orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.notAddedFaces[].orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.notAddedFaces[].orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.notAddedFaces[].mask | boolean |  | false | 마스크 착용 여부 |
 | data.notAddedFaces[].spoofing | boolean |  | false | 얼굴 스푸핑 여부 |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 
@@ -877,7 +877,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 200 | 100 | 최대 크기 |
+| limit | int | O |  | 1 ~ 200 | 100 | 최대 크기 |
 | next-token | string |  |  |  | "skljsdioew..." | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 
@@ -1019,8 +1019,8 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 4096 | 100 | 최대 크기 |
-| threshold | int | O |  | 1 \~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
+| limit | int | O |  | 1 ~ 4096 | 100 | 최대 크기 |
+| threshold | int | O |  | 1 ~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
 
 
 <details>
@@ -1141,8 +1141,8 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 4096 | 100 | 최대 크기 |
-| threshold | int | O |  | 1 \~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
+| limit | int | O |  | 1 ~ 4096 | 100 | 최대 크기 |
+| threshold | int | O |  | 1 ~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
 
 [Request Body]
 
@@ -1347,7 +1347,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
-| threshold | int | O |  | 1 \~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
+| threshold | int | O |  | 1 ~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
 
 [Request Body]
 
@@ -1406,11 +1406,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.matchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 각도 |
-| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
-| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
-| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
-| data.matchedFaceDetails[].mask | boolean | O | false | 마스크 착용 여부 |
+| data.matchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | 얼굴 각도 |
+| data.matchedFaceDetails[].faceDetail.orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.matchedFaceDetails[].faceDetail.orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.matchedFaceDetails[].faceDetail.orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.matchedFaceDetails[].mask | boolean |  | false | 마스크 착용 여부 |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | 0~100 값을 가지는 유사도 |
 | data.unmatchedFaceDetailCount | int | O | 1 | 매칭되지 않은 얼굴 수 |
@@ -1423,11 +1423,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 유효한 값 목록:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 얼굴 특징의 x 좌표 |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 얼굴 특징의 y 좌표 |
-| data.unmatchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | 얼굴 각도 |
-| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | 얼굴 좌우 각도(Yaw) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | 얼굴 상하 각도(Pitch) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
-| data.unmatchedFaceDetails[].mask | boolean | O | false | 마스크 착용 여부 |
+| data.unmatchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | 얼굴 각도 |
+| data.unmatchedFaceDetails[].faceDetail.orientation.x | float |  | 15.303436 | 얼굴 좌우 각도(Yaw) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.y | float |  | -9.222179 | 얼굴 상하 각도(Pitch) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.z | float |  | -7.97249 | 수평면 대비 얼굴 각도(Roll) |
+| data.unmatchedFaceDetails[].mask | boolean |  | false | 마스크 착용 여부 |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | 얼굴 인식 신뢰도 |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | 0~100 값을 가지는 유사도 |
 | data.sourceFace.bbox | object | O | - | 입력 이미지에서 감지한 가장 큰 얼굴의 경계 상자(bounding box) 정보 |

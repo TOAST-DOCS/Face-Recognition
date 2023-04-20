@@ -159,7 +159,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O | | 1 \~ 200 | 100 | Max size |
+| limit | int | O | | 1 ~ 200 | 100 | Max size |
 | next-token | string | | | | "skljsdioew..." | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
 
@@ -571,7 +571,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | image.url | string | △ | | | "https://..." | Image URL<br>Must have only one of either image.url or image.bytes |
 | image.bytes | blob | △ | | | "/0j3Ohdk==..." | Base64-encoded Image bytes<br>Must have only one of either image.url or image.bytes |
 | externalImageId | string | | | [a-zA-Z0-9\_.-:]+<br>Max. 255 characters | "image01.jsp" | Values provided by user to create a label for an image or face ID |
-| limit | int | O | | 1 \~ 20 | 3 | Max number of faces to register in the group after sorting the faces recognized from the input image in order of largest to smallest |
+| limit | int | O | | 1 ~ 20 | 3 | Max number of faces to register in the group after sorting the faces recognized from the input image in order of largest to smallest |
 | orientation | bool | | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
 | mask | bool | | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
 | spoofing | bool | | false | true, false | false | 얼굴 스푸핑 감지 기능 사용 여부 |
@@ -627,11 +627,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
-| data.addedFaceDetails[].orientation | object | O | 0.362 | Face angle |
-| data.addedFaceDetails[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
-| data.addedFaceDetails[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
-| data.addedFaceDetails[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
-| data.addedFaceDetails[].mask | boolean | O | false | Whether to wear a mask |
+| data.addedFaceDetails[].orientation | object |  | 0.362 | Face angle |
+| data.addedFaceDetails[].orientation.x | float |  | 15.303436 | Face left/right angle(Yaw) |
+| data.addedFaceDetails[].orientation.y | float |  | -9.222179 | Face up/down angle(Pitch) |
+| data.addedFaceDetails[].orientation.z | float |  | -7.97249 | Face angle compared to level surface(Roll) |
+| data.addedFaceDetails[].mask | boolean |  | false | Whether to wear a mask |
 | data.addedFaceDetails[].spoofing | boolean | | false | 얼굴 스푸핑 여부 |
 | data.addedFaceDetails[].confidence | float | O | 99.9123 | Face recognition confidence |
 | data.notAddedFaceCount | int | O | 1 | Number of faces not registered |
@@ -644,11 +644,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
-| data.notAddedFaces[].orientation | object | O | 0.362 | Face angle |
-| data.notAddedFaces[].orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
-| data.notAddedFaces[].orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
-| data.notAddedFaces[].orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
-| data.notAddedFaces[].mask | boolean | O | false | Whether to wear a mask |
+| data.notAddedFaces[].orientation | object |  | 0.362 | Face angle |
+| data.notAddedFaces[].orientation.x | float |  | 15.303436 | Face left/right angle(Yaw) |
+| data.notAddedFaces[].orientation.y | float |  | -9.222179 | Face up/down angle(Pitch) |
+| data.notAddedFaces[].orientation.z | float |  | -7.97249 | Face angle compared to level surface(Roll) |
+| data.notAddedFaces[].mask | boolean |  | false | Whether to wear a mask |
 | data.notAddedFaces[].spoofing | boolean | | false | 얼굴 스푸핑 여부 |
 | data.notAddedFaces[].confidence | float | O | 99.9123 | Face recognition confidence |
 
@@ -876,7 +876,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O | | 1 \~ 20 | 100 | Max size|
+| limit | int | O | | 1 ~ 20 | 100 | Max size|
 | next-token | string | | | | "skljsdioew..." | Value returned from 'Group list response body data'<br/>If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
 
@@ -1018,8 +1018,8 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 4096 | 100 | Max value to find. |
-| threshold | int | O |  | 1 \~ 100 | 90 | A similarity reference value that determines a match |
+| limit | int | O |  | 1 ~ 4096 | 100 | Max value to find. |
+| threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
 
 
 <details>
@@ -1140,8 +1140,8 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 \~ 4096 | 100 | Max value to find. |
-| threshold | int | O |  | 1 \~ 100 | 90 | A similarity reference value that determines a match |
+| limit | int | O |  | 1 ~ 4096 | 100 | Max value to find. |
+| threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
 
 [Request Body]
 
@@ -1346,7 +1346,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
-| threshold | int | O | | 1 \~ 100 | 90 | A similarity reference value that determines a match |
+| threshold | int | O | | 1 ~ 100 | 90 | A similarity reference value that determines a match |
 
 [Request Body]
 
@@ -1405,11 +1405,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
-| data.matchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | Face angle |
-| data.matchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
-| data.matchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
-| data.matchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
-| data.matchedFaceDetails[].mask | boolean | O | false | Whether to wear a mask |
+| data.matchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | Face angle |
+| data.matchedFaceDetails[].faceDetail.orientation.x | float |  | 15.303436 | Face left/right angle(Yaw) |
+| data.matchedFaceDetails[].faceDetail.orientation.y | float |  | -9.222179 | Face up/down angle(Pitch) |
+| data.matchedFaceDetails[].faceDetail.orientation.z | float |  | -7.97249 | Face angle compared to level surface(Roll) |
+| data.matchedFaceDetails[].mask | boolean |  | false | Whether to wear a mask |
 | data.matchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
 | data.matchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.unmatchedFaceDetailCount | int | O | 1 | Number of unmatched faces |
@@ -1422,11 +1422,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
-| data.unmatchedFaceDetails[].faceDetail.orientation | object | O | 0.362 | Face angle |
-| data.unmatchedFaceDetails[].faceDetail.orientation.x | float | O | 15.303436 | Face left/right angle(Yaw) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.y | float | O | -9.222179 | Face up/down angle(Pitch) |
-| data.unmatchedFaceDetails[].faceDetail.orientation.z | float | O | -7.97249 | Face angle compared to level surface(Roll) |
-| data.unmatchedFaceDetails[].mask | boolean | O | false | Whether to wear a mask |
+| data.unmatchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | Face angle |
+| data.unmatchedFaceDetails[].faceDetail.orientation.x | float |  | 15.303436 | Face left/right angle(Yaw) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.y | float |  | -9.222179 | Face up/down angle(Pitch) |
+| data.unmatchedFaceDetails[].faceDetail.orientation.z | float |  | -7.97249 | Face angle compared to level surface(Roll) |
+| data.unmatchedFaceDetails[].mask | boolean |  | false | Whether to wear a mask |
 | data.unmatchedFaceDetails[].faceDetail.confidence | float | O | 99.9123 | Face recognition confidence |
 | data.unmatchedFaceDetails[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.sourceFace.bbox | object | O | - | Bounding box information of the largest face detected in the input image |
