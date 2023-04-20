@@ -278,7 +278,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 [응답 본문 데이터]
 
-| 이름 | 타입 | 필수 여부 | 예제 | 설명 |
+| 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 1 | 그룹 수 |
 | data.groups[].groupId | string | O | "group-id" | 사용자가 등록한 그룹 아이디 |
