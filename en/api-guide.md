@@ -31,6 +31,7 @@
 * In the input image, both left/right angle(Yaw) and up/down angle(Pitch) of the face must be 45 degrees or less.
 * Max image size: up to 3MB(3,000,000Byte)
 * Supported image formats: PNG, JPEG
+* If you specify the port directly in the image URL, only ports 80, 443, 10000-12000 can be used.
 
 <span id="common-response"></span>
 ### Common Response Information
