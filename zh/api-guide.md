@@ -448,7 +448,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | data.faceDetails[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
 | data.faceDetails[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.faceDetails[].landmarks | array | O | - | Facial characteristics |
-| data.faceDetails[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.faceDetails[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.faceDetails[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.faceDetails[].landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.faceDetails[].orientation | object |  | 0.362 | Face angle |
@@ -617,7 +617,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
 | data.addedFaceDetails[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.addedFaceDetails[].landmarks | array | O | - | Facial characteristics |
-| data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.addedFaceDetails[].orientation | object |  | 0.362 | Face angle |
@@ -633,7 +633,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
 | data.notAddedFaces[].bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.notAddedFaces[].landmarks | array | O | - | Facial characteristics |
-| data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.notAddedFaces[].orientation | object |  | 0.362 | Face angle |
@@ -1185,7 +1185,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.sourceFace.landmarks | array | O | - | Facial characteristics |
-| data.sourceFace.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.sourceFace.landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.sourceFace.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.sourceFace.orientation | object |  | 0.362 | Face angle |
@@ -1382,7 +1382,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
 | data.matchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.matchedFaceDetails[].faceDetail.landmarks | array | O | - | Facial characteristics |
-| data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.matchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | Face angle |
@@ -1399,7 +1399,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
 | data.unmatchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.unmatchedFaceDetails[].faceDetail.landmarks | array | O | - | Facial characteristics |
-| data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.unmatchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | Face angle |
@@ -1415,7 +1415,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.sourceFace.landmarks | array | O | - | Facial characteristics |
-| data.sourceFace.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.sourceFace.landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.sourceFace.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.sourceFace.orientation | object |  | 0.362 | Face angle |
@@ -1711,7 +1711,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | data.sourceFace.bbox.x1 | float | O | 0.123 | x1 coordinates of the face box detected in the image |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | y1 coordinates of the face box detected in the image |
 | data.sourceFace.landmarks | array | O | - | Facial characteristics |
-| data.sourceFace.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | List of valid values:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.sourceFace.landmarks[].y | float | O | 0.362 | y coordinate of the facial characteristic |
 | data.sourceFace.landmarks[].x | float | O | 0.362 | x coordinate of the facial characteristic |
 | data.sourceFace.orientation | object |  | 0.362 | Face angle |
