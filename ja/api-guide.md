@@ -448,7 +448,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | data.faceDetails[].bbox.x1 | float | O | 0.123 | 画像内で検出した顔boxのx1座標 |
 | data.faceDetails[].bbox.y1 | float | O | 0.123 | 画像内で検出した顔boxのy1座標 |
 | data.faceDetails[].landmarks | array | O | - | 顔の特徴 |
-| data.faceDetails[].landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.faceDetails[].landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.faceDetails[].landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
 | data.faceDetails[].landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.faceDetails[].orientation | object |  | 0.362 | 顔の角度 |
@@ -618,7 +618,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.addedFaceDetails[].bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.addedFaceDetails[].bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
 | data.addedFaceDetails[].landmarks | array | O | - | 顔の特徴 |
-| data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.addedFaceDetails[].landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.addedFaceDetails[].landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
 | data.addedFaceDetails[].landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.addedFaceDetails[].orientation | object |  | 0.362 | 顔の角度 |
@@ -634,7 +634,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | data.notAddedFaces[].bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.notAddedFaces[].bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
 | data.notAddedFaces[].landmarks | array | O | - | 顔の特徴 |
-| data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.notAddedFaces[].landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.notAddedFaces[].landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.notAddedFaces[].landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
 | data.notAddedFaces[].orientation | object |  | 0.362 | 顔の角度 |
@@ -1186,7 +1186,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
 | data.sourceFace.landmarks | array | O | - | 顔の特徴 |
-| data.sourceFace.landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.sourceFace.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
 | data.sourceFace.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.sourceFace.orientation | object |  | 0.362 | 顔の角度 |
@@ -1384,7 +1384,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.matchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.matchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
 | data.matchedFaceDetails[].faceDetail.landmarks | array | O | - | 顔の特徴 |
-| data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.matchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.matchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.matchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
 | data.matchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | 顔の角度 |
@@ -1401,7 +1401,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.unmatchedFaceDetails[].faceDetail.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.unmatchedFaceDetails[].faceDetail.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
 | data.unmatchedFaceDetails[].faceDetail.landmarks | array | O | - | 顔の特徴 |
-| data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.unmatchedFaceDetails[].faceDetail.landmarks[].type | string | O | "leftEye" | 有効な値リスト:<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.unmatchedFaceDetails[].faceDetail.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
 | data.unmatchedFaceDetails[].faceDetail.orientation | object |  | 0.362 | 顔の角度 |
@@ -1417,7 +1417,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
 | data.sourceFace.landmarks | array | O | - | 顔の特徴 |
-| data.sourceFace.landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.sourceFace.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
 | data.sourceFace.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.sourceFace.orientation | object |  | 0.362 | 顔の角度 |
@@ -1713,7 +1713,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | data.sourceFace.bbox.x1 | float | O | 0.123 | 画像内から検出した顔boxのx1座標 |
 | data.sourceFace.bbox.y1 | float | O | 0.123 | 画像内から検出した顔boxのy1座標 |
 | data.sourceFace.landmarks | array | O | - | 顔の特徴 |
-| data.sourceFace.landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLib" |
+| data.sourceFace.landmarks[].type | string | O | "leftEye" | 有効な値リスト：<br>"leftEye", "rightEye", "nose", "leftLip", "rightLip" |
 | data.sourceFace.landmarks[].y | float | O | 0.362 | 顔の特徴のy座標 |
 | data.sourceFace.landmarks[].x | float | O | 0.362 | 顔の特徴のx座標 |
 | data.sourceFace.orientation | object |  | 0.362 | 顔の角度 |
