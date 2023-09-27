@@ -1,6 +1,6 @@
-## AI Service > Face Recognition > 顔認識APIガイド
+## AI Service > Face Recognition > API v1.0 가이드
 
-* 顔認識APIを使用するのに必要なAPIを説明します。
+* 얼굴 인식 API v1.0을 사용하는 데 필요한 API를 설명합니다.
 
 ## API共通情報
 ### 事前準備
