@@ -144,7 +144,8 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40010| InvalidGroupID | 그룹 아이디 오류 |
 |-40020| DuplicatedGroupID | 중복된 그룹 아이디 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-40070| ServiceQuotaExceededException | 생성할 수 있는 최대 그룹 개수 초과 |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-50000| InternalServerError | 서버 오류 |
 
 ### 그룹 목록
@@ -245,7 +246,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40040| InvalidTokenError | 잘못된 token 사용 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-50000| InternalServerError | 서버 오류 |
 
 ### 그룹 상세 정보
@@ -321,7 +322,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorizati
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-50000| InternalServerError | 서버 오류 |
 
 ### 그룹 삭제
@@ -378,7 +379,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="detect-face"></span>
@@ -541,7 +542,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
 |-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
@@ -810,7 +811,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40070| ServiceQuotaExceededException | 단일 그룹에 등록 가능한 최대 얼굴 개수 초과 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
 |-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
@@ -874,7 +875,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="face-list-in-a-group"></span>
@@ -1006,7 +1007,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40040| InvalidTokenError | 잘못된 token 사용 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="search-by-face-id"></span>
@@ -1126,7 +1127,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="search-by-image"></span>
@@ -1334,7 +1335,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
 |-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
@@ -1683,7 +1684,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: 이미지 크기 초과 |
 |-45030| InvalidImageParameterException:{Source/Target} | {Source/Target} 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: 지원하지 않는 이미지 포맷 |
@@ -1874,7 +1875,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 Appkey 또는 SecretKey |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
 |-45030| InvalidImageParameterException | 잘못된 이미지 파라미터. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
