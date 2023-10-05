@@ -28,7 +28,7 @@
   * 얼굴 크기가 최소 60*60px 이상이어야 얼굴 인식이 가능합니다.
   * 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식이 가능합니다.
   * 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
-* 입력 이미지에서 얼굴의 좌우 각도(Yaw)와 얼굴의 상하 각도(Pitch)는 모두 45도 이하여야 합니다.
+* 입력 이미지에서 얼굴의 좌우 각도(Yaw)와 상하 각도(Pitch)는 모두 45도 이하여야 합니다.
 * 이미지 최대 크기: 최대 3MB(3,000,000Byte)
 * 지원 이미지 포맷: PNG, JPEG
 * 이미지 URL에 포트를 직접 지정하는 경우 80, 443, 10000~12000 포트만 사용 가능합니다.
@@ -388,7 +388,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * 감지한 얼굴에서 얼굴, 눈, 코, 입 등의 위치 정보와 신뢰도 값을 반환합니다.
 * 입력 이미지에서 얼굴이 큰 순서대로 최대 20개의 얼굴을 감지합니다.
 * 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부 사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
 
 <span id="detect-face-request"></span>
 #### 요청
@@ -538,7 +538,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 * 추출한 벡터 데이터는 암호화하여 데이터베이스에 저장합니다.
 * 저장한 벡터 데이터는 [페이스 아이디로 얼굴 검색](./api-guide-v1.0/#search-by-face-id), [이미지로 얼굴 검색](./api-guide-v1.0/#search-by-image) API에 특징 벡터로 사용합니다.
 * 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부 사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
 * 'imageId'는 입력 이미지에 부여되는 값이며 'externalImageId'는 사용자가 직접 부여할 수 있는 값입니다. 사용자는 'imageId'와 'externalImageId'를 통해 사용자 단에서 이미지 또는 페이스 아이디에 라벨링하고 인덱스처럼 자체적으로 활용할 수 있습니다.
 * 'imageId'와 'externalImageId'는 [그룹 내 얼굴 목록](./api-guide-v1.0/#face-list-in-a-group)과 [페이스 아이디로 얼굴 검색](./api-guide-v1.0/#search-by-face-id), [이미지로 얼굴 검색](./api-guide-v1.0/#search-by-image) API의 응답에서 반환됩니다.
 * 단일 그룹에 등록할 수 있는 최대 얼굴 개수는 10만 개입니다.
@@ -1107,7 +1107,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 * 입력 이미지에서 감지한 가장 큰 얼굴을 사용하여 특정 그룹에 속한 얼굴과 일치 여부를 비교합니다.
 * 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부 사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 <span id="search-by-image-request"></span>
@@ -1309,7 +1309,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 * 기준 이미지(sourceImage)와 비교 이미지(targetImage)에서 감지한 얼굴이 얼마나 유사한지 비교합니다.
 * 기준 이미지에서 감지한 얼굴 중 가장 큰 얼굴(기준 얼굴)만 사용합니다.
 * 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부 사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 <span id="compare-face-request"></span>
@@ -1640,7 +1640,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 * [얼굴 등록](./api-guide-v1.0/#add-face)을 이용하여 얼굴을 등록할 수 있습니다.
 * 입력 이미지에서 감지한 얼굴 중 가장 큰 얼굴만 사용합니다.
 * 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
-* 입력 이미지에 대한 세부사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
+* 입력 이미지에 대한 세부 사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
 
 <span id="verify-request"></span>
 #### 요청

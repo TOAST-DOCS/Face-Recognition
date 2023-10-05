@@ -26,7 +26,7 @@
 
 | 이름 | 값 | 설명 |
 | --- | --- | --- |
-| Authorization | {secretKey} | 콘솔에서 발급받은 보안 키 |
+| Authorization | {secretKey} | 콘솔에서 발급 받은 보안 키 |
 
 <span id="input-image-guide"></span>
 
