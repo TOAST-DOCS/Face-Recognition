@@ -1,18 +1,19 @@
-## AI Service > Face Recognition > 顔認識APIガイド
+## AI Service > Face Recognition > API v2.0 가이드
 
-* 顔認識APIを使用するのに必要なAPIを説明します。
+* 얼굴 인식 API v2.0을 사용하는 데 필요한 API를 설명합니다.
+* 얼굴 인식 API v2.0부터 SecretKey 인증이 추가됩니다.
 
 ## API共通情報
+
 ### 事前準備
+
 - APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
     - プロジェクト統合Appkeyを使用することを推奨します。
     - プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
-    - サービスAppkeyは、コンソールの上部「URL & Appkey」メニューで確認できます。
-
-
-
+    - 서비스 Appkey, SecretKey는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
 
 ### リクエスト共通情報
+
 - APIを使用するにはセキュリティキーの認証処理が必要です。
 
 [APIドメイン]
@@ -21,7 +22,14 @@
 | --- |
 | https://face-recognition.api.nhncloudservice.com |
 
+[Header]
+
+| 이름 | 값 | 설명 |
+| --- | --- | --- |
+| Authorization | {secretKey} | 콘솔에서 발급 받은 보안 키 |
+
 <span id="input-image-guide"></span>
+
 ### 入力画像ガイド
 
 * 入力画像は幅と高さがどちらも80px以上必要です。
@@ -35,6 +43,7 @@
 * イメージURLにポートを直接指定する場合は80、443、10000～12000ポートのみ使用できます。
 
 <span id="common-response"></span>
+
 ### レスポンス共通情報
 
 - すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
@@ -51,11 +60,11 @@
 
 ```json
 {
-    "header": {
-        "isSuccessful": true,
-        "resultCode": 0,
-        "resultMessage": "Success"
-    }
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 0,
+    "resultMessage": "Success"
+  }
 }
 ```
 
@@ -63,13 +72,14 @@
 
 ```json
 {
-    "header": {
-        "isSuccessful": false,
-        "resultCode": -40000,
-        "resultMessage": "InvalidParam"
-    }
+  "header": {
+    "isSuccessful": false,
+    "resultCode": -40000,
+    "resultMessage": "InvalidParam"
+  }
 }
 ```
+
 ## API目次
 
 ### グループ作成
@@ -77,11 +87,12 @@
 - グループを作成するAPIです。作成されたグループに[顔登録](./api-guide/#add-face)を利用して顔を登録できます。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups |
+| POST | /v2.0/appkeys/{appKey}/groups |
 
 [Path Variable]
 
@@ -95,12 +106,11 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | groupId | string | O |  | [a-z0-9-]<br>最大255文字 | "my-group" | ユーザーが登録したグループID |
 
-
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "groupId": "my-group"
 }'
 ```
@@ -112,17 +122,16 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 * [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-
 <details>
 <summary>レスポンス本文例</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  }
 }
 ```
 
@@ -148,8 +157,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 | メソッド | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups |
-
+| GET | /v2.0/appkeys/{appKey}/groups |
 
 [Path Variable]
 
@@ -164,7 +172,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 | limit | int | O |  | 1 ～ 200 | 100 | 最大サイズ |
 | next-token | string |  |  |  | "skljsdioew..." | 「グループリストレスポンス本文データ」から返った値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
 
-
 * 注意事項
     * 最初はnext-tokenが存在しません。
     * tokenは特定時間または特定条件で消える場合があります。
@@ -173,24 +180,22 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 * 最初のquery
 
-
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
 
 * グループリストレスポンス本文データに含まれたnext-tokenを利用してリクエスト
 
-
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -208,7 +213,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 2 | グループ数 |
 | data.groups[].groupId | string | O | "group-id" | ユーザーが登録したグループID |
-| data.groups[].modelVersion | string | O | "v1.0" | 顔検出モデルバージョン情報 |
 | data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | ページングで使用するトークン<br>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
 
 <details>
@@ -216,22 +220,23 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "groupCount": 2,
-        "groups": [{
-            "groupId": "group-id",
-            "modelVersion": "v1.0"
-        }, {
-            "groupId": "my-group",
-            "modelVersion": "v1.0"
-        }],
-        "nextToken":"dlkj-210jwoivndslko9d..."
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "groupCount": 2,
+    "groups": [
+      {
+        "groupId": "group-id"
+      },
+      {
+        "groupId": "my-group"
+      }
+    ],
+    "nextToken": "dlkj-210jwoivndslko9d..."
+  }
 }
 ```
 
@@ -251,11 +256,12 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 * グループID、モデルバージョン、グループに登録した顔の数など、特定グループの詳細情報を照会するAPIです。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+| GET | /v2.0/appkeys/{appKey}/groups/{group-id} |
 
 [Path Variable]
 
@@ -268,7 +274,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -284,7 +290,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 1 | グループ数 |
 | data.groups[].groupId | string | O | "group-id" | ユーザーが登録したグループID |
-| data.groups[].modelVersion | string | O | "v1.0" | 顔検出モデルバージョン情報 |
 | data.groups[].createTime | string | O | "2020-11-04T12:36:24" | グループを作成した時間 |
 | data.groups[].faceCount | int |  | 365 | グループに登録した顔の数 |
 
@@ -293,20 +298,21 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "groupCount": 1,
-        "groups": [{
-            "groupId": "group-id",
-            "modelVersion": "v1.0",
-            "createTime": "2020-09-29T14:34:12",
-            "faceCount": 365
-        }]
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "groupCount": 1,
+    "groups": [
+      {
+        "groupId": "group-id",
+        "createTime": "2020-09-29T14:34:12",
+        "faceCount": 365
+      }
+    ]
+  }
 }
 ```
 
@@ -331,7 +337,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 | メソッド | URI |
 | --- | --- |
-| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+| DELETE | /v2.0/appkeys/{appKey}/groups/{group-id} |
 
 [Path Variable]
 
@@ -340,17 +346,14 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 | appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
-
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
-
-
 
 #### レスポンス
 
@@ -362,16 +365,15 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
@@ -383,6 +385,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="detect-face"></span>
+
 ### 顔検出
 
 * 入力画像から顔を検出するAPIです。
@@ -392,12 +395,14 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
 
 <span id="detect-face-request"></span>
+
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/detect |
+| POST | /v2.0/appkeys/{appKey}/faces/detect |
 
 [Path Variable]
 
@@ -406,6 +411,8 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | appKey | 統合AppkeyまたはサービスAppkey |
 
 [Request Body]
+
+#### Content-Type: application/json
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -417,21 +424,33 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 * image.url、image.bytesのどちらか1つが必要です。
 
+#### Content-Type: multipart/form-data
+
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| imageFile | file | O |  | | image.png | 얼굴 감지에 사용할 이미지 파일 | 
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/detect' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url":"https://..."
     }
 }'
 ```
 
+```
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/faces/detect'
+```
+
 </details>
 
 <span id="detect-face-response"></span>
+
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -458,65 +477,67 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | data.faceDetails[].mask | boolean |  | false | マスク着用の有無 |
 | data.faceDetails[].confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
-
 <details>
 <summary>レスポンス本文例</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "faceDetailCount": 1,
-        "faceDetails": [{
-            "bbox": {
-                "x0": 0.36,
-                "y0": 0.21,
-                "x1": 0.612,
-                "y1": 0.715
-            },
-            "landmarks": [{
-                    "type": "leftEye",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "rightEye",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "nose",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "leftLip",
-                    "x": 0.415,
-                    "y": 0.513
-                }, {
-                    "type": "rightLip",
-                    "x": 0.415,
-                    "y": 0.513
-                }
-            ],
-            "orientation": {
-                "x": 15.303436,
-                "y": -9.222179,
-                "z": -7.97249
-            },
-            "mask": false,
-            "confidence": 99.8945155187
-        }]
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "faceDetailCount": 1,
+    "faceDetails": [
+      {
+        "bbox": {
+          "x0": 0.36,
+          "y0": 0.21,
+          "x1": 0.612,
+          "y1": 0.715
+        },
+        "landmarks": [
+          {
+            "type": "leftEye",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "rightEye",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "nose",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "leftLip",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "rightLip",
+            "x": 0.415,
+            "y": 0.513
+          }
+        ],
+        "orientation": {
+          "x": 15.303436,
+          "y": -9.222179,
+          "z": -7.97249
+        },
+        "mask": false,
+        "confidence": 99.8945155187
+      }
+    ]
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
@@ -532,6 +553,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="add-face"></span>
+
 ### 顔登録
 
 * 入力画像から検出した顔を特定グループに登録するAPIです。
@@ -545,13 +567,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 * 1つのグループに登録できる顔の数は最大10万個です。
 
 <span id="add-face-request"></span>
+
 #### リクエスト
 
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces |
 
 [Path Variable]
 
@@ -562,24 +585,35 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 [Request Body]
 
+#### Content-Type: application/json
+
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
 | image | object | O |  |  | - | 顔の登録に使用する画像 |
 | image.url | string | △ |  |  | "https://..." | 画像のURL |
 | image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
-| externalImageId | string |  |  | [a-zA-Z0-9\_.-:]<br>最大255文字 | "image01.jsp" | ユーザーが画像またはフェイスIDにラベリングを行うために渡す値 |
 | limit | int | O |  | 1 ～ 20 | 3 | 入力画像から認識した顔のうち、サイズが大きい順にソートしてグループに登録する最大顔数 |
+| externalImageId | string |  |  | [a-zA-Z0-9_.\-:]<br>最大255文字 | "image01.jsp" | ユーザーが画像またはフェイスIDにラベリングを行うために渡す値 |
 | orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
 | mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
 
 * image.url、image.bytesのどちらか1つが必要です。
 
+#### Content-Type: multipart/form-data
+
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| imageFile | file | O |  | | image.png | 얼굴 등록에 사용할 이미지 파일 | 
+| limit | int | O |  | 1 ~ 20 | 3 | 입력 이미지에서 인식한 얼굴 중 크기가 큰 순으로 정렬하여 그룹에 등록할 최대 얼굴 수 |
+| externalImageId | string |  |  | [a-zA-Z0-9_.\-:]<br>최대 255자 | "image01.jsp" | 사용자가 이미지 또는 페이스 아이디에 라벨링을 하기 위해 전달하는 값 |
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -588,10 +622,15 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 }'
 ```
 
+```
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces'
+```
+
 </details>
 
 
 <span id="add-face-response"></span>
+
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -601,7 +640,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
 | data.addedFaceCount | int | O | 1 | 登録した顔の数 |
 | data.addedFaces[].bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.addedFaces[].bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
@@ -651,116 +689,117 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "modelVersion": "v1.0",
-        "addedFaceCount": 1,
-        "addedFaces": [{
-
-            "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
-            "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-            "externalImageId": "image01.jpg",
-            "bbox": {
-                "x0": 0.36,
-                "y0": 0.21,
-                "x1": 0.612,
-                "y1": 0.715
-            },
-            "confidence": 99.8945155187
-
-        }],
-        "addedFaceDetails": [{
-
-            "bbox": {
-                "x0": 0.36,
-                "y0": 0.21,
-                "x1": 0.612,
-                "y1": 0.715
-            },
-            "landmarks": [{
-                    "type": "leftEye",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "rightEye",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "nose",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "leftLip",
-                    "x": 0.415,
-                    "y": 0.513
-                }, {
-                    "type": "rightLip",
-                    "x": 0.415,
-                    "y": 0.513
-                }
-            ],
-            "orientation": {
-                "x": 15.303436,
-                "y": -9.222179,
-                "z": -7.97249
-            },
-            "mask": false,
-            "confidence": 99.8945155187
-
-        }],
-
-        "notAddedFaceCount": 1,
-        "notAddedFaces": [{
-
-            "bbox": {
-                "x0": 0.36,
-                "y0": 0.21,
-                "x1": 0.612,
-                "y1": 0.715
-            },
-            "landmarks": [{
-                    "type": "leftEye",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "rightEye",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "nose",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "leftLip",
-                    "x": 0.415,
-                    "y": 0.513
-                }, {
-                    "type": "rightLip",
-                    "x": 0.415,
-                    "y": 0.513
-                }
-            ],
-            "orientation": {
-                "x": 15.303436,
-                "y": -9.222179,
-                "z": -7.97249
-            },
-            "mask": false,
-            "confidence": 99.8945155187
-
-        }]
-
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "addedFaceCount": 1,
+    "addedFaces": [
+      {
+        "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
+        "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+        "externalImageId": "image01.jpg",
+        "bbox": {
+          "x0": 0.36,
+          "y0": 0.21,
+          "x1": 0.612,
+          "y1": 0.715
+        },
+        "confidence": 99.8945155187
+      }
+    ],
+    "addedFaceDetails": [
+      {
+        "bbox": {
+          "x0": 0.36,
+          "y0": 0.21,
+          "x1": 0.612,
+          "y1": 0.715
+        },
+        "landmarks": [
+          {
+            "type": "leftEye",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "rightEye",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "nose",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "leftLip",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "rightLip",
+            "x": 0.415,
+            "y": 0.513
+          }
+        ],
+        "orientation": {
+          "x": 15.303436,
+          "y": -9.222179,
+          "z": -7.97249
+        },
+        "mask": false,
+        "confidence": 99.8945155187
+      }
+    ],
+    "notAddedFaceCount": 1,
+    "notAddedFaces": [
+      {
+        "bbox": {
+          "x0": 0.36,
+          "y0": 0.21,
+          "x1": 0.612,
+          "y1": 0.715
+        },
+        "landmarks": [
+          {
+            "type": "leftEye",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "rightEye",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "nose",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "leftLip",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "rightLip",
+            "x": 0.415,
+            "y": 0.513
+          }
+        ],
+        "orientation": {
+          "x": 15.303436,
+          "y": -9.222179,
+          "z": -7.97249
+        },
+        "mask": false,
+        "confidence": 99.8945155187
+      }
+    ]
+  }
 }
 ```
 
@@ -787,11 +826,12 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 * グループに登録した特定の顔を削除するAPIです。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+| DELETE | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
 
 [Path Variable]
 
@@ -801,12 +841,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 | face-id | 登録されたフェイスID |
 
-
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -816,17 +855,16 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * [レスポンス本文ヘッダ説明省略]
     * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
-
 <details>
 <summary>レスポンス本文例</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  }
 }
 ```
 
@@ -843,17 +881,19 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="face-list-in-a-group"></span>
+
 ### グループ内顔リスト
 
 * 特定グループに登録した顔情報リストを照会するAPIです。
 * 登録が新しい順で顔情報配列を返します。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces |
+| GET | /v2.0/appkeys/{appKey}/groups/{group-id}/faces |
 
 [Path Variable]
 
@@ -869,7 +909,6 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | limit | int | O |  | 1 ～ 200 | 100 | 最大サイズ |
 | next-token | string |  |  |  | "skljsdioew..." | 「グループリストレスポンス本文データ」から返った値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
 
-
 * 注意事項
     * 最初はnext-tokenが存在しません。
     * tokenは特定時間または特定条件で消える場合があります。
@@ -878,32 +917,27 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 * 最初のquery
 
-
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
-
 
 * グループリストレスポンス本文データに含まれたnext-tokenを利用してリクエスト
 
-
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
 
-
 * next-tokenが存在する場合、limitは変更できず、tokenが発行される時の値に自動設定される
-
 
 #### レスポンス
 
@@ -914,7 +948,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
 | data.faceCount | int | O | 2 | 検出した顔の数 |
 | data.faces[].bbox | object | O | - | 顔の登録時に使用した画像で顔の境界ボックス(bounding box)情報 |
 | data.faces[].bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
@@ -927,47 +960,46 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | data.faces[].externalImageId | string |  | "image01.jpg" | ユーザーが画像に登録した値 |
 | data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | ページングで使用するトークン<br>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
 
-
 <details>
 <summary>レスポンス本文例</summary>
 
-
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "modelVersion": "v1.0",
-        "faceCount": 2,
-        "faces": [{
-                "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                "externalImageId": "image01.jpg",
-                "bbox": {
-                    "x0": 0.36,
-                    "y0": 0.21,
-                    "x1": 0.612,
-                    "y1": 0.715
-                },
-                "confidence": 99.8945155187
-            },
-            {
-                "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                "externalImageId": "image01.jpg",
-                "bbox": {
-                    "x0": 0.36,
-                    "y0": 0.21,
-                    "x1": 0.612,
-                    "y1": 0.715
-                },
-                "confidence": 99.8945155187
-            }],
-        "nextToken":"dlkj-210jwoivndslko9d..."
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "faceCount": 2,
+    "faces": [
+      {
+        "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
+        "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+        "externalImageId": "image01.jpg",
+        "bbox": {
+          "x0": 0.36,
+          "y0": 0.21,
+          "x1": 0.612,
+          "y1": 0.715
+        },
+        "confidence": 99.8945155187
+      },
+      {
+        "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
+        "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+        "externalImageId": "image01.jpg",
+        "bbox": {
+          "x0": 0.36,
+          "y0": 0.21,
+          "x1": 0.612,
+          "y1": 0.715
+        },
+        "confidence": 99.8945155187
+      }
+    ],
+    "nextToken": "dlkj-210jwoivndslko9d..."
+  }
 }
 ```
 
@@ -984,17 +1016,19 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-face-id"></span>
+
 ### フェイスIDで顔検索
 
 * フェイスIDで特定グループから顔を検索するAPIです。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+| GET | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/search |
 
 [Path Variable]
 
@@ -1011,12 +1045,11 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | limit | int | O |  | 1 ～ 4096 | 100 | 最大サイズ |
 | threshold | int | O |  | 1 ～ 100 | 90 | マッチングの有無を判断する類似度基準値 |
 
-
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1042,56 +1075,55 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | ユーザーが画像に登録した値 |
 | data.matchFaces[].similarity | float | O | 98.156 | 0～100の値を持つ類似度 |
 
-
 <details>
 <summary>レスポンス本文例</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "matchFaceCount": 2,
-        "matchFaces": [{
-                "face": {
-                    "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                    "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                    "externalImageId": "image01.jpg",
-                    "bbox": {
-                        "x0": 0.36,
-                        "y0": 0.21,
-                        "x1": 0.612,
-                        "y1": 0.715
-                    },
-                    "confidence": 99.8945155187
-                },
-                "similarity": 99.8945155187
-            },
-            {
-                "face": {
-                    "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                    "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                    "externalImageId": "image01.jpg",
-                    "bbox": {
-                        "x0": 0.36,
-                        "y0": 0.21,
-                        "x1": 0.612,
-                        "y1": 0.715
-                    },
-                    "confidence": 99.8945155187
-                },
-                "similarity": 79.8945155187
-            }
-        ]
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "matchFaceCount": 2,
+    "matchFaces": [
+      {
+        "face": {
+          "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
+          "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+          "externalImageId": "image01.jpg",
+          "bbox": {
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
+          },
+          "confidence": 99.8945155187
+        },
+        "similarity": 99.8945155187
+      },
+      {
+        "face": {
+          "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
+          "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+          "externalImageId": "image01.jpg",
+          "bbox": {
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
+          },
+          "confidence": 99.8945155187
+        },
+        "similarity": 79.8945155187
+      }
+    ]
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
@@ -1104,6 +1136,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-image"></span>
+
 ### 画像で顔検索
 
 * 入力画像から検出した最も大きい顔を使用して特定グループに属す顔と一致するかどうかを比較します。
@@ -1112,12 +1145,14 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="search-by-image-request"></span>
+
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search |
+| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/search |
 
 [Path Variable]
 
@@ -1126,39 +1161,48 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | appKey | 統合AppkeyまたはサービスAppkey |
 | group-id | ユーザーが登録したgroup id<br>[a-z0-9-]<br>最大255文字 |
 
-[URL Parameter]
-
-| 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
-| --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 ～ 4096 | 100 | 最大サイズ |
-| threshold | int | O |  | 1 ～ 100 | 90 | マッチングの有無を判断する類似度基準値 |
-
 [Request Body]
+
+#### Content-Type: application/json
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
 | image | object | O |  |  | - | 顔の検索に使用する画像 |
 | image.url | string | △ |  |  | "https://..." | 画像のURL |
 | image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
+| limit | int | O |  | 1 ～ 4096 | 100 | 最大サイズ |
+| threshold | int | O |  | 1 ～ 100 | 90 | マッチングの有無を判断する類似度基準値 |
 | orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
 | mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
 
 * image.url、image.bytesのどちらか1つが必要です。
 
+#### Content-Type: multipart/form-data
+
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| imageFile | file | O |  |  | image.png | 얼굴 검색에 사용할 이미지 파일 |
+| limit | int | O |  | 1 ~ 4096 | 100 | 최대 크기 |
+| threshold | int | O |  | 1 ~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 | 
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     }
 }'
 ```
 
-</details>
+```
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search'
+```
 
+</details>
 
 #### レスポンス
 
@@ -1196,99 +1240,97 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | data.sourceFace.mask | boolean |  | false | マスク着用の有無 |
 | data.sourceFace.confidence | float | O | 99.9123 | 入力画像内から検出した最も大きい顔の認識信頼度 |
 
-
 <details>
 <summary>レスポンス本文例</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "modelVersion": "v1.0",
-        "matchFaceCount": 2,
-        "matchFaces": [{
-                "face": {
-                    "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                    "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                    "externalImageId": "image01.jpg",
-                    "bbox": {
-                        "x0": 0.36,
-                        "y0": 0.21,
-                        "x1": 0.612,
-                        "y1": 0.715
-                    },
-                    "confidence": 99.8945155187
-                },
-                "similarity": 99.8945155187
-            },
-            {
-                "face": {
-                    "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                    "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                    "externalImageId": "image01.jpg",
-                    "bbox": {
-                        "x0": 0.36,
-                        "y0": 0.21,
-                        "x1": 0.612,
-                        "y1": 0.715
-                    },
-                    "confidence": 99.8945155187
-                },
-                "similarity": 79.8945155187
-            }
-        ],
-        "sourceFace": {
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "matchFaceCount": 2,
+    "matchFaces": [
+      {
+        "face": {
+          "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
+          "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+          "externalImageId": "image01.jpg",
           "bbox": {
-            "x0": 0.26785714285714285,
-            "y0": 0.22767857142857142,
-            "x1": 0.7366071428571429,
-            "y1": 0.8660714285714286
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
           },
-          "landmarks": [
-            {
-              "type": "leftEye",
-              "x": 0.39285714285714285,
-              "y": 0.47767857142857145
-            },
-            {
-              "type": "rightEye",
-              "x": 0.6071428571428571,
-              "y": 0.4732142857142857
-            },
-            {
-              "type": "nose",
-              "x": 0.5,
-              "y": 0.6026785714285714
-            },
-            {
-              "type": "leftLip",
-              "x": 0.41964285714285715,
-              "y": 0.7276785714285714
-            },
-            {
-              "type": "rightLip",
-              "x": 0.5758928571428571,
-              "y": 0.7276785714285714
-            }
-          ],
-          "orientation": {
-            "x": 1.400425,
-            "y": 6.624787,
-            "z": -2.08028
+          "confidence": 99.8945155187
+        },
+        "similarity": 99.8945155187
+      },
+      {
+        "face": {
+          "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
+          "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+          "externalImageId": "image01.jpg",
+          "bbox": {
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
           },
-          "mask": false,
-          "confidence": 0.999894
+          "confidence": 99.8945155187
+        },
+        "similarity": 79.8945155187
+      }
+    ],
+    "sourceFace": {
+      "bbox": {
+        "x0": 0.26785714285714285,
+        "y0": 0.22767857142857142,
+        "x1": 0.7366071428571429,
+        "y1": 0.8660714285714286
+      },
+      "landmarks": [
+        {
+          "type": "leftEye",
+          "x": 0.39285714285714285,
+          "y": 0.47767857142857145
+        },
+        {
+          "type": "rightEye",
+          "x": 0.6071428571428571,
+          "y": 0.4732142857142857
+        },
+        {
+          "type": "nose",
+          "x": 0.5,
+          "y": 0.6026785714285714
+        },
+        {
+          "type": "leftLip",
+          "x": 0.41964285714285715,
+          "y": 0.7276785714285714
+        },
+        {
+          "type": "rightLip",
+          "x": 0.5758928571428571,
+          "y": 0.7276785714285714
         }
+      ],
+      "orientation": {
+        "x": 1.400425,
+        "y": 6.624787,
+        "z": -2.08028
+      },
+      "mask": false,
+      "confidence": 0.999894
     }
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
@@ -1305,6 +1347,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="compare-face"></span>
+
 ### 顔比較
 
 * 基準画像(sourceImage)と比較画像(targetImage)から検出した顔がどれくらい類似しているかを比較します。
@@ -1314,12 +1357,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="compare-face-request"></span>
+
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/compare |
+| POST | /v2.0/appkeys/{appKey}/faces/compare |
 
 [Path Variable]
 
@@ -1327,13 +1372,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
 
-[URL Parameter]
-
-| 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
-| --- | --- | --- | --- | --- | --- | --- |
-| threshold | int | O |  | 1 ～ 100 | 90 | マッチングの有無を判断する類似度基準値 |
-
 [Request Body]
+
+#### Content-Type: application/json
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1343,18 +1384,28 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | targetImage | object | O |  |  | - | 比較対象になる顔が含まれる画像<br/>(=comparisonImage) |
 | targetImage.url | string | △ |  |  | "https://..." | 画像のURL |
 | targetImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64でエンコードされた画像バイト |
+| threshold | int | O |  | 1 ～ 100 | 90 | マッチングの有無を判断する類似度基準値 |
 | orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
 | mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
 
 * sourceImage.url, sourceImage.bytesのうち、1つだけ必要です。
 * targetImage.url, targetImage.bytesのうち、1つだけ必要です。
 
+#### Content-Type: multipart/form-data
+
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| sourceImageFile | object | O |  |  | sourceImage.png | 얼굴 비교 시 기준이 되는 이미지 파일<br/>(=referenceImage) |
+| targetImageFile | object | O |  |  | targetImage.png | 비교 대상이 되는 얼굴이 포함된 이미지 파일<br/>(=comparisonImage) |
+| threshold | int | O |  | 1 ~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/compare?threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "sourceImage": {
         "url": "https://..."
     },
@@ -1364,9 +1415,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 }'
 ```
 
+```
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F sourceImage=@sourceImage.png -F targetImage=@targetImage.png -F threshold=90 '{domain}/v2.0/appkeys/{appKey}/faces/compare'
+```
+
 </details>
 
 <span id="compare-face-response"></span>
+
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -1376,7 +1432,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
 | data.matchedFaceDetailCount | int | O | 1 | マッチングした顔の数 |
 | data.matchedFaceDetails[].faceDetail.bbox | object | O | - | 画像内から検出した顔の境界ボックス(bounding box)情報 |
 | data.matchedFaceDetails[].faceDetail.bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
@@ -1427,199 +1482,205 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.sourceFace.mask | boolean |  | false | マスク着用の有無 |
 | data.sourceFace.confidence | float | O | 99.9123 | 入力画像内から検出した最も大きい顔の認識信頼度 |
 
-
 <details>
 <summary>レスポンス本文例</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "modelVersion": "v1.0",
-        "matchedFaceDetailCount": 2,
-        "matchedFaceDetails": [{
-            "faceDetail": {
-                "bbox": {
-                    "x0": 0.36,
-                    "y0": 0.21,
-                    "x1": 0.612,
-                    "y1": 0.715
-                },
-                "landmarks": [{
-                        "type": "leftEye",
-                        "x": 0.415,
-                        "y": 0.513
-                    },
-                    {
-                        "type": "rightEye",
-                        "x": 0.415,
-                        "y": 0.513
-                    },
-                    {
-                        "type": "nose",
-                        "x": 0.415,
-                        "y": 0.513
-                    },
-                    {
-                        "type": "leftLip",
-                        "x": 0.415,
-                        "y": 0.513
-                    }, {
-                        "type": "rightLip",
-                        "x": 0.415,
-                        "y": 0.513
-                    }
-                ],
-                "orientation": {
-                    "x": 15.303436,
-                    "y": -9.222179,
-                    "z": -7.97249
-                },
-                "mask": false,
-                "confidence": 99.8945155187
-            },
-            "similarity": 90.654
-        }, {
-            "faceDetail": {
-                "bbox": {
-                    "x0": 0.36,
-                    "y0": 0.21,
-                    "x1": 0.612,
-                    "y1": 0.715
-                },
-                "landmarks": [{
-                        "type": "leftEye",
-                        "x": 0.415,
-                        "y": 0.513
-                    },
-                    {
-                        "type": "rightEye",
-                        "x": 0.415,
-                        "y": 0.513
-                    },
-                    {
-                        "type": "nose",
-                        "x": 0.415,
-                        "y": 0.513
-                    },
-                    {
-                        "type": "leftLip",
-                        "x": 0.415,
-                        "y": 0.513
-                    }, {
-                        "type": "rightLip",
-                        "x": 0.415,
-                        "y": 0.513
-                    }
-                ],
-                "orientation": {
-                    "x": 15.303436,
-                    "y": -9.222179,
-                    "z": -7.97249
-                },
-                "mask": false,
-                "confidence": 99.8945155187
-            },
-            "similarity": 90.654
-        }],
-        "unmatchedFaceDetailCount": 1,
-        "unmatchedFaceDetails": [{
-                "faceDetail": {
-                    "bbox": {
-                        "x0": 0.36,
-                        "y0": 0.21,
-                        "x1": 0.612,
-                        "y1": 0.715
-                    },
-                    "landmarks": [{
-                            "type": "leftEye",
-                            "x": 0.415,
-                            "y": 0.513
-                        },
-                        {
-                            "type": "rightEye",
-                            "x": 0.415,
-                            "y": 0.513
-                        },
-                        {
-                            "type": "nose",
-                            "x": 0.415,
-                            "y": 0.513
-                        },
-                        {
-                            "type": "leftLip",
-                            "x": 0.415,
-                            "y": 0.513
-                        }, {
-                            "type": "rightLip",
-                            "x": 0.415,
-                            "y": 0.513
-                        }
-                    ],
-                    "orientation": {
-                        "x": 15.303436,
-                        "y": -9.222179,
-                        "z": -7.97249
-                    },
-                    "mask": false,
-                    "confidence": 99.8945155187
-                },
-                "similarity": 60.654
-            }
-
-        ],
-        "sourceFace": {
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "matchedFaceDetailCount": 2,
+    "matchedFaceDetails": [
+      {
+        "faceDetail": {
           "bbox": {
-            "x0": 0.26785714285714285,
-            "y0": 0.22767857142857142,
-            "x1": 0.7366071428571429,
-            "y1": 0.8660714285714286
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
           },
           "landmarks": [
             {
               "type": "leftEye",
-              "x": 0.39285714285714285,
-              "y": 0.47767857142857145
+              "x": 0.415,
+              "y": 0.513
             },
             {
               "type": "rightEye",
-              "x": 0.6071428571428571,
-              "y": 0.4732142857142857
+              "x": 0.415,
+              "y": 0.513
             },
             {
               "type": "nose",
-              "x": 0.5,
-              "y": 0.6026785714285714
+              "x": 0.415,
+              "y": 0.513
             },
             {
               "type": "leftLip",
-              "x": 0.41964285714285715,
-              "y": 0.7276785714285714
+              "x": 0.415,
+              "y": 0.513
             },
             {
               "type": "rightLip",
-              "x": 0.5758928571428571,
-              "y": 0.7276785714285714
+              "x": 0.415,
+              "y": 0.513
             }
           ],
           "orientation": {
-            "x": 1.400425,
-            "y": 6.624787,
-            "z": -2.08028
+            "x": 15.303436,
+            "y": -9.222179,
+            "z": -7.97249
           },
           "mask": false,
-          "confidence": 0.999894
+          "confidence": 99.8945155187
+        },
+        "similarity": 90.654
+      },
+      {
+        "faceDetail": {
+          "bbox": {
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
+          },
+          "landmarks": [
+            {
+              "type": "leftEye",
+              "x": 0.415,
+              "y": 0.513
+            },
+            {
+              "type": "rightEye",
+              "x": 0.415,
+              "y": 0.513
+            },
+            {
+              "type": "nose",
+              "x": 0.415,
+              "y": 0.513
+            },
+            {
+              "type": "leftLip",
+              "x": 0.415,
+              "y": 0.513
+            },
+            {
+              "type": "rightLip",
+              "x": 0.415,
+              "y": 0.513
+            }
+          ],
+          "orientation": {
+            "x": 15.303436,
+            "y": -9.222179,
+            "z": -7.97249
+          },
+          "mask": false,
+          "confidence": 99.8945155187
+        },
+        "similarity": 90.654
+      }
+    ],
+    "unmatchedFaceDetailCount": 1,
+    "unmatchedFaceDetails": [
+      {
+        "faceDetail": {
+          "bbox": {
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
+          },
+          "landmarks": [
+            {
+              "type": "leftEye",
+              "x": 0.415,
+              "y": 0.513
+            },
+            {
+              "type": "rightEye",
+              "x": 0.415,
+              "y": 0.513
+            },
+            {
+              "type": "nose",
+              "x": 0.415,
+              "y": 0.513
+            },
+            {
+              "type": "leftLip",
+              "x": 0.415,
+              "y": 0.513
+            },
+            {
+              "type": "rightLip",
+              "x": 0.415,
+              "y": 0.513
+            }
+          ],
+          "orientation": {
+            "x": 15.303436,
+            "y": -9.222179,
+            "z": -7.97249
+          },
+          "mask": false,
+          "confidence": 99.8945155187
+        },
+        "similarity": 60.654
+      }
+    ],
+    "sourceFace": {
+      "bbox": {
+        "x0": 0.26785714285714285,
+        "y0": 0.22767857142857142,
+        "x1": 0.7366071428571429,
+        "y1": 0.8660714285714286
+      },
+      "landmarks": [
+        {
+          "type": "leftEye",
+          "x": 0.39285714285714285,
+          "y": 0.47767857142857145
+        },
+        {
+          "type": "rightEye",
+          "x": 0.6071428571428571,
+          "y": 0.4732142857142857
+        },
+        {
+          "type": "nose",
+          "x": 0.5,
+          "y": 0.6026785714285714
+        },
+        {
+          "type": "leftLip",
+          "x": 0.41964285714285715,
+          "y": 0.7276785714285714
+        },
+        {
+          "type": "rightLip",
+          "x": 0.5758928571428571,
+          "y": 0.7276785714285714
         }
+      ],
+      "orientation": {
+        "x": 1.400425,
+        "y": 6.624787,
+        "z": -2.08028
+      },
+      "mask": false,
+      "confidence": 0.999894
     }
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
@@ -1634,9 +1695,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image:画像ダウンロード時間超過 |
 |-50000| InternalServerError | サーバーエラー |
 
-
 <span id="verify"></span>
+
 ### 顔検証
+
 * 事前に登録された特定の顔のフェイスIDと、入力画像から検出した顔を比較して類似度値を返す機能です。
 * [顔登録](./api-guide/#add-face)を利用して顔を登録できます。
 * 入力画像から検出した顔のうち、最も大きい顔のみを使用します。
@@ -1644,12 +1706,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 * 入力画像についての詳細は、[入力画像ガイド](./api-guide/#input-image-guide)を参照してください。
 
 <span id="verify-request"></span>
+
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id} |
+| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify |
 
 [Path Variable]
 
@@ -1661,6 +1725,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 [Request Body]
 
+#### Content-Type: application/json
+
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
 | compareImage | object | O |  |  | - | 顔の検証に使用する画像 |
@@ -1671,25 +1737,35 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 * compareImage.url, compareImage.bytesのいずれかが必要です。
 
+#### Content-Type: multipart/form-data
+
+| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| --- | --- | --- | --- | --- | --- | --- |
+| imageFile | file | O |  |  | image.png | 얼굴 검증에 사용할 이미지 파일 |
+| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
+| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
     }
 }'
 ```
 
-</details>
+```
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify'
+```
 
+</details>
 
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-  * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1723,79 +1799,77 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | data.sourceFace.mask | boolean |  | false | マスク着用の有無 |
 | data.sourceFace.confidence | float | O | 99.9123 | 顔の認識信頼度 |
 
-
 <details>
 <summary>レスポンス本文例</summary>
 
 ```json
 {
-    "header": {
-        "isSuccessful": true,
-        "resultCode": 0,
-        "resultMessage": "Success"
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 0,
+    "resultMessage": "Success"
+  },
+  "data": {
+    "similarity": 29.507784,
+    "face": {
+      "bbox": {
+        "x0": 0.15520833333333334,
+        "y0": 0.2222222222222222,
+        "x1": 0.24479166666666666,
+        "y1": 0.45185185185185184
+      },
+      "confidence": 0.997507,
+      "faceId": "b460baac-190d-448e-9f29-c2d5d429f388",
+      "imageId": "f43a7bee-6a33-4450-82dd-16adfc6788ef",
+      "externalImageId": "imsa-control-wb801-test"
     },
-    "data": {
-        "similarity": 29.507784,
-        "face": {
-            "bbox": {
-                "x0": 0.15520833333333334,
-                "y0": 0.2222222222222222,
-                "x1": 0.24479166666666666,
-                "y1": 0.45185185185185184
-            },
-            "confidence": 0.997507,
-            "faceId": "b460baac-190d-448e-9f29-c2d5d429f388",
-            "imageId": "f43a7bee-6a33-4450-82dd-16adfc6788ef",
-            "externalImageId": "imsa-control-wb801-test"
+    "sourceFace": {
+      "bbox": {
+        "x0": 0.26785714285714285,
+        "y0": 0.22767857142857142,
+        "x1": 0.7366071428571429,
+        "y1": 0.8660714285714286
+      },
+      "landmarks": [
+        {
+          "type": "leftEye",
+          "x": 0.39285714285714285,
+          "y": 0.47767857142857145
         },
-        "sourceFace": {
-            "bbox": {
-                "x0": 0.26785714285714285,
-                "y0": 0.22767857142857142,
-                "x1": 0.7366071428571429,
-                "y1": 0.8660714285714286
-            },
-            "landmarks": [
-                {
-                    "type": "leftEye",
-                    "x": 0.39285714285714285,
-                    "y": 0.47767857142857145
-                },
-                {
-                    "type": "rightEye",
-                    "x": 0.6071428571428571,
-                    "y": 0.4732142857142857
-                },
-                {
-                    "type": "nose",
-                    "x": 0.5,
-                    "y": 0.6026785714285714
-                },
-                {
-                    "type": "leftLip",
-                    "x": 0.41964285714285715,
-                    "y": 0.7276785714285714
-                },
-                {
-                    "type": "rightLip",
-                    "x": 0.5758928571428571,
-                    "y": 0.7276785714285714
-                }
-            ],
-            "orientation": {
-                "x": 1.400425,
-                "y": 6.624787,
-                "z": -2.08028
-            },
-            "mask": false,
-            "confidence": 0.999286
+        {
+          "type": "rightEye",
+          "x": 0.6071428571428571,
+          "y": 0.4732142857142857
+        },
+        {
+          "type": "nose",
+          "x": 0.5,
+          "y": 0.6026785714285714
+        },
+        {
+          "type": "leftLip",
+          "x": 0.41964285714285715,
+          "y": 0.7276785714285714
+        },
+        {
+          "type": "rightLip",
+          "x": 0.5758928571428571,
+          "y": 0.7276785714285714
         }
+      ],
+      "orientation": {
+        "x": 1.400425,
+        "y": 6.624787,
+        "z": -2.08028
+      },
+      "mask": false,
+      "confidence": 0.999286
     }
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
