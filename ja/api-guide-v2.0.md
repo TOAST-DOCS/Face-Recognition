@@ -1,7 +1,7 @@
-## AI Service > Face Recognition > API v2.0 가이드
+## AI Service > Face Recognition > API v2.0ガイド
 
-* 얼굴 인식 API v2.0을 사용하는 데 필요한 API를 설명합니다.
-* 얼굴 인식 API v2.0부터 SecretKey 인증이 추가됩니다.
+* 顔認識API v2.0を使用するために必要なAPIを説明します。
+* 顔認識API v2.0からSecretKey認証が追加されます。
 
 ## API共通情報
 
@@ -10,7 +10,7 @@
 - APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
     - プロジェクト統合Appkeyを使用することを推奨します。
     - プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
-    - 서비스 Appkey, SecretKey는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
+    - サービスAppkey, SecretKeyはコンソール上部の**URL & Appkey** メニューで確認が可能です。
 
 ### リクエスト共通情報
 
@@ -24,9 +24,9 @@
 
 [Header]
 
-| 이름 | 값 | 설명 |
+| 名前 | 値 | 説明 |
 | --- | --- | --- |
-| Authorization | {secretKey} | 콘솔에서 발급 받은 보안 키 |
+| Authorization | {secretKey} | コンソールで発行されたセキュリティキー |
 
 <span id="input-image-guide"></span>
 
@@ -40,7 +40,7 @@
 * 入力画像の幅または高さが2048pxを超える場合、原本画像の比率に合わせて幅または高さを最大2048pxに変換して使用します。
 * 画像最大サイズ：最大3MB(3,000,000Byte)
 * サポート画像フォーマット：PNG、JPEG
-* イメージURLにポートを直接指定する場合は80、443、10000～12000ポートのみ使用できます。
+* 画像URLにポートを直接指定する場合は80、443、10000～12000ポートのみ使用できます。
 
 <span id="common-response"></span>
 
@@ -93,6 +93,7 @@
 | メソッド | URI |
 | --- | --- |
 | POST | /v2.0/appkeys/{appKey}/groups |
+
 
 [Path Variable]
 
@@ -426,11 +427,11 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-
 
 #### Content-Type: multipart/form-data
 
-| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| imageFile | file | O |  | | image.png | 얼굴 감지에 사용할 이미지 파일 | 
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+| imageFile | file | O |  | | image.png | 顔検出に使用する画像ファイル | 
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
 
 <details>
 <summary>リクエスト例</summary>
@@ -546,7 +547,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | パラメータにエラーがある |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageParameterException | 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageParameterException | 無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
@@ -601,13 +602,13 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 #### Content-Type: multipart/form-data
 
-| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| imageFile | file | O |  | | image.png | 얼굴 등록에 사용할 이미지 파일 | 
-| limit | int | O |  | 1 ~ 20 | 3 | 입력 이미지에서 인식한 얼굴 중 크기가 큰 순으로 정렬하여 그룹에 등록할 최대 얼굴 수 |
-| externalImageId | string |  |  | [a-zA-Z0-9_.\-:]<br>최대 255자 | "image01.jsp" | 사용자가 이미지 또는 페이스 아이디에 라벨링을 하기 위해 전달하는 값 |
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+| imageFile | file | O |  | | image.png | 顔登録に使用する画像ファイル | 
+| limit | int | O |  | 1 ～ 20 | 3 | 入力画像から認識した顔のうち、大きい順にソートしてグループに登録する最大顔数 |
+| externalImageId | string |  |  | [a-zA-Z0-9_.\-:]<br>最大255文字 | "image01.jsp" | ユーザーが画像またはフェイスIDにラベリングをするために渡す値 |
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
 
 <details>
 <summary>リクエスト例</summary>
@@ -815,7 +816,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40070| ServiceQuotaExceededException | 1つのグループに登録可能な最大顔数を超過 |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageParameterException | 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageParameterException | 無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
@@ -1179,13 +1180,13 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 #### Content-Type: multipart/form-data
 
-| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| imageFile | file | O |  |  | image.png | 얼굴 검색에 사용할 이미지 파일 |
-| limit | int | O |  | 1 ~ 4096 | 100 | 최대 크기 |
-| threshold | int | O |  | 1 ~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 | 
+| imageFile | file | O |  |  | image.png | 顔検索に使用する画像ファイル |
+| limit | int | O |  | 1 ～ 4096 | 100 | 最大サイズ |
+| threshold | int | O |  | 1 ～ 100 | 90 | マッチング有無を判断する類似度基準値 |
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか | 
 
 <details>
 <summary>リクエスト例</summary>
@@ -1340,7 +1341,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageParameterException | 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageParameterException | 無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
@@ -1393,13 +1394,13 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 #### Content-Type: multipart/form-data
 
-| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| sourceImageFile | object | O |  |  | sourceImage.png | 얼굴 비교 시 기준이 되는 이미지 파일<br/>(=referenceImage) |
-| targetImageFile | object | O |  |  | targetImage.png | 비교 대상이 되는 얼굴이 포함된 이미지 파일<br/>(=comparisonImage) |
-| threshold | int | O |  | 1 ~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+| sourceImageFile | object | O |  |  | sourceImage.png | 顔を比較する際の基準となる画像ファイル<br/>(=referenceImage) |
+| targetImageFile | object | O |  |  | targetImage.png | 比較対象となる顔を含む画像ファイル<br/>(=comparisonImage) |
+| threshold | int | O |  | 1 ～ 100 | 90 | マッチング有無を判断する類似度基準値 |
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
 
 <details>
 <summary>リクエスト例</summary>
@@ -1689,7 +1690,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | パラメータにエラーがある |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image:画像サイズ超過 |
-|-45030| InvalidImageParameterException:{Source/Target} | {Source/Target} 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageParameterException:{Source/Target} | {Source/Target}無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image:サポートしない画像フォーマット |
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image：無効な画像URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image:画像ダウンロード時間超過 |
@@ -1739,11 +1740,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 #### Content-Type: multipart/form-data
 
-| 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
+| 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| imageFile | file | O |  |  | image.png | 얼굴 검증에 사용할 이미지 파일 |
-| orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
-| mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+| imageFile | file | O |  |  | image.png | 顔検証に使用する画像ファイル |
+| orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
+| mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
 
 <details>
 <summary>リクエスト例</summary>
@@ -1880,7 +1881,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
 |-41000| UnauthorizedAppKey | 承認されていないAppkey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageParameterException | 無効なイメージパラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageParameterException | 無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
