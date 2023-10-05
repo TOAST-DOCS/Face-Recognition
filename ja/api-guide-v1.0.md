@@ -1,6 +1,6 @@
-## AI Service > Face Recognition > API v1.0 가이드
+## AI Service > Face Recognition > API v1.0ガイド
 
-* 얼굴 인식 API v1.0을 사용하는 데 필요한 API를 설명합니다.
+* 顔認識API v1.0を使用するために必要なAPIを説明します。
 
 ## API共通情報
 ### 事前準備
@@ -74,7 +74,7 @@
 
 ### グループ作成
 
-- グループを作成するAPIです。作成されたグループに[顔登録](./api-guide/#add-face)を利用して顔を登録できます。
+'- グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v1.0/#add-face)を利用して顔を登録できます。
 
 #### リクエスト
 [URI]
@@ -110,7 +110,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 
 <details>
@@ -200,7 +200,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -276,7 +276,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -355,7 +355,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -389,7 +389,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * 検出した顔から顔、目、鼻、口などの位置情報と信頼度の値を返します。
 * 入力画像から顔が大きい順に最大20個の顔を検出します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v1.0/#input-image-guide)」を参照してください。
 
 <span id="detect-face-request"></span>
 #### リクエスト
@@ -435,7 +435,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -537,11 +537,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 * 入力画像から検出した顔を特定グループに登録するAPIです。
 * 入力画像から顔のboxを検出し、検出した顔boxから顔の特徴をベクトルで抽出します。この時、入力画像と入力画像から検出した顔画像は保存しません。
 * 抽出したベクトルデータは暗号化してデータベースに保存します。
-* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide/#search-by-face-id)、[画像で顔検索](./api-guide/#search-by-image) APIで特徴ベクトルとして使用します。
+* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide-v1.0/#search-by-face-id)、[画像で顔検索](./api-guide-v1.0/#search-by-image) APIで特徴ベクトルとして使用します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v1.0/#input-image-guide)」を参照してください。
 * "imageId"は入力画像に付与される値で、"externalImageId"はユーザーが直接付与できる値です。ユーザーは"imageId"と"externalImageId"を利用して画像またはフェイスIDにラベリングしてインデックスのように活用できます。
-* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide/#face-list-in-a-group)と[フェイスIDで顔検索](./api-guide/#search-by-face-id)、[画像で顔検索](./api-guide/#search-by-image) APIのレスポンスで返されます。
+* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide-v1.0/#face-list-in-a-group)と[フェイスIDで顔検索](./api-guide-v1.0/#search-by-face-id)、[画像で顔検索](./api-guide-v1.0/#search-by-image) APIのレスポンスで返されます。
 * 1つのグループに登録できる顔の数は最大10万個です。
 
 <span id="add-face-request"></span>
@@ -595,7 +595,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -814,7 +814,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 
 <details>
@@ -908,7 +908,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1024,7 +1024,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1108,7 +1108,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 * 入力画像から検出した最も大きい顔を使用して特定グループに属す顔と一致するかどうかを比較します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v1.0/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="search-by-image-request"></span>
@@ -1163,7 +1163,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1310,7 +1310,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 * 基準画像(sourceImage)と比較画像(targetImage)から検出した顔がどれくらい類似しているかを比較します。
 * 基準画像から検出した顔のうち、最も大きい顔(基準顔)のみ使用します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v1.0/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="compare-face-request"></span>
@@ -1370,7 +1370,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1638,10 +1638,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 <span id="verify"></span>
 ### 顔検証
 * 事前に登録された特定の顔のフェイスIDと、入力画像から検出した顔を比較して類似度値を返す機能です。
-* [顔登録](./api-guide/#add-face)を利用して顔を登録できます。
+* [顔登録](./api-guide-v1.0/#add-face)を利用して顔を登録できます。
 * 入力画像から検出した顔のうち、最も大きい顔のみを使用します。
 * 入力画像はBase64でエンコードされた画像バイトで伝達するか、画像URLで伝達できます。
-* 入力画像についての詳細は、[入力画像ガイド](./api-guide/#input-image-guide)を参照してください。
+* 入力画像についての詳細は、[入力画像ガイド](./api-guide-v1.0/#input-image-guide)を参照してください。
 
 <span id="verify-request"></span>
 #### リクエスト
@@ -1689,7 +1689,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-  * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+  * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
