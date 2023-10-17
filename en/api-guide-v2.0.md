@@ -1,18 +1,18 @@
 ## AI Service > Face Recognition > API v2.0 Guide
 
-* 얼굴 인식 API v2.0을 사용하는 데 필요한 API를 설명합니다.
-* 얼굴 인식 API v2.0부터 SecretKey 인증이 추가됩니다.
+* This document describes the APIs required for using Face Recognition API v2.0.
+* SecretKey authentication is added starting with the Face Recognition API v2.0.
 
-## Common API Information
+## API Common Information
 
 ### Preparations
 
 - To use APIs, an integrated project Appkey or service Appkey is required.
     - We recommend using the integrated project Appkey.
     - You can create and use the integrated project Appkey from the API security settings in the project settings page.
-    - The service Appkey and SecretKey are located in the **URL & Appkey** menu on the top of the console.
+    - You can check the Appkey and SecretKey in the **URL & Appkey** menu at the top of the console.
 
-### Common Request Information
+### Request Common Information
 
 - The security key needs to be authenticated in order to use APIs.
 
@@ -26,20 +26,20 @@
 
 | Name | Value | Description |
 | --- | --- | --- |
-| Authorization | {secretKey} | 콘솔에서 발급 받은 보안 키 |
+| Authorization | {secretKey} | Security key issued from the console |
 
 <span id="input-image-guide"></span>
 
 ### Input Image Guide
 
-* Face images must be at least 80*80 px in width and height.
+* Face images must be at least 80x80 px in width and height.
     * The face size must be at least 60*60 px to be eligible for facial recognition.
     * As the image gets bigger, the minimum face size must get bigger as well for better facial recognition precision.
     * The bigger the proportion of the face area in the image, the more precise the facial recognition.
 * In the input image, both left/right angle(Yaw) and up/down angle(Pitch) of the face must be 45 degrees or less.
-* Max image size: up to 3MB(3,000,000Byte)
+* Maximum size of image file: 3 MB (3,000,000 bytes)
 * Supported image formats: PNG, JPEG
-* If you specify the port directly in the image URL, only ports 80, 443, 10000-12000 can be used.
+* If you specify a port directly in the image URL, only ports 80, 443, and 10000 to 12000 are available.
 
 <span id="common-response"></span>
 
@@ -101,9 +101,9 @@
 
 [Request Body]
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| groupId | string | O |  | [a-z0-9-]{1,255} | "my-group" | Group ID registered by user |
+| groupId | string | O |  | [a-z0-9-]<br>Max. 255 characters | "my-group" | Group ID registered by user |
 
 <details>
 <summary>Request example</summary>
@@ -143,7 +143,8 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 |-40000| InvalidParam | The parameter contains an error |
 |-40010| InvalidGroupID | Group ID error |
 |-40020| DuplicatedGroupID | Duplicate group ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-40070| ServiceQuotaExceededException | Exceeding the maximum number of groups you can create |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
 ### Group List
@@ -166,18 +167,15 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 
 [URL Parameter]
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | limit | int | O |  | 1 ~ 200 | 100 | Max size |
-| next-token | string |  |  |  | "skljsdioew..."  | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
+| next-token | string |  |  |  | "skljsdioew..." | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
 * Caution
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
     * Upon issuing the token, the limit becomes fixed.
-* Scenario example)
-
-* Initial query
 
 <details>
 <summary>Request example</summary>
@@ -208,11 +206,10 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 
 [Response body data]
 
-| Name | Type | Required | Example | Description |
+| Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 2 | Number of groups |
-| data.groups[].groupId | string | O | "group-id" | Group IDs registered by user |
-| data.groups[].modelVersion | string | O | "v1.0" | Face recognition model version info |
+| data.groups[].groupId | string | O | "group-id" | Group ID registered by user |
 | data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | Token to be used for paging<br>If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
 <details>
@@ -248,7 +245,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40040| InvalidTokenError | Invalid token used |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
 ### Group Details
@@ -268,13 +265,13 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
+| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -286,10 +283,10 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Typ
 
 [Response body data]
 
-| Name | Type | Required | Example | Description |
+| Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
 | data.groupCount | int | O | 1 | Number of groups |
-| data.groups[].groupId | string | O | "group-id" | Group IDs registered by user |
+| data.groups[].groupId | string | O | "group-id" | Group ID registered by user |
 | data.groups[].createTime | string | O | "2020-11-04T12:36:24" | Time when the group was created |
 | data.groups[].faceCount | int |  | 365 | Number of faces registered in the group |
 
@@ -324,7 +321,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Typ
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
 ### Delete Group
@@ -344,7 +341,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Typ
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
+| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 
 <details>
 <summary>Request example</summary>
@@ -381,7 +378,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
 <span id="detect-face"></span>
@@ -414,29 +411,29 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 #### Content-Type: application/json
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| image | object | O |  |  | - | Image to use for face recognition |
+| image | object | O |  |  | - | Image used for face detection |
 | image.url | string | △ |  |  | "https://..." | Image URL |
 | image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64-encoded Image bytes |
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
 * Must have only one of either image.url or image.bytes.
 
 #### Content-Type: multipart/form-data
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| imageFile | file | O |  | | image.png | Image file to use for face recognition | 
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| imageFile | file | O |  | | image.png | Image file used for face detection | 
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/detect' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/detect' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url":"https://..."
     }
@@ -458,7 +455,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Response body data]
 
-| Name | Type | Required | Example | Description |
+| Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
 | data.faceDetailCount | int | O | 1 | Number of faces recognized |
 | data.faceDetails[].bbox | object | O | - | Bounding box information of a face detected in the image |
@@ -544,7 +541,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45030| InvalidImageParameterException | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
@@ -581,39 +578,39 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
+| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 
 [Request Body]
 
 #### Content-Type: application/json
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| image | object | O |  |  | - | Image to use for face recognition |
+| image | object | O |  |  | - | Image used for face registration |
 | image.url | string | △ |  |  | "https://..." | Image URL |
 | image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64-encoded Image bytes |
-| limit | int | O |  | 1 ~ 20 | 3 | Max number of faces to register in the group after sorting the faces recognized from the input image in order of largest to smallest |
-| externalImageId | string |  |  | [a-zA-Z0-9_.\-:]{1,255} | "image01.jsp" | Values provided by user to create a label for an image or face ID |
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| limit | int | O |  | 1~20 | 3 | Max number of faces to register in the group after sorting the faces recognized from the input image in order of largest to smallest |
+| externalImageId | string |  |  | [a-zA-Z0-9_.-:]<br>Max. 255 characters | "image01.jsp" | Values provided by user to create a label for an image or face ID |
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
 * Must have only one of either image.url or image.bytes.
 
 #### Content-Type: multipart/form-data
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| imageFile | file | O |  | | image.png | Image file to use for face recognition | 
-| limit | int | O |  | 1 ~ 20 | 3 | Max number of faces to register in the group after sorting the faces recognized from the input image in order of largest to smallest |
-| externalImageId | string |  |  | [a-zA-Z0-9_.\-:]{1,255} | "image01.jsp" | Values provided by user to create a label for an image or face ID |
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| imageFile | file | O |  | | image.png | Image file used for face registration | 
+| limit | int | O |  | 1~20 | 3 | Max number of faces to register in the group after sorting the faces recognized from the input image in order of largest to smallest |
+| externalImageId | string |  |  | [a-zA-Z0-9_.-:]<br>Max. 255 characters | "image01.jsp" | Values provided by user to create a label for an image or face ID |
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -628,6 +625,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
+
 <span id="add-face-response"></span>
 
 #### Response
@@ -637,7 +635,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Response body data]
 
-| Name | Type | Required | Example | Description |
+| Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
 | data.addedFaceCount | int | O | 1 | Number of faces registered |
 | data.addedFaces[].bbox | object | O | - | Bounding box information of a face detected in the image |
@@ -812,7 +810,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40070| ServiceQuotaExceededException | Exceeds the max number of faces which can be registered for a single group |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45030| InvalidImageParameterException | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
@@ -837,14 +835,14 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
+| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 | face-id | Registered face ID |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -876,7 +874,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40050| NotFoundFaceIDError | Could not find the face ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
 <span id="face-list-in-a-group"></span>
@@ -899,28 +897,25 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
+| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 
 [URL Parameter]
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | limit | int | O |  | 1 ~ 200 | 100 | Max size |
-| next-token | string |  |  |  | "skljsdioew..."  | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
+| next-token | string |  |  |  | "skljsdioew..." | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
 * Caution
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
     * Upon issuing the token, the limit becomes fixed.
-* Scenario example)
-
-* Initial query
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -931,7 +926,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 <summary>Request example</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -945,7 +940,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 
 [Response body data]
 
-| Name | Type | Required | Example | Description |
+| Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
 | data.faceCount | int | O | 2 | Number of faces recognized |
 | data.faces[].bbox | object | O | - | Bounding box information of a face in the image used for face registration |
@@ -1011,7 +1006,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40040| InvalidTokenError | Invalid token used |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
 <span id="search-by-face-id"></span>
@@ -1034,21 +1029,21 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
+| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 | face-id | Face ID to compare |
 
 [URL Parameter]
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| limit | int | O |  | 1 ~ 4096 | 100 | Max value to find |
-| threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
+| limit | int | O |  | 1~100 | 100 | Max size |
+| threshold | int | O |  | 1~100 | 90 | A similarity reference value that determines a match |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' 
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/search?limit={limit}&threshold={threshold}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1060,7 +1055,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?
 
 [Response body data]
 
-| Name | Type | Required | Example | Description |
+| Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
 | data.matchFaceCount | int | O | 2 | Number of faces matching the largest face detected in the input image |
 | data.matchFaces[].face.bbox | object | O | - | Bounding box information of a face in the image used for face registration |
@@ -1131,7 +1126,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40050| NotFoundFaceIDError | Could not find the face ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
 <span id="search-by-image"></span>
@@ -1158,42 +1153,44 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group id registered by user<br>[a-z0-9-]{1,255} |
+| group-id | Group id registered by user<br>[a-z0-9-]<br>Up to 255 characters |
 
 [Request Body]
 
 #### Content-Type: application/json
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| image | object | O |  |  | - | Image to use for face recognition |
+| image | object | O |  |  | - | Image used for face search |
 | image.url | string | △ |  |  | "https://..." | Image URL |
 | image.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64-encoded Image bytes |
-| limit | int | O |  | 1 ~ 4096 | 100 | Max value to find |
-| threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| limit | int | O |  | 1~100 | 100 | Max size |
+| threshold | int | O |  | 1~100 | 90 | A similarity reference value that determines a match |
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
 * Must have only one of either image.url or image.bytes.
 
 #### Content-Type: multipart/form-data
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| imageFile | file | O |  |  | image.png | Image File to use for face recognition |
-| limit | int | O |  | 1 ~ 4096 | 100 | Max value to find |
-| threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| imageFile | file | O |  |  | image.png | Image file used for face search |
+| limit | int | O |  | 1~100 | 100 | Max size |
+| threshold | int | O |  | 1~100 | 90 | A similarity reference value that determines a match |
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
-    }
+    },
+    "limit": 100
+    "threshold": 90
 }'
 ```
 
@@ -1210,7 +1207,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Response body data]
 
-| Name | Type | Required | Example | Description |
+| Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
 | data.matchFaceCount | int | O | 2 | Number of faces matching the largest face detected in the input image |
 | data.matchFaces[].face.bbox | object | O | - | Bounding box information of a face in the image used for face registration |
@@ -1337,7 +1334,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45030| InvalidImageParameterException | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
@@ -1347,7 +1344,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 <span id="compare-face"></span>
 
-### Compare faces
+### Compare Faces
 
 * Compares the similarity of the faces recognized from the reference image(sourceImage) and comparison image(targetImage).
 * Out of the faces recognized from the reference image, only the largest face(source face) is used.
@@ -1375,36 +1372,36 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 #### Content-Type: application/json
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| sourceImage | object | O |  |  | - | Reference image for facial comparison <br/>(=referenceImage) |
+| sourceImage | object | O |  |  | - | Reference image for facial comparison<br/>(=referenceImage) |
 | sourceImage.url | string | △ |  |  | "https://..." | Image URL |
 | sourceImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64-encoded Image bytes |
-| targetImage | object | O |  |  | - | Image containing the target face for comparison <br/>(=comparisonImage) |
+| targetImage | object | O |  |  | - | Image containing the target face for comparison<br/>(=comparisonImage) |
 | targetImage.url | string | △ |  |  | "https://..." | Image URL |
 | targetImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64-encoded Image bytes |
-| threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| threshold | int | O |  | 1~100 | 90 | A similarity reference value that determines a match |
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
-* Must have only one of either sourceImage.url or sourceImage.bytes.
-* Must have only one of either targetImage.url or targetImage.bytes.
+* Must have only either sourceImage.url or sourceImage.bytes.
+* Must have only either targetImage.url or targetImage.bytes.
 
 #### Content-Type: multipart/form-data
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| sourceImageFile | object | O |  |  | sourceImage.png | Reference image file for facial comparison <br/>(=referenceImage) |
-| targetImageFile | object | O |  |  | targetImage.png | Image file containing the target face for comparison <br/>(=comparisonImage) |
-| threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| sourceImageFile | object | O |  |  | sourceImage.png | Reference image file for facial comparison<br/>(=referenceImage) |
+| targetImageFile | object | O |  |  | targetImage.png | Image file containing the target face for comparison<br/>(=comparisonImage) |
+| threshold | int | O |  | 1~100 | 90 | A similarity reference value that determines a match |
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/compare?threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/compare' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "sourceImage": {
         "url": "https://..."
     },
@@ -1429,7 +1426,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Response body data]
 
-| Name | Type | Required | Example | Description |
+| Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
 | data.matchedFaceDetailCount | int | O | 1 | Number of matched faces |
 | data.matchedFaceDetails[].faceDetail.bbox | object | O | - | Bounding box information of a face detected in the image |
@@ -1686,7 +1683,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: Image size exceeded |
 |-45030| InvalidImageParameterException:{Source/Target} | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: Unsupported image format |
@@ -1719,36 +1716,36 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
+| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 | face-id | Registered face ID |
 
 [Request Body]
 
 #### Content-Type: application/json
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| compareImage | object | O |  |  | - | Image to use for face validation |
+| compareImage | object | O |  |  | - | Image used for face verification |
 | compareImage.url | string | △ |  |  | "https://..." | Image URL |
 | compareImage.bytes | blob | △ |  |  | "/0j3Ohdk==..." | Base64-encoded Image bytes |
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
 * Must have only either compareImage.url or compareImage.bytes
- 
+
 #### Content-Type: multipart/form-data
 
-| Name | Type | Required | Default value | Valid range | Example | Description |
+| Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| imageFile | file | O |  |  | image.png | Image file to use for face validation |
-| orientation | bool |  | true | true, false | false | Whether to use face orientation recognition function |
-| mask | bool |  | true | true, false | false | Whether to use the mask wear recognition function |
+| imageFile | file | O |  |  | image.png | Image file used for face verification |
+| orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
+| mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
     }
@@ -1768,7 +1765,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Response body data]
 
-| Name | Type | Required | Example | Description |
+| Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
 | data.similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 | data.face | object | O | - | A face registered using face registration API |
@@ -1809,18 +1806,18 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
     "resultMessage": "Success"
   },
   "data": {
-    "similarity": 87.074165,
+    "similarity": 29.507784,
     "face": {
       "bbox": {
-        "x0": 0.828,
-        "y0": 0.07829181494661921,
-        "x1": 0.886,
-        "y1": 0.2117437722419929
+        "x0": 0.15520833333333334,
+        "y0": 0.2222222222222222,
+        "x1": 0.24479166666666666,
+        "y1": 0.45185185185185184
       },
-      "confidence": 0.998737,
-      "faceId": "bd21a5d1-64bc-4723-a041-71d720fe56d8",
-      "imageId": "165b63c9-9564-4a65-b3f6-7bb64d4fe9f9",
-      "externalImageId": "user-defined-external-image-id"
+      "confidence": 0.997507,
+      "faceId": "b460baac-190d-448e-9f29-c2d5d429f388",
+      "imageId": "f43a7bee-6a33-4450-82dd-16adfc6788ef",
+      "externalImageId": "imsa-control-wb801-test"
     },
     "sourceFace": {
       "bbox": {
@@ -1877,7 +1874,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40050| NotFoundFaceIDError | Could not find the face ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45030| InvalidImageParameterException | Invalid image parameter. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
