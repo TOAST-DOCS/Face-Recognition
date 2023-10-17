@@ -33,7 +33,7 @@
 ### Input Image Guide
 
 * Face images must be at least 80x80 px in width and height.
-    * The face size must be at least 60\*60 px to be eligible for facial recognition.
+    * The face size must be at least 60*60 px to be eligible for facial recognition.
     * As the image gets bigger, the minimum face size must get bigger as well for better facial recognition precision.
     * The bigger the proportion of the face area in the image, the more precise the facial recognition.
 * In the input image, both left/right angle(Yaw) and up/down angle(Pitch) of the face must be 45 degrees or less.
@@ -426,7 +426,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| imageFile | file | O |  | | image.png | Image files for face detection | 
+| imageFile | file | O |  | | image.png | Image file used for face detection | 
 | orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
 | mask | bool |  | true | true, false | false | Whether to use mask wear detection |
 
