@@ -53,17 +53,17 @@
 | --- | --- | --- |
 | header.isSuccessful | boolean | true: normal<br>false: error |
 | header.resultCode | int | 0: normal<br>bigger than 0: partial success<br>negative number: error |
-| header.resultMessage | string | "SUCCESS": normal<br>other: returns error message |
+| header.resultMessage | string | "Success": normal<br>other: returns error message |
 
 [Success response body example]
 
 ```json
 {
-    "header": {
-        "isSuccessful": true,
-        "resultCode": 0,
-        "resultMessage": "SUCCESS"
-    }
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 0,
+    "resultMessage": "Success"
+  }
 }
 ```
 
@@ -71,11 +71,11 @@
 
 ```json
 {
-	"header": {
-		"isSuccessful": false,
-		"resultCode": -40000,
-		"resultMessage": "InvalidParam"
-	}
+  "header": {
+    "isSuccessful": false,
+    "resultCode": -40000,
+    "resultMessage": "InvalidParam"
+  }
 }
 ```
 
@@ -92,7 +92,6 @@
 | Method | URI |
 | --- | --- |
 | POST | /v2.0/appkeys/{appKey}/groups |
-
 
 [Path Variable]
 
@@ -127,11 +126,11 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 
 ```json
 {
-    "header" : {
-        "resultCode" :  0,
-        "resultMessage" :  "SUCCESS",
-        "isSuccessful" :  true
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  }
 }
 ```
 
@@ -363,11 +362,11 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 ```json
 {
-    "header" : {
-        "resultCode" :  0,
-        "resultMessage" :  "SUCCESS",
-        "isSuccessful" :  true
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  }
 }
 ```
 
@@ -858,11 +857,11 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 
 ```json
 {
-    "header" : {
-        "resultCode" :  0,
-        "resultMessage" :  "SUCCESS",
-        "isSuccessful" :  true
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  }
 }
 ```
 
@@ -1075,45 +1074,46 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "SUCCESS",
-        "isSuccessful": true
-    },
-    "data": {
-        "matchFaceCount": 2,
-        "matchFaces": [{
-                "face": {
-                    "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                    "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                    "externalImageId": "image01.jpg",
-                    "bbox": {
-                        "x0": 0.36,
-                        "y0": 0.21,
-                        "x1": 0.612,
-                        "y1": 0.715
-                    },
-                    "confidence": 99.8945155187
-                },
-                "similarity": 99.8945155187
-            },
-            {
-                "face": {
-                    "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                    "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                    "externalImageId": "image01.jpg",
-                    "bbox": {
-                        "x0": 0.36,
-                        "y0": 0.21,
-                        "x1": 0.612,
-                        "y1": 0.715
-                    },
-                    "confidence": 99.8945155187
-                },
-                "similarity": 79.8945155187
-            }
-        ]
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "matchFaceCount": 2,
+    "matchFaces": [
+      {
+        "face": {
+          "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
+          "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+          "externalImageId": "image01.jpg",
+          "bbox": {
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
+          },
+          "confidence": 99.8945155187
+        },
+        "similarity": 99.8945155187
+      },
+      {
+        "face": {
+          "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
+          "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+          "externalImageId": "image01.jpg",
+          "bbox": {
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
+          },
+          "confidence": 99.8945155187
+        },
+        "similarity": 79.8945155187
+      }
+    ]
+  }
 }
 ```
 

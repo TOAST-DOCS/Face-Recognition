@@ -1,18 +1,18 @@
 ## AI Service > Face Recognition > API v1.0 Guide
 
-* 얼굴 인식 API v1.0을 사용하는 데 필요한 API를 설명합니다.
+* This document describes the APIs required for using Face Recognition API v1.0.
 
 ## Common API Information
+
 ### Preparations
-- To use APIs, an integrated project Appkey or service Appkey is required.  
+
+- To use APIs, an integrated project Appkey or service Appkey is required.
     - We recommend using the integrated project Appkey.
     - You can create and use the integrated project Appkey from the API security settings in the project settings page.
     - The service Appkey is located in the **URL & Appkey** menu on the top of the console.
 
-
-
-
 ### Common Request Information
+
 - The security key needs to be authenticated in order to use APIs.
 
 [API domain]
@@ -22,6 +22,7 @@
 | https://face-recognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
+
 ### Input Image Guide
 
 * Face images must be at least 80*80 px in width and height.
@@ -34,6 +35,7 @@
 * If you specify the port directly in the image URL, only ports 80, 443, 10000-12000 can be used.
 
 <span id="common-response"></span>
+
 ### Common Response Information
 
 - Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
@@ -50,11 +52,11 @@
 
 ```json
 {
-    "header": {
-        "isSuccessful": true,
-        "resultCode": 0,
-        "resultMessage": "Success"
-    }
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 0,
+    "resultMessage": "Success"
+  }
 }
 ```
 
@@ -62,20 +64,22 @@
 
 ```json
 {
-    "header": {
-        "isSuccessful": false,
-        "resultCode": -40000,
-        "resultMessage": "InvalidParam"
-    }
+  "header": {
+    "isSuccessful": false,
+    "resultCode": -40000,
+    "resultMessage": "InvalidParam"
+  }
 }
 ```
+
 ## API Contents
 
 ### Create Groups
 
-- This API creates groups. You can use [Register Face](./api-guide/#add-face) to a created group to register faces.
+- This API creates groups. You can use [Register Face](./api-guide-v1.0/#add-face) to a created group to register faces.
 
 #### Request
+
 [URI]
 
 | Method | URI |
@@ -94,7 +98,6 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | groupId | string | O |  | [a-z0-9-]{1,255} | "my-group" | Group ID registered by user |
 
-
 <details>
 <summary>Request example</summary>
 
@@ -109,19 +112,18 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
-
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 <details>
 <summary>Response body example</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  }
 }
 ```
 
@@ -149,7 +151,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 | --- | --- |
 | GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups |
 
-
 [Path Variable]
 
 | Name | Description |
@@ -163,7 +164,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 | limit | int | O |  | 1 ~ 200 | 100 | Max size |
 | next-token | string |  |  |  | "skljsdioew..."  | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
-
 * Caution
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
@@ -171,7 +171,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 * Scenario example)
 
 * Initial query
-
 
 <details>
 <summary>Request example</summary>
@@ -183,7 +182,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 </details>
 
 * Requested using the next-token contained in the 'Group list response body data'
-
 
 <details>
 <summary>Request example</summary>
@@ -199,8 +197,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
-
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 [Response body data]
 
@@ -216,22 +213,25 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "groupCount": 2,
-        "groups": [{
-            "groupId": "group-id",
-            "modelVersion": "v1.0"
-        }, {
-            "groupId": "my-group",
-            "modelVersion": "v1.0"
-        }],
-        "nextToken":"dlkj-210jwoivndslko9d..."
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "groupCount": 2,
+    "groups": [
+      {
+        "groupId": "group-id",
+        "modelVersion": "v1.0"
+      },
+      {
+        "groupId": "my-group",
+        "modelVersion": "v1.0"
+      }
+    ],
+    "nextToken": "dlkj-210jwoivndslko9d..."
+  }
 }
 ```
 
@@ -251,6 +251,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 * This API views details of a specific group, such as group ID, model version, number of faces registered in the group, etc.
 
 #### Request
+
 [URI]
 
 | Method | URI |
@@ -276,7 +277,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 [Response body data]
 
@@ -293,20 +294,22 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "groupCount": 1,
-        "groups": [{
-            "groupId": "group-id",
-            "modelVersion": "v1.0",
-            "createTime": "2020-09-29T14:34:12",
-            "faceCount": 365
-        }]
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "groupCount": 1,
+    "groups": [
+      {
+        "groupId": "group-id",
+        "modelVersion": "v1.0",
+        "createTime": "2020-09-29T14:34:12",
+        "faceCount": 365
+      }
+    ]
+  }
 }
 ```
 
@@ -340,7 +343,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 | appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
 
-
 <details>
 <summary>Request example</summary>
 
@@ -350,28 +352,25 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 </details>
 
-
-
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 <details>
 <summary>Response body example</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
@@ -383,24 +382,27 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-50000| InternalServerError | Server error |
 
 <span id="detect-face"></span>
+
 ### Recognize Face
 
 * This API recognizes faces from input image.
 * Returns the position data of the face, eyes, nose, and moth and the confidence value from the recognized face.
 * Recognizes up to 20 faces from the input image in the order from the largest to smallest face.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 
 <span id="detect-face-request"></span>
+
 #### Request
+
 [URI]
- 
+
 | Method | URI |
 | --- | --- |
 | POST | /nhn-face-reco/v1.0/appkeys/{appKey}/detect |
 
 [Path Variable]
- 
+
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
@@ -417,10 +419,9 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 * Must have only one of either image.url or image.bytes.
 
-
 <details>
 <summary>Request example</summary>
- 
+
 ```
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
@@ -432,10 +433,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 </details>
 
 <span id="detect-face-response"></span>
+
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 [Response body data]
 
@@ -458,65 +460,67 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | data.faceDetails[].mask | boolean |  | false | Whether to wear a mask |
 | data.faceDetails[].confidence | float | O | 99.9123 | Face recognition confidence |
 
-
 <details>
 <summary>Response body example</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "faceDetailCount": 1,
-        "faceDetails": [{
-            "bbox": {
-                "x0": 0.36,
-                "y0": 0.21,
-                "x1": 0.612,
-                "y1": 0.715
-            },
-            "landmarks": [{
-                    "type": "leftEye",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "rightEye",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "nose",
-                    "x": 0.415,
-                    "y": 0.513
-                },
-                {
-                    "type": "leftLip",
-                    "x": 0.415,
-                    "y": 0.513
-                }, {
-                    "type": "rightLip",
-                    "x": 0.415,
-                    "y": 0.513
-                }
-            ],
-            "orientation": {
-                "x": 15.303436,
-                "y": -9.222179,
-                "z": -7.97249
-            },
-            "mask": false,
-            "confidence": 99.8945155187
-        }]
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "faceDetailCount": 1,
+    "faceDetails": [
+      {
+        "bbox": {
+          "x0": 0.36,
+          "y0": 0.21,
+          "x1": 0.612,
+          "y1": 0.715
+        },
+        "landmarks": [
+          {
+            "type": "leftEye",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "rightEye",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "nose",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "leftLip",
+            "x": 0.415,
+            "y": 0.513
+          },
+          {
+            "type": "rightLip",
+            "x": 0.415,
+            "y": 0.513
+          }
+        ],
+        "orientation": {
+          "x": 15.303436,
+          "y": -9.222179,
+          "z": -7.97249
+        },
+        "mask": false,
+        "confidence": 99.8945155187
+      }
+    ]
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
@@ -532,34 +536,36 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 |-50000| InternalServerError | Server error |
 
 <span id="add-face"></span>
+
 ### Register face
 
 * This API registers the face recognized from the input image to a certain group.
 * Recognizes the face box from the input image, and extracts the facial characteristics from the face box as vectors. As for the input image and the face recognized from the input image, neither is saved.
 * Extracted vector data gets saved in the database after encryption.
-* The saved vector data gets used as characteristic vectors for the [Search face by face ID](./api-guide/#search-by-face-id)and [Search face by image](./api-guide/#search-by-image) APIs.
+* The saved vector data gets used as characteristic vectors for the [Search face by face ID](./api-guide-v1.0/#search-by-face-id)and [Search face by image](./api-guide-v1.0/#search-by-image) APIs.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 * 'imageId' is a value given for the input image, and the 'externalImageId' is a value which can be directly given by the user. The user can utilize 'imageId' and 'externalImageId' to perform labeling for the image or face ID from the user-end, and they can also be used on their own like indexes.
-* 'imageId' and 'externalImageId' are returned from the response of the [Face list within a group](./api-guide/#face-list-in-a-group) and [Search face by face ID](./api-guide/#search-by-face-id) and [Search face by image](./api-guide/#search-by-image) APIs. 
+* 'imageId' and 'externalImageId' are returned from the response of the [Face list within a group](./api-guide-v1.0/#face-list-in-a-group) and [Search face by face ID](./api-guide-v1.0/#search-by-face-id) and [Search face by image](./api-guide/#search-by-image) APIs.
 * Up to 100,000 faces can be registered per single group.
- 
+
 <span id="add-face-request"></span>
+
 #### Request
 
 [URI]
- 
+
 | Method | URI |
 | --- | --- |
 | POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
- 
+
 [Path Variable]
- 
+
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
- 
+
 [Request Body]
 
 | Name | Type | Required | Default value | Valid range | Example | Description |
@@ -574,10 +580,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 * Must have only one of either image.url or image.bytes.
 
-
 <details>
 <summary>Request example</summary>
- 
+
 ```
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
@@ -591,10 +596,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 </details>
 
 <span id="add-face-response"></span>
+
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 [Response body data]
 
@@ -786,20 +792,20 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 * This API deletes specific registered faces from the group.
 
 #### Request
+
 [URI]
- 
+
 | Method | URI |
 | --- | --- |
 | DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
- 
+
 [Path Variable]
- 
+
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
 | face-id | Registered face ID |
- 
 
 <details>
 <summary>Request example</summary>
@@ -813,19 +819,18 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
-
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 <details>
 <summary>Response body example</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  }
 }
 ```
 
@@ -842,32 +847,33 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-50000| InternalServerError | Server error |
 
 <span id="face-list-in-a-group"></span>
+
 ### List of Faces within Group
 
 * This API views the face info list registered for a specific group.
 * Returns the face info array in order of most recently registered.
 
 #### Request
+
 [URI]
- 
+
 | Method | URI |
 | --- | --- |
 | GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces |
- 
+
 [Path Variable]
- 
+
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
- 
+
 [URL Parameter]
 
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | limit | int | O |  | 1 ~ 200 | 100 | Max size |
 | next-token | string |  |  |  | "skljsdioew..."  | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
- 
 
 * Caution
     * In the beginning, the next-token cannot exist.
@@ -877,7 +883,6 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 * Initial query
 
- 
 <details>
 <summary>Request example</summary>
 
@@ -887,9 +892,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 </details>
 
-
 * Requested using the next-token contained in the 'Group list response body data'
- 
 
 <details>
 <summary>Request example</summary>
@@ -900,14 +903,12 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 </details>
 
-
 * If the next-token exists, the limit cannot be changed, and it is auto-set to the value from when the token was issued
-
 
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 [Response body data]
 
@@ -926,47 +927,47 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | data.faces[].externalImageId | string |  | "image01.jpg" | Values registered in the image by user |
 | data.nextToken | string | O | "dlkj-210jwoivndslko9d..." | Token to be used for paging<br>If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
-
 <details>
 <summary>Response body example</summary>
 
-
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "modelVersion": "v1.0",
-        "faceCount": 2,
-        "faces": [{
-                "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                "externalImageId": "image01.jpg",
-                "bbox": {
-                    "x0": 0.36,
-                    "y0": 0.21,
-                    "x1": 0.612,
-                    "y1": 0.715
-                },
-                "confidence": 99.8945155187
-            }, 
-            {
-                "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                "externalImageId": "image01.jpg",
-                "bbox": {
-                    "x0": 0.36,
-                    "y0": 0.21,
-                    "x1": 0.612,
-                    "y1": 0.715
-                },
-                "confidence": 99.8945155187
-            }],
-        "nextToken":"dlkj-210jwoivndslko9d..."
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "modelVersion": "v1.0",
+    "faceCount": 2,
+    "faces": [
+      {
+        "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
+        "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+        "externalImageId": "image01.jpg",
+        "bbox": {
+          "x0": 0.36,
+          "y0": 0.21,
+          "x1": 0.612,
+          "y1": 0.715
+        },
+        "confidence": 99.8945155187
+      },
+      {
+        "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
+        "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+        "externalImageId": "image01.jpg",
+        "bbox": {
+          "x0": 0.36,
+          "y0": 0.21,
+          "x1": 0.612,
+          "y1": 0.715
+        },
+        "confidence": 99.8945155187
+      }
+    ],
+    "nextToken": "dlkj-210jwoivndslko9d..."
+  }
 }
 ```
 
@@ -983,37 +984,38 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-50000| InternalServerError | Server error |
 
 <span id="search-by-face-id"></span>
+
 ### Search face by face ID
 
 * This API searches for faces from a specific group using the face ID.
 * Returns the array of the face info in order of the most to least similar.
 
 #### Request
+
 [URI]
- 
+
 | Method | URI |
 | --- | --- |
 | GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
- 
+
 [Path Variable]
- 
+
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
 | group-id | Group ID registered by user<br>[a-z0-9-]{1,255} |
 | face-id | Face ID to compare |
- 
+
 [URL Parameter]
- 
+
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | limit | int | O |  | 1 ~ 4096 | 100 | Max value to find |
 | threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
 
-
 <details>
 <summary>Request example</summary>
- 
+
 ```
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' 
 ```
@@ -1023,7 +1025,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 [Response body data]
 
@@ -1041,56 +1043,55 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | data.matchFaces[].face.externalImageId | string |  | "image01.jpg" | Values registered in the image by user |
 | data.matchFaces[].similarity | float | O | 98.156 | Similarity value between 0 and 100 |
 
-
 <details>
 <summary>Response body example</summary>
 
 ```json
 {
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "Success",
-        "isSuccessful": true
-    },
-    "data": {
-        "matchFaceCount": 2,
-        "matchFaces": [{
-                "face": {
-                    "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                    "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                    "externalImageId": "image01.jpg",
-                    "bbox": {
-                        "x0": 0.36,
-                        "y0": 0.21,
-                        "x1": 0.612,
-                        "y1": 0.715
-                    },
-                    "confidence": 99.8945155187
-                },
-                "similarity": 99.8945155187
-            },
-            {
-                "face": {
-                    "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
-                    "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
-                    "externalImageId": "image01.jpg",
-                    "bbox": {
-                        "x0": 0.36,
-                        "y0": 0.21,
-                        "x1": 0.612,
-                        "y1": 0.715
-                    },
-                    "confidence": 99.8945155187
-                },
-                "similarity": 79.8945155187
-            }
-        ]
-    }
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "Success",
+    "isSuccessful": true
+  },
+  "data": {
+    "matchFaceCount": 2,
+    "matchFaces": [
+      {
+        "face": {
+          "faceId": "87db50d4-f2c6-b8ea-05ed-9f201309fd92",
+          "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+          "externalImageId": "image01.jpg",
+          "bbox": {
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
+          },
+          "confidence": 99.8945155187
+        },
+        "similarity": 99.8945155187
+      },
+      {
+        "face": {
+          "faceId": "17db50d4-f2c6-b8ea-05ed-9f201309fd92",
+          "imageId": "9297db50-d4f2-c6b8-ea05-edf2013089fd",
+          "externalImageId": "image01.jpg",
+          "bbox": {
+            "x0": 0.36,
+            "y0": 0.21,
+            "x1": 0.612,
+            "y1": 0.715
+          },
+          "confidence": 99.8945155187
+        },
+        "similarity": 79.8945155187
+      }
+    ]
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
@@ -1103,37 +1104,40 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-50000| InternalServerError | Server error |
 
 <span id="search-by-image"></span>
+
 ### Search face by image
 
 * Uses the largest face recognized from the input image to compare if it matches a face from a specific group.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
 <span id="search-by-image-request"></span>
+
 #### Request
+
 [URI]
- 
+
 | Method | URI |
 | --- | --- |
 | POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search |
- 
+
 [Path Variable]
- 
+
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
 | group-id | Group id registered by user<br>[a-z0-9-]{1,255} |
- 
+
 [URL Parameter]
- 
+
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | limit | int | O |  | 1 ~ 4096 | 100 | Max value to find |
 | threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
 
 [Request Body]
- 
+
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | image | object | O |  |  | - | Image to use for face recognition |
@@ -1144,10 +1148,9 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 * Must have only one of either image.url or image.bytes.
 
-
 <details>
 <summary>Request example</summary>
- 
+
 ```
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
@@ -1158,11 +1161,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 </details>
 
-
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 [Response body data]
 
@@ -1194,7 +1196,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | data.sourceFace.orientation.z | float |  | -7.97249 | Face angle compared to level surface(Roll) |
 | data.sourceFace.mask | boolean |  | false | Whether to wear a mask |
 | data.sourceFace.confidence | float | O | 99.9123 | Recognition confidence of the largest face detected in the input image |
-
 
 <details>
 <summary>Response body example</summary>
@@ -1288,7 +1289,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 </details>
 
-
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -1304,36 +1304,39 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 |-50000| InternalServerError | Server error |
 
 <span id="compare-face"></span>
+
 ### Compare faces
 
 * Compares the similarity of the faces recognized from the reference image(sourceImage) and comparison image(targetImage).
 * Out of the faces recognized from the reference image, only the largest face(source face) is used.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
 <span id="compare-face-request"></span>
+
 #### Request
+
 [URI]
- 
+
 | Method | URI |
 | --- | --- |
 | POST | /nhn-face-reco/v1.0/appkeys/{appKey}/compare |
- 
+
 [Path Variable]
- 
+
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
- 
+
 [URL Parameter]
- 
+
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | threshold | int | O |  | 1 ~ 100 | 90 | A similarity reference value that determines a match |
 
 [Request Body]
- 
+
 | Name | Type | Required | Default value | Valid range | Example | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | sourceImage | object | O |  |  | - | Reference image for facial comparison <br/>(=referenceImage) |
@@ -1350,7 +1353,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 <details>
 <summary>Request example</summary>
- 
+
 ```
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "sourceImage": {
@@ -1365,10 +1368,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 </details>
 
 <span id="compare-face-response"></span>
+
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 [Response body data]
 
@@ -1424,7 +1428,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | data.sourceFace.orientation.z | float |  | -7.97249 | Face angle compared to level surface(Roll) |
 | data.sourceFace.mask | boolean |  | false | Whether to wear a mask |
 | data.sourceFace.confidence | float | O | 99.9123 | Recognition confidence of the largest face detected in the input image |
-
 
 <details>
 <summary>Response body example</summary>
@@ -1618,7 +1621,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 </details>
 
-
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -1632,17 +1634,20 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} Image: Image download timeout |
 |-50000| InternalServerError | Server error |
 
-
 <span id="verify"></span>
+
 ### Face Verification
+
 * This function compares the face ID of a specific face registered in advance with the face detected in the input image and returns a similarity value.
-* Use [Register Face](./api-guide/#add-face) to a created group to register faces.
-* Only the largest face detected in the input image is used.  
+* Use [Register Face](./api-guide-v1.0/#add-face) to a created group to register faces.
+* Only the largest face detected in the input image is used.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 
 <span id="verify-request"></span>
+
 #### Request
+
 [URI]
 
 | Method | URI |
@@ -1669,7 +1674,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 * Must have only either compareImage.url or compareImage.bytes
 
-
 <details>
 <summary>Request example</summary>
 
@@ -1683,11 +1687,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 
 </details>
 
-
 #### Response
 
 * [Response body header description omitted]
-  * This information is available in [Common Response Information](./api-guide/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
 
 [Response body data]
 
@@ -1721,80 +1724,77 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 | data.sourceFace.mask | boolean |  | false | Whether to wear a mask |
 | data.sourceFace.confidence | float | O | 99.9123 | Face recognition confidence |
 
-
-
 <details>
 <summary>Response body example</summary>
 
 ```json
 {
-    "header": {
-        "isSuccessful": true,
-        "resultCode": 0,
-        "resultMessage": "Success"
+  "header": {
+    "isSuccessful": true,
+    "resultCode": 0,
+    "resultMessage": "Success"
+  },
+  "data": {
+    "similarity": 87.074165,
+    "face": {
+      "bbox": {
+        "x0": 0.828,
+        "y0": 0.07829181494661921,
+        "x1": 0.886,
+        "y1": 0.2117437722419929
+      },
+      "confidence": 0.998737,
+      "faceId": "bd21a5d1-64bc-4723-a041-71d720fe56d8",
+      "imageId": "165b63c9-9564-4a65-b3f6-7bb64d4fe9f9",
+      "externalImageId": "user-defined-external-image-id"
     },
-    "data": {
-        "similarity": 87.074165,
-        "face": {
-            "bbox": {
-                "x0": 0.828,
-                "y0": 0.07829181494661921,
-                "x1": 0.886,
-                "y1": 0.2117437722419929
-            },
-            "confidence": 0.998737,
-            "faceId": "bd21a5d1-64bc-4723-a041-71d720fe56d8",
-            "imageId": "165b63c9-9564-4a65-b3f6-7bb64d4fe9f9",
-            "externalImageId": "user-defined-external-image-id"
+    "sourceFace": {
+      "bbox": {
+        "x0": 0.26785714285714285,
+        "y0": 0.22767857142857142,
+        "x1": 0.7366071428571429,
+        "y1": 0.8660714285714286
+      },
+      "landmarks": [
+        {
+          "type": "leftEye",
+          "x": 0.39285714285714285,
+          "y": 0.47767857142857145
         },
-        "sourceFace": {
-            "bbox": {
-                "x0": 0.26785714285714285,
-                "y0": 0.22767857142857142,
-                "x1": 0.7366071428571429,
-                "y1": 0.8660714285714286
-            },
-            "landmarks": [
-                {
-                    "type": "leftEye",
-                    "x": 0.39285714285714285,
-                    "y": 0.47767857142857145
-                },
-                {
-                    "type": "rightEye",
-                    "x": 0.6071428571428571,
-                    "y": 0.4732142857142857
-                },
-                {
-                    "type": "nose",
-                    "x": 0.5,
-                    "y": 0.6026785714285714
-                },
-                {
-                    "type": "leftLip",
-                    "x": 0.41964285714285715,
-                    "y": 0.7276785714285714
-                },
-                {
-                    "type": "rightLip",
-                    "x": 0.5758928571428571,
-                    "y": 0.7276785714285714
-                }
-            ],
-            "orientation": {
-                "x": 1.400425,
-                "y": 6.624787,
-                "z": -2.08028
-            },
-            "mask": false,
-            "confidence": 0.999286
+        {
+          "type": "rightEye",
+          "x": 0.6071428571428571,
+          "y": 0.4732142857142857
+        },
+        {
+          "type": "nose",
+          "x": 0.5,
+          "y": 0.6026785714285714
+        },
+        {
+          "type": "leftLip",
+          "x": 0.41964285714285715,
+          "y": 0.7276785714285714
+        },
+        {
+          "type": "rightLip",
+          "x": 0.5758928571428571,
+          "y": 0.7276785714285714
         }
+      ],
+      "orientation": {
+        "x": 1.400425,
+        "y": 6.624787,
+        "z": -2.08028
+      },
+      "mask": false,
+      "confidence": 0.999286
     }
+  }
 }
 ```
 
 </details>
-
 
 #### Error Codes
 
