@@ -285,10 +285,9 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorizati
 
 | Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
-| data.groupCount | int | O | 1 | Number of groups |
-| data.groups[].groupId | string | O | "group-id" | Group ID registered by user |
-| data.groups[].createTime | string | O | "2020-11-04T12:36:24" | Time when the group was created |
-| data.groups[].faceCount | int |  | 365 | Number of faces registered in the group |
+| data.groupId | string | O | "group-id" | Group ID registered by user |
+| data.createTime | string | O | "2020-11-04T12:36:24" | Time when the group was created |
+| data.faceCount | int |  | 365 | Number of faces registered in the group |
 
 <details>
 <summary>Response body example</summary>
@@ -301,14 +300,9 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorizati
     "isSuccessful": true
   },
   "data": {
-    "groupCount": 1,
-    "groups": [
-      {
-        "groupId": "group-id",
-        "createTime": "2020-09-29T14:34:12",
-        "faceCount": 365
-      }
-    ]
+    "groupId": "group-id",
+    "createTime": "2020-09-29T14:34:12",
+    "faceCount": 365
   }
 }
 ```
@@ -942,7 +936,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 
 | Name | Type | Required | Examples | Description |
 | --- | --- | --- | --- | --- |
-| data.faceCount | int | O | 2 | Number of faces recognized |
+| data.faceCount | int | O | 2 | Number of faces registered in the group |
 | data.faces[].bbox | object | O | - | Bounding box information of a face in the image used for face registration |
 | data.faces[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
 | data.faces[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
