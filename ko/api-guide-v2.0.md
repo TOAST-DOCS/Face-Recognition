@@ -286,10 +286,9 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorizati
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.groupCount | int | O | 1 | 그룹 수 |
-| data.groups[].groupId | string | O | "group-id" | 사용자가 등록한 그룹 아이디 |
-| data.groups[].createTime | string | O | "2020-11-04T12:36:24" | 그룹을 생성한 시간 |
-| data.groups[].faceCount | int |  | 365 | 그룹에 등록한 얼굴 수 |
+| data.groupId | string | O | "group-id" | 사용자가 등록한 그룹 아이디 |
+| data.createTime | string | O | "2020-11-04T12:36:24" | 그룹을 생성한 시간 |
+| data.faceCount | int |  | 365 | 그룹에 등록한 얼굴 수 |
 
 <details>
 <summary>응답 본문 예</summary>
@@ -302,14 +301,9 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorizati
     "isSuccessful": true
   },
   "data": {
-    "groupCount": 1,
-    "groups": [
-      {
-        "groupId": "group-id",
-        "createTime": "2020-09-29T14:34:12",
-        "faceCount": 365
-      }
-    ]
+    "groupId": "group-id",
+    "createTime": "2020-09-29T14:34:12",
+    "faceCount": 365
   }
 }
 ```
@@ -943,7 +937,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
-| data.faceCount | int | O | 2 | 감지한 얼굴 수 |
+| data.faceCount | int | O | 2 | 그룹에 등록한 얼굴 수 |
 | data.faces[].bbox | object | O | - | 얼굴 등록 시 사용한 이미지에서 얼굴의 경계 상자(bounding box) 정보 |
 | data.faces[].bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.faces[].bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |

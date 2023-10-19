@@ -915,7 +915,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | 이름 | 타입 | 필수 | 예제 | 설명 |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 얼굴 감지 모델 정보 |
-| data.faceCount | int | O | 2 | 감지한 얼굴 수 |
+| data.faceCount | int | O | 2 | 그룹에 등록한 얼굴 수 |
 | data.faces[].bbox | object | O | - | 얼굴 등록 시 사용한 이미지에서 얼굴의 경계 상자(bounding box) 정보 |
 | data.faces[].bbox.x0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 x0 좌표 |
 | data.faces[].bbox.y0 | float | O | 0.123 | 이미지 내에서 감지한 얼굴 box의 y0 좌표 |
