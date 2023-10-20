@@ -15,10 +15,9 @@
 ### 分析
 画像をアップロードして分析ボタンを押すと、分析結果が画面右側に表示されます。
 
-![detect](http://static.toastoven.net/prod_facerecognition/FR_detect_jp.png)
+![detect](http://static.toastoven.net/prod_facerecognition/FR_detect_jp_v2.png)
 
 * [Result]検出した顔の領域と信頼度を表示します。
-* [Request] APIの呼び出し時にリクエストするJSONのサンプルを表示します。
 * [Response] APIの呼び出し時にレスポンスされるJSONサンプルを表示します。
 
 
@@ -36,8 +35,7 @@
 ### 比較
 画像をアップロードして比較ボタンを押すと、比較結果が画面右側に表示されます。
 
-![compare](http://static.toastoven.net/prod_facerecognition/FR_compare_jp.png)
+![compare](http://static.toastoven.net/prod_facerecognition/FR_compare_jp_v2.png)
 
 * [Result]基準画像(Reference Image)から検出した顔と比較画像(Comparison Image)から検出した顔の比較結果と類似度を表示します。 
-* [Request] APIの呼び出し時にリクエストするJSONのサンプルを表示します。
 * [Response] APIの呼び出し時にレスポンスされるJSONサンプルを表示します。
