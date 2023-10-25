@@ -915,7 +915,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | 顔検出モデル情報 |
-| data.faceCount | int | O | 2 | 検出した顔の数 |
+| data.faceCount | int | O | 2 | グループに登録した顔の数 |
 | data.faces[].bbox | object | O | - | 顔の登録時に使用した画像で顔の境界ボックス(bounding box)情報 |
 | data.faces[].bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.faces[].bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |

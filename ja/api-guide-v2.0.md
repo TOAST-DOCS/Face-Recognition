@@ -289,10 +289,9 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Typ
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.groupCount | int | O | 1 | グループ数 |
-| data.groups[].groupId | string | O | "group-id" | ユーザーが登録したグループID |
-| data.groups[].createTime | string | O | "2020-11-04T12:36:24" | グループを作成した時間 |
-| data.groups[].faceCount | int |  | 365 | グループに登録した顔の数 |
+| data.groupId | string | O | "group-id" | ユーザーが登録したグループID |
+| data.createTime | string | O | "2020-11-04T12:36:24" | グループを作成した時間 |
+| data.faceCount | int |  | 365 | グループに登録した顔の数 |
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -305,14 +304,9 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Typ
     "isSuccessful": true
   },
   "data": {
-    "groupCount": 1,
-    "groups": [
-      {
-        "groupId": "group-id",
-        "createTime": "2020-09-29T14:34:12",
-        "faceCount": 365
-      }
-    ]
+    "groupId": "group-id",
+    "createTime": "2020-09-29T14:34:12",
+    "faceCount": 365
   }
 }
 ```
@@ -949,7 +943,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 
 | 名前 | タイプ | 必須 | 例 | 説明 |
 | --- | --- | --- | --- | --- |
-| data.faceCount | int | O | 2 | 検出した顔の数 |
+| data.faceCount | int | O | 2 | グループに登録した顔の数 |
 | data.faces[].bbox | object | O | - | 顔の登録時に使用した画像で顔の境界ボックス(bounding box)情報 |
 | data.faces[].bbox.x0 | float | O | 0.123 | 画像内から検出した顔boxのx0座標 |
 | data.faces[].bbox.y0 | float | O | 0.123 | 画像内から検出した顔boxのy0座標 |

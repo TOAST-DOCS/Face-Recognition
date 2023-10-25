@@ -915,7 +915,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 | Name | Type | Required | Example | Description |
 | --- | --- | --- | --- | --- |
 | data.modelVersion | string | O | "v1.0" | Face recognition model info |
-| data.faceCount | int | O | 2 | Number of faces recognized |
+| data.faceCount | int | O | 2 | Number of faces registered in the group |
 | data.faces[].bbox | object | O | - | Bounding box information of a face in the image used for face registration |
 | data.faces[].bbox.x0 | float | O | 0.123 | x0 coordinates of the face box detected in the image |
 | data.faces[].bbox.y0 | float | O | 0.123 | y0 coordinates of the face box detected in the image |
