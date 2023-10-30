@@ -15,10 +15,9 @@ Photos can be uploaded using one of the three methods:
 ### Analyze
 Once you upload the photo and click Analyze button, the analysis results appear on the right side of the screen.
 
-![detect](http://static.toastoven.net/prod_facerecognition/FR_detect_en.png)
+![detect](http://static.toastoven.net/prod_facerecognition/FR_detect_en_v2.png
 
 * [Result] Shows the area of the recognized face and confidence.
-* [Request] Shows the JSON example that is requested when calling the API.
 * [Response] Shows the JSON example that responds to the API call.
 
 
@@ -36,8 +35,7 @@ Threshold is a reference value of similarity that determines if the face detecte
 ### Compare
 Once you upload the photo and click Compare button, the comparison results appear on the right side of the screen.
 
-![compare](http://static.toastoven.net/prod_facerecognition/FR_compare_en.png)
+![compare](http://static.toastoven.net/prod_facerecognition/FR_compare_en_v2.png)
 
 * [Result] Shows the comparison results and similarity of faces recognized from the Reference Image and Comparison Image.  
-* [Request] Shows the JSON example that is requested when calling the API.
 * [Response] Shows the JSON example that responds to the API call.
