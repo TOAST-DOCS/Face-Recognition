@@ -1,5 +1,11 @@
 ## AI Service > Face Recognition > Release Notes
 
+### January 09, 2024
+
+#### Updates
+
+* Error message update(`InvalidImageParameterException` -> `InvalidImageBytesException`)
+
 ### October 31, 2023
 
 #### Added Features
