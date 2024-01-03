@@ -1,5 +1,11 @@
 ## AI Service > Face Recognition > 릴리스 노트
 
+### 2024. 01. 09.
+
+#### 개선
+
+* 오류 메시지 개선(`InvalidImageParameterException` -> `InvalidImageBytesException`)
+
 ### 2023. 10. 31.
 
 #### 기능 추가
