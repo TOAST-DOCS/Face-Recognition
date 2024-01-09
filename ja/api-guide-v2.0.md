@@ -541,7 +541,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | パラメータにエラーがある |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageParameterException | 無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
@@ -810,7 +810,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40070| ServiceQuotaExceededException | 1つのグループに登録可能な最大顔数を超過 |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageParameterException | 無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像パbytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
@@ -1335,7 +1335,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageParameterException | 無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像パbytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
@@ -1684,7 +1684,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | パラメータにエラーがある |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
 |-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image:画像サイズ超過 |
-|-45030| InvalidImageParameterException:{Source/Target} | {Source/Target}無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException:{Source/Target} | {Source/Target}無効な画像パbytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image:サポートしない画像フォーマット |
 |-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image：無効な画像URL |
 |-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image:画像ダウンロード時間超過 |
@@ -1875,7 +1875,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
 |-41000| UnauthorizedAppKey | 承認されていないAppkey |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageParameterException | 無効な画像パラメータ。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像パbytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
