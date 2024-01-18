@@ -529,6 +529,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="add-face"></span>
@@ -780,6 +781,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
 
 ### 얼굴 삭제
@@ -1302,6 +1304,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="compare-face"></span>
@@ -1626,12 +1629,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
-|-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: 이미지 크기 초과 |
-|-45030| InvalidImageBytesException:{Source/Target} | {Source/Target} 잘못된 이미지 bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
-|-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: 지원하지 않는 이미지 포맷 |
-|-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: 잘못된 이미지 URL |
-|-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image: 이미지 다운로드 시간 초과 |
+|-45020| ImageTooLargeException | 이미지 크기 초과 |
+|-45030| InvalidImageBytesException | 잘못된 이미지 bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
+|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
 
 
@@ -1810,4 +1815,5 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
