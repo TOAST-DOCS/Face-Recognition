@@ -3,17 +3,12 @@
 * This document describes the APIs required for using Face Recognition API v1.0.
 
 ## Common API Information
+
 ### Preparations
-- To use APIs, an integrated project Appkey or service Appkey is required.  
-    - We recommend using the integrated project Appkey.
-    - You can create and use the integrated project Appkey from the API security settings in the project settings page.
-    - The service Appkey is located in the **URL & Appkey** menu on the top of the console.
-
-
-
-
-### Common Request Information
-- The security key needs to be authenticated in order to use APIs.
+* To use APIs, an integrated project Appkey or service Appkey is required.  
+    * We recommend using the integrated project Appkey.
+        * You can create and use the integrated project Appkey from the API security settings in the project settings page.
+    * The service Appkey is located in the **URL & Appkey** menu on the top of the console.
 
 [API domain]
 
@@ -22,6 +17,7 @@
 | https://face-recognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
+
 ### Input Image Guide
 
 * Face images must be at least 80*80 px in width and height.
@@ -34,9 +30,10 @@
 * If you specify the port directly in the image URL, only ports 80, 443, 10000-12000 can be used.
 
 <span id="common-response"></span>
+
 ### Common Response Information
 
-- Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
+* Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
 
 [Response Body Header]
 
@@ -73,7 +70,7 @@
 
 ### Create Groups
 
-- This API creates groups. You can use [Register Face](./api-guide-v1.0/#add-face) to a created group to register faces.
+* This API creates groups. You can use [Register Face](./api-guide-v1.0/#add-face) to a created group to register faces.
 
 #### Request
 [URI]

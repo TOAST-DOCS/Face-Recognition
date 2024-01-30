@@ -7,14 +7,14 @@
 
 ### Preparations
 
-- To use APIs, an integrated project Appkey or service Appkey is required.
-    - We recommend using the integrated project Appkey.
-    - You can create and use the integrated project Appkey from the API security settings in the project settings page.
-    - You can check the Appkey and SecretKey in the **URL & Appkey** menu at the top of the console.
+* To use APIs, an integrated project Appkey or service Appkey is required.
+    * We recommend using the integrated project Appkey.
+        * You can create and use the integrated project Appkey from the API security settings in the project settings page.
+    * You can check the Appkey and SecretKey in the **URL & Appkey** menu at the top of the console.
 
 ### Request Common Information
 
-- The security key needs to be authenticated in order to use APIs.
+* The security key needs to be authenticated in order to use APIs.
 
 [API domain]
 
@@ -45,7 +45,7 @@
 
 ### Common Response Information
 
-- Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
+* Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
 
 [Response Body Header]
 
@@ -83,7 +83,7 @@
 
 ### Create Groups
 
-- This API creates groups. You can use [Register Face](./api-guide-v2.0/#add-face) to a created group to register faces.
+* This API creates groups. You can use [Register Face](./api-guide-v2.0/#add-face) to a created group to register faces.
 
 #### Request
 

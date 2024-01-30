@@ -17,9 +17,9 @@
 #### 機能追加
 
 * [API] 応答のFaceDetailsにマスク着用の有無を追加
-    * [顔検出の応答](./api-guide/#detect-face-response)
-    * [顔登録の応答](./api-guide/#add-face-response)
-    * [顔比較の応答](./api-guide/#compare-face-response)
+    * [顔検出の応答](./api-guide-v1.0/#detect-face-response)
+    * [顔登録の応答](./api-guide-v1.0/#add-face-response)
+    * [顔比較の応答](./api-guide-v1.0/#compare-face-response)
 
 ### 2022. 03. 29.
 
@@ -34,7 +34,7 @@
 
 #### 機能追加
 
-* [API] [顔検証](./api-guide/#verify) APIを追加
+* [API] [顔検証](./api-guide-v1.0/#verify) APIを追加
 
 ### 2021.04.27.
 
