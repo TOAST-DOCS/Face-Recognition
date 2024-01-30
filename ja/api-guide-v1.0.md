@@ -3,17 +3,14 @@
 * 顔認識API v1.0を使用するために必要なAPIを説明します。
 
 ## API共通情報
+
 ### 事前準備
-- APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
-    - プロジェクト統合Appkeyを使用することを推奨します。
-    - プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
-    - サービスAppkeyは、コンソールの上部「URL & Appkey」メニューで確認できます。
 
+* APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
+    * プロジェクト統合Appkeyを使用することを推奨します。
+        * プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
+    * サービスAppkeyは、コンソールの上部「URL & Appkey」メニューで確認できます。
 
-
-
-### リクエスト共通情報
-- APIを使用するにはセキュリティキーの認証処理が必要です。
 
 [APIドメイン]
 
@@ -22,6 +19,7 @@
 | https://face-recognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
+
 ### 入力画像ガイド
 
 * 入力画像は幅と高さがどちらも80px以上必要です。
@@ -35,6 +33,7 @@
 * イメージURLにポートを直接指定する場合は80、443、10000～12000ポートのみ使用できます。
 
 <span id="common-response"></span>
+
 ### レスポンス共通情報
 
 - すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
@@ -74,7 +73,7 @@
 
 ### グループ作成
 
-'- グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v1.0/#add-face)を利用して顔を登録できます。
+* グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v1.0/#add-face)を利用して顔を登録できます。
 
 #### リクエスト
 [URI]
@@ -1627,11 +1626,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
-|-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image:画像サイズ超過 |
-|-45030| InvalidImageBytesException:{Source/Target} | {Source/Target} 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
-|-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image:サポートしない画像フォーマット |
-|-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image：無効な画像URL |
-|-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image:画像ダウンロード時間超過 |
+|-45020| ImageTooLargeException | 画像サイズ超過 |
+|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
+|-45050| InvalidImageURLException | 無効な画像URL |
+|-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
 |-50000| InternalServerError | サーバーエラー |
 
 

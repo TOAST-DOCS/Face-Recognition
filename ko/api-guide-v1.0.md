@@ -3,17 +3,14 @@
 * 얼굴 인식 API v1.0을 사용하는 데 필요한 API를 설명합니다.
 
 ## API 공통 정보
+
+
 ### 사전 준비
-- API 사용을 위해서는 프로젝트 통합 Appkey 또는 서비스 Appkey가 필요합니다.
-  - 프로젝트 통합 Appkey 사용을 권장합니다.
-  - 프로젝트 통합 Appkey는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
-  - 서비스 Appkey는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
 
-
-
-
-### 요청 공통 정보
-- API를 사용하기 위해서는 보안 키 인증 처리가 필요합니다.
+* API 사용을 위해서는 프로젝트 통합 앱키 또는 서비스 앱키가 필요합니다.
+    * 프로젝트 통합 앱키 사용을 권장합니다.
+        * 프로젝트 통합 앱키는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
+    * 서비스 앱키는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
 
 [API 도메인]
 
@@ -22,21 +19,23 @@
 | https://face-recognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
+
 ### 입력 이미지 가이드
 
 * 입력 이미지는 너비와 높이 모두 최소 80px 이상이어야 합니다.
-  * 얼굴 크기가 최소 60*60px 이상이어야 얼굴 인식이 가능합니다.
-  * 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식이 가능합니다.
-  * 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
+    * 얼굴 크기가 최소 60*60px 이상이어야 얼굴 인식이 가능합니다.
+    * 이미지 크기가 커질수록 최소 얼굴 크기도 커져야 더 정확하게 인식이 가능합니다.
+    * 이미지에서 얼굴이 차지하는 비중이 클수록 더 정확하게 인식이 가능합니다.
 * 입력 이미지에서 얼굴의 좌우 각도(Yaw)와 상하 각도(Pitch)는 모두 45도 이하여야 합니다.
 * 이미지 최대 크기: 최대 3MB(3,000,000Byte)
 * 지원 이미지 포맷: PNG, JPEG
 * 이미지 URL에 포트를 직접 지정하는 경우 80, 443, 10000~12000 포트만 사용 가능합니다.
 
 <span id="common-response"></span>
+
 ### 응답 공통 정보
 
-- 모든 API 요청에 '200 OK'로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
+* 모든 API 요청에 '200 OK'로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
 
 [응답 본문 헤더]
 
@@ -73,9 +72,10 @@
 
 ### 그룹 생성
 
-- 그룹을 생성하는 API입니다. 생성된 그룹에 [얼굴 등록](./api-guide-v1.0/#add-face)을 이용하여 얼굴을 등록할 수 있습니다.
+* 그룹을 생성하는 API입니다. 생성된 그룹에 [얼굴 등록](./api-guide-v1.0/#add-face)을 이용하여 얼굴을 등록할 수 있습니다.
 
 #### 요청
+
 [URI]
 
 | 메서드 | URI |
@@ -86,7 +86,7 @@
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 [Request Body]
 
@@ -135,7 +135,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 |-40010| InvalidGroupID | 그룹 아이디 오류 |
 |-40020| DuplicatedGroupID | 중복된 그룹 아이디 |
 |-40070| ServiceQuotaExceededException | 생성할 수 있는 최대 그룹 개수 초과 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
 ### 그룹 목록
@@ -155,7 +155,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 [URL Parameter]
 
@@ -243,7 +243,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40040| InvalidTokenError | 잘못된 token 사용 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
 ### 그룹 상세 정보
@@ -261,7 +261,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 <details>
@@ -318,7 +318,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
 ### 그룹 삭제
@@ -337,7 +337,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 
@@ -379,7 +379,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="detect-face"></span>
@@ -403,7 +403,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 [Request Body]
 
@@ -523,12 +523,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
-|-45030| InvalidImageBytesException | 잘못된 이미지 bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45030| InvalidImageBytesException | 잘못된 이미지 Bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지 않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="add-face"></span>
@@ -557,7 +558,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 [Request Body]
@@ -774,12 +775,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40070| ServiceQuotaExceededException | 단일 그룹에 등록 가능한 최대 얼굴 개수 초과 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
-|-45030| InvalidImageBytesException | 잘못된 이미지 bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45030| InvalidImageBytesException | 잘못된 이미지 Bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지 않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
 
 ### 얼굴 삭제
@@ -797,7 +799,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 등록된 페이스 아이디 |
 
@@ -839,7 +841,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="face-list-in-a-group"></span>
@@ -859,7 +861,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 [URL Parameter]
@@ -980,7 +982,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40040| InvalidTokenError | 잘못된 token 사용 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="search-by-face-id"></span>
@@ -1000,7 +1002,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 비교하려는 페이스 아이디 |
 
@@ -1100,7 +1102,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="search-by-image"></span>
@@ -1123,7 +1125,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 group id<br>[a-z0-9-]<br>최대255자 |
 
 [URL Parameter]
@@ -1296,12 +1298,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
-|-45030| InvalidImageBytesException | 잘못된 이미지 bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45030| InvalidImageBytesException | 잘못된 이미지 Bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지 않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="compare-face"></span>
@@ -1325,7 +1328,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 [URL Parameter]
 
@@ -1626,12 +1629,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
-|-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: 이미지 크기 초과 |
-|-45030| InvalidImageBytesException:{Source/Target} | {Source/Target} 잘못된 이미지 bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
-|-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: 지원하지 않는 이미지 포맷 |
-|-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: 잘못된 이미지 URL |
-|-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image: 이미지 다운로드 시간 초과 |
+|-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
+|-45020| ImageTooLargeException | 이미지 크기 초과 |
+|-45030| InvalidImageBytesException | 잘못된 이미지 Bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
+|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지 않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
 
 
@@ -1655,7 +1660,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 등록된 페이스 아이디 |
 
@@ -1804,10 +1809,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
-|-45030| InvalidImageBytesException | 잘못된 이미지 bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
+|-45030| InvalidImageBytesException | 잘못된 이미지 Bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
 |-45050| InvalidImageURLException | 잘못된 이미지 URL |
 |-45060| ImageTimeoutError | 이미지 다운로드 시간 초과 |
+|-45080| InvalidImageFileException | 이미지 포맷에 맞지 않는 파일 |
 |-50000| InternalServerError | 서버 오류 |

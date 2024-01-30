@@ -17,9 +17,9 @@
 #### 기능 추가
 
 * [API] 응답 본문의 FaceDetails에 마스크 착용 여부 추가
-    * [얼굴 감지의 응답](./api-guide/#detect-face-response)
-    * [얼굴 등록의 응답](./api-guide/#add-face-response)
-    * [얼굴 비교의 응답](./api-guide/#compare-face-response)
+    * [얼굴 감지의 응답](./api-guide-v1.0/#detect-face-response)
+    * [얼굴 등록의 응답](./api-guide-v1.0/#add-face-response)
+    * [얼굴 비교의 응답](./api-guide-v1.0/#compare-face-response)
 
 ### 2022. 03. 29.
 
@@ -34,7 +34,7 @@
 
 #### 기능 추가
 
-* [API] [얼굴 검증](./api-guide/#verify) API 추가
+* [API] [얼굴 검증](./api-guide-v1.0/#verify) API 추가
 
 ### 2021. 04. 27.
 

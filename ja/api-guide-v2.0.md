@@ -7,14 +7,14 @@
 
 ### 事前準備
 
-- APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
-    - プロジェクト統合Appkeyを使用することを推奨します。
-    - プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
-    - サービスAppkey, SecretKeyはコンソール上部の**URL & Appkey** メニューで確認が可能です。
+* APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
+    * プロジェクト統合Appkeyを使用することを推奨します。
+        * プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
+    * サービスAppkey, SecretKeyはコンソール上部の**URL & Appkey** メニューで確認が可能です。
 
 ### リクエスト共通情報
 
-- APIを使用するにはセキュリティキーの認証処理が必要です。
+* APIを使用するにはセキュリティキーの認証処理が必要です。
 
 [APIドメイン]
 
@@ -46,7 +46,7 @@
 
 ### レスポンス共通情報
 
-- すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
+* すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
 
 [レスポンス本文ヘッダ]
 
@@ -84,7 +84,7 @@
 
 ### グループ作成
 
-- グループを作成するAPIです。作成されたグループに[顔登録](./api-guide/#add-face)を利用して顔を登録できます。
+* グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v2.0/#add-face)を利用して顔を登録できます。
 
 #### リクエスト
 
@@ -121,7 +121,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Content-Type: applica
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -206,7 +206,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -283,7 +283,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Typ
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -353,7 +353,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -387,7 +387,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-
 * 検出した顔から顔、目、鼻、口などの位置情報と信頼度の値を返します。
 * 入力画像から顔が大きい順に最大20個の顔を検出します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
 
 <span id="detect-face-request"></span>
 
@@ -449,7 +449,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -554,11 +554,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * 入力画像から検出した顔を特定グループに登録するAPIです。
 * 入力画像から顔のboxを検出し、検出した顔boxから顔の特徴をベクトルで抽出します。この時、入力画像と入力画像から検出した顔画像は保存しません。
 * 抽出したベクトルデータは暗号化してデータベースに保存します。
-* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide/#search-by-face-id)、[画像で顔検索](./api-guide/#search-by-image) APIで特徴ベクトルとして使用します。
+* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide-v2.0/#search-by-face-id)、[画像で顔検索](./api-guide-v2.0/#search-by-image) APIで特徴ベクトルとして使用します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
 * "imageId"は入力画像に付与される値で、"externalImageId"はユーザーが直接付与できる値です。ユーザーは"imageId"と"externalImageId"を利用して画像またはフェイスIDにラベリングしてインデックスのように活用できます。
-* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide/#face-list-in-a-group)と[フェイスIDで顔検索](./api-guide/#search-by-face-id)、[画像で顔検索](./api-guide/#search-by-image) APIのレスポンスで返されます。
+* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide-v2.0/#face-list-in-a-group)と[フェイスIDで顔検索](./api-guide-v2.0/#search-by-face-id)、[画像で顔検索](./api-guide-v2.0/#search-by-image) APIのレスポンスで返されます。
 * 1つのグループに登録できる顔の数は最大10万個です。
 
 <span id="add-face-request"></span>
@@ -629,7 +629,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -848,7 +848,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -937,7 +937,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1052,7 +1052,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1136,7 +1136,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 * 入力画像から検出した最も大きい顔を使用して特定グループに属す顔と一致するかどうかを比較します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="search-by-image-request"></span>
@@ -1202,7 +1202,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1348,7 +1348,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * 基準画像(sourceImage)と比較画像(targetImage)から検出した顔がどれくらい類似しているかを比較します。
 * 基準画像から検出した顔のうち、最も大きい顔(基準顔)のみ使用します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="compare-face-request"></span>
@@ -1421,7 +1421,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1683,11 +1683,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-41000| UnauthorizedAppKey | 承認されていないappKey |
-|-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image:画像サイズ超過 |
-|-45030| InvalidImageBytesException:{Source/Target} | {Source/Target}無効な画像パbytes。主にBase64エンコードが正しくない場合に発生 |
-|-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image:サポートしない画像フォーマット |
-|-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image：無効な画像URL |
-|-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image:画像ダウンロード時間超過 |
+|-45020| ImageTooLargeException | 画像サイズ超過 |
+|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
+|-45050| InvalidImageURLException | 無効な画像URL |
+|-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="verify"></span>
@@ -1695,10 +1695,10 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 ### 顔検証
 
 * 事前に登録された特定の顔のフェイスIDと、入力画像から検出した顔を比較して類似度値を返す機能です。
-* [顔登録](./api-guide/#add-face)を利用して顔を登録できます。
+* [顔登録](./api-guide-v2.0/#add-face)を利用して顔を登録できます。
 * 入力画像から検出した顔のうち、最も大きい顔のみを使用します。
 * 入力画像はBase64でエンコードされた画像バイトで伝達するか、画像URLで伝達できます。
-* 入力画像についての詳細は、[入力画像ガイド](./api-guide/#input-image-guide)を参照してください。
+* 入力画像についての詳細は、[入力画像ガイド](./api-guide-v2.0/#input-image-guide)を参照してください。
 
 <span id="verify-request"></span>
 
@@ -1760,7 +1760,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
 
 [レスポンス本文データ]
 
