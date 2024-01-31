@@ -1677,7 +1677,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45030| InvalidImageBytesException | Invalid image bytes. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
