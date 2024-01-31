@@ -98,7 +98,7 @@
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 [Request Body]
 
@@ -1682,7 +1682,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 앱키 또는 비밀 키 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
 |-45030| InvalidImageBytesException | 잘못된 이미지 Bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
@@ -1873,7 +1873,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
-|-41000| UnauthorizedAppKey | 승인되지 않은 Appkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 승인되지 않은 앱키 또는 비밀 키 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
 |-45030| InvalidImageBytesException | 잘못된 이미지 Bytes. 주로 Base64 인코딩이 잘못된 경우 발생 |
 |-45040| InvalidImageFormatException | 지원하지 않는 이미지 포맷 |
