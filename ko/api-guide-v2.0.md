@@ -164,7 +164,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 [URL Parameter]
 
@@ -265,7 +265,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 <details>
@@ -335,7 +335,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorizati
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 <details>
@@ -400,7 +400,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 [Request Body]
 
@@ -573,7 +573,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 [Request Body]
@@ -831,7 +831,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 등록된 페이스 아이디 |
 
@@ -893,7 +893,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 [URL Parameter]
@@ -1025,7 +1025,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 비교하려는 페이스 아이디 |
 
@@ -1149,7 +1149,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 group id<br>[a-z0-9-]<br>최대255자 |
 
 [Request Body]
@@ -1364,7 +1364,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 
 [Request Body]
 
@@ -1715,7 +1715,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | 이름 | 설명 |
 | --- | --- |
-| appKey | 통합 Appkey 또는 서비스 Appkey |
+| appKey | 통합 앱키 또는 서비스 앱키 |
 | group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 | face-id | 등록된 페이스 아이디 |
 
