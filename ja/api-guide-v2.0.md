@@ -1,20 +1,20 @@
 ## AI Service > Face Recognition > API v2.0ガイド
 
 * 顔認識API v2.0を使用するために必要なAPIを説明します。
-* 顔認識API v2.0からSecretKey認証が追加されます。
+* 顔認識API v2.0から秘密鍵認証が追加されます。
 
 ## API共通情報
 
 ### 事前準備
 
-* APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
-    * プロジェクト統合Appkeyを使用することを推奨します。
-        * プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
-    * サービスAppkey, SecretKeyはコンソール上部の**URL & Appkey** メニューで確認が可能です。
+* APIを使用するにはプロジェクト統合アプリケーションキーまたはサービスアプリケーションキーが必要です。
+    * プロジェクト統合アプリケーションキーを使用することを推奨します。
+        * プロジェクト統合アプリケーションキーは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
+    * サービスアプリケーションキー、 SecretKeyはコンソール上部の**URL & Appkey** メニューで確認が可能です。
 
 ### リクエスト共通情報
 
-* APIを使用するにはセキュリティキーの認証処理が必要です。
+* APIを使用するには秘密鍵の認証処理が必要です。
 
 [APIドメイン]
 
@@ -26,7 +26,7 @@
 
 | 名前 | 値 | 説明 |
 | --- | --- | --- |
-| Authorization | {secretKey} | コンソールで発行されたセキュリティキー |
+| Authorization | {secretKey} | コンソールで発行された秘密鍵 |
 
 <span id="input-image-guide"></span>
 
@@ -99,7 +99,7 @@
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 
 [Request Body]
 
@@ -145,7 +145,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Content-Type: applica
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40010| InvalidGroupID | グループIDエラー |
 |-40020| DuplicatedGroupID | 重複したグループID |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループリスト
@@ -249,7 +249,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループ詳細情報
@@ -319,7 +319,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Typ
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループ削除
@@ -376,7 +376,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="detect-face"></span>
@@ -539,12 +539,13 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="add-face"></span>
@@ -808,12 +809,13 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40070| ServiceQuotaExceededException | 1つのグループに登録可能な最大顔数を超過 |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像パbytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像パBytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
 ### 顔の削除
@@ -872,7 +874,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="face-list-in-a-group"></span>
@@ -1007,7 +1009,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-face-id"></span>
@@ -1127,7 +1129,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-image"></span>
@@ -1333,11 +1335,12 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像パbytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像パBytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
 |-50000| InternalServerError | サーバーエラー |
 
@@ -1682,13 +1685,14 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-40030| NotFoundGroupError | グループIDが見つからない |
+|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
-|-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45040| InvalidImageFormatException | サポートしない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
-|-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
-|-50000| InternalServerError | サーバーエラー |
+|-45060| ImageTimeoutError | 画像ダウンロードタイムアウト |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 
 <span id="verify"></span>
 
@@ -1872,11 +1876,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないAppkey |
+|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像パbytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像パBytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
