@@ -36,7 +36,7 @@
 
 ### レスポンス共通情報
 
-- すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
+* すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
 
 [レスポンス本文ヘッダ]
 
@@ -76,6 +76,7 @@
 * グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v1.0/#add-face)を利用して顔を登録できます。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -86,7 +87,7 @@
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 
 [Request Body]
 
@@ -134,7 +135,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40010| InvalidGroupID | グループIDエラー |
 |-40020| DuplicatedGroupID | 重複したグループID |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループリスト
@@ -154,7 +155,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 
 [URL Parameter]
 
@@ -242,7 +243,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループ詳細情報
@@ -260,7 +261,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 <details>
@@ -317,7 +318,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループ削除
@@ -336,7 +337,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 
@@ -378,7 +379,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="detect-face"></span>
@@ -402,7 +403,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 
 [Request Body]
 
@@ -522,12 +523,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="add-face"></span>
@@ -556,7 +558,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 [Request Body]
@@ -773,12 +775,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40070| ServiceQuotaExceededException | 1つのグループに登録可能な最大顔数を超過 |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
 ### 顔の削除
@@ -796,7 +799,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 | face-id | 登録されたフェイスID |
 
@@ -838,7 +841,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="face-list-in-a-group"></span>
@@ -858,7 +861,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 [URL Parameter]
@@ -979,7 +982,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-face-id"></span>
@@ -999,7 +1002,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 | face-id | 比較するフェイスID |
 
@@ -1099,7 +1102,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-image"></span>
@@ -1122,7 +1125,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したgroup id<br>[a-z0-9-]<br>最大255文字 |
 
 [URL Parameter]
@@ -1295,12 +1298,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
 |-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="compare-face"></span>
@@ -1324,7 +1328,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 
 [URL Parameter]
 
@@ -1625,13 +1629,15 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-40030| NotFoundGroupError | グループIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
-|-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
-|-45050| InvalidImageURLException | 無効な画像URL |
-|-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
-|-50000| InternalServerError | サーバーエラー |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45040| InvalidImageFormatException | サポートしない画像フォーマット |
+|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45060| ImageTimeoutError | 画像ダウンロードタイムアウト |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
+|-50000| InternalServerError | 서버 오류 |
 
 
 <span id="verify"></span>
@@ -1654,7 +1660,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 | face-id | 登録されたフェイスID |
 
@@ -1803,10 +1809,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないAppkey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
