@@ -1634,10 +1634,10 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-45020| ImageTooLargeException | 画像サイズ超過 |
 |-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしない画像フォーマット |
-|-45050| InvalidImageURLException | 잘못된 이미지 URL |
+|-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロードタイムアウト |
 |-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
-|-50000| InternalServerError | 서버 오류 |
+|-50000| InternalServerError | サーバーエラー |
 
 
 <span id="verify"></span>
