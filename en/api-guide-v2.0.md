@@ -810,6 +810,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 ### Delete Face
@@ -1334,6 +1335,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="compare-face"></span>
@@ -1677,12 +1679,14 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
+|-40030| NotFoundGroupError | Could not find the group ID |
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45030| InvalidImageBytesException | Invalid image bytes. Mainly due to incorrect Base64 encoding |
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="verify"></span>
@@ -1874,4 +1878,5 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |

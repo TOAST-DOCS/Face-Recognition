@@ -34,7 +34,7 @@
 
 #### Added Features
 
-* [API] Added [Face Verification](./api-guide-v1.0/#face-verification) API
+* [API] Added [Face Verification](./api-guide-v1.0/#verify) API
 
 ### April 27, 2021
 
