@@ -176,6 +176,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
     * Upon issuing the token, the limit becomes fixed.
+* Scenario example
 
 <details>
 <summary>Request example</summary>
@@ -541,6 +542,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="add-face"></span>
@@ -1335,7 +1337,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
--45080| InvalidImageFileException | Invalid image file format |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="compare-face"></span>
