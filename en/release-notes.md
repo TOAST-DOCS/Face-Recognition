@@ -17,9 +17,9 @@
 #### Added Features
 
 * [API] Added whether to wear a mask to FaceDetails in response body.
-    * [Response of Face Recognize](./api-guide/#detect-face-response)
-    * [Response of Face Register](./api-guide/#add-face-response)
-    * [Response of Face Compare](./api-guide/#compare-face-response)
+    * [Response of Face Recognize](./api-guide-v1.0/#detect-face-response)
+    * [Response of Face Register](./api-guide-v1.0/#add-face-response)
+    * [Response of Face Compare](./api-guide-v1.0/#compare-face-response)
 
 ### March 29, 2022
 
@@ -34,7 +34,7 @@
 
 #### Added Features
 
-* [API] Added [Face Verification](./api-guide/#face-verification) API
+* [API] Added [Face Verification](./api-guide-v1.0/#verify) API
 
 ### April 27, 2021
 
