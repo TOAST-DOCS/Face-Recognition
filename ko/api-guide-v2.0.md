@@ -177,6 +177,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
     * 처음에는 next-token이 없습니다.
     * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
     * token 발행 시 limit은 고정됩니다.
+* 시나리오 예
 
 <details>
 <summary>요청 예</summary>
