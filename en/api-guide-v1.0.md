@@ -4,7 +4,9 @@
 
 ## Common API Information
 
+
 ### Preparations
+
 * To use APIs, an integrated project Appkey or service Appkey is required.  
     * We recommend using the integrated project Appkey.
         * You can create and use the integrated project Appkey from the API security settings in the project settings page.
@@ -73,6 +75,7 @@
 * This API creates groups. You can use [Register Face](./api-guide-v1.0/#add-face) to a created group to register faces.
 
 #### Request
+
 [URI]
 
 | Method | URI |
@@ -131,6 +134,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 |-40000| InvalidParam | The parameter contains an error |
 |-40010| InvalidGroupID | Group ID error |
 |-40020| DuplicatedGroupID | Duplicate group ID |
+|-40070| ServiceQuotaExceededException | 	
+Exceeded the maximum number of groups you can create |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
@@ -145,7 +150,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 | Method | URI |
 | --- | --- |
 | GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups |
-
 
 [Path Variable]
 
@@ -197,7 +201,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 * [Response body header description omitted]
     * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
-
 
 [Response body data]
 
@@ -1621,6 +1624,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
+|-40030| NotFoundGroupError | Could not find the group ID |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45030| InvalidImageBytesException | Invalid image bytes. Mainly due to incorrect Base64 encoding |
@@ -1805,4 +1809,5 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
