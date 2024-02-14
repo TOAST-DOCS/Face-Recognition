@@ -134,8 +134,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 |-40000| InvalidParam | The parameter contains an error |
 |-40010| InvalidGroupID | Group ID error |
 |-40020| DuplicatedGroupID | Duplicate group ID |
-|-40070| ServiceQuotaExceededException | 	
-Exceeded the maximum number of groups you can create |
+|-40070| ServiceQuotaExceededException | Exceeded the maximum number of groups you can create |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
@@ -169,7 +168,7 @@ Exceeded the maximum number of groups you can create |
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
     * Upon issuing the token, the limit becomes fixed.
-* Scenario example)
+* Scenario example
 
 * Initial query
 
@@ -529,6 +528,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="add-face"></span>
@@ -779,6 +779,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 ### Delete Face
@@ -873,7 +874,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
     * Upon issuing the token, the limit becomes fixed.
-* Scenario example)
+* Scenario example
 
 * Initial query
 
@@ -1301,6 +1302,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="compare-face"></span>
@@ -1631,6 +1633,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="verify"></span>
