@@ -12,6 +12,8 @@
         * You can create and use the integrated project Appkey from the API security settings in the project settings page.
     * The service Appkey is located in the **URL & Appkey** menu on the top of the console.
 
+### Request Common Information
+
 [API domain]
 
 | Domain |
