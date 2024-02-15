@@ -3,17 +3,14 @@
 * 顔認識API v1.0を使用するために必要なAPIを説明します。
 
 ## API共通情報
+
 ### 事前準備
-- APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
-    - プロジェクト統合Appkeyを使用することを推奨します。
-    - プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
-    - サービスAppkeyは、コンソールの上部「URL & Appkey」メニューで確認できます。
 
+* APIを使用するにはプロジェクト統合AppkeyまたはサービスAppkeyが必要です。
+    * プロジェクト統合Appkeyを使用することを推奨します。
+        * プロジェクト統合Appkeyは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
+    * サービスAppkeyは、コンソールの上部「URL & Appkey」メニューで確認できます。
 
-
-
-### リクエスト共通情報
-- APIを使用するにはセキュリティキーの認証処理が必要です。
 
 [APIドメイン]
 
@@ -22,6 +19,7 @@
 | https://face-recognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
+
 ### 入力画像ガイド
 
 * 入力画像は幅と高さがどちらも80px以上必要です。
@@ -35,9 +33,10 @@
 * イメージURLにポートを直接指定する場合は80、443、10000～12000ポートのみ使用できます。
 
 <span id="common-response"></span>
+
 ### レスポンス共通情報
 
-- すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
+* すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
 
 [レスポンス本文ヘッダ]
 
@@ -74,9 +73,10 @@
 
 ### グループ作成
 
-'- グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v1.0/#add-face)を利用して顔を登録できます。
+* グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v1.0/#add-face)を利用して顔を登録できます。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -87,7 +87,7 @@
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 
 [Request Body]
 
@@ -135,7 +135,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40010| InvalidGroupID | グループIDエラー |
 |-40020| DuplicatedGroupID | 重複したグループID |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループリスト
@@ -155,7 +155,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 
 [URL Parameter]
 
@@ -243,7 +243,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループ詳細情報
@@ -251,6 +251,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 * グループID、モデルバージョン、グループに登録した顔の数など、特定グループの詳細情報を照会するAPIです。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -261,7 +262,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 <details>
@@ -318,7 +319,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループ削除
@@ -337,7 +338,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 
@@ -379,10 +380,11 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="detect-face"></span>
+
 ### 顔検出
 
 * 入力画像から顔を検出するAPIです。
@@ -392,7 +394,9 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * 入力画像の詳細は「[入力画像ガイド](./api-guide-v1.0/#input-image-guide)」を参照してください。
 
 <span id="detect-face-request"></span>
+
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -403,7 +407,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 
 [Request Body]
 
@@ -432,6 +436,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 </details>
 
 <span id="detect-face-response"></span>
+
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -523,15 +528,17 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="add-face"></span>
+
 ### 顔登録
 
 * 入力画像から検出した顔を特定グループに登録するAPIです。
@@ -545,6 +552,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 * 1つのグループに登録できる顔の数は最大10万個です。
 
 <span id="add-face-request"></span>
+
 #### リクエスト
 
 [URI]
@@ -557,7 +565,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 [Request Body]
@@ -592,6 +600,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 
 <span id="add-face-response"></span>
+
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -774,12 +783,13 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40070| ServiceQuotaExceededException | 1つのグループに登録可能な最大顔数を超過 |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
 ### 顔の削除
@@ -787,6 +797,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 * グループに登録した特定の顔を削除するAPIです。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -797,7 +808,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 | face-id | 登録されたフェイスID |
 
@@ -839,7 +850,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="face-list-in-a-group"></span>
@@ -849,6 +860,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 * 登録が新しい順で顔情報配列を返します。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -859,7 +871,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 [URL Parameter]
@@ -980,7 +992,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-face-id"></span>
@@ -990,6 +1002,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -1000,7 +1013,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 | face-id | 比較するフェイスID |
 
@@ -1100,7 +1113,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-image"></span>
@@ -1112,7 +1125,9 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="search-by-image-request"></span>
+
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -1123,7 +1138,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したgroup id<br>[a-z0-9-]<br>最大255文字 |
 
 [URL Parameter]
@@ -1296,15 +1311,17 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
 |-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="compare-face"></span>
+
 ### 顔比較
 
 * 基準画像(sourceImage)と比較画像(targetImage)から検出した顔がどれくらい類似しているかを比較します。
@@ -1314,7 +1331,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="compare-face-request"></span>
+
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -1325,7 +1344,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 
 [URL Parameter]
 
@@ -1367,6 +1386,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 </details>
 
 <span id="compare-face-response"></span>
+
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
@@ -1626,12 +1646,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
-|-41000| UnauthorizedAppKey | 承認されていないappKey |
-|-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image:画像サイズ超過 |
-|-45030| InvalidImageBytesException:{Source/Target} | {Source/Target} 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
-|-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image:サポートしない画像フォーマット |
-|-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image：無効な画像URL |
-|-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} image:画像ダウンロード時間超過 |
+|-40030| NotFoundGroupError | グループIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
+|-45020| ImageTooLargeException | 画像サイズ超過 |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45040| InvalidImageFormatException | サポートしない画像フォーマット |
+|-45050| InvalidImageURLException | 無効な画像URL |
+|-45060| ImageTimeoutError | 画像ダウンロードタイムアウト |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
 
@@ -1644,7 +1666,9 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 * 入力画像についての詳細は、[入力画像ガイド](./api-guide-v1.0/#input-image-guide)を参照してください。
 
 <span id="verify-request"></span>
+
 #### リクエスト
+
 [URI]
 
 | メソッド | URI |
@@ -1655,7 +1679,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 | 名前 | 説明 |
 | --- | --- |
-| appKey | 統合AppkeyまたはサービスAppkey |
+| appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
 | group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 | face-id | 登録されたフェイスID |
 
@@ -1804,10 +1828,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41000| UnauthorizedAppKey | 承認されていないAppkey |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
-|-45030| InvalidImageBytesException | 無効な画像bytes。主にBase64エンコードが正しくない場合に発生 |
+|-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
 |-45050| InvalidImageURLException | 無効な画像URL |
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
+|-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |

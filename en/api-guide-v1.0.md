@@ -3,17 +3,14 @@
 * This document describes the APIs required for using Face Recognition API v1.0.
 
 ## Common API Information
+
+
 ### Preparations
-- To use APIs, an integrated project Appkey or service Appkey is required.  
-    - We recommend using the integrated project Appkey.
-    - You can create and use the integrated project Appkey from the API security settings in the project settings page.
-    - The service Appkey is located in the **URL & Appkey** menu on the top of the console.
 
-
-
-
-### Common Request Information
-- The security key needs to be authenticated in order to use APIs.
+* To use APIs, an integrated project Appkey or service Appkey is required.  
+    * We recommend using the integrated project Appkey.
+        * You can create and use the integrated project Appkey from the API security settings in the project settings page.
+    * The service Appkey is located in the **URL & Appkey** menu on the top of the console.
 
 [API domain]
 
@@ -22,6 +19,7 @@
 | https://face-recognition.api.nhncloudservice.com |
 
 <span id="input-image-guide"></span>
+
 ### Input Image Guide
 
 * Face images must be at least 80*80 px in width and height.
@@ -34,9 +32,10 @@
 * If you specify the port directly in the image URL, only ports 80, 443, 10000-12000 can be used.
 
 <span id="common-response"></span>
+
 ### Common Response Information
 
-- Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
+* Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
 
 [Response Body Header]
 
@@ -73,9 +72,10 @@
 
 ### Create Groups
 
-- This API creates groups. You can use [Register Face](./api-guide-v1.0/#add-face) to a created group to register faces.
+* This API creates groups. You can use [Register Face](./api-guide-v1.0/#add-face) to a created group to register faces.
 
 #### Request
+
 [URI]
 
 | Method | URI |
@@ -134,6 +134,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 |-40000| InvalidParam | The parameter contains an error |
 |-40010| InvalidGroupID | Group ID error |
 |-40020| DuplicatedGroupID | Duplicate group ID |
+|-40070| ServiceQuotaExceededException | Exceeded the maximum number of groups you can create |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
@@ -148,7 +149,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 | Method | URI |
 | --- | --- |
 | GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups |
-
 
 [Path Variable]
 
@@ -168,7 +168,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
     * Upon issuing the token, the limit becomes fixed.
-* Scenario example)
+* Scenario example
 
 * Initial query
 
@@ -200,7 +200,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 * [Response body header description omitted]
     * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
-
 
 [Response body data]
 
@@ -529,6 +528,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="add-face"></span>
@@ -779,6 +779,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 ### Delete Face
@@ -873,7 +874,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
     * Upon issuing the token, the limit becomes fixed.
-* Scenario example)
+* Scenario example
 
 * Initial query
 
@@ -1301,6 +1302,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/s
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="compare-face"></span>
@@ -1624,14 +1626,15 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
+|-40030| NotFoundGroupError | Could not find the group ID |
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
-|-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: Image size exceeded |
-|-45030| InvalidImageBytesException:{Source/Target} | Invalid image bytes. Mainly due to incorrect Base64 encoding |
-|-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: Unsupported image format |
-|-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: Invalid image URL |
-|-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} Image: Image download timeout |
+|-45020| ImageTooLargeException | Image size exceeded |
+|-45030| InvalidImageBytesException | Invalid image bytes. Mainly due to incorrect Base64 encoding |
+|-45040| InvalidImageFormatException | Unsupported image format |
+|-45050| InvalidImageURLException | Invalid image URL |
+|-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
-
 
 <span id="verify"></span>
 ### Face Verification
@@ -1809,4 +1812,5 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |

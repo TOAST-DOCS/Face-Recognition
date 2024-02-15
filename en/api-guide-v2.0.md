@@ -7,14 +7,14 @@
 
 ### Preparations
 
-- To use APIs, an integrated project Appkey or service Appkey is required.
-    - We recommend using the integrated project Appkey.
-    - You can create and use the integrated project Appkey from the API security settings in the project settings page.
-    - You can check the Appkey and SecretKey in the **URL & Appkey** menu at the top of the console.
+* To use APIs, an integrated project Appkey or service Appkey is required.
+    * We recommend using the integrated project Appkey.
+        * You can create and use the integrated project Appkey from the API security settings in the project settings page.
+    * You can check the Appkey and SecretKey in the **URL & Appkey** menu at the top of the console.
 
 ### Request Common Information
 
-- The security key needs to be authenticated in order to use APIs.
+* The security key needs to be authenticated in order to use APIs.
 
 [API domain]
 
@@ -45,7 +45,7 @@
 
 ### Common Response Information
 
-- Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
+* Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
 
 [Response Body Header]
 
@@ -83,7 +83,7 @@
 
 ### Create Groups
 
-- This API creates groups. You can use [Register Face](./api-guide-v2.0/#add-face) to a created group to register faces.
+* This API creates groups. You can use [Register Face](./api-guide-v2.0/#add-face) to a created group to register faces.
 
 #### Request
 
@@ -176,6 +176,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
     * Upon issuing the token, the limit becomes fixed.
+* Scenario example
 
 <details>
 <summary>Request example</summary>
@@ -541,6 +542,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="add-face"></span>
@@ -810,6 +812,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 ### Delete Face
@@ -1334,6 +1337,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="compare-face"></span>
@@ -1677,12 +1681,14 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
+|-40030| NotFoundGroupError | Could not find the group ID |
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
-|-45020| ImageImageTooLargeException:{Source/Target} | {Source/Target} Image: Image size exceeded |
-|-45030| InvalidImageBytesException:{Source/Target} | Invalid image bytes. Mainly due to incorrect Base64 encoding |
-|-45040| ImageInvalidImageFormatException:{Source/Target} | {Source/Target} image: Unsupported image format |
-|-45050| ImageInvalidImageURLException:{Source/Target} | {Source/Target} image: Invalid image URL |
-|-45060| ImageImageTimeoutError:{Source/Target} | {Source/Target} Image: Image download timeout |
+|-45020| ImageTooLargeException | Image size exceeded |
+|-45030| InvalidImageBytesException | Invalid image bytes. Mainly due to incorrect Base64 encoding |
+|-45040| InvalidImageFormatException | Unsupported image format |
+|-45050| InvalidImageURLException | Invalid image URL |
+|-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
 <span id="verify"></span>
@@ -1874,4 +1880,5 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45040| InvalidImageFormatException | Unsupported image format |
 |-45050| InvalidImageURLException | Invalid image URL |
 |-45060| ImageTimeoutError | Image download timeout |
+|-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |

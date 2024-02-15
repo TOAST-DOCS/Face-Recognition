@@ -17,24 +17,24 @@
 #### Added Features
 
 * [API] Added whether to wear a mask to FaceDetails in response body.
-  * [Response of Face Recognize](./api-guide/#detect-face-response)
-  * [Response of Face Register](./api-guide/#add-face-response)
-  * [Response of Face Compare](./api-guide/#compare-face-response)
+    * [Response of Face Recognize](./api-guide-v1.0/#detect-face-response)
+    * [Response of Face Register](./api-guide-v1.0/#add-face-response)
+    * [Response of Face Compare](./api-guide-v1.0/#compare-face-response)
 
 ### March 29, 2022
 
 #### Feature Updates
 
 * Applied a new model with enhancements including the improved face recognition rate
-  * The new model will be automatically applied to newly created groups from March 29, 2022
-  * Groups that have already been created will use the existing model as it is.
-  * To use the new model, you need to create a new group and register faces again.
+    * The new model will be automatically applied to newly created groups from March 29, 2022
+    * Groups that have already been created will use the existing model as it is.
+    * To use the new model, you need to create a new group and register faces again.
 
 ### July 27, 2021
 
 #### Added Features
 
-* [API] Added [Face Verification](./api-guide/#face-verification) API
+* [API] Added [Face Verification](./api-guide-v1.0/#verify) API
 
 ### April 27, 2021
 
