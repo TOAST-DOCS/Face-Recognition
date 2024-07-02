@@ -1390,11 +1390,16 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
-| sourceImageFile | object | O |  |  | sourceImage.png | 얼굴 비교 시 기준이 되는 이미지 파일<br/>(=referenceImage) |
-| targetImageFile | object | O |  |  | targetImage.png | 비교 대상이 되는 얼굴이 포함된 이미지 파일<br/>(=comparisonImage) |
+| sourceImageFile | file | △ |  |  | sourceImage.png | 얼굴 비교 시 기준이 되는 이미지 파일<br/>(=referenceImage) |
+| sourceImageUrl | string | △ |  |  | "https://..." | 얼굴 비교 시 기준이 되는 이미지의 URL<br/>(=referenceImage) |
+| targetImageFile | file | △ |  |  | targetImage.png | 비교 대상이 되는 얼굴이 포함된 이미지 파일<br/>(=comparisonImage) |
+| targetImageUrl | string | △ |  |  | "https://..." | 비교 대상이 되는 얼굴이 포함된 이미지의 URL<br/>(=comparisonImage) |
 | threshold | int | O |  | 1 ~ 100 | 90 | 매칭 여부를 판단하는 유사도 기준값 |
 | orientation | bool |  | true | true, false | false | 얼굴 방향 감지 기능 사용 여부 |
 | mask | bool |  | true | true, false | false | 마스크 착용 감지 기능 사용 여부 |
+
+* sourceImageFile, sourceImageUrl 중 반드시 1개만 있어야 합니다.
+* targetImageFile, targetImageUrl 중 반드시 1개만 있어야 합니다.
 
 <details>
 <summary>요청 예</summary>

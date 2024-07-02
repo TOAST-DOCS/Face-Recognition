@@ -1393,11 +1393,16 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
-| sourceImageFile | object | O |  |  | sourceImage.png | 顔を比較する際の基準となる画像ファイル<br/>(=referenceImage) |
-| targetImageFile | object | O |  |  | targetImage.png | 比較対象となる顔を含む画像ファイル<br/>(=comparisonImage) |
+| sourceImageFile | file | △ |  |  | sourceImage.png | 顔を比較する際の基準となる画像ファイル<br/>(=referenceImage) |
+| sourceImageUrl | string | △ |  |  | "https://..." | 顔を比較する際の基準となる画像のURL<br/>(=referenceImage) |
+| targetImageFile | file | △ |  |  | targetImage.png | 比較対象となる顔を含む画像ファイル<br/>(=string) |
+| targetImageUrl | string | △ |  |  | "https://..." | 比較対象となる顔を含む画像のURL<br/>(=comparisonImage) |
 | threshold | int | O |  | 1 ～ 100 | 90 | マッチング有無を判断する類似度基準値 |
 | orientation | bool |  | true | true, false | false | 顔方向検出機能を使用するかどうか |
 | mask | bool |  | true | true, false | false | マスク着用検出機能を使用するかどうか |
+
+* sourceImageFile, sourceImageUrlのうち、1つだけ必要です。
+* targetImageFile, targetImageUrlのうち、1つだけ必要です。
 
 <details>
 <summary>リクエスト例</summary>

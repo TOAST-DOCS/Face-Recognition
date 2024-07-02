@@ -1389,11 +1389,16 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| sourceImageFile | object | O |  |  | sourceImage.png | Reference image file for facial comparison<br/>(=referenceImage) |
-| targetImageFile | object | O |  |  | targetImage.png | Image file containing the target face for comparison<br/>(=comparisonImage) |
+| sourceImageFile | file | △ |  |  | sourceImage.png | Reference image file for facial comparison<br/>(=referenceImage) |
+| sourceImageUrl | string | △ |  |  | "https://..." | Reference image URL for facial comparison<br/>(=referenceImage) |
+| targetImageFile | file | △ |  |  | targetImage.png | Image file containing the target face for comparison<br/>(=comparisonImage) |
+| targetImageUrl | string | △ |  |  | "https://..." | Image URL containing the target face for comparison<br/>(=comparisonImage) |
 | threshold | int | O |  | 1~100 | 90 | A similarity reference value that determines a match |
 | orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
 | mask | bool |  | true | true, false | false | Whether to use mask wear detection |
+
+* Must have only either sourceImageFile or sourceImageUrl.
+* Must have only either targetImageFile or targetImageUrl.
 
 <details>
 <summary>Request example</summary>
