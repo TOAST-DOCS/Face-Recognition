@@ -404,7 +404,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -416,7 +416,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 * Must have only one of either image.url or image.bytes.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -578,7 +578,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -592,7 +592,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 * Must have only one of either image.url or image.bytes.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1154,7 +1154,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1168,7 +1168,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 * Must have only one of either image.url or image.bytes.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1368,7 +1368,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1385,7 +1385,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * Must have only either sourceImage.url or sourceImage.bytes.
 * Must have only either targetImage.url or targetImage.bytes.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1726,7 +1726,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1738,7 +1738,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 * Must have only either compareImage.url or compareImage.bytes
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |

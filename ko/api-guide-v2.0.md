@@ -405,7 +405,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -417,7 +417,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -579,7 +579,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -593,7 +593,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1155,7 +1155,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1169,7 +1169,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 * image.url, image.bytes 중 반드시 1개만 있어야 합니다.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1369,7 +1369,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1386,7 +1386,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * sourceImage.url, sourceImage.bytes 중 반드시 1개만 있어야 합니다.
 * targetImage.url, targetImage.bytes 중 반드시 1개만 있어야 합니다.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1727,7 +1727,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1739,7 +1739,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 * compareImage.url, compareImage.bytes 중 반드시 1개만 있어야 합니다.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
