@@ -260,20 +260,20 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{group-id} |
+| GET | /v2.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -330,20 +330,20 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorizati
 
 | 메서드 | URI |
 | --- | --- |
-| DELETE | /v2.0/appkeys/{appKey}/groups/{group-id} |
+| DELETE | /v2.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -568,14 +568,14 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | 메서드 | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces |
+| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 [Request Body]
 
@@ -607,7 +607,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -617,7 +617,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces' -H 'Auth
 ```
 
 ```
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces'
 ```
 
 </details>
@@ -826,21 +826,21 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | 메서드 | URI |
 | --- | --- |
-| DELETE | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+| DELETE | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
-| face-id | 등록된 페이스 아이디 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| faceId | 등록된 페이스 아이디 |
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -888,14 +888,14 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{group-id}/faces |
+| GET | /v2.0/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 [URL Parameter]
 
@@ -913,7 +913,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -924,7 +924,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}&next-token={next-token}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1020,15 +1020,15 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/search |
+| GET | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
-| face-id | 비교하려는 페이스 아이디 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| faceId | 비교하려는 페이스 아이디 |
 
 [URL Parameter]
 
@@ -1041,7 +1041,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/search?limit={limit}&threshold={threshold}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search?limit={limit}&threshold={threshold}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1144,14 +1144,14 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 | 메서드 | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/search |
+| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/search |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 group id<br>[a-z0-9-]<br>최대255자 |
+| groupId | 사용자가 등록한 group id<br>[a-z0-9-]<br>최대255자 |
 
 [Request Body]
 
@@ -1183,7 +1183,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/search' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -1193,7 +1193,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search' -
 ```
 
 ```
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/search'
 ```
 
 </details>
@@ -1715,15 +1715,15 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | 메서드 | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify |
+| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
-| face-id | 등록된 페이스 아이디 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| faceId | 등록된 페이스 아이디 |
 
 [Request Body]
 
@@ -1751,7 +1751,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
     }
@@ -1759,7 +1759,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}
 ```
 
 ```
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify'
 ```
 
 </details>

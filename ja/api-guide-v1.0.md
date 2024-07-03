@@ -257,20 +257,20 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 | メソッド | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -333,21 +333,21 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 | メソッド | URI |
 | --- | --- |
-| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -560,14 +560,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 | メソッド | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 [Request Body]
 
@@ -588,7 +588,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -803,22 +803,22 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 | メソッド | URI |
 | --- | --- |
-| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
-| face-id | 登録されたフェイスID |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| faceId | 登録されたフェイスID |
 
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -866,14 +866,14 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | メソッド | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 [URL Parameter]
 
@@ -896,7 +896,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -909,7 +909,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1008,15 +1008,15 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | メソッド | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
-| face-id | 比較するフェイスID |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| faceId | 比較するフェイスID |
 
 [URL Parameter]
 
@@ -1030,7 +1030,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1133,14 +1133,14 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | メソッド | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/search |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
-| group-id | ユーザーが登録したgroup id<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したgroup id<br>[a-z0-9-]<br>最大255文字 |
 
 [URL Parameter]
 
@@ -1166,7 +1166,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     }
@@ -1674,15 +1674,15 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 | メソッド | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id} |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合アプリケーションキーまたはサービスアプリケーションキー |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
-| face-id | 登録されたフェイスID |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| faceId | 登録されたフェイスID |
 
 [Request Body]
 
@@ -1701,7 +1701,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{groupId}/faces/{faceId}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
     }
