@@ -407,7 +407,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -419,7 +419,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-
 
 * image.url、image.bytesのどちらか1つが必要です。
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -581,7 +581,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -595,7 +595,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 * image.url、image.bytesのどちらか1つが必要です。
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1160,7 +1160,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1174,7 +1174,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 * image.url、image.bytesのどちらか1つが必要です。
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1372,7 +1372,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1389,7 +1389,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * sourceImage.url, sourceImage.bytesのうち、1つだけ必要です。
 * targetImage.url, targetImage.bytesのうち、1つだけ必要です。
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1730,7 +1730,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1742,7 +1742,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 * compareImage.url, compareImage.bytesのいずれかが必要です。
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | 名前 | タイプ | 必須かどうか | デフォルト値 | 有効範囲 | 例 | 説明 |
 | --- | --- | --- | --- | --- | --- | --- |
