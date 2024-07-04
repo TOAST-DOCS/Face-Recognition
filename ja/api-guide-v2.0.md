@@ -262,20 +262,20 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 
 | メソッド | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{group-id} |
+| GET | /v2.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -332,20 +332,20 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Typ
 
 | メソッド | URI |
 | --- | --- |
-| DELETE | /v2.0/appkeys/{appKey}/groups/{group-id} |
+| DELETE | /v2.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -570,14 +570,14 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | メソッド | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces |
+| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 [Request Body]
 
@@ -609,7 +609,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -619,7 +619,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces' -H 'Cont
 ```
 
 ```
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces'
 ```
 
 </details>
@@ -828,21 +828,21 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | メソッド | URI |
 | --- | --- |
-| DELETE | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+| DELETE | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
-| face-id | 登録されたフェイスID |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| faceId | 登録されたフェイスID |
 
 <details>
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -890,14 +890,14 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 
 | メソッド | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{group-id}/faces |
+| GET | /v2.0/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
 
 [URL Parameter]
 
@@ -918,7 +918,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -929,7 +929,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1025,15 +1025,15 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 
 | メソッド | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/search |
+| GET | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
-| face-id | 比較するフェイスID |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| faceId | 比較するフェイスID |
 
 [URL Parameter]
 
@@ -1046,7 +1046,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1149,14 +1149,14 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 | メソッド | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/search |
+| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/search |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| group-id | ユーザーが登録したgroup id<br>[a-z0-9-]<br>最大255文字 |
+| groupId | ユーザーが登録したgroup id<br>[a-z0-9-]<br>最大255文字 |
 
 [Request Body]
 
@@ -1188,7 +1188,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     }
@@ -1196,7 +1196,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/search?limit={l
 ```
 
 ```
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/search'
 ```
 
 </details>
@@ -1718,15 +1718,15 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | メソッド | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify |
+| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify |
 
 [Path Variable]
 
 | 名前 | 説明 |
 | --- | --- |
 | appKey | 統合AppkeyまたはサービスAppkey |
-| group-id | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
-| face-id | 登録されたフェイスID |
+| groupId | ユーザーが登録したグループID<br>[a-z0-9-]<br>最大255文字 |
+| faceId | 登録されたフェイスID |
 
 [Request Body]
 
@@ -1754,7 +1754,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
     }
@@ -1762,7 +1762,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}
 ```
 
 ```
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify'
 ```
 
 </details>
