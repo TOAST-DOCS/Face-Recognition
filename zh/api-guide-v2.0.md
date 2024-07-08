@@ -259,20 +259,20 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 
 | Method | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{group-id} |
+| GET | /v2.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
+| groupId | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -329,20 +329,20 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorizati
 
 | Method | URI |
 | --- | --- |
-| DELETE | /v2.0/appkeys/{appKey}/groups/{group-id} |
+| DELETE | /v2.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
+| groupId | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -404,7 +404,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -416,7 +416,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}' -H 'Authoriz
 
 * Must have only one of either image.url or image.bytes.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -567,18 +567,18 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | Method | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces |
+| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
+| groupId | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -592,7 +592,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 * Must have only one of either image.url or image.bytes.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -606,7 +606,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>Request example</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -616,7 +616,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces' -H 'Auth
 ```
 
 ```
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces'
 ```
 
 </details>
@@ -825,21 +825,21 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | Method | URI |
 | --- | --- |
-| DELETE | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+| DELETE | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
-| face-id | Registered face ID |
+| groupId | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
+| faceId | Registered face ID |
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -887,14 +887,14 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 
 | Method | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{group-id}/faces |
+| GET | /v2.0/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
+| groupId | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
 
 [URL Parameter]
 
@@ -912,7 +912,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-i
 <summary>Request example</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -923,7 +923,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 <summary>Request example</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}&next-token={next-token}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1019,15 +1019,15 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 
 | Method | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/search |
+| GET | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search |
 
 [Path Variable]
 
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
-| face-id | Face ID to compare |
+| groupId | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
+| faceId | Face ID to compare |
 
 [URL Parameter]
 
@@ -1040,7 +1040,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 <summary>Request example</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/search?limit={limit}&threshold={threshold}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search?limit={limit}&threshold={threshold}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1143,18 +1143,18 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 | Method | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/search |
+| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/search |
 
 [Path Variable]
 
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group id registered by user<br>[a-z0-9-]<br>Up to 255 characters |
+| groupId | Group id registered by user<br>[a-z0-9-]<br>Up to 255 characters |
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1168,7 +1168,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 
 * Must have only one of either image.url or image.bytes.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1182,7 +1182,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/
 <summary>Request example</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/search' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -1192,7 +1192,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search' -
 ```
 
 ```
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/search'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/search'
 ```
 
 </details>
@@ -1368,7 +1368,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1385,15 +1385,20 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * Must have only either sourceImage.url or sourceImage.bytes.
 * Must have only either targetImage.url or targetImage.bytes.
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| sourceImageFile | object | O |  |  | sourceImage.png | Reference image file for facial comparison<br/>(=referenceImage) |
-| targetImageFile | object | O |  |  | targetImage.png | Image file containing the target face for comparison<br/>(=comparisonImage) |
+| sourceImageFile | file | △ |  |  | sourceImage.png | Reference image file for facial comparison<br/>(=referenceImage) |
+| sourceImageUrl | string | △ |  |  | "https://..." | Reference image URL for facial comparison<br/>(=referenceImage) |
+| targetImageFile | file | △ |  |  | targetImage.png | Image file containing the target face for comparison<br/>(=comparisonImage) |
+| targetImageUrl | string | △ |  |  | "https://..." | Image URL containing the target face for comparison<br/>(=comparisonImage) |
 | threshold | int | O |  | 1~100 | 90 | A similarity reference value that determines a match |
 | orientation | bool |  | true | true, false | false | Whether to use face orientation detection |
 | mask | bool |  | true | true, false | false | Whether to use mask wear detection |
+
+* Must have only either sourceImageFile or sourceImageUrl.
+* Must have only either targetImageFile or targetImageUrl.
 
 <details>
 <summary>Request example</summary>
@@ -1709,19 +1714,19 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | Method | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify |
+| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify |
 
 [Path Variable]
 
 | Name | Description |
 | --- | --- |
 | appKey | Integrated Appkey or service Appkey |
-| group-id | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
-| face-id | Registered face ID |
+| groupId | Group ID registered by user<br>[a-z0-9-]<br>Max. 255 characters |
+| faceId | Registered face ID |
 
 [Request Body]
 
-#### Content-Type: application/json
+**Content-Type: application/json**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1733,7 +1738,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 * Must have only either compareImage.url or compareImage.bytes
 
-#### Content-Type: multipart/form-data
+**Content-Type: multipart/form-data**
 
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1745,7 +1750,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>Request example</summary>
 
 ```
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
     }
@@ -1753,7 +1758,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}
 ```
 
 ```
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}/verify'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify'
 ```
 
 </details>

@@ -257,20 +257,20 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -333,21 +333,21 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -
 
 | 메서드 | URI |
 | --- | --- |
-| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -554,14 +554,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 | 메서드 | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id} |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 [Request Body]
 
@@ -582,7 +582,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -795,22 +795,22 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}' 
 
 | 메서드 | URI |
 | --- | --- |
-| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+| DELETE | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
-| face-id | 등록된 페이스 아이디 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| faceId | 등록된 페이스 아이디 |
 
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -857,14 +857,14 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
 
 [URL Parameter]
 
@@ -887,7 +887,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -900,7 +900,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -998,15 +998,15 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 메서드 | URI |
 | --- | --- |
-| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id} |
+| GET | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
-| face-id | 비교하려는 페이스 아이디 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| faceId | 비교하려는 페이스 아이디 |
 
 [URL Parameter]
 
@@ -1020,7 +1020,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/faces/{face-id}?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1121,14 +1121,14 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 
 | 메서드 | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/search |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 group id<br>[a-z0-9-]<br>최대255자 |
+| groupId | 사용자가 등록한 group id<br>[a-z0-9-]<br>최대255자 |
 
 [URL Parameter]
 
@@ -1154,7 +1154,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/fa
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{group-id}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     }
@@ -1656,15 +1656,15 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 | 메서드 | URI |
 | --- | --- |
-| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id} |
+| POST | /nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
 | 이름 | 설명 |
 | --- | --- |
 | appKey | 통합 앱키 또는 서비스 앱키 |
-| group-id | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
-| face-id | 등록된 페이스 아이디 |
+| groupId | 사용자가 등록한 그룹 아이디<br>[a-z0-9-]<br>최대 255자 |
+| faceId | 등록된 페이스 아이디 |
 
 [Request Body]
 
@@ -1683,7 +1683,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 <summary>요청 예</summary>
 
 ```
-$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{group-id}/faces/{face-id}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{groupId}/faces/{faceId}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
     }
