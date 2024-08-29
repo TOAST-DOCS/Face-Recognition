@@ -904,7 +904,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 | limit | int | O |  | 1 ~ 200 | 100 | 최대 크기 |
 | face-id | string | X |  |  | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 페이스 아이디 |
 | image-id | string | X |  |  | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 이미지 아이디 |
-| external-image-id | string | X |  | [a-zA-Z0-9_.\-:]<br>최대 255자 | "image01.jsp" | 사용자가 이미지에 등록한 값|
+| external-image-id | string | X |  | [a-zA-Z0-9_.\-:]<br>최대 255자 | "image01.jsp" | 사용자가 얼굴 등록 시 설정한 이미지 또는 페이스 아이디 라벨링 값|
 | next-token | string |  |  |  | "skljsdioew..." | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 * 주의 사항
