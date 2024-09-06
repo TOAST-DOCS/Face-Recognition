@@ -905,11 +905,14 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 | --- | --- | --- | --- | --- | --- | --- |
 | limit | int | O |  | 1 ～ 200 | 100 | 最大サイズ |
 | next-token | string |  |  |  | "skljsdioew..." | 「グループリストレスポンス本文データ」から返った値<br/>結果が途切れている場合は、next-tokenを利用して以降の結果を取得できる |
+| face-id | string | X |  |  | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | フェイスID |
+| image-id | string | X |  |  | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | イメージID |
+| external-image-id | string | X |  | [a-zA-Z0-9_.\-:]<br>最大255文字 | "image01.jsp" | ユーザーが顔登録時に設定した画像またはフェイスIDラベリング値|
 
 * 注意事項
     * 最初はnext-tokenが存在しません。
     * tokenは特定時間または特定条件で消える場合があります。
-    * token発行時、limitは固定されます。
+    * token発行時、face-id, image-id, external-image-id, limitは固定されます。
 * シナリオ例
 
 * 最初のquery
@@ -918,7 +921,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 <summary>リクエスト例</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&external-image-id={external-image-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -934,7 +937,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 
 </details>
 
-* next-tokenが存在する場合、limitは変更できず、tokenが発行される時の値に自動設定される
+* next-tokenが存在する場合、face-id, image-id, external-image-id, limitは変更できず、tokenが発行される時の値に自動設定される
 
 #### レスポンス
 

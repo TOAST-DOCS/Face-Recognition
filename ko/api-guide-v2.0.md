@@ -902,18 +902,21 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 | 이름 | 타입 | 필수 여부 | 기본값 | 유효 범위 | 예제 | 설명 |
 | --- | --- | --- | --- | --- | --- | --- |
 | limit | int | O |  | 1 ~ 200 | 100 | 최대 크기 |
+| face-id | string | X |  |  | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | 페이스 아이디 |
+| image-id | string | X |  |  | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | 이미지 아이디 |
+| external-image-id | string | X |  | [a-zA-Z0-9_.\-:]<br>최대 255자 | "image01.jsp" | 사용자가 얼굴 등록 시 설정한 이미지 또는 페이스 아이디 라벨링 값|
 | next-token | string |  |  |  | "skljsdioew..." | '그룹 목록 응답 본문 데이터'에서 반환한 값<br/> 결과가 잘린 경우 next-token을 이용하여 이후 결과를 가지고 올 수 있음 |
 
 * 주의 사항
     * 처음에는 next-token이 없습니다.
     * token은 특정 시간이나 특정 조건에서 사라질 수 있습니다.
-    * token 발행 시 limit은 고정됩니다.
+    * token 발행 시 face-id, image-id, external-image-id, limit은 고정됩니다.
 
 <details>
 <summary>요청 예</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&external-image-id={external-image-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -929,7 +932,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 
 </details>
 
-* next-token이 존재하면 limit은 변경될 수 없으며 token이 발행될 때의 값으로 자동 설정됨
+* next-token이 존재하면 face-id, image-id, external-image-id, limit은 변경될 수 없으며 token이 발행될 때의 값으로 자동 설정됨
 
 #### 응답
 
