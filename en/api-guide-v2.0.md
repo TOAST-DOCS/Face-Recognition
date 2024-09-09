@@ -903,7 +903,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 | limit | int | O |  | 1 ~ 200 | 100 | Max size |
 | face-id | string | X |  |  | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | Face ID |
 | image-id | string | X |  |  | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Image ID |
-| external-image-id | string | X |  | [a-zA-Z0-9_.\-:]<br>최대 255자 | "image01.jsp" | The image or face ID labelling value that users set when registering their face.|
+| external-image-id | string | X |  | [a-zA-Z0-9_.\-:]<br>Max. 255 characters | "image01.jsp" | The image or face ID labelling value that users set when registering their face.|
 | next-token | string |  |  |  | "skljsdioew..." | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
 * Caution
