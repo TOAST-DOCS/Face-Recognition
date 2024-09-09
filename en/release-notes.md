@@ -4,9 +4,7 @@
 
 #### Added Features
 
-* [API v2.0] Added the feature to filter the list of faces by using face ID, Image ID, images or face ID labeling values (ExternalImageID) users set while registering faces, when retrieving [Face List In Group](./api-guide-v2.0/#face-list-in-a-group). 
-
-face ID, image ID, the image the user set when registering the face, or the face ID labelling value (ExternalImageId).
+* [API v2.0] Added the feature to filter the list of faces by using face ID, Image ID, images or face ID labeling values (ExternalImageID) users set while registering faces, when retrieving [Face List In Group](./api-guide-v2.0/#face-list-in-a-group).
 
 ### January 09, 2024
 
