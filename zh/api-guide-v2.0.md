@@ -901,18 +901,22 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 | Name | Type | Required | Default value | Valid range | Examples | Description |
 | --- | --- | --- | --- | --- | --- | --- |
 | limit | int | O |  | 1 ~ 200 | 100 | Max size |
+| face-id | string | X |  |  | "87db50d4-f2c6-b8ea-05ed-9f201309fd92" | Face ID |
+| image-id | string | X |  |  | "9297db50-d4f2-c6b8-ea05-edf2013089fd" | Image ID |
+| external-image-id | string | X |  | [a-zA-Z0-9_.\-:]<br>Max. 255 characters | "image01.jsp" | The image or face ID labelling value that users set when registering their face.|
 | next-token | string |  |  |  | "skljsdioew..." | Value returned from 'Group list response body data'<br/> If the result is partially truncated, the next-token can be used to bring the rest of the result |
 
 * Caution
     * In the beginning, the next-token cannot exist.
     * The token may disappear at a specific time or under specific conditions.
-    * Upon issuing the token, the limit becomes fixed.
+    * Upon issuing the token, the face-id, image-id, external-image-id, and limit becomes fixed.
 
 <details>
 <summary>Request example</summary>
 
 ```
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+
+$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&external-image-id={external-image-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -928,7 +932,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 
 </details>
 
-* If the next-token exists, the limit cannot be changed, and it is auto-set to the value from when the token was issued
+* If the next-token exists, the face-id, image-id, external-image-id, limit cannot be changed, and it is auto-set to the value from when the token was issued
 
 #### Response
 

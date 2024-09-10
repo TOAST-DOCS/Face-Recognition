@@ -1,8 +1,14 @@
 ## AI Service > Face Recognition > リリースノート
 
+### 2024. 09. 10.
+
+#### 機能追加
+
+* [API v2.0] [グループ内の顔リスト](./api-guide-v2.0/#face-list-in-a-group)照会時、フェイスID、画像ID、ユーザーが顔登録時に設定した画像またはフェイスIDラベリング値(ExternalImageId)を利用して顔リストをフィルタリングできるように機能追加
+
 ### 2024. 01. 09.
 
-#### 改善
+#### 機能改善
 
 * エラーメッセージの改善(`InvalidImageParameterException` -> `InvalidImageBytesException`)
 

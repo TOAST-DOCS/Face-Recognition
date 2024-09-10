@@ -41,10 +41,7 @@ Provides the following features:
 
 ## Privacy Policy
 
-- While using the face recognition service, the customer may collect personal and sensitive information of their users. Therefore, the customer of this service must inform a legal notice to their users as per the Personal Information Protection Act and acquire their consent regarding the matter.
+* While using the Face Recognition service, the customer may collect personal and sensitive information of their users. Therefore, the customer of this service must inform a legal notice to their users as per the Personal Information Protection Act and acquire their consent regarding the matter.<br/>
 Also during this process, work consignment relation regarding the processing of personal information may arise between the customer and NHN Cloud. The customer who assumes the position of consignor may enter into a consignment contract with the consignee, NHN Cloud, separately in writing, and post a privacy policy notice by referencing the following:
-
-     \- Consignee: NHN Cloud
-     \- Consignment Description: Providing face recognition service
- 
- 
+    * Consignee: NHN Cloud
+    * Consignment Description: Providing face recognition service

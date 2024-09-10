@@ -1,8 +1,14 @@
 ## AI Service > Face Recognition > 릴리스 노트
 
+### 2024. 09. 10.
+
+#### 기능 추가
+
+* [API v2.0] [그룹 내 얼굴 목록](./api-guide-v2.0/#face-list-in-a-group) 조회 시 페이스 아이디, 이미지 아이디, 사용자가 얼굴 등록 시 설정한 이미지 또는 페이스 아이디 라벨링 값(ExternalImageId)을 이용하여 얼굴 목록을 필터링할 수 있도록 기능 추가
+
 ### 2024. 01. 09.
 
-#### 개선
+#### 기능 개선
 
 * 오류 메시지 개선(`InvalidImageParameterException` -> `InvalidImageBytesException`)
 
