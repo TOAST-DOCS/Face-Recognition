@@ -1,5 +1,11 @@
 ## AI Service > Face Recognition > Release Notes
 
+### March 11, 2025
+
+#### Feature Updates
+
+* Made face detection 5-10% faster than before
+
 ### September 10, 2024
 
 #### Added Features
