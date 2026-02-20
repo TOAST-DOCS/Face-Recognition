@@ -100,7 +100,7 @@
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "groupId": "my-group"
 }'
@@ -178,7 +178,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -190,7 +190,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -268,7 +268,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -345,7 +345,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
@@ -422,7 +422,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 <details>
 <summary>Request example</summary>
  
-```
+```shell
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url":"https://..."
@@ -580,7 +580,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 <details>
 <summary>Request example</summary>
  
-```
+```shell
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
@@ -807,7 +807,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}' -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
@@ -884,7 +884,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}' -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
@@ -897,7 +897,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
@@ -1017,7 +1017,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 <details>
 <summary>Request example</summary>
  
-```
+```shell
 $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' 
 ```
 
@@ -1151,7 +1151,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 <details>
 <summary>Request example</summary>
  
-```
+```shell
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/search?limit={limit}&threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
@@ -1355,7 +1355,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 <details>
 <summary>Request example</summary>
  
-```
+```shell
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={threshold}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "sourceImage": {
         "url": "https://..."
@@ -1678,7 +1678,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{groupId}/faces/{faceId}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."

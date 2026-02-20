@@ -1,20 +1,15 @@
-## AI Service > Face Recognition > API v2.0ガイド
-
-* 顔認識API v2.0を使用するために必要なAPIを説明します。
-* 顔認識API v2.0から秘密鍵認証が追加されます。
+## AI Service > Face Recognition > API v2.1ガイド
 
 ## API共通情報
 
 ### 事前準備
 
+* Face Recognitionは、API呼び出し時の認証/認可のためにUser Access Keyトークンを使用します。User Access Keyトークンは、User Access Keyに基づいて発行されるBearerタイプの一時的なアクセストークンです。User Access Keyトークンの発行及び使用に関する詳細は、[User Access Keyトークン](docs.nhncloud.com/ja/nhncloud/ja/public-api/user-access-key-token)を参照してください。
 * APIを使用するにはプロジェクト統合アプリケーションキーまたはサービスアプリケーションキーが必要です。
-    * プロジェクト統合アプリケーションキーを使用することを推奨します。
-        * プロジェクト統合アプリケーションキーは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
-    * サービスアプリケーションキー、 SecretKeyはコンソール上部の**URL & Appkey** メニューで確認が可能です。
+    * プロジェクト統合アプリケーションキーは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
+    * サービスアプリケーションキーはコンソール上部の**URL & Appkey** メニューで確認が可能です。
 
 ### リクエスト共通情報
-
-* APIを使用するには秘密鍵の認証処理が必要です。
 
 [APIドメイン]
 
@@ -26,7 +21,7 @@
 
 | 名前 | 値 | 説明 |
 | --- | --- | --- |
-| Authorization | {secretKey} | コンソールで発行された秘密鍵 |
+| x-nhn-authorization | Bearer {User Access Key Token} | User Access Keyトークン |
 
 <span id="input-image-guide"></span>
 
@@ -84,7 +79,7 @@
 
 ### グループ作成
 
-* グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v2.0/#add-face)を利用して顔を登録できます。
+* グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v2.1/#add-face)を利用して顔を登録できます。
 
 #### リクエスト
 
@@ -92,7 +87,7 @@
 
 | メソッド | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups |
+| POST | /v2.1/appkeys/{appKey}/groups |
 
 
 [Path Variable]
@@ -111,7 +106,7 @@
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "groupId": "my-group"
 }'
 ```
@@ -121,7 +116,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -145,7 +140,8 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40010| InvalidGroupID | グループIDエラー |
 |-40020| DuplicatedGroupID | 重複したグループID |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループリスト
@@ -158,7 +154,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 
 | メソッド | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups |
+| GET | /v2.1/appkeys/{appKey}/groups |
 
 [Path Variable]
 
@@ -185,7 +181,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups?limit={limit}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -196,7 +192,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}' -H 'Authoriz
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -206,7 +202,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -249,7 +245,8 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループ詳細情報
@@ -262,7 +259,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 
 | メソッド | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{groupId} |
+| GET | /v2.1/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
@@ -275,7 +272,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -283,7 +280,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -319,7 +316,8 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
 
 ### グループ削除
@@ -332,7 +330,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 
 | メソッド | URI |
 | --- | --- |
-| DELETE | /v2.0/appkeys/{appKey}/groups/{groupId} |
+| DELETE | /v2.1/appkeys/{appKey}/groups/{groupId} |
 
 [Path Variable]
 
@@ -345,7 +343,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -353,7 +351,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -376,7 +374,8 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="detect-face"></span>
@@ -387,7 +386,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 * 検出した顔から顔、目、鼻、口などの位置情報と信頼度の値を返します。
 * 入力画像から顔が大きい順に最大20個の顔を検出します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.1/#input-image-guide)」を参照してください。
 
 <span id="detect-face-request"></span>
 
@@ -397,7 +396,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 
 | メソッド | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/faces/detect |
+| POST | /v2.1/appkeys/{appKey}/faces/detect |
 
 [Path Variable]
 
@@ -431,7 +430,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/detect' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/faces/detect' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url":"https://..."
     }
@@ -439,7 +438,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/detect' -H 'Authorization: 
 ```
 
 ```shell
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/faces/detect'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.1/appkeys/{appKey}/faces/detect'
 ```
 
 </details>
@@ -449,7 +448,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -539,7 +538,8 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
 |-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
@@ -555,11 +555,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * 入力画像から検出した顔を特定グループに登録するAPIです。
 * 入力画像から顔のboxを検出し、検出した顔boxから顔の特徴をベクトルで抽出します。この時、入力画像と入力画像から検出した顔画像は保存しません。
 * 抽出したベクトルデータは暗号化してデータベースに保存します。
-* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide-v2.0/#search-by-face-id)、[画像で顔検索](./api-guide-v2.0/#search-by-image) APIで特徴ベクトルとして使用します。
+* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide-v2.1/#search-by-face-id)、[画像で顔検索](./api-guide-v2.1/#search-by-image) APIで特徴ベクトルとして使用します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.1/#input-image-guide)」を参照してください。
 * "imageId"は入力画像に付与される値で、"externalImageId"はユーザーが直接付与できる値です。ユーザーは"imageId"と"externalImageId"を利用して画像またはフェイスIDにラベリングしてインデックスのように活用できます。
-* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide-v2.0/#face-list-in-a-group)と[フェイスIDで顔検索](./api-guide-v2.0/#search-by-face-id)、[画像で顔検索](./api-guide-v2.0/#search-by-image) APIのレスポンスで返されます。
+* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide-v2.1/#face-list-in-a-group)と[フェイスIDで顔検索](./api-guide-v2.1/#search-by-face-id)、[画像で顔検索](./api-guide-v2.1/#search-by-image) APIのレスポンスで返されます。
 * 1つのグループに登録できる顔の数は最大10万個です。
 
 <span id="add-face-request"></span>
@@ -570,7 +570,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | メソッド | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces |
+| POST | /v2.1/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
@@ -609,7 +609,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     },
@@ -619,7 +619,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces' -H 'Autho
 ```
 
 ```shell
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces'
 ```
 
 </details>
@@ -630,7 +630,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -809,7 +809,8 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40070| ServiceQuotaExceededException | 1つのグループに登録可能な最大顔数を超過 |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
 |-45030| InvalidImageBytesException | 無効な画像パBytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
@@ -828,7 +829,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | メソッド | URI |
 | --- | --- |
-| DELETE | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId} |
+| DELETE | /v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId} |
 
 [Path Variable]
 
@@ -842,7 +843,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X DELETE '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -850,7 +851,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -874,7 +875,8 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="face-list-in-a-group"></span>
@@ -890,7 +892,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 
 | メソッド | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{groupId}/faces |
+| GET | /v2.1/appkeys/{appKey}/groups/{groupId}/faces |
 
 [Path Variable]
 
@@ -921,7 +923,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&external-image-id={external-image-id}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{group-id}/faces?limit={limit}&external-image-id={external-image-id}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -932,7 +934,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}&next-token={next-token}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}&next-token={next-token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -942,7 +944,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1012,7 +1014,8 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-face-id"></span>
@@ -1028,7 +1031,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 
 | メソッド | URI |
 | --- | --- |
-| GET | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search |
+| GET | /v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search |
 
 [Path Variable]
 
@@ -1049,7 +1052,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search?limit={limit}&threshold={threshold}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
+$ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search?limit={limit}&threshold={threshold}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
 </details>
@@ -1057,7 +1060,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1132,7 +1135,8 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
 
 <span id="search-by-image"></span>
@@ -1141,7 +1145,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 
 * 入力画像から検出した最も大きい顔を使用して特定グループに属す顔と一致するかどうかを比較します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.1/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="search-by-image-request"></span>
@@ -1152,7 +1156,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 
 | メソッド | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/search |
+| POST | /v2.1/appkeys/{appKey}/groups/{groupId}/faces/search |
 
 [Path Variable]
 
@@ -1191,7 +1195,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/search?limit={limit}&threshold={threshold}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/search?limit={limit}&threshold={threshold}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
     }
@@ -1199,7 +1203,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/search?limit={li
 ```
 
 ```shell
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/search'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/search'
 ```
 
 </details>
@@ -1207,7 +1211,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1338,7 +1342,8 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
 |-45030| InvalidImageBytesException | 無効な画像パBytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
@@ -1354,7 +1359,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * 基準画像(sourceImage)と比較画像(targetImage)から検出した顔がどれくらい類似しているかを比較します。
 * 基準画像から検出した顔のうち、最も大きい顔(基準顔)のみ使用します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
-* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
+* 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.1/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
 <span id="compare-face-request"></span>
@@ -1365,7 +1370,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | メソッド | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/faces/compare |
+| POST | /v2.1/appkeys/{appKey}/faces/compare |
 
 [Path Variable]
 
@@ -1411,7 +1416,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/compare?threshold={threshold}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/compare?threshold={threshold}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "sourceImage": {
         "url": "https://..."
     },
@@ -1422,7 +1427,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/compare?threshold={threshold}' -H
 ```
 
 ```shell
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F sourceImage=@sourceImage.png -F targetImage=@targetImage.png -F threshold=90 '{domain}/v2.0/appkeys/{appKey}/faces/compare'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F sourceImage=@sourceImage.png -F targetImage=@targetImage.png -F threshold=90 '{domain}/v2.1/appkeys/{appKey}/faces/compare'
 ```
 
 </details>
@@ -1432,7 +1437,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1694,7 +1699,8 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
 |-45030| InvalidImageBytesException | 無効な画像Bytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしない画像フォーマット |
@@ -1708,10 +1714,10 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 ### 顔検証
 
 * 事前に登録された特定の顔のフェイスIDと、入力画像から検出した顔を比較して類似度値を返す機能です。
-* [顔登録](./api-guide-v2.0/#add-face)を利用して顔を登録できます。
+* [顔登録](./api-guide-v2.1/#add-face)を利用して顔を登録できます。
 * 入力画像から検出した顔のうち、最も大きい顔のみを使用します。
 * 入力画像はBase64でエンコードされた画像バイトで伝達するか、画像URLで伝達できます。
-* 入力画像についての詳細は、[入力画像ガイド](./api-guide-v2.0/#input-image-guide)を参照してください。
+* 入力画像についての詳細は、[入力画像ガイド](./api-guide-v2.1/#input-image-guide)を参照してください。
 
 <span id="verify-request"></span>
 
@@ -1721,7 +1727,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 | メソッド | URI |
 | --- | --- |
-| POST | /v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify |
+| POST | /v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify |
 
 [Path Variable]
 
@@ -1757,7 +1763,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <summary>リクエスト例</summary>
 
 ```shell
-$ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
     }
@@ -1765,7 +1771,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/v
 ```
 
 ```shell
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify'
+$ curl -X POST -H 'Authorization: {secretKey}' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify'
 ```
 
 </details>
@@ -1773,7 +1779,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.1/#common-response)で確認可能
 
 [レスポンス本文データ]
 
@@ -1885,7 +1891,8 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
-|-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
+|-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
+|-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
 |-45030| InvalidImageBytesException | 無効な画像パBytes。主にBase64エンコードが正しくない場合に発生 |
 |-45040| InvalidImageFormatException | サポートしていない画像フォーマット |
