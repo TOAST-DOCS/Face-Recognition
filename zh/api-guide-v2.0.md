@@ -7,7 +7,10 @@
 
 ### Preparations
 
-* Appkey is required to use the Face Recognition API. The Appkey is included in the request URL to identify and specify a particular resource when making API calls. For more information on checking and using Appkeys, please refer to the  [Appkey](docs.nhncloud.com/en/nhncloud/en/public-api/appkey).
+* AppKey and SecretKey are required to use the Face Recognition API.
+An Appkey is a unique authentication key issued for each NHN Cloud service, used to identify the service and validate API requests. A SecretKey is a private key used to control access to the API. For more information on checking and using Appkeys, please refer to the [Appkey](/nhncloud/en/public-api/appkey).<br/>
+Project Integrated Appkey can be used in place of the Appkey. Project Integrated Appkey is a common authentication key that can be shared across multiple services within a single NHN Cloud project.
+For more information on creating and using Project Integrated Appkeys, please refer to the [Project Integrated Appkey](/nhncloud/en/public-api/project-integrated-appkey).
 
 ### Request Common Information
 
