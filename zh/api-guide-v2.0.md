@@ -7,10 +7,10 @@
 
 ### Preparations
 
-* To use APIs, an integrated project Appkey or service Appkey is required.
-    * We recommend using the integrated project Appkey.
-        * You can create and use the integrated project Appkey from the API security settings in the project settings page.
-    * You can check the Appkey and SecretKey in the **URL & Appkey** menu at the top of the console.
+* AppKey and SecretKey are required to use the Face Recognition API.
+An Appkey is a unique authentication key issued for each NHN Cloud service, used to identify the service and validate API requests. A SecretKey is a private key used to control access to the API. For more information on checking and using Appkeys, please refer to the [Appkey](/nhncloud/en/public-api/appkey).<br/>
+Project Integrated Appkey can be used in place of the Appkey. Project Integrated Appkey is a common authentication key that can be shared across multiple services within a single NHN Cloud project.
+For more information on creating and using Project Integrated Appkeys, please refer to the [Project Integrated Appkey](/nhncloud/en/public-api/project-integrated-appkey).
 
 ### Request Common Information
 
@@ -108,7 +108,7 @@
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "groupId": "my-group"
 }'
@@ -181,7 +181,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -192,7 +192,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}' -H 'Authoriz
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={next-token}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -271,7 +271,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -341,7 +341,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -427,7 +427,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/detect' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url":"https://..."
@@ -435,7 +435,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/detect' -H 'Authorization: 
 }'
 ```
 
-```
+```shell
 $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/faces/detect'
 ```
 
@@ -605,7 +605,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
@@ -615,7 +615,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces' -H 'Autho
 }'
 ```
 
-```
+```shell
 $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces'
 ```
 
@@ -838,7 +838,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -926,7 +926,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{group-id}/faces?limit={lim
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limit}&next-token={next-token}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -1043,7 +1043,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/search?limit={limit}&threshold={threshold}' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8'
 ```
 
@@ -1185,7 +1185,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/search' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "image": {
         "url": "https://..."
@@ -1195,7 +1195,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/search' -H
 }'
 ```
 
-```
+```shell
 $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/search'
 ```
 
@@ -1407,7 +1407,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/compare' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "sourceImage": {
         "url": "https://..."
@@ -1418,7 +1418,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/faces/compare' -H 'Authorization:
 }'
 ```
 
-```
+```shell
 $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F sourceImage=@sourceImage.png -F targetImage=@targetImage.png -F threshold=90 '{domain}/v2.0/appkeys/{appKey}/faces/compare'
 ```
 
@@ -1753,7 +1753,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 <details>
 <summary>Request example</summary>
 
-```
+```shell
 $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify' -H 'Authorization: {secretKey}' -H 'Content-Type: application/json;charset=UTF-8' -d '{
     "compareImage": {
         "url": "https://..."
@@ -1761,7 +1761,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/v
 }'
 ```
 
-```
+```shell
 $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify'
 ```
 
