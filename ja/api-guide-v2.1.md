@@ -5,9 +5,8 @@
 ### 事前準備
 
 * Face Recognitionは、API呼び出し時の認証/認可のためにUser Access Keyトークンを使用します。User Access Keyトークンは、User Access Keyに基づいて発行されるBearerタイプの一時的なアクセストークンです。User Access Keyトークンの発行及び使用に関する詳細は、[User Access Keyトークン](docs.nhncloud.com/ja/nhncloud/ja/public-api/user-access-key-token)を参照してください。
-* APIを使用するにはプロジェクト統合アプリケーションキーまたはサービスアプリケーションキーが必要です。
-    * プロジェクト統合アプリケーションキーは、プロジェクト設定ページのAPIセキュリティ設定で作成して使用できます。
-    * サービスアプリケーションキーはコンソール上部の**URL & Appkey** メニューで確認が可能です。
+* Face Recognition APIを使用するには、Appkeyが必要です。Appkeyは、API呼び出し時にリクエストURLに含めて特定のリソースを指定し、識別するために使用されます。
+Appkeyの確認及び使用に関する詳細は、[Appkey](docs.nhncloud.com/ja/nhncloud/ja/public-api/appkey)を参照してください。
 
 ### リクエスト共通情報
 

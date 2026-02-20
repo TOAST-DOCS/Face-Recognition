@@ -7,11 +7,7 @@
 
 ### Preparations
 
-* To use APIs, an integrated project Appkey or service Appkey is required.  
-    * We recommend using the integrated project Appkey.
-        * You can create and use the integrated project Appkey from the API security settings in the project settings page.
-    * The service Appkey is located in the **URL & Appkey** menu on the top of the console.
-
+* Appkey is required to use the Face Recognition API. The Appkey is included in the request URL to identify and specify a particular resource when making API calls. For more information on checking and using Appkeys, please refer to the  [Appkey](docs.nhncloud.com/en/nhncloud/en/public-api/appkey).
 ### Request Common Information
 
 [API domain]

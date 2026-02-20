@@ -7,10 +7,8 @@
 
 ### 사전 준비
 
-* API 사용을 위해서는 프로젝트 통합 앱키 또는 서비스 앱키가 필요합니다.
-    * 프로젝트 통합 앱키 사용을 권장합니다.
-        * 프로젝트 통합 앱키는 프로젝트 설정 페이지의 API 보안 설정에서 생성해 사용할 수 있습니다.
-    * 서비스 앱키는 콘솔 상단 **URL & Appkey** 메뉴에서 확인이 가능합니다.
+* Face Recognition은 API를 사용하려면 Appkey가 필요합니다. Appkey는 API 호출 시 요청 URL에 포함하여 특정 리소스를 가리키고 식별하는 데 사용됩니다.
+Appkey 확인 및 사용에 대한 자세한 내용은 [Appkey](docs.nhncloud.com/ko/nhncloud/ko/public-api/appkey)를 참고하세요.
 
 ### 요청 공통 정보
 

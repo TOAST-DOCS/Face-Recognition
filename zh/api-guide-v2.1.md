@@ -5,9 +5,7 @@
 ### Preparations
 
 * Face Recognition uses User Access Key tokens for authentication and authorization when making API calls. The User Access Key token is a temporary, Bearer-type access token issued from a User Access Key. For more information on issuing and using User Access Key tokens, please refer to the [User Access Key Token](docs.nhncloud.com/en/nhncloud/en/public-api/user-access-key-token).
-* To use APIs, an integrated project Appkey or service Appkey is required.
-    * You can create and use the integrated project Appkey from the API security settings in the project settings page.
-    * You can check the Appkey in the **URL & Appkey** menu at the top of the console.
+* Appkey is required to use the Face Recognition API. The Appkey is included in the request URL to identify and specify a particular resource when making API calls. For more information on checking and using Appkeys, please refer to the  [Appkey](docs.nhncloud.com/en/nhncloud/en/public-api/appkey).
 
 ### Request Common Information
 
