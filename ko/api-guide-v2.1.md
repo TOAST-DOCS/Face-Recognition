@@ -436,7 +436,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/faces/detect' -H 'x-nhn-authoriza
 ```
 
 ```shell
-$ curl -X POST -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.1/appkeys/{appKey}/faces/detect'
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/faces/detect' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png
 ```
 
 </details>
@@ -617,7 +617,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces' -H 'x-nhn
 ```
 
 ```shell
-$ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3 '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces'
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F externalImageId=image01.jsp -F limit=3
 ```
 
 </details>
@@ -1200,7 +1200,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/search' -H
 ```
 
 ```shell
-$ curl -X POST -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90 '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/search'
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/search' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png -F limit=100 threshold=90
 ```
 
 </details>
@@ -1424,7 +1424,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/faces/compare' -H 'x-nhn-authoriz
 ```
 
 ```shell
-$ curl -X POST -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F sourceImage=@sourceImage.png -F targetImage=@targetImage.png -F threshold=90 '{domain}/v2.1/appkeys/{appKey}/faces/compare'
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/faces/compare' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F sourceImage=@sourceImage.png -F targetImage=@targetImage.png -F threshold=90
 ```
 
 </details>
@@ -1768,7 +1768,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/v
 ```
 
 ```shell
-$ curl -X POST -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify'
+$ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/verify' -H 'x-nhn-authorization: Bearer {User Access Key Token}' -H 'Content-Type: multipart/form-data' -F imageFile=@image.png
 ```
 
 </details>
