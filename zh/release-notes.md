@@ -1,5 +1,19 @@
 ## AI Service > Face Recognition > Release Notes
 
+### March 10, 2026
+
+#### Added Features
+
+* Release of API v2.1
+    * Added API using User Access Key token authentication.
+    * For more information on issuing and using User Access Key tokens, please refer to the [User Access Key Token](/nhncloud/en/public-api/user-access-key-token).
+
+### March 11, 2025
+
+#### Feature Updates
+
+* Made face detection 5-10% faster than before
+
 ### September 10, 2024
 
 #### Added Features

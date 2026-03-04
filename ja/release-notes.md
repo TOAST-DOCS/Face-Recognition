@@ -1,5 +1,13 @@
 ## AI Service > Face Recognition > リリースノート
 
+### 2026. 03. 10.
+
+#### 機能追加
+
+* API v2.1 リリース
+  * User Access Keyトークン認証を使用するAPIが追加されました。
+  * User Access Keyトークンの発行及び使用に関する詳細は、[User Access Keyトークン](/nhncloud/ja/public-api/user-access-key-token)を参照してください。
+
 ### 2025. 03. 11.
 
 #### 機能改善
