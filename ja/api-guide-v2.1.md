@@ -140,6 +140,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups' -H 'x-nhn-authorization: 
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40010| InvalidGroupID | グループIDエラー |
 |-40020| DuplicatedGroupID | 重複したグループID |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
@@ -245,6 +246,7 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups?limit={limit}&next-token={n
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
@@ -316,6 +318,7 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}' -H 'x-nhn-author
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
@@ -374,6 +377,7 @@ $ curl -X DELETE '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}' -H 'x-nhn-aut
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
@@ -538,6 +542,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | resultCode | resultMessage | 説明 |
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
@@ -809,6 +814,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'x-nhn-authorization: Bearer {
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40070| ServiceQuotaExceededException | 1つのグループに登録可能な最大顔数を超過 |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
@@ -875,6 +881,7 @@ $ curl -X DELETE '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
@@ -1014,6 +1021,7 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40040| InvalidTokenError | 無効なトークンを使用 |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
@@ -1135,6 +1143,7 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |
@@ -1342,6 +1351,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'x-nhn-authorization: Bearer {
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
@@ -1699,6 +1709,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'x-nhn-authorization: Bearer {
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
@@ -1891,6 +1902,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'x-nhn-authorization: Bearer {
 | --- | --- | --- |
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40030| NotFoundGroupError | グループIDが見つからない |
+|-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-45020| ImageTooLargeException | 画像サイズ超過 |
