@@ -140,6 +140,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups' -H 'x-nhn-authorization: 
 |-40010| InvalidGroupID | 그룹 아이디 오류 |
 |-40020| DuplicatedGroupID | 중복된 그룹 아이디 |
 |-40070| ServiceQuotaExceededException | 생성할 수 있는 최대 그룹 개수 초과 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-50000| InternalServerError | 서버 오류 |
@@ -243,6 +244,7 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups?limit={limit}&next-token={n
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40040| InvalidTokenError | 잘못된 token 사용 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-50000| InternalServerError | 서버 오류 |
@@ -314,6 +316,7 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}' -H 'x-nhn-author
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-50000| InternalServerError | 서버 오류 |
@@ -536,6 +539,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/faces/detect' -H 'x-nhn-authoriza
 | resultCode | resultMessage | 설명 |
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
@@ -807,6 +811,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces' -H 'x-nhn
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40070| ServiceQuotaExceededException | 단일 그룹에 등록 가능한 최대 얼굴 개수 초과 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
@@ -873,6 +878,7 @@ $ curl -X DELETE '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-50000| InternalServerError | 서버 오류 |
@@ -1009,6 +1015,7 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40040| InvalidTokenError | 잘못된 token 사용 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-50000| InternalServerError | 서버 오류 |
@@ -1130,6 +1137,7 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
 |-40050| NotFoundFaceIDError | 페이스 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-50000| InternalServerError | 서버 오류 |
@@ -1339,6 +1347,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/search' -H
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
@@ -1696,6 +1705,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/faces/compare' -H 'x-nhn-authoriz
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
@@ -1888,6 +1898,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/v
 | --- | --- | --- |
 |-40000| InvalidParam | 파라미터에 오류가 있음 |
 |-40030| NotFoundGroupError | 그룹 아이디를 찾을 수 없음 |
+|-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-41006| InvalidToken | 유효하지 않은 형식의 User Access Key 토큰 |
 |-41007| UnauthorizedToken | 권한이 없는 User Access Key 토큰 |
 |-45020| ImageTooLargeException | 이미지 크기 초과 |
