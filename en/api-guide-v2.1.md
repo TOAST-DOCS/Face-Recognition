@@ -139,7 +139,6 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups' -H 'x-nhn-authorization: 
 |-40010| InvalidGroupID | Group ID error |
 |-40020| DuplicatedGroupID | Duplicate group ID |
 |-40070| ServiceQuotaExceededException | Exceeding the maximum number of groups you can create |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-50000| InternalServerError | Server error |
@@ -243,7 +242,6 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups?limit={limit}&next-token={n
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40040| InvalidTokenError | Invalid token used |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-50000| InternalServerError | Server error |
@@ -315,7 +313,6 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}' -H 'x-nhn-author
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-50000| InternalServerError | Server error |
@@ -374,7 +371,6 @@ $ curl -X DELETE '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}' -H 'x-nhn-aut
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-50000| InternalServerError | Server error |
@@ -539,7 +535,6 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/faces/detect' -H 'x-nhn-authoriza
 | resultCode | resultMessage | Description |
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-45020| ImageTooLargeException | Image size exceeded |
@@ -811,7 +806,6 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces' -H 'x-nhn
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40070| ServiceQuotaExceededException | Exceeds the max number of faces which can be registered for a single group |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-45020| ImageTooLargeException | Image size exceeded |
@@ -878,7 +872,6 @@ $ curl -X DELETE '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40050| NotFoundFaceIDError | Could not find the face ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-50000| InternalServerError | Server error |
@@ -1015,7 +1008,6 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40040| InvalidTokenError | Invalid token used |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-50000| InternalServerError | Server error |
@@ -1137,7 +1129,6 @@ $ curl -X GET '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40050| NotFoundFaceIDError | Could not find the face ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-50000| InternalServerError | Server error |
@@ -1347,7 +1338,6 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/search' -H
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-45020| ImageTooLargeException | Image size exceeded |
@@ -1705,7 +1695,6 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/faces/compare' -H 'x-nhn-authoriz
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-45020| ImageTooLargeException | Image size exceeded |
@@ -1899,7 +1888,6 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/v
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
 |-40050| NotFoundFaceIDError | Could not find the face ID |
-|-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-45020| ImageTooLargeException | Image size exceeded |
