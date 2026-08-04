@@ -1,17 +1,23 @@
-## AI Service > Face Recognition > API v1.0 가이드
+<!-- pre-align:aligned sig=0dea13be036a -->
+
+<a id="ai-service-face-recognition-api-v10-guide"></a>
+## AI Service > Face Recognition > API v1.0 가이드 { #ai-service-face-recognition-api-v10-guide }
 
 * 얼굴 인식 API v1.0을 사용하는 데 필요한 API를 설명합니다.
 
-## API 공통 정보
+<a id="common-api-information"></a>
+## API 공통 정보 { #common-api-information }
 
 
-### 사전 준비
+<a id="preparations"></a>
+### 사전 준비 { #preparations }
 
 * Face Recognition API를 사용하려면 Appkey 또는 프로젝트 통합 Appkey가 필요합니다.<br/>
 Appkey는 NHN Cloud의 각 서비스별로 발급되는 고유 인증 키이며, 프로젝트 통합 Appkey는 NHN Cloud에서 하나의 프로젝트 내 여러 서비스에 대해 공통으로 사용할 수 있는 인증 키입니다.<br/>
 Appkey 확인 및 사용에 대한 자세한 내용은 [Appkey](/nhncloud/ko/public-api/appkey)를 참고하세요. 프로젝트 통합 Appkey 생성 및 사용에 대한 자세한 내용은 [프로젝트 통합 Appkey](/nhncloud/ko/public-api/project-integrated-appkey)를 참고하세요.
 
-### 요청 공통 정보
+<a id="request-common-information"></a>
+### 요청 공통 정보 { #request-common-information }
 
 [API 도메인]
 
@@ -21,7 +27,8 @@ Appkey 확인 및 사용에 대한 자세한 내용은 [Appkey](/nhncloud/ko/pub
 
 <span id="input-image-guide"></span>
 
-### 입력 이미지 가이드
+<a id="input-image-guide"></a>
+### 입력 이미지 가이드 { #input-image-guide }
 
 * 입력 이미지는 너비와 높이 모두 최소 80px 이상이어야 합니다.
     * 얼굴 크기가 최소 60*60px 이상이어야 얼굴 인식이 가능합니다.
@@ -34,7 +41,8 @@ Appkey 확인 및 사용에 대한 자세한 내용은 [Appkey](/nhncloud/ko/pub
 
 <span id="common-response"></span>
 
-### 응답 공통 정보
+<a id="common-response-information"></a>
+### 응답 공통 정보 { #common-response-information }
 
 * 모든 API 요청에 '200 OK'로 응답합니다. 자세한 응답 결과는 응답 본문 헤더를 참고합니다.
 
@@ -69,12 +77,15 @@ Appkey 확인 및 사용에 대한 자세한 내용은 [Appkey](/nhncloud/ko/pub
     }
 }
 ```
-## API 목차
+<a id="api-contents"></a>
+## API 목차 { #api-contents }
 
-### 그룹 생성
+<a id="create-groups"></a>
+### 그룹 생성 { #create-groups }
 
 * 그룹을 생성하는 API입니다. 생성된 그룹에 [얼굴 등록](./api-guide-v1.0/#add-face)을 이용하여 얼굴을 등록할 수 있습니다.
 
+<a id="create-groups-request"></a>
 #### 요청
 
 [URI]
@@ -107,6 +118,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 </details>
 
+<a id="create-groups-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -128,6 +140,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 </details>
 
+<a id="create-groups-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -139,10 +152,12 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 |-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
-### 그룹 목록
+<a id="group-list"></a>
+### 그룹 목록 { #group-list }
 
 * 그룹 목록을 조회하는 API입니다.
 
+<a id="group-list-request"></a>
 #### 요청
 
 [URI]
@@ -198,6 +213,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 * next-token이 존재하면 limit은 변경될 수 없으며 token이 발행될 때의 값으로 자동 설정됨
 
+<a id="group-list-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -238,6 +254,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 </details>
 
+<a id="group-list-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -247,10 +264,12 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 |-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
-### 그룹 상세 정보
+<a id="group-details"></a>
+### 그룹 상세 정보 { #group-details }
 
 * 그룹 아이디, 모델 버전, 그룹에 등록한 얼굴 수 등 특정 그룹의 상세 정보를 조회하는 API입니다.
 
+<a id="group-details-request"></a>
 #### 요청
 [URI]
 
@@ -274,6 +293,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H
 
 </details>
 
+<a id="group-details-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -313,6 +333,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H
 
 </details>
 
+<a id="group-details-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -322,10 +343,12 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H
 |-41000| UnauthorizedAppKey | 승인되지 않은 앱키 |
 |-50000| InternalServerError | 서버 오류 |
 
-### 그룹 삭제
+<a id="delete-group"></a>
+### 그룹 삭제 { #delete-group }
 
 * 특정 그룹과 그 그룹에 속한 얼굴 정보를 영구히 삭제하는 API입니다.
 
+<a id="delete-group-request"></a>
 #### 요청
 
 [URI]
@@ -353,6 +376,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 
 
 
+<a id="delete-group-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -374,6 +398,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 </details>
 
 
+<a id="delete-group-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -384,7 +409,8 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="detect-face"></span>
-### 얼굴 감지
+<a id="recognize-face"></a>
+### 얼굴 감지 { #recognize-face }
 
 * 입력 이미지에서 얼굴을 감지하는 API입니다.
 * 감지한 얼굴에서 얼굴, 눈, 코, 입 등의 위치 정보와 신뢰도 값을 반환합니다.
@@ -393,6 +419,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 * 입력 이미지에 대한 세부 사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
 
 <span id="detect-face-request"></span>
+<a id="recognize-face-request"></a>
 #### 요청
 [URI]
 
@@ -433,6 +460,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 </details>
 
 <span id="detect-face-response"></span>
+<a id="recognize-face-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -519,6 +547,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 </details>
 
 
+<a id="recognize-face-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -534,7 +563,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="add-face"></span>
-### 얼굴 등록
+<a id="register-face"></a>
+### 얼굴 등록 { #register-face }
 
 * 입력 이미지에서 감지한 얼굴을 특정 그룹에 등록하는 API입니다.
 * 입력 이미지에서 얼굴의 box를 감지하고 감지한 얼굴 box에서 얼굴 특징을 벡터로 추출합니다. 이때, 입력 이미지와 입력 이미지에서 감지한 얼굴 이미지 그 어느 것도 저장하지 않습니다.
@@ -547,6 +577,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 * 단일 그룹에 등록할 수 있는 최대 얼굴 개수는 10만 개입니다.
 
 <span id="add-face-request"></span>
+<a id="register-face-request"></a>
 #### 요청
 
 [URI]
@@ -594,6 +625,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -
 
 
 <span id="add-face-response"></span>
+<a id="register-face-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -768,6 +800,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -
 
 </details>
 
+<a id="register-face-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -785,10 +818,12 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -
 |-45080| InvalidImageFileException | 이미지 포맷에 맞지 않는 파일 |
 |-50000| InternalServerError | 서버 오류 |
 
-### 얼굴 삭제
+<a id="delete-face"></a>
+### 얼굴 삭제 { #delete-face }
 
 * 그룹에 등록한 특정 얼굴을 삭제하는 API입니다.
 
+<a id="delete-face-request"></a>
 #### 요청
 [URI]
 
@@ -814,6 +849,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/
 
 </details>
 
+<a id="delete-face-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -835,6 +871,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/
 
 </details>
 
+<a id="delete-face-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -846,11 +883,13 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="face-list-in-a-group"></span>
-### 그룹 내 얼굴 목록
+<a id="list-of-faces-within-group"></a>
+### 그룹 내 얼굴 목록 { #list-of-faces-within-group }
 
 * 특정 그룹에 등록한 얼굴 정보 목록을 조회하는 API입니다.
 * 최근에 등록한 순으로 얼굴 정보 배열을 반환합니다.
 
+<a id="list-of-faces-within-group-request"></a>
 #### 요청
 [URI]
 
@@ -908,6 +947,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 * next-token이 존재하면 limit은 변경될 수 없으며 token이 발행될 때의 값으로 자동 설정됨
 
 
+<a id="list-of-faces-within-group-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -976,6 +1016,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 
 </details>
 
+<a id="list-of-faces-within-group-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -987,11 +1028,13 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="search-by-face-id"></span>
-### 페이스 아이디로 얼굴 검색
+<a id="search-face-by-face-id"></a>
+### 페이스 아이디로 얼굴 검색 { #search-face-by-face-id }
 
 * 페이스 아이디로 특정 그룹에서 얼굴을 검색하는 API입니다.
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
+<a id="search-face-by-face-id-request"></a>
 #### 요청
 [URI]
 
@@ -1024,6 +1067,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 
 </details>
 
+<a id="search-face-by-face-id-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -1096,6 +1140,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 </details>
 
 
+<a id="search-face-by-face-id-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -1107,7 +1152,8 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="search-by-image"></span>
-### 이미지로 얼굴 검색
+<a id="search-face-by-image"></a>
+### 이미지로 얼굴 검색 { #search-face-by-image }
 
 * 입력 이미지에서 감지한 가장 큰 얼굴을 사용하여 특정 그룹에 속한 얼굴과 일치 여부를 비교합니다.
 * 입력 이미지는 Base64로 인코딩된 이미지 바이트로 전달하거나 이미지 URL로 전달할 수 있습니다.
@@ -1115,6 +1161,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 <span id="search-by-image-request"></span>
+<a id="search-face-by-image-request"></a>
 #### 요청
 [URI]
 
@@ -1163,6 +1210,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 </details>
 
 
+<a id="search-face-by-image-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -1293,6 +1341,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 </details>
 
 
+<a id="search-face-by-image-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -1309,7 +1358,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 |-50000| InternalServerError | 서버 오류 |
 
 <span id="compare-face"></span>
-### 얼굴 비교
+<a id="compare-faces"></a>
+### 얼굴 비교 { #compare-faces }
 
 * 기준 이미지(sourceImage)와 비교 이미지(targetImage)에서 감지한 얼굴이 얼마나 유사한지 비교합니다.
 * 기준 이미지에서 감지한 얼굴 중 가장 큰 얼굴(기준 얼굴)만 사용합니다.
@@ -1318,6 +1368,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 * 유사도가 가장 높은 순서로 일치하는 얼굴 정보의 배열을 반환합니다.
 
 <span id="compare-face-request"></span>
+<a id="compare-faces-request"></a>
 #### 요청
 [URI]
 
@@ -1371,6 +1422,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 </details>
 
 <span id="compare-face-response"></span>
+<a id="compare-faces-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -1625,6 +1677,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 </details>
 
 
+<a id="compare-faces-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |
@@ -1642,7 +1695,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 
 <span id="verify"></span>
-### 얼굴 검증
+<a id="face-verification"></a>
+### 얼굴 검증 { #face-verification }
 * 사전에 등록된 특정 얼굴의 페이스 아이디와 입력 이미지에서 감지한 얼굴을 비교하여 유사도 값을 반환하는 기능입니다.
 * [얼굴 등록](./api-guide-v1.0/#add-face)을 이용하여 얼굴을 등록할 수 있습니다.
 * 입력 이미지에서 감지한 얼굴 중 가장 큰 얼굴만 사용합니다.
@@ -1650,6 +1704,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 * 입력 이미지에 대한 세부 사항은 [입력 이미지 가이드](./api-guide-v1.0/#input-image-guide)를 참고하시기 바랍니다.
 
 <span id="verify-request"></span>
+<a id="face-verification-request"></a>
 #### 요청
 [URI]
 
@@ -1692,6 +1747,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 </details>
 
 
+<a id="face-verification-response"></a>
 #### 응답
 
 * [응답 본문 헤더 설명 생략]
@@ -1803,6 +1859,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 </details>
 
 
+<a id="face-verification-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 설명 |

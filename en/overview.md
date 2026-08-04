@@ -1,10 +1,14 @@
-## AI Service > Face Recognition > Overview
+<!-- pre-align:aligned sig=243442c4ec93 -->
+
+<a id="ai-service-face-recognition-overview"></a>
+## AI Service > Face Recognition > Overview { #ai-service-face-recognition-overview }
 
 * NHN Cloud's face recognition service has been developed by learning the quality facial dataset using the machine learning technology.
 * It offers a variety of features including facial recognition, analysis, and comparison, and supports the identity verification feature in various scenarios.
 * It can provide elaborate and personalized custom services in a variety of online and offline environments (e.g. financial, medical, and commercial industries) where facial recognition is applicable.
 
-## Key Features
+<a id="key-features"></a>
+## Key Features { #key-features }
 
 Provides the following features:
 
@@ -30,7 +34,8 @@ Provides the following features:
     * Analyzes the detected face images and returns whether the face is spoofed or not.
     * The face spoofing detection feature is available in the Face Recognition API (Face Detection, Face Registration, Face Comparison, Face Search by Image, and Face Verification).
 
-## Service targets
+<a id="service-targets"></a>
+## Service targets { #service-targets }
 
 * For building an access control system utilizing the facial recognition technology
 * For monitoring visitors
@@ -39,7 +44,8 @@ Provides the following features:
 * For searching photos containing a specific face from photo albums
 * For determining whether the face image is spoofed or not
 
-## Privacy Policy
+<a id="privacy-policy"></a>
+## Privacy Policy { #privacy-policy }
 
 * While using the Face Recognition service, the customer may collect personal and sensitive information of their users. Therefore, the customer of this service must inform a legal notice to their users as per the Personal Information Protection Act and acquire their consent regarding the matter.<br/>
 Also during this process, work consignment relation regarding the processing of personal information may arise between the customer and NHN Cloud. The customer who assumes the position of consignor may enter into a consignment contract with the consignee, NHN Cloud, separately in writing, and post a privacy policy notice by referencing the following:
