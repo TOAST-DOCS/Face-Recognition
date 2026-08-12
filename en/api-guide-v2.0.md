@@ -1,18 +1,24 @@
-## AI Service > Face Recognition > API v2.0 Guide
+<!-- pre-align:aligned sig=6a0bdf8dab2c -->
+
+<a id="ai-service-face-recognition-api-v20-guide"></a>
+## AI Service > Face Recognition > API v2.0 Guide { #ai-service-face-recognition-api-v20-guide }
 
 * This document describes the APIs required for using Face Recognition API v2.0.
 * SecretKey authentication is added starting with the Face Recognition API v2.0.
 
-## API Common Information
+<a id="api-common-information"></a>
+## API Common Information { #api-common-information }
 
-### Preparations
+<a id="preparations"></a>
+### Preparations { #preparations }
 
 * AppKey and SecretKey are required to use the Face Recognition API.
 An Appkey is a unique authentication key issued for each NHN Cloud service, used to identify the service and validate API requests. A SecretKey is a private key used to control access to the API. For more information on checking and using Appkeys, please refer to the [Appkey](/nhncloud/en/public-api/appkey).<br/>
 Project Integrated Appkey can be used in place of the Appkey. Project Integrated Appkey is a common authentication key that can be shared across multiple services within a single NHN Cloud project.
 For more information on creating and using Project Integrated Appkeys, please refer to the [Project Integrated Appkey](/nhncloud/en/public-api/project-integrated-appkey).
 
-### Request Common Information
+<a id="request-common-information"></a>
+### Request Common Information { #request-common-information }
 
 * The security key needs to be authenticated in order to use APIs.
 
@@ -28,9 +34,8 @@ For more information on creating and using Project Integrated Appkeys, please re
 | --- | --- | --- |
 | Authorization | {secretKey} | Security key issued from the console |
 
-<span id="input-image-guide"></span>
-
-### Input Image Guide
+<a id="input-image-guide"></a>
+### Input Image Guide { #input-image-guide }
 
 * Face images must be at least 80x80 px in width and height.
     * The face size must be at least 60*60 px to be eligible for facial recognition.
@@ -41,9 +46,8 @@ For more information on creating and using Project Integrated Appkeys, please re
 * Supported image formats: PNG, JPEG
 * If you specify a port directly in the image URL, only ports 80, 443, and 10000 to 12000 are available.
 
-<span id="common-response"></span>
-
-### Common Response Information
+<a id="common-response-information"></a>
+### Common Response Information { #common-response-information }
 
 * Returns '200 OK' for all API requests. For more information on the response results, see Response Body Header.
 
@@ -79,12 +83,15 @@ For more information on creating and using Project Integrated Appkeys, please re
 }
 ```
 
-## API Contents
+<a id="api-contents"></a>
+## API Contents { #api-contents }
 
-### Create Groups
+<a id="create-groups"></a>
+### Create Groups { #create-groups }
 
-* This API creates groups. You can use [Register Face](./api-guide-v2.0/#add-face) to a created group to register faces.
+* This API creates groups. You can use [Register Face](./api-guide-v2.0/#register-face) to a created group to register faces.
 
+<a id="create-groups-request"></a>
 #### Request
 
 [URI]
@@ -116,10 +123,11 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 
 </details>
 
+<a id="create-groups-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 <details>
 <summary>Response body example</summary>
@@ -136,6 +144,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 
 </details>
 
+<a id="create-groups-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -147,10 +156,12 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
-### Group List
+<a id="group-list"></a>
+### Group List { #group-list }
 
 * This API views the list of groups.
 
+<a id="group-list-request"></a>
 #### Request
 
 [URI]
@@ -200,10 +211,11 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 
 * If the next-token exists, the limit cannot be changed, and it is auto-set to the value from when the token was issued
 
+<a id="group-list-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 [Response body data]
 
@@ -240,6 +252,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 
 </details>
 
+<a id="group-list-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -249,10 +262,12 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
-### Group Details
+<a id="group-details"></a>
+### Group Details { #group-details }
 
 * This API views details of a specific group, such as group ID, model version, number of faces registered in the group, etc.
 
+<a id="group-details-request"></a>
 #### Request
 
 [URI]
@@ -277,10 +292,11 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 
 </details>
 
+<a id="group-details-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 [Response body data]
 
@@ -310,6 +326,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 
 </details>
 
+<a id="group-details-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -319,10 +336,12 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
-### Delete Group
+<a id="delete-group"></a>
+### Delete Group { #delete-group }
 
 * This API permanently deletes a group and all face information of the group.
 
+<a id="delete-group-request"></a>
 #### Request
 
 [URI]
@@ -347,10 +366,11 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 
 </details>
 
+<a id="delete-group-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 <details>
 <summary>Response body example</summary>
@@ -367,6 +387,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 
 </details>
 
+<a id="delete-group-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -376,9 +397,8 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
-<span id="detect-face"></span>
-
-### Recognize Face
+<a id="recognize-face"></a>
+### Recognize Face { #recognize-face }
 
 * This API recognizes faces from input image.
 * Returns the position data of the face, eyes, nose, and moth and the confidence value from the recognized face.
@@ -386,8 +406,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 * The input image can be delivered via Base64-encoded image bytes or image url.
 * To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
 
-<span id="detect-face-request"></span>
-
+<a id="recognize-face-request"></a>
 #### Request
 
 [URI]
@@ -441,12 +460,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
-<span id="detect-face-response"></span>
-
+<a id="recognize-face-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 [Response body data]
 
@@ -531,6 +549,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
+<a id="recognize-face-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -545,22 +564,20 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
-<span id="add-face"></span>
-
-### Register face
+<a id="register-face"></a>
+### Register face { #register-face }
 
 * This API registers the face recognized from the input image to a certain group.
 * Recognizes the face box from the input image, and extracts the facial characteristics from the face box as vectors. As for the input image and the face recognized from the input image, neither is saved.
 * Extracted vector data gets saved in the database after encryption.
-* The saved vector data gets used as characteristic vectors for the [Search face by face ID](./api-guide-v2.0/#search-by-face-id)and [Search face by image](./api-guide-v2.0/#search-by-image) APIs.
+* The saved vector data gets used as characteristic vectors for the [Search face by face ID](./api-guide-v2.0/#search-face-by-face-id)and [Search face by image](./api-guide-v2.0/#search-face-by-image) APIs.
 * The input image can be delivered via Base64-encoded image bytes or image url.
 * To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
 * 'imageId' is a value given for the input image, and the 'externalImageId' is a value which can be directly given by the user. The user can utilize 'imageId' and 'externalImageId' to perform labeling for the image or face ID from the user-end, and they can also be used on their own like indexes.
-* 'imageId' and 'externalImageId' are returned from the response of the [Face list within a group](./api-guide-v2.0/#face-list-in-a-group) and [Search face by face ID](./api-guide-v2.0/#search-by-face-id) and [Search face by image](./api-guide-v2.0/#search-by-image) APIs.
+* 'imageId' and 'externalImageId' are returned from the response of the [Face list within a group](./api-guide-v2.0/#list-of-faces-within-group) and [Search face by face ID](./api-guide-v2.0/#search-face-by-face-id) and [Search face by image](./api-guide-v2.0/#search-face-by-image) APIs.
 * Up to 100,000 faces can be registered per single group.
 
-<span id="add-face-request"></span>
-
+<a id="register-face-request"></a>
 #### Request
 
 [URI]
@@ -622,12 +639,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 </details>
 
 
-<span id="add-face-response"></span>
-
+<a id="register-face-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 [Response body data]
 
@@ -798,6 +814,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
+<a id="register-face-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -815,10 +832,12 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
-### Delete Face
+<a id="delete-face"></a>
+### Delete Face { #delete-face }
 
 * This API deletes specific registered faces from the group.
 
+<a id="delete-face-request"></a>
 #### Request
 
 [URI]
@@ -844,10 +863,11 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 
 </details>
 
+<a id="delete-face-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 <details>
 <summary>Response body example</summary>
@@ -864,6 +884,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 
 </details>
 
+<a id="delete-face-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -874,13 +895,13 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
-<span id="face-list-in-a-group"></span>
-
-### List of Faces within Group
+<a id="list-of-faces-within-group"></a>
+### List of Faces within Group { #list-of-faces-within-group }
 
 * This API views the face info list registered for a specific group.
 * Returns the face info array in order of most recently registered.
 
+<a id="list-of-faces-within-group-request"></a>
 #### Request
 
 [URI]
@@ -934,10 +955,11 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 
 * If the next-token exists, the face-id, image-id, external-image-id, limit cannot be changed, and it is auto-set to the value from when the token was issued
 
+<a id="list-of-faces-within-group-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 [Response body data]
 
@@ -1000,6 +1022,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 
 </details>
 
+<a id="list-of-faces-within-group-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -1010,13 +1033,13 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
-<span id="search-by-face-id"></span>
-
-### Search face by face ID
+<a id="search-face-by-face-id"></a>
+### Search face by face ID { #search-face-by-face-id }
 
 * This API searches for faces from a specific group using the face ID.
 * Returns the array of the face info in order of the most to least similar.
 
+<a id="search-face-by-face-id-request"></a>
 #### Request
 
 [URI]
@@ -1049,10 +1072,11 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 
 </details>
 
+<a id="search-face-by-face-id-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 [Response body data]
 
@@ -1120,6 +1144,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 
 </details>
 
+<a id="search-face-by-face-id-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -1130,17 +1155,15 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-50000| InternalServerError | Server error |
 
-<span id="search-by-image"></span>
-
-### Search face by image
+<a id="search-face-by-image"></a>
+### Search face by image { #search-face-by-image }
 
 * Uses the largest face recognized from the input image to compare if it matches a face from a specific group.
 * The input image can be delivered via Base64-encoded image bytes or image url.
 * To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
-<span id="search-by-image-request"></span>
-
+<a id="search-face-by-image-request"></a>
 #### Request
 
 [URI]
@@ -1201,10 +1224,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
+<a id="search-face-by-image-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 [Response body data]
 
@@ -1329,6 +1353,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
+<a id="search-face-by-image-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -1344,9 +1369,8 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
-<span id="compare-face"></span>
-
-### Compare Faces
+<a id="compare-faces"></a>
+### Compare Faces { #compare-faces }
 
 * Compares the similarity of the faces recognized from the reference image(sourceImage) and comparison image(targetImage).
 * Out of the faces recognized from the reference image, only the largest face(source face) is used.
@@ -1354,8 +1378,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
-<span id="compare-face-request"></span>
-
+<a id="compare-faces-request"></a>
 #### Request
 
 [URI]
@@ -1424,12 +1447,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
-<span id="compare-face-response"></span>
-
+<a id="compare-faces-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 [Response body data]
 
@@ -1685,6 +1707,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
+<a id="compare-faces-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |
@@ -1700,18 +1723,16 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
-<span id="verify"></span>
-
-### Face Verification
+<a id="face-verification"></a>
+### Face Verification { #face-verification }
 
 * This function compares the face ID of a specific face registered in advance with the face detected in the input image and returns a similarity value.
-* Use [Register Face](./api-guide-v2.0/#add-face) to a created group to register faces.
+* Use [Register Face](./api-guide-v2.0/#register-face) to a created group to register faces.
 * Only the largest face detected in the input image is used.
 * The input image can be delivered via Base64-encoded image bytes or image url.
 * To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
 
-<span id="verify-request"></span>
-
+<a id="face-verification-request"></a>
 #### Request
 
 [URI]
@@ -1767,10 +1788,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
+<a id="face-verification-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
 
 [Response body data]
 
@@ -1876,6 +1898,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
+<a id="face-verification-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | Description |

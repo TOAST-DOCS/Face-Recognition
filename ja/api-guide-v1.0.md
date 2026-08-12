@@ -1,16 +1,22 @@
-## AI Service > Face Recognition > API v1.0ガイド
+<!-- pre-align:aligned sig=0dea13be036a -->
+
+<a id="ai-service-face-recognition-api-v10-guide"></a>
+## AI Service > Face Recognition > API v1.0ガイド { #ai-service-face-recognition-api-v10-guide }
 
 * 顔認識API v1.0を使用するために必要なAPIを説明します。
 
-## API共通情報
+<a id="common-api-information"></a>
+## API共通情報 { #common-api-information }
 
-### 事前準備
+<a id="preparations"></a>
+### 事前準備 { #preparations }
 
 * Face Recognition APIを使用するにはAppkeyまたはプロジェクト統合Appkeyが必要です。<br/>
 Appkeyは、NHN Cloudの各サービスごとに発行される固有の認証キーであり、プロジェクト統合Appkeyは、NHN Cloudの1つのプロジェクト内の複数のサービスに対して共通で使用できる認証キーです。<br/>
 Appkeyの確認及び使用に関する詳細は、[Appkey](/nhncloud/ja/public-api/appkey)を参照してください。プロジェクト統合Appkeyの作成及び使用に関する詳細は、[プロジェクト統合Appkey](/nhncloud/ja/public-api/project-integrated-appkey)を参照してください。
 
-### リクエスト共通情報
+<a id="request-common-information"></a>
+### リクエスト共通情報 { #request-common-information }
 
 [APIドメイン]
 
@@ -18,9 +24,8 @@ Appkeyの確認及び使用に関する詳細は、[Appkey](/nhncloud/ja/public-
 | --- |
 | https://face-recognition.api.nhncloudservice.com |
 
-<span id="input-image-guide"></span>
-
-### 入力画像ガイド
+<a id="input-image-guide"></a>
+### 入力画像ガイド { #input-image-guide }
 
 * 入力画像は幅と高さがどちらも80px以上必要です。
     * 顔のサイズが60*60px以上の顔のみ認識できます。
@@ -32,9 +37,8 @@ Appkeyの確認及び使用に関する詳細は、[Appkey](/nhncloud/ja/public-
 * サポート画像フォーマット：PNG、JPEG
 * イメージURLにポートを直接指定する場合は80、443、10000～12000ポートのみ使用できます。
 
-<span id="common-response"></span>
-
-### レスポンス共通情報
+<a id="common-response-information"></a>
+### レスポンス共通情報 { #common-response-information }
 
 * すべてのAPIリクエストに「200 OK」でレスポンスします。詳細なレスポンス結果はレスポンス本文ヘッダを参照してください。
 
@@ -69,12 +73,15 @@ Appkeyの確認及び使用に関する詳細は、[Appkey](/nhncloud/ja/public-
     }
 }
 ```
-## API目次
+<a id="api-contents"></a>
+## API目次 { #api-contents }
 
-### グループ作成
+<a id="create-groups"></a>
+### グループ作成 { #create-groups }
 
-* グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v1.0/#add-face)を利用して顔を登録できます。
+* グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v1.0/#register-face)を利用して顔を登録できます。
 
+<a id="create-groups-request"></a>
 #### リクエスト
 
 [URI]
@@ -107,10 +114,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 </details>
 
+<a id="create-groups-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 
 <details>
@@ -128,6 +136,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 
 </details>
 
+<a id="create-groups-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -138,10 +147,12 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 |-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
-### グループリスト
+<a id="group-list"></a>
+### グループリスト { #group-list }
 
 * グループリストを照会するAPIです。
 
+<a id="group-list-request"></a>
 #### リクエスト
 
 [URI]
@@ -197,10 +208,11 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 * next-tokenが存在する場合、limitは変更できず、tokenが発行される時の値に自動設定される
 
+<a id="group-list-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -237,6 +249,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 
 </details>
 
+<a id="group-list-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -246,10 +259,12 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 |-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
-### グループ詳細情報
+<a id="group-details"></a>
+### グループ詳細情報 { #group-details }
 
 * グループID、モデルバージョン、グループに登録した顔の数など、特定グループの詳細情報を照会するAPIです。
 
+<a id="group-details-request"></a>
 #### リクエスト
 
 [URI]
@@ -274,10 +289,11 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H
 
 </details>
 
+<a id="group-details-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -313,6 +329,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H
 
 </details>
 
+<a id="group-details-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -322,10 +339,12 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H
 |-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
-### グループ削除
+<a id="delete-group"></a>
+### グループ削除 { #delete-group }
 
 * 特定グループと、そのグループに属す顔情報を完全に削除するAPIです。
 
+<a id="delete-group-request"></a>
 #### リクエスト
 
 [URI]
@@ -353,10 +372,11 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 
 
 
+<a id="delete-group-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -374,6 +394,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 </details>
 
 
+<a id="delete-group-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -383,9 +404,8 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 |-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="detect-face"></span>
-
-### 顔検出
+<a id="recognize-face"></a>
+### 顔検出 { #recognize-face }
 
 * 入力画像から顔を検出するAPIです。
 * 検出した顔から顔、目、鼻、口などの位置情報と信頼度の値を返します。
@@ -393,8 +413,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide-v1.0/#input-image-guide)」を参照してください。
 
-<span id="detect-face-request"></span>
-
+<a id="recognize-face-request"></a>
 #### リクエスト
 
 [URI]
@@ -435,12 +454,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 </details>
 
-<span id="detect-face-response"></span>
-
+<a id="recognize-face-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -523,6 +541,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 </details>
 
 
+<a id="recognize-face-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -537,22 +556,20 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 |-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="add-face"></span>
-
-### 顔登録
+<a id="register-face"></a>
+### 顔登録 { #register-face }
 
 * 入力画像から検出した顔を特定グループに登録するAPIです。
 * 入力画像から顔のboxを検出し、検出した顔boxから顔の特徴をベクトルで抽出します。この時、入力画像と入力画像から検出した顔画像は保存しません。
 * 抽出したベクトルデータは暗号化してデータベースに保存します。
-* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide-v1.0/#search-by-face-id)、[画像で顔検索](./api-guide-v1.0/#search-by-image) APIで特徴ベクトルとして使用します。
+* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide-v1.0/#search-face-by-face-id)、[画像で顔検索](./api-guide-v1.0/#search-face-by-image) APIで特徴ベクトルとして使用します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide-v1.0/#input-image-guide)」を参照してください。
 * "imageId"は入力画像に付与される値で、"externalImageId"はユーザーが直接付与できる値です。ユーザーは"imageId"と"externalImageId"を利用して画像またはフェイスIDにラベリングしてインデックスのように活用できます。
-* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide-v1.0/#face-list-in-a-group)と[フェイスIDで顔検索](./api-guide-v1.0/#search-by-face-id)、[画像で顔検索](./api-guide-v1.0/#search-by-image) APIのレスポンスで返されます。
+* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide-v1.0/#list-of-faces-within-group)と[フェイスIDで顔検索](./api-guide-v1.0/#search-face-by-face-id)、[画像で顔検索](./api-guide-v1.0/#search-face-by-image) APIのレスポンスで返されます。
 * 1つのグループに登録できる顔の数は最大10万個です。
 
-<span id="add-face-request"></span>
-
+<a id="register-face-request"></a>
 #### リクエスト
 
 [URI]
@@ -599,12 +616,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -
 </details>
 
 
-<span id="add-face-response"></span>
-
+<a id="register-face-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -775,6 +791,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -
 
 </details>
 
+<a id="register-face-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -792,10 +809,12 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -
 |-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
-### 顔の削除
+<a id="delete-face"></a>
+### 顔の削除 { #delete-face }
 
 * グループに登録した特定の顔を削除するAPIです。
 
+<a id="delete-face-request"></a>
 #### リクエスト
 
 [URI]
@@ -822,10 +841,11 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/
 
 </details>
 
+<a id="delete-face-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 
 <details>
@@ -843,6 +863,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/
 
 </details>
 
+<a id="delete-face-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -853,12 +874,13 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/
 |-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="face-list-in-a-group"></span>
-### グループ内顔リスト
+<a id="list-of-faces-within-group"></a>
+### グループ内顔リスト { #list-of-faces-within-group }
 
 * 特定グループに登録した顔情報リストを照会するAPIです。
 * 登録が新しい順で顔情報配列を返します。
 
+<a id="list-of-faces-within-group-request"></a>
 #### リクエスト
 
 [URI]
@@ -917,10 +939,11 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 * next-tokenが存在する場合、limitは変更できず、tokenが発行される時の値に自動設定される
 
 
+<a id="list-of-faces-within-group-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -985,6 +1008,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 
 </details>
 
+<a id="list-of-faces-within-group-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -995,12 +1019,13 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 |-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="search-by-face-id"></span>
-### フェイスIDで顔検索
+<a id="search-face-by-face-id"></a>
+### フェイスIDで顔検索 { #search-face-by-face-id }
 
 * フェイスIDで特定グループから顔を検索するAPIです。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
+<a id="search-face-by-face-id-request"></a>
 #### リクエスト
 
 [URI]
@@ -1034,10 +1059,11 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 
 </details>
 
+<a id="search-face-by-face-id-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -1106,6 +1132,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 </details>
 
 
+<a id="search-face-by-face-id-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -1116,16 +1143,15 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 |-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="search-by-image"></span>
-### 画像で顔検索
+<a id="search-face-by-image"></a>
+### 画像で顔検索 { #search-face-by-image }
 
 * 入力画像から検出した最も大きい顔を使用して特定グループに属す顔と一致するかどうかを比較します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide-v1.0/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
-<span id="search-by-image-request"></span>
-
+<a id="search-face-by-image-request"></a>
 #### リクエスト
 
 [URI]
@@ -1175,10 +1201,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 </details>
 
 
+<a id="search-face-by-image-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -1305,6 +1332,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 </details>
 
 
+<a id="search-face-by-image-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -1320,9 +1348,8 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 |-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="compare-face"></span>
-
-### 顔比較
+<a id="compare-faces"></a>
+### 顔比較 { #compare-faces }
 
 * 基準画像(sourceImage)と比較画像(targetImage)から検出した顔がどれくらい類似しているかを比較します。
 * 基準画像から検出した顔のうち、最も大きい顔(基準顔)のみ使用します。
@@ -1330,8 +1357,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 * 入力画像の詳細は「[入力画像ガイド](./api-guide-v1.0/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
 
-<span id="compare-face-request"></span>
-
+<a id="compare-faces-request"></a>
 #### リクエスト
 
 [URI]
@@ -1385,12 +1411,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 </details>
 
-<span id="compare-face-response"></span>
-
+<a id="compare-faces-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -1641,6 +1666,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 </details>
 
 
+<a id="compare-faces-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
@@ -1657,16 +1683,15 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-50000| InternalServerError | サーバーエラー |
 
 
-<span id="verify"></span>
-### 顔検証
+<a id="face-verification"></a>
+### 顔検証 { #face-verification }
 * 事前に登録された特定の顔のフェイスIDと、入力画像から検出した顔を比較して類似度値を返す機能です。
-* [顔登録](./api-guide-v1.0/#add-face)を利用して顔を登録できます。
+* [顔登録](./api-guide-v1.0/#register-face)を利用して顔を登録できます。
 * 入力画像から検出した顔のうち、最も大きい顔のみを使用します。
 * 入力画像はBase64でエンコードされた画像バイトで伝達するか、画像URLで伝達できます。
 * 入力画像についての詳細は、[入力画像ガイド](./api-guide-v1.0/#input-image-guide)を参照してください。
 
-<span id="verify-request"></span>
-
+<a id="face-verification-request"></a>
 #### リクエスト
 
 [URI]
@@ -1710,10 +1735,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 </details>
 
 
+<a id="face-verification-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-  * [レスポンス共通情報](./api-guide-v1.0/#common-response)で確認可能
+  * [レスポンス共通情報](./api-guide-v1.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -1821,6 +1847,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 </details>
 
 
+<a id="face-verification-error-codes"></a>
 #### Error Codes
 
 | resultCode | resultMessage | 説明 |
