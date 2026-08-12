@@ -27,7 +27,7 @@
 <a id="september-10-2024-added-features"></a>
 #### Added Features
 
-* [API v2.0] Added the feature to filter the list of faces by using face ID, Image ID, images or face ID labeling values (ExternalImageID) users set while registering faces, when retrieving [Face List In Group](./api-guide-v2.0/#face-list-in-a-group).
+* [API v2.0] Added the feature to filter the list of faces by using face ID, Image ID, images or face ID labeling values (ExternalImageID) users set while registering faces, when retrieving [Face List In Group](./api-guide-v2.0/#list-of-faces-within-group).
 
 <a id="january-09-2024"></a>
 ### January 09, 2024 { #january-09-2024 }
@@ -52,9 +52,9 @@
 #### Added Features
 
 * [API] Added whether to wear a mask to FaceDetails in response body.
-    * [Response of Face Recognize](./api-guide-v1.0/#detect-face-response)
-    * [Response of Face Register](./api-guide-v1.0/#add-face-response)
-    * [Response of Face Compare](./api-guide-v1.0/#compare-face-response)
+    * [Response of Face Recognize](./api-guide-v1.0/#recognize-face-response)
+    * [Response of Face Register](./api-guide-v1.0/#register-face-response)
+    * [Response of Face Compare](./api-guide-v1.0/#compare-faces-response)
 
 <a id="march-29-2022"></a>
 ### March 29, 2022 { #march-29-2022 }
@@ -73,7 +73,7 @@
 <a id="july-27-2021-added-features"></a>
 #### Added Features
 
-* [API] Added [Face Verification](./api-guide-v1.0/#verify) API
+* [API] Added [Face Verification](./api-guide-v1.0/#face-verification) API
 
 <a id="april-27-2021"></a>
 ### April 27, 2021 { #april-27-2021 }

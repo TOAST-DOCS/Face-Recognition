@@ -35,8 +35,6 @@ Appkeyの代わりに、プロジェクト統合Appkeyを使用することも�
 | --- | --- | --- |
 | Authorization | {secretKey} | コンソールで発行された秘密鍵 |
 
-<span id="input-image-guide"></span>
-
 <a id="input-image-guide"></a>
 ### 入力画像ガイド { #input-image-guide }
 
@@ -49,8 +47,6 @@ Appkeyの代わりに、プロジェクト統合Appkeyを使用することも�
 * 画像最大サイズ：最大3MB(3,000,000Byte)
 * サポート画像フォーマット：PNG、JPEG
 * 画像URLにポートを直接指定する場合は80、443、10000～12000ポートのみ使用できます。
-
-<span id="common-response"></span>
 
 <a id="common-response-information"></a>
 ### レスポンス共通情報 { #common-response-information }
@@ -95,7 +91,7 @@ Appkeyの代わりに、プロジェクト統合Appkeyを使用することも�
 <a id="create-groups"></a>
 ### グループ作成 { #create-groups }
 
-* グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v2.0/#add-face)を利用して顔を登録できます。
+* グループを作成するAPIです。作成されたグループに[顔登録](./api-guide-v2.0/#register-face)を利用して顔を登録できます。
 
 <a id="create-groups-request"></a>
 #### リクエスト
@@ -134,7 +130,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -223,7 +219,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -304,7 +300,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -378,7 +374,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -405,8 +401,6 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 |-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="detect-face"></span>
-
 <a id="recognize-face"></a>
 ### 顔検出 { #recognize-face }
 
@@ -415,8 +409,6 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 * 入力画像から顔が大きい順に最大20個の顔を検出します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
-
-<span id="detect-face-request"></span>
 
 <a id="recognize-face-request"></a>
 #### リクエスト
@@ -472,13 +464,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
-<span id="detect-face-response"></span>
-
 <a id="recognize-face-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -578,22 +568,18 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="add-face"></span>
-
 <a id="register-face"></a>
 ### 顔登録 { #register-face }
 
 * 入力画像から検出した顔を特定グループに登録するAPIです。
 * 入力画像から顔のboxを検出し、検出した顔boxから顔の特徴をベクトルで抽出します。この時、入力画像と入力画像から検出した顔画像は保存しません。
 * 抽出したベクトルデータは暗号化してデータベースに保存します。
-* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide-v2.0/#search-by-face-id)、[画像で顔検索](./api-guide-v2.0/#search-by-image) APIで特徴ベクトルとして使用します。
+* 保存したベクトルデータは、[フェイスIDで顔検索](./api-guide-v2.0/#search-face-by-face-id)、[画像で顔検索](./api-guide-v2.0/#search-face-by-image) APIで特徴ベクトルとして使用します。
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
 * "imageId"は入力画像に付与される値で、"externalImageId"はユーザーが直接付与できる値です。ユーザーは"imageId"と"externalImageId"を利用して画像またはフェイスIDにラベリングしてインデックスのように活用できます。
-* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide-v2.0/#face-list-in-a-group)と[フェイスIDで顔検索](./api-guide-v2.0/#search-by-face-id)、[画像で顔検索](./api-guide-v2.0/#search-by-image) APIのレスポンスで返されます。
+* "imageId"と"externalImageId"は[グループ内顔リスト](./api-guide-v2.0/#list-of-faces-within-group)と[フェイスIDで顔検索](./api-guide-v2.0/#search-face-by-face-id)、[画像で顔検索](./api-guide-v2.0/#search-face-by-image) APIのレスポンスで返されます。
 * 1つのグループに登録できる顔の数は最大10万個です。
-
-<span id="add-face-request"></span>
 
 <a id="register-face-request"></a>
 #### リクエスト
@@ -657,13 +643,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 </details>
 
 
-<span id="add-face-response"></span>
-
 <a id="register-face-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -887,7 +871,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 <details>
 <summary>レスポンス本文例</summary>
@@ -914,8 +898,6 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 |-40050| NotFoundFaceIDError | フェイスIDが見つからない |
 |-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
-
-<span id="face-list-in-a-group"></span>
 
 <a id="list-of-faces-within-group"></a>
 ### グループ内顔リスト { #list-of-faces-within-group }
@@ -983,7 +965,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -1057,8 +1039,6 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 |-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="search-by-face-id"></span>
-
 <a id="search-face-by-face-id"></a>
 ### フェイスIDで顔検索 { #search-face-by-face-id }
 
@@ -1102,7 +1082,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -1181,8 +1161,6 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 |-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="search-by-image"></span>
-
 <a id="search-face-by-image"></a>
 ### 画像で顔検索 { #search-face-by-image }
 
@@ -1190,8 +1168,6 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
-
-<span id="search-by-image-request"></span>
 
 <a id="search-face-by-image-request"></a>
 #### リクエスト
@@ -1256,7 +1232,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -1397,8 +1373,6 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45060| ImageTimeoutError | 画像ダウンロード時間超過 |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="compare-face"></span>
-
 <a id="compare-faces"></a>
 ### 顔比較 { #compare-faces }
 
@@ -1407,8 +1381,6 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * 入力画像はBase64でエンコードされた画像バイトまたは、画像のURLで伝達できます。
 * 入力画像の詳細は「[入力画像ガイド](./api-guide-v2.0/#input-image-guide)」を参照してください。
 * 類似度が最も高い順序で、一致する顔情報の配列を返します。
-
-<span id="compare-face-request"></span>
 
 <a id="compare-faces-request"></a>
 #### リクエスト
@@ -1479,13 +1451,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 
 </details>
 
-<span id="compare-face-response"></span>
-
 <a id="compare-faces-response"></a>
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 
@@ -1757,18 +1727,14 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 |-45080| InvalidImageFileException | 画像フォーマットに合っていないファイル |
 |-50000| InternalServerError | サーバーエラー |
 
-<span id="verify"></span>
-
 <a id="face-verification"></a>
 ### 顔検証 { #face-verification }
 
 * 事前に登録された特定の顔のフェイスIDと、入力画像から検出した顔を比較して類似度値を返す機能です。
-* [顔登録](./api-guide-v2.0/#add-face)を利用して顔を登録できます。
+* [顔登録](./api-guide-v2.0/#register-face)を利用して顔を登録できます。
 * 入力画像から検出した顔のうち、最も大きい顔のみを使用します。
 * 入力画像はBase64でエンコードされた画像バイトで伝達するか、画像URLで伝達できます。
 * 入力画像についての詳細は、[入力画像ガイド](./api-guide-v2.0/#input-image-guide)を参照してください。
-
-<span id="verify-request"></span>
 
 <a id="face-verification-request"></a>
 #### リクエスト
@@ -1830,7 +1796,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### レスポンス
 
 * [レスポンス本文ヘッダ説明省略]
-    * [レスポンス共通情報](./api-guide-v2.0/#common-response)で確認可能
+    * [レスポンス共通情報](./api-guide-v2.0/#common-response-information)で確認可能
 
 [レスポンス本文データ]
 

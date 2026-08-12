@@ -27,7 +27,7 @@
 <a id="september-10-2024-added-features"></a>
 #### 기능 추가
 
-* [API v2.0] [그룹 내 얼굴 목록](./api-guide-v2.0/#face-list-in-a-group) 조회 시 페이스 아이디, 이미지 아이디, 사용자가 얼굴 등록 시 설정한 이미지 또는 페이스 아이디 라벨링 값(ExternalImageId)을 이용하여 얼굴 목록을 필터링할 수 있도록 기능 추가
+* [API v2.0] [그룹 내 얼굴 목록](./api-guide-v2.0/#list-of-faces-within-group) 조회 시 페이스 아이디, 이미지 아이디, 사용자가 얼굴 등록 시 설정한 이미지 또는 페이스 아이디 라벨링 값(ExternalImageId)을 이용하여 얼굴 목록을 필터링할 수 있도록 기능 추가
 
 <a id="january-09-2024"></a>
 ### 2024. 01. 09. { #january-09-2024 }
@@ -52,9 +52,9 @@
 #### 기능 추가
 
 * [API] 응답 본문의 FaceDetails에 마스크 착용 여부 추가
-    * [얼굴 감지의 응답](./api-guide-v1.0/#detect-face-response)
-    * [얼굴 등록의 응답](./api-guide-v1.0/#add-face-response)
-    * [얼굴 비교의 응답](./api-guide-v1.0/#compare-face-response)
+    * [얼굴 감지의 응답](./api-guide-v1.0/#recognize-face-response)
+    * [얼굴 등록의 응답](./api-guide-v1.0/#register-face-response)
+    * [얼굴 비교의 응답](./api-guide-v1.0/#compare-faces-response)
 
 <a id="march-29-2022"></a>
 ### 2022. 03. 29. { #march-29-2022 }
@@ -73,7 +73,7 @@
 <a id="july-27-2021-added-features"></a>
 #### 기능 추가
 
-* [API] [얼굴 검증](./api-guide-v1.0/#verify) API 추가
+* [API] [얼굴 검증](./api-guide-v1.0/#face-verification) API 추가
 
 <a id="april-27-2021"></a>
 ### 2021. 04. 27. { #april-27-2021 }

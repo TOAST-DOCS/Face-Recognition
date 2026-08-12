@@ -28,7 +28,7 @@
 <a id="september-10-2024-added-features"></a>
 #### 機能追加
 
-* [API v2.0] [グループ内の顔リスト](./api-guide-v2.0/#face-list-in-a-group)照会時、フェイスID、画像ID、ユーザーが顔登録時に設定した画像またはフェイスIDラベリング値(ExternalImageId)を利用して顔リストをフィルタリングできるように機能追加
+* [API v2.0] [グループ内の顔リスト](./api-guide-v2.0/#list-of-faces-within-group)照会時、フェイスID、画像ID、ユーザーが顔登録時に設定した画像またはフェイスIDラベリング値(ExternalImageId)を利用して顔リストをフィルタリングできるように機能追加
 
 <a id="january-09-2024"></a>
 ### 2024. 01. 09. { #january-09-2024 }
@@ -53,9 +53,9 @@
 #### 機能追加
 
 * [API] 応答のFaceDetailsにマスク着用の有無を追加
-    * [顔検出の応答](./api-guide-v1.0/#detect-face-response)
-    * [顔登録の応答](./api-guide-v1.0/#add-face-response)
-    * [顔比較の応答](./api-guide-v1.0/#compare-face-response)
+    * [顔検出の応答](./api-guide-v1.0/#recognize-face-response)
+    * [顔登録の応答](./api-guide-v1.0/#register-face-response)
+    * [顔比較の応答](./api-guide-v1.0/#compare-faces-response)
 
 <a id="march-29-2022"></a>
 ### 2022. 03. 29. { #march-29-2022 }
@@ -74,7 +74,7 @@
 <a id="july-27-2021-added-features"></a>
 #### 機能追加
 
-* [API] [顔検証](./api-guide-v1.0/#verify) APIを追加
+* [API] [顔検証](./api-guide-v1.0/#face-verification) APIを追加
 
 <a id="april-27-2021"></a>
 ### 2021.04.27. { #april-27-2021 }

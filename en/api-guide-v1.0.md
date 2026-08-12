@@ -25,8 +25,6 @@ For more information on checking and using Appkeys, please refer to the [Appkey]
 | --- |
 | https://face-recognition.api.nhncloudservice.com |
 
-<span id="input-image-guide"></span>
-
 <a id="input-image-guide"></a>
 ### Input Image Guide { #input-image-guide }
 
@@ -38,8 +36,6 @@ For more information on checking and using Appkeys, please refer to the [Appkey]
 * Max image size: up to 3MB(3,000,000Byte)
 * Supported image formats: PNG, JPEG
 * If you specify the port directly in the image URL, only ports 80, 443, 10000-12000 can be used.
-
-<span id="common-response"></span>
 
 <a id="common-response-information"></a>
 ### Common Response Information { #common-response-information }
@@ -83,7 +79,7 @@ For more information on checking and using Appkeys, please refer to the [Appkey]
 <a id="create-groups"></a>
 ### Create Groups { #create-groups }
 
-* This API creates groups. You can use [Register Face](./api-guide-v1.0/#add-face) to a created group to register faces.
+* This API creates groups. You can use [Register Face](./api-guide-v1.0/#register-face) to a created group to register faces.
 
 <a id="create-groups-request"></a>
 #### Request
@@ -122,7 +118,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 
 <details>
@@ -216,7 +212,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups?limit={limit}
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 [Response body data]
 
@@ -296,7 +292,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -H
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 [Response body data]
 
@@ -379,7 +375,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 <details>
 <summary>Response body example</summary>
@@ -407,7 +403,6 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
-<span id="detect-face"></span>
 <a id="recognize-face"></a>
 ### Recognize Face { #recognize-face }
 
@@ -417,7 +412,6 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}'
 * The input image can be delivered via Base64-encoded image bytes or image url.
 * To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 
-<span id="detect-face-request"></span>
 <a id="recognize-face-request"></a>
 #### Request
 [URI]
@@ -458,12 +452,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 
 </details>
 
-<span id="detect-face-response"></span>
 <a id="recognize-face-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 [Response body data]
 
@@ -561,21 +554,19 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/detect' -H 'Content
 |-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
-<span id="add-face"></span>
 <a id="register-face"></a>
 ### Register face { #register-face }
 
 * This API registers the face recognized from the input image to a certain group.
 * Recognizes the face box from the input image, and extracts the facial characteristics from the face box as vectors. As for the input image and the face recognized from the input image, neither is saved.
 * Extracted vector data gets saved in the database after encryption.
-* The saved vector data gets used as characteristic vectors for the [Search face by face ID](./api-guide-v1.0/#search-by-face-id)and [Search face by image](./api-guide-v1.0/#search-by-image) APIs.
+* The saved vector data gets used as characteristic vectors for the [Search face by face ID](./api-guide-v1.0/#search-face-by-face-id)and [Search face by image](./api-guide-v1.0/#search-face-by-image) APIs.
 * The input image can be delivered via Base64-encoded image bytes or image url.
 * To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 * 'imageId' is a value given for the input image, and the 'externalImageId' is a value which can be directly given by the user. The user can utilize 'imageId' and 'externalImageId' to perform labeling for the image or face ID from the user-end, and they can also be used on their own like indexes.
-* 'imageId' and 'externalImageId' are returned from the response of the [Face list within a group](./api-guide-v1.0/#face-list-in-a-group) and [Search face by face ID](./api-guide-v1.0/#search-by-face-id) and [Search face by image](./api-guide/#search-by-image) APIs. 
+* 'imageId' and 'externalImageId' are returned from the response of the [Face list within a group](./api-guide-v1.0/#list-of-faces-within-group) and [Search face by face ID](./api-guide-v1.0/#search-face-by-face-id) and [Search face by image](./api-guide-v1.0/#search-face-by-image) APIs. 
 * Up to 100,000 faces can be registered per single group.
  
-<span id="add-face-request"></span>
 <a id="register-face-request"></a>
 #### Request
 
@@ -622,12 +613,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}' -
 
 </details>
 
-<span id="add-face-response"></span>
 <a id="register-face-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 [Response body data]
 
@@ -851,7 +841,7 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 
 <details>
@@ -880,7 +870,6 @@ $ curl -X DELETE '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
-<span id="face-list-in-a-group"></span>
 <a id="list-of-faces-within-group"></a>
 ### List of Faces within Group { #list-of-faces-within-group }
 
@@ -949,7 +938,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 [Response body data]
 
@@ -1025,7 +1014,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
-<span id="search-by-face-id"></span>
 <a id="search-face-by-face-id"></a>
 ### Search face by face ID { #search-face-by-face-id }
 
@@ -1069,7 +1057,7 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 [Response body data]
 
@@ -1149,7 +1137,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 |-41000| UnauthorizedAppKey | Unauthorized Appkey |
 |-50000| InternalServerError | Server error |
 
-<span id="search-by-image"></span>
 <a id="search-face-by-image"></a>
 ### Search face by image { #search-face-by-image }
 
@@ -1158,7 +1145,6 @@ $ curl -X GET '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/fac
 * To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
-<span id="search-by-image-request"></span>
 <a id="search-face-by-image-request"></a>
 #### Request
 [URI]
@@ -1212,7 +1198,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 [Response body data]
 
@@ -1355,7 +1341,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 |-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
-<span id="compare-face"></span>
 <a id="compare-faces"></a>
 ### Compare faces { #compare-faces }
 
@@ -1365,7 +1350,6 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups/{groupId}/se
 * To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
-<span id="compare-face-request"></span>
 <a id="compare-faces-request"></a>
 #### Request
 [URI]
@@ -1418,12 +1402,11 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 
 </details>
 
-<span id="compare-face-response"></span>
 <a id="compare-faces-response"></a>
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+    * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 [Response body data]
 
@@ -1690,16 +1673,14 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/compare?threshold={
 |-45080| InvalidImageFileException | Invalid image file format |
 |-50000| InternalServerError | Server error |
 
-<span id="verify"></span>
 <a id="face-verification"></a>
 ### Face Verification { #face-verification }
 * This function compares the face ID of a specific face registered in advance with the face detected in the input image and returns a similarity value.
-* Use [Register Face](./api-guide-v1.0/#add-face) to a created group to register faces.
+* Use [Register Face](./api-guide-v1.0/#register-face) to a created group to register faces.
 * Only the largest face detected in the input image is used.  
 * The input image can be delivered via Base64-encoded image bytes or image url.
 * To find out more about input image, see [Input Image Guide](./api-guide-v1.0/#input-image-guide).
 
-<span id="verify-request"></span>
 <a id="face-verification-request"></a>
 #### Request
 [URI]
@@ -1747,7 +1728,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/verify/groups/{grou
 #### Response
 
 * [Response body header description omitted]
-  * This information is available in [Common Response Information](./api-guide-v1.0/#common-response)
+  * This information is available in [Common Response Information](./api-guide-v1.0/#common-response-information)
 
 [Response body data]
 
