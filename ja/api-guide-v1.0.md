@@ -144,6 +144,7 @@ $ curl -X POST '{domain}/nhn-face-reco/v1.0/appkeys/{appKey}/groups' -H 'Content
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40010| InvalidGroupID | グループIDエラー |
 |-40020| DuplicatedGroupID | 重複したグループID |
+|-40070| ServiceQuotaExceededException | 作成できるグループの最大数を超過 |
 |-41000| UnauthorizedAppKey | 承認されていないアプリケーションキー |
 |-50000| InternalServerError | サーバーエラー |
 

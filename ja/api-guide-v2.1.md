@@ -149,6 +149,7 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups' -H 'x-nhn-authorization: 
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40010| InvalidGroupID | グループIDエラー |
 |-40020| DuplicatedGroupID | 重複したグループID |
+|-40070| ServiceQuotaExceededException | 作成できるグループの最大数を超過 |
 |-41006| InvalidToken | 無効な形式のUser Access Keyトークン |
 |-41007| UnauthorizedToken | 権限のないUser Access Keyトークン |
 |-50000| InternalServerError | サーバーエラー |

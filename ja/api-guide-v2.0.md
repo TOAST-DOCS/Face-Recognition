@@ -155,6 +155,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 |-40000| InvalidParam | パラメータにエラーがある |
 |-40010| InvalidGroupID | グループIDエラー |
 |-40020| DuplicatedGroupID | 重複したグループID |
+|-40070| ServiceQuotaExceededException | 作成できる最大グループ数を超過 |
 |-41005| UnauthorizedAppKeyOrSecretKey | 承認されていないアプリケーションキーまたは秘密鍵 |
 |-50000| InternalServerError | サーバーエラー |
 
