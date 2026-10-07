@@ -1910,7 +1910,6 @@ $ curl -X POST '{domain}/v2.1/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/v
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-40050| NotFoundFaceIDError | Could not find the face ID |
 |-41006| InvalidToken | User Access Key token with an invalid format |
 |-41007| UnauthorizedToken | User Access Key token without permission |
 |-45020| ImageTooLargeException | Image size exceeded |

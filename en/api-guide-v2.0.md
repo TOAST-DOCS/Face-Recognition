@@ -1905,7 +1905,6 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 | --- | --- | --- |
 |-40000| InvalidParam | The parameter contains an error |
 |-40030| NotFoundGroupError | Could not find the group ID |
-|-40050| NotFoundFaceIDError | Could not find the face ID |
 |-41005| UnauthorizedAppKeyOrSecretKey | Unauthorized Appkey or SecretKey |
 |-45020| ImageTooLargeException | Image size exceeded |
 |-45030| InvalidImageBytesException | Invalid image bytes. Mainly due to incorrect Base64 encoding |
