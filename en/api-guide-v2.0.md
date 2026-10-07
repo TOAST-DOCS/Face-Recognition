@@ -89,7 +89,7 @@ For more information on creating and using Project Integrated Appkeys, please re
 <a id="create-groups"></a>
 ### Create Groups { #create-groups }
 
-* This API creates groups. You can use [Register Face](./api-guide-v2.0/#register-face) to a created group to register faces.
+* This API creates groups. You can use [Register Face](#register-face) to a created group to register faces.
 
 <a id="create-groups-request"></a>
 #### Request
@@ -127,7 +127,7 @@ $ curl -X POST '{domain}/v2.0/appkeys/{appKey}/groups' -H 'Authorization: {secre
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 <details>
 <summary>Response body example</summary>
@@ -215,7 +215,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups?limit={limit}&next-token={n
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 [Response body data]
 
@@ -296,7 +296,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authorizatio
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 [Response body data]
 
@@ -370,7 +370,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 <details>
 <summary>Response body example</summary>
@@ -404,7 +404,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}' -H 'Authoriza
 * Returns the position data of the face, eyes, nose, and moth and the confidence value from the recognized face.
 * Recognizes up to 20 faces from the input image in the order from the largest to smallest face.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](#input-image-guide).
 
 <a id="recognize-face-request"></a>
 #### Request
@@ -464,7 +464,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 [Response body data]
 
@@ -570,11 +570,11 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * This API registers the face recognized from the input image to a certain group.
 * Recognizes the face box from the input image, and extracts the facial characteristics from the face box as vectors. As for the input image and the face recognized from the input image, neither is saved.
 * Extracted vector data gets saved in the database after encryption.
-* The saved vector data gets used as characteristic vectors for the [Search face by face ID](./api-guide-v2.0/#search-face-by-face-id)and [Search face by image](./api-guide-v2.0/#search-face-by-image) APIs.
+* The saved vector data gets used as characteristic vectors for the [Search face by face ID](#search-face-by-face-id)and [Search face by image](#search-face-by-image) APIs.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](#input-image-guide).
 * 'imageId' is a value given for the input image, and the 'externalImageId' is a value which can be directly given by the user. The user can utilize 'imageId' and 'externalImageId' to perform labeling for the image or face ID from the user-end, and they can also be used on their own like indexes.
-* 'imageId' and 'externalImageId' are returned from the response of the [Face list within a group](./api-guide-v2.0/#list-of-faces-within-group) and [Search face by face ID](./api-guide-v2.0/#search-face-by-face-id) and [Search face by image](./api-guide-v2.0/#search-face-by-image) APIs.
+* 'imageId' and 'externalImageId' are returned from the response of the [Face list within a group](#list-of-faces-within-group) and [Search face by face ID](#search-face-by-face-id) and [Search face by image](#search-face-by-image) APIs.
 * Up to 100,000 faces can be registered per single group.
 
 <a id="register-face-request"></a>
@@ -643,7 +643,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 [Response body data]
 
@@ -867,7 +867,7 @@ $ curl -X DELETE '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 <details>
 <summary>Response body example</summary>
@@ -959,7 +959,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces?limit={limi
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 [Response body data]
 
@@ -1076,7 +1076,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 [Response body data]
 
@@ -1160,7 +1160,7 @@ $ curl -X GET '{domain}/v2.0/appkeys/{appKey}/groups/{groupId}/faces/{faceId}/se
 
 * Uses the largest face recognized from the input image to compare if it matches a face from a specific group.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
 <a id="search-face-by-image-request"></a>
@@ -1228,7 +1228,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 [Response body data]
 
@@ -1375,7 +1375,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 * Compares the similarity of the faces recognized from the reference image(sourceImage) and comparison image(targetImage).
 * Out of the faces recognized from the reference image, only the largest face(source face) is used.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](#input-image-guide).
 * Returns the array of the face info in order of the most to least similar.
 
 <a id="compare-faces-request"></a>
@@ -1451,7 +1451,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 [Response body data]
 
@@ -1727,10 +1727,10 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 ### Face Verification { #face-verification }
 
 * This function compares the face ID of a specific face registered in advance with the face detected in the input image and returns a similarity value.
-* Use [Register Face](./api-guide-v2.0/#register-face) to a created group to register faces.
+* Use [Register Face](#register-face) to a created group to register faces.
 * Only the largest face detected in the input image is used.
 * The input image can be delivered via Base64-encoded image bytes or image url.
-* To find out more about input image, see [Input Image Guide](./api-guide-v2.0/#input-image-guide).
+* To find out more about input image, see [Input Image Guide](#input-image-guide).
 
 <a id="face-verification-request"></a>
 #### Request
@@ -1792,7 +1792,7 @@ $ curl -X POST -H 'Authorization: {secretKey}' -H 'Content-Type: multipart/form-
 #### Response
 
 * [Response body header description omitted]
-    * This information is available in [Common Response Information](./api-guide-v2.0/#common-response-information)
+    * This information is available in [Common Response Information](#common-response-information)
 
 [Response body data]
 
